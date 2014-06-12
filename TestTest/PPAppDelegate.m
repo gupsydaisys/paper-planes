@@ -7,12 +7,22 @@
 //
 
 #import "PPAppDelegate.h"
+#import "HSConversation.h"
+#import "HSComment.h"
+#import <Parse/Parse.h>
 
 @implementation PPAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [HSConversation registerSubclass];
+    [HSComment registerSubclass];
+    [Parse setApplicationId:@"2LO16PKzVeyCkKJZpSjnCQvBuNqjP3gzdCAcbXWe"
+                  clientKey:@"Yh2DwI5cs2IYTF8dvesiJsphydT3kb08yOAuBMXK"];
+    // Tracking
+    // [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+
     return YES;
 }
 							
