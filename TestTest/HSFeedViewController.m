@@ -24,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     PFQuery *query = [HSConversation query];
+    [query orderByDescending:@"updatedAt"];
     [query includeKey:@"creator"];
     [query includeKey:@"comments"];
     [query includeKey:@"comments.creator"];

@@ -207,14 +207,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zaz-NN-grg">
-                                                <rect key="frame" x="20" y="181" width="280" height="129"/>
+                                                <rect key="frame" x="20" y="170" width="280" height="129"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eCN-4j-Zrg">
-                                                <rect key="frame" x="129" y="97" width="25" height="30"/>
+                                                <rect key="frame" x="133" y="97" width="25" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                         </subviews>
@@ -254,7 +254,7 @@
             <objects>
                 <tableViewController id="Cby-gS-vRZ" userLabel="ThreadViewController" customClass="HSThreadViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="146" sectionHeaderHeight="22" sectionFooterHeight="22" id="J7s-8t-mzj">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="136"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="426"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
@@ -350,7 +350,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t8Y-2m-CKt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2687" y="681"/>
+            <point key="canvasLocation" x="2727" y="696"/>
         </scene>
         <!--SheetViewController-->
         <scene sceneID="Zzk-sP-XlV">
@@ -361,22 +361,88 @@
                         <viewControllerLayoutGuide type="bottom" id="usU-ug-FXq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="N8V-p7-mTC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="15"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="426"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="ZWC-g4-uKq">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="337"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="ZWC-g4-uKq" userLabel="Image Scroll View">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="301"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wgV-Uh-67R">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="337"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="301"/>
                                     </imageView>
                                 </subviews>
                                 <connections>
                                     <outlet property="delegate" destination="7Qm-7q-9aa" id="7ok-dJ-biQ"/>
                                 </connections>
                             </scrollView>
+                            <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="146" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="thR-Yz-Va0">
+                                <rect key="frame" x="0.0" y="301" width="320" height="125"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentCell" rowHeight="146" id="vRO-xv-BZ0" customClass="HSCommentCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="146"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vRO-xv-BZ0" id="PAS-bp-tcd">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="145"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="serenagupta" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hy0-hj-qOu">
+                                                    <rect key="frame" x="11" y="2" width="140" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hani, please don't bite you nails. PLESEEEEE man.  DON'T DO IT, seriously yo. Super Dupa serial cereal serious man." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="297" translatesAutoresizingMaskIntoConstraints="NO" id="bmL-pZ-B2F">
+                                                    <rect key="frame" x="12" y="23" width="297" height="74"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cn4-MM-Uah" userLabel="Thanks View">
+                                                    <rect key="frame" x="206" y="113" width="81" height="23"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hvO-wL-kQi">
+                                                            <rect key="frame" x="24" y="-2" width="62" height="30"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <state key="normal" title="Thanks!">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="sayThanks:" destination="vRO-xv-BZ0" eventType="touchUpInside" id="tId-ZL-3qg"/>
+                                                            </connections>
+                                                        </button>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="+19" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="30" translatesAutoresizingMaskIntoConstraints="NO" id="AzF-UZ-qxz">
+                                                            <rect key="frame" x="5" y="2" width="30" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="2d ago" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAP-dN-V3S">
+                                                    <rect key="frame" x="237" y="3" width="43" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Cn4-MM-Uah" secondAttribute="trailing" id="XMz-Lt-eza"/>
+                                                <constraint firstAttribute="trailing" secondItem="zAP-dN-V3S" secondAttribute="trailing" id="bvM-hu-eRr"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="content" destination="bmL-pZ-B2F" id="prR-2w-q5R"/>
+                                            <outlet property="creator" destination="hy0-hj-qOu" id="Lfe-EN-V1Z"/>
+                                            <outlet property="thanksCount" destination="AzF-UZ-qxz" id="zuh-td-hhE"/>
+                                            <outlet property="timestamp" destination="zAP-dN-V3S" id="ZOV-K9-icS"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.2483586274" blue="0.17771203429999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="thR-Yz-Va0" secondAttribute="bottom" id="nfV-pH-I3m"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <connections>
@@ -458,42 +524,6 @@
             </objects>
             <point key="canvasLocation" x="970" y="724"/>
         </scene>
-        <!--SheetThreadViewController-->
-        <scene sceneID="aoF-4n-G6K">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="dMz-4v-VNa" userLabel="SheetThreadViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fr6-4M-voT"/>
-                        <viewControllerLayoutGuide type="bottom" id="eH3-e2-h3l"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="XbY-aO-TSb">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vce-02-uhB" userLabel="SheetView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="15"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <connections>
-                                    <segue destination="7Qm-7q-9aa" kind="embed" id="WLW-q6-jeB"/>
-                                </connections>
-                            </containerView>
-                            <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IyO-lz-rRj" userLabel="ThreadView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="136"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <connections>
-                                    <segue destination="Cby-gS-vRZ" kind="embed" id="djz-WH-13h"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="giv-23-JnP"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XJw-jY-lQO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2893" y="129"/>
-        </scene>
         <!--Add Comment View Controller-->
         <scene sceneID="XtH-7g-OTC">
             <objects>
@@ -552,9 +582,6 @@
                                                 <state key="normal" title="1">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
-                                                <connections>
-                                                    <segue destination="dMz-4v-VNa" kind="modal" id="NgD-99-o0J"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q8z-10-JLR">
                                                 <rect key="frame" x="9" y="-4" width="30" height="30"/>
@@ -665,8 +692,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="WLW-q6-jeB"/>
-        <segue reference="djz-WH-13h"/>
-    </inferredMetricsTieBreakers>
 </document>
