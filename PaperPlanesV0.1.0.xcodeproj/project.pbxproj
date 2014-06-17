@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48EC166F194BC29E000B3165 /* UIFont+SecretFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EC166A194BC29E000B3165 /* UIFont+SecretFont.m */; };
+		48EC1670194BC29E000B3165 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EC166C194BC29E000B3165 /* UIImage+ImageEffects.m */; };
+		48EC1671194BC29E000B3165 /* UIView+GradientMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EC166E194BC29E000B3165 /* UIView+GradientMask.m */; };
 		48EEE9B7194A285600863902 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EEE9B6194A285600863902 /* Foundation.framework */; };
 		48EEE9B9194A285600863902 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EEE9B8194A285600863902 /* CoreGraphics.framework */; };
 		48EEE9BB194A285600863902 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EEE9BA194A285600863902 /* UIKit.framework */; };
@@ -63,6 +66,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		48EC1669194BC29E000B3165 /* UIFont+SecretFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+SecretFont.h"; sourceTree = "<group>"; };
+		48EC166A194BC29E000B3165 /* UIFont+SecretFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+SecretFont.m"; sourceTree = "<group>"; };
+		48EC166B194BC29E000B3165 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		48EC166C194BC29E000B3165 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		48EC166D194BC29E000B3165 /* UIView+GradientMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GradientMask.h"; sourceTree = "<group>"; };
+		48EC166E194BC29E000B3165 /* UIView+GradientMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GradientMask.m"; sourceTree = "<group>"; };
 		48EEE9B3194A285600863902 /* PaperPlanesV0.1.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaperPlanesV0.1.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48EEE9B6194A285600863902 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		48EEE9B8194A285600863902 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -167,6 +176,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		48EC1672194BC2BA000B3165 /* Secret Effects */ = {
+			isa = PBXGroup;
+			children = (
+				48EC1669194BC29E000B3165 /* UIFont+SecretFont.h */,
+				48EC166A194BC29E000B3165 /* UIFont+SecretFont.m */,
+				48EC166B194BC29E000B3165 /* UIImage+ImageEffects.h */,
+				48EC166C194BC29E000B3165 /* UIImage+ImageEffects.m */,
+				48EC166D194BC29E000B3165 /* UIView+GradientMask.h */,
+				48EC166E194BC29E000B3165 /* UIView+GradientMask.m */,
+			);
+			name = "Secret Effects";
+			sourceTree = "<group>";
+		};
 		48EEE9AA194A285600863902 = {
 			isa = PBXGroup;
 			children = (
@@ -305,6 +327,7 @@
 		48FE6359194A2FDB009F98D0 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				48EC1672194BC2BA000B3165 /* Secret Effects */,
 				48FE635A194A2FE2009F98D0 /* DateTools */,
 			);
 			name = Libraries;
@@ -446,12 +469,15 @@
 				48FE6388194A3211009F98D0 /* HSNewConversationViewController.m in Sources */,
 				48FE638B194A323F009F98D0 /* HSThreadViewController.m in Sources */,
 				48FE6391194A3276009F98D0 /* HSCommentCell.m in Sources */,
+				48EC1670194BC29E000B3165 /* UIImage+ImageEffects.m in Sources */,
 				48FE6370194A2FF2009F98D0 /* NSDate+DateTools.m in Sources */,
 				48FE6341194A2E43009F98D0 /* HSFeedViewController.m in Sources */,
 				48FE634A194A2ED4009F98D0 /* HSSummaryCell.m in Sources */,
 				48FE636D194A2FF2009F98D0 /* DTTimePeriodChain.m in Sources */,
 				48EEE9C3194A285600863902 /* main.m in Sources */,
 				48FE636C194A2FF2009F98D0 /* DTTimePeriod.m in Sources */,
+				48EC1671194BC29E000B3165 /* UIView+GradientMask.m in Sources */,
+				48EC166F194BC29E000B3165 /* UIFont+SecretFont.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

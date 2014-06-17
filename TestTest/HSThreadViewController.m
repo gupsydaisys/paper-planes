@@ -19,7 +19,6 @@
 @implementation HSThreadViewController
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSLog(@"%@ parent conversation controller", [self getConversationViewController]);
 }
 
 - (HSConversationViewController*) getConversationViewController {
@@ -40,7 +39,6 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"Comments array %@", [self getComments]);
     return [self getComments] == nil ? 0 : [self getComments].count;
 }
 
@@ -48,12 +46,10 @@
 {
     HSCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
     HSComment *comment = [self getComments][indexPath.row];
-    NSLog(@"Current comment %@", comment);
     
     
     cell.content.text = comment.content;
     cell.timestamp.text = comment.updatedAt.timeAgoSinceNow;
-    NSLog(@"comment creator %@", comment.creator);
     cell.creator.text = comment.creator.username;
     return cell;
 }

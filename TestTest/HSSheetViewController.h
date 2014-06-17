@@ -8,10 +8,33 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HSSheetViewController : UIViewController <UIScrollViewDelegate>
+@interface HSSheetViewController : UIViewController <UIScrollViewDelegate, UITableViewDataSource,UITableViewDelegate>
 
 - (void) commentAdded;
+
+@property (weak, nonatomic) IBOutlet UIView *mainView;
+
+@property (weak, nonatomic) IBOutlet UIScrollView *imageScrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *fadeView;
+@property (weak, nonatomic) IBOutlet UIImageView *blurImageView;
+
+@property (weak, nonatomic) IBOutlet UIView *commentsViewContainer;
+@property (weak, nonatomic) IBOutlet UITableView *commentsTableView;
+@property (weak, nonatomic) IBOutlet UIView *commentsHandle;
+
+enum commentStateTypes
+{
+    CLOSED = 0,
+    HALFUP = 1,
+    FULL = 2,
+    HALFDOWN = 3,
+} typedef CommentState;
+
+@property (weak, nonatomic) IBOutlet UIPanGestureRecognizer *dragRecognizer;
+@property (weak, nonatomic) IBOutlet UITapGestureRecognizer *tapRecognizer;
+
+- (IBAction)dragCommentsHandle:(UIPanGestureRecognizer *)sender;
+- (IBAction)tapCommentsHandle:(UITapGestureRecognizer *)sender;
 
 @end

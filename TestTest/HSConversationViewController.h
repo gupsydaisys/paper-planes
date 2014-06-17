@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *keyboardHeight;
 @property (strong, nonatomic) HSConversation *conversation;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *flipButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addCommentHeight;
 
 
 - (IBAction)tapFlip:(id)sender;
