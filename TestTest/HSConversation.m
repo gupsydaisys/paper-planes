@@ -15,6 +15,7 @@
 @dynamic title;
 @dynamic isQuickQuestion;
 @dynamic comments;
+@dynamic dotboxes;
 @dynamic image;
 @dynamic creator;
 

@@ -46,7 +46,9 @@
         UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
         [self.imageView addGestureRecognizer:longPressRecognizer];
         
-        [self loadData];
+        for (PPDotBox* dotBox in [self getDotboxes]) {
+            [self.imageView addSubview:[[PPDotBoxView alloc] initWithModel:dotBox]];
+        }
     }
 }
 
@@ -58,12 +60,9 @@
     return [self getConversationViewController].conversation.comments;
 }
 
-- (void) loadData {
-    for (HSComment* comment in [self getComments]) {
-        NSLog(@"Dotbox: %@", comment.dotBox);
-    }
+- (NSArray*) getDotboxes {
+    return [self getConversationViewController].conversation.dotboxes;
 }
-
 
 - (void) handleTap: (UITapGestureRecognizer *) tapGesture {
     PPDotBoxView* touchedDotBox = [self getTouchedDotBox:tapGesture];
@@ -149,12 +148,14 @@
     [self.currentlySelectedDotBox setSelected:false];
     [dotBox setSelected:true];
     self.currentlySelectedDotBox = dotBox;
+    [dotBox logComments];
 }
 
 - (void) toggleSelectDotBox: (PPDotBoxView*) dotBox {
     BOOL didSelect = [dotBox toggleSelected];
 
     if (didSelect) {
+        [dotBox logComments];
         if (self.currentlySelectedDotBox != nil) {
             [self.currentlySelectedDotBox toggleSelected];
         }

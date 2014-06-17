@@ -13,9 +13,11 @@
 
 + (PPDotBoxView *) dotBoxAtPoint: (CGPoint) point;
 
+- (id) initWithModel:(PPDotBox*) model;
 - (BOOL) toggleSelected;
 - (void) setSelected:(BOOL) isSelected;
 - (void) blink;
+- (void) logComments;
 
 @property float minWidth;
 @property (nonatomic, strong) PPDotBox *model;

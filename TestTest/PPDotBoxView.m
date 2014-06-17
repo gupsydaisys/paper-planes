@@ -7,6 +7,7 @@
 //
 
 #import "PPDotBoxView.h"
+#import "HSComment.h"
 
 @interface PPDotBoxView () {
     UIColor* color;
@@ -23,12 +24,19 @@
 #define kDefaultColor [UIColor colorWithRed:57/255.0f green:150/255.0f blue:219/255.0f alpha:1.0]
 #define kSelectedColor [UIColor colorWithRed:24/255.0f green:64/255.0f blue:93/255.0f alpha:1.0]
 
+- (id)initWithModel:(PPDotBox*) model {
+    self.model = model;
+//    selected = model.selected;
+    return [self initWithFrame:CGRectMake(model.originX, model.originY, model.width, model.height)];
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.model = [PPDotBox object];
+        if (!self.model) {
+            self.model = [PPDotBox object];
+        }
         self.opaque = NO;
         self.minWidth = kDotBoxDefaultWidth;
         [self setSelectionColor:false];
@@ -125,6 +133,19 @@
     
     [dotLayer addAnimation:fillAnimation forKey:nil];
     [boxLayer addAnimation:strokeAnimation forKey:nil];
+}
+
+- (void) logComments {
+    for(HSComment* comment in self.model.comments) {
+        NSLog(@"comment %@", comment);
+    }
+//    NSLog(@"logging comments");
+//    PFQuery *query = [PFQuery queryWithClassName:@"Comment"];
+//    NSLog(@"dotbox model %@", self.model);
+//    [query whereKey:@"dotBox" equalTo:self.model];
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        NSLog(@"comments %@", objects);
+//    }];
 }
 
 + (PPDotBoxView *) dotBoxAtPoint: (CGPoint) point {

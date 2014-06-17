@@ -16,6 +16,8 @@
 @dynamic originY;
 @dynamic width;
 @dynamic height;
+@dynamic selected;
+@dynamic comments;
 
 
 + (NSString *)parseClassName {

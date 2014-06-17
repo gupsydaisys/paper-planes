@@ -26,8 +26,11 @@
     PFQuery *query = [HSConversation query];
     [query orderByDescending:@"updatedAt"];
     [query includeKey:@"creator"];
+    [query includeKey:@"dotboxes"];
+    [query includeKey:@"dotboxes.comments"];
     [query includeKey:@"comments"];
     [query includeKey:@"comments.creator"];
+    [query includeKey:@"comments.dotBox"];
     [query findObjectsInBackgroundWithTarget:self selector:@selector(handleGetConversations:error:)];
 }
 

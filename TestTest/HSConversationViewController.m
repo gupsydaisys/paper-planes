@@ -58,14 +58,18 @@
 }
 
 - (void) addComment:(NSString*) commentText {
+    HSSheetViewController* sheetViewController = [self getSheetViewController];
+    
+    PPDotBox *selectedDotBox = sheetViewController.currentlySelectedDotBox.model;
     HSComment *comment = [HSComment object];
+    
     comment.content = commentText;
     comment.creator = [PFUser currentUser];
+//    comment.dotBox = selectedDotBox;
 
-    HSSheetViewController* sheetViewController = [self getSheetViewController];
-    comment.dotBox = sheetViewController.currentlySelectedDotBox.model;
-    NSLog(@"comment dotbox: %@", comment.dotBox);
-
+    [selectedDotBox addObject:comment forKey:@"comments"];
+    
+    [self.conversation addUniqueObject:selectedDotBox forKey:@"dotboxes"];
     [self.conversation addObject:comment forKey:@"comments"];
     [self.conversation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {

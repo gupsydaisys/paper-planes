@@ -16,6 +16,6 @@
 @property float width;
 @property float height;
 @property bool selected;
-
+@property (retain, nonatomic) NSArray* comments;
 
 @end

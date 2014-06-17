@@ -50,6 +50,7 @@
 		48FE638B194A323F009F98D0 /* HSThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FE638A194A323F009F98D0 /* HSThreadViewController.m */; };
 		48FE638E194A3252009F98D0 /* HSSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FE638D194A3252009F98D0 /* HSSheetViewController.m */; };
 		48FE6391194A3276009F98D0 /* HSCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FE6390194A3276009F98D0 /* HSCommentCell.m */; };
+		CA606040194FBBED00B71EB4 /* PPDotBox.m in Sources */ = {isa = PBXBuildFile; fileRef = CA60603F194FBBED00B71EB4 /* PPDotBox.m */; };
 		CAE40B07194A5AAA00EDA4CB /* PPDotBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE40B06194A5AAA00EDA4CB /* PPDotBoxView.m */; };
 /* End PBXBuildFile section */
 
@@ -132,6 +133,8 @@
 		48FE638D194A3252009F98D0 /* HSSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSSheetViewController.m; sourceTree = "<group>"; };
 		48FE638F194A3276009F98D0 /* HSCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSCommentCell.h; sourceTree = "<group>"; };
 		48FE6390194A3276009F98D0 /* HSCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSCommentCell.m; sourceTree = "<group>"; };
+		CA60603E194FBBED00B71EB4 /* PPDotBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPDotBox.h; sourceTree = "<group>"; };
+		CA60603F194FBBED00B71EB4 /* PPDotBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPDotBox.m; sourceTree = "<group>"; };
 		CAE40B05194A5AAA00EDA4CB /* PPDotBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PPDotBoxView.h; path = TestTest/PPDotBoxView.h; sourceTree = "<group>"; };
 		CAE40B06194A5AAA00EDA4CB /* PPDotBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PPDotBoxView.m; path = TestTest/PPDotBoxView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -299,6 +302,8 @@
 		48FE634C194A2EF4009F98D0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CA60603E194FBBED00B71EB4 /* PPDotBox.h */,
+				CA60603F194FBBED00B71EB4 /* PPDotBox.m */,
 				48FE6356194A2F9E009F98D0 /* HSComment.h */,
 				48FE6357194A2F9E009F98D0 /* HSComment.m */,
 				48FE634D194A2F14009F98D0 /* HSConversation.h */,
@@ -452,6 +457,7 @@
 				48FE636E194A2FF2009F98D0 /* DTTimePeriodCollection.m in Sources */,
 				48FE6352194A2F76009F98D0 /* HSConversationViewController.m in Sources */,
 				48FE6388194A3211009F98D0 /* HSNewConversationViewController.m in Sources */,
+				CA606040194FBBED00B71EB4 /* PPDotBox.m in Sources */,
 				48FE638B194A323F009F98D0 /* HSThreadViewController.m in Sources */,
 				48FE6391194A3276009F98D0 /* HSCommentCell.m in Sources */,
 				48FE6370194A2FF2009F98D0 /* NSDate+DateTools.m in Sources */,
