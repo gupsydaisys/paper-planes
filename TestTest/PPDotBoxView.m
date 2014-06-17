@@ -28,6 +28,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.model = [PPDotBox object];
         self.opaque = NO;
         self.minWidth = kDotBoxDefaultWidth;
         [self setSelectionColor:false];
@@ -64,13 +65,16 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-    NSLog(@"rect: %@", NSStringFromCGRect(rect));
-    
     UIBezierPath* rectPath = [UIBezierPath bezierPathWithRect:[self getBoxFrame:rect]];
     boxLayer.path = rectPath.CGPath;
     
     UIBezierPath* dotPath = [UIBezierPath bezierPathWithOvalInRect:[self getDotFrame:rect]];
     dotLayer.path = dotPath.CGPath;
+    
+    self.model.originX = self.frame.origin.x;
+    self.model.originY = self.frame.origin.y;
+    self.model.width  = self.frame.size.width;
+    self.model.height = self.frame.size.height;
 }
 
 - (BOOL) toggleSelected {

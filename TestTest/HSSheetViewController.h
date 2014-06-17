@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PPDotBoxView.h"
 
 @interface HSSheetViewController : UIViewController <UIScrollViewDelegate>
 
 - (void) commentAdded;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) PPDotBoxView* currentlySelectedDotBox;
 
 @end

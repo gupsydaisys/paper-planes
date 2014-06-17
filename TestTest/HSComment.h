@@ -7,6 +7,7 @@
 //
 
 #import <Parse/Parse.h>
+#import "PPDotBox.h"
 
 @interface HSComment : PFObject<PFSubclassing>
 
@@ -14,5 +15,6 @@
 @property (retain) NSString* displayName;
 @property NSString* content;
 @property (retain) PFUser* creator;
+@property (retain) PPDotBox* dotBox;
 
 @end

@@ -9,11 +9,9 @@
 #import "HSSheetViewController.h"
 #import "HSConversationViewController.h"
 #import "HSConversation.h"
-#import "PPDotBoxView.h"
-#import <Parse/Parse.h>
+#import "HSComment.h"
 
 @interface HSSheetViewController () {
-    PPDotBoxView* currentlySelectedDotBox;
     PPDotBoxView* currentlyPanningDotBox;
     PPDotBoxView* currentlyResizingDotBox;
     CGPoint initialLongPressPoint;
@@ -47,8 +45,25 @@
         
         UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
         [self.imageView addGestureRecognizer:longPressRecognizer];
+        
+        [self loadData];
     }
 }
+
+- (HSConversationViewController*) getConversationViewController {
+    return (HSConversationViewController*)self.parentViewController;
+}
+
+- (NSArray*) getComments {
+    return [self getConversationViewController].conversation.comments;
+}
+
+- (void) loadData {
+    for (HSComment* comment in [self getComments]) {
+        NSLog(@"Dotbox: %@", comment.dotBox);
+    }
+}
+
 
 - (void) handleTap: (UITapGestureRecognizer *) tapGesture {
     PPDotBoxView* touchedDotBox = [self getTouchedDotBox:tapGesture];
@@ -131,21 +146,21 @@
 }
 
 - (void) selectDotBox: (PPDotBoxView*) dotBox {
-    [currentlySelectedDotBox setSelected:false];
+    [self.currentlySelectedDotBox setSelected:false];
     [dotBox setSelected:true];
-    currentlySelectedDotBox = dotBox;
+    self.currentlySelectedDotBox = dotBox;
 }
 
 - (void) toggleSelectDotBox: (PPDotBoxView*) dotBox {
     BOOL didSelect = [dotBox toggleSelected];
 
     if (didSelect) {
-        if (currentlySelectedDotBox != nil) {
-            [currentlySelectedDotBox toggleSelected];
+        if (self.currentlySelectedDotBox != nil) {
+            [self.currentlySelectedDotBox toggleSelected];
         }
-        currentlySelectedDotBox = dotBox;
+        self.currentlySelectedDotBox = dotBox;
     } else {
-        currentlySelectedDotBox = nil;
+        self.currentlySelectedDotBox = nil;
     }
 }
 
@@ -159,10 +174,6 @@
 
 - (UIView *) viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return self.imageView;
-}
-
-- (HSConversationViewController*) getConversationViewController {
-    return (HSConversationViewController*)self.parentViewController;
 }
 
 - (void)commentAdded {

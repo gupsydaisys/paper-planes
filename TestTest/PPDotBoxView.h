@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PPDotBox.h"
 
 @interface PPDotBoxView : UIView
 
@@ -17,5 +18,6 @@
 - (void) blink;
 
 @property float minWidth;
+@property (nonatomic, strong) PPDotBox *model;
 
 @end

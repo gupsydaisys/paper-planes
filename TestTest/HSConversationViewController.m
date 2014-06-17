@@ -7,6 +7,7 @@
 //
 
 #import "HSConversationViewController.h"
+#import "HSSheetViewController.h"
 #import "HSComment.h"
 #import "HSUtilities.h"
 
@@ -60,7 +61,11 @@
     HSComment *comment = [HSComment object];
     comment.content = commentText;
     comment.creator = [PFUser currentUser];
-    
+
+    HSSheetViewController* sheetViewController = [self getSheetViewController];
+    comment.dotBox = sheetViewController.currentlySelectedDotBox.model;
+    NSLog(@"comment dotbox: %@", comment.dotBox);
+
     [self.conversation addObject:comment forKey:@"comments"];
     [self.conversation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
@@ -94,6 +99,16 @@
     [UIView animateWithDuration:animationDuration animations:^{
         [self.view layoutIfNeeded];
     }];
+}
+
+- (HSSheetViewController*) getSheetViewController {
+    for (UIViewController* viewController in self.childViewControllers) {
+        if ([viewController isKindOfClass:[HSSheetViewController class]]) {
+            return (HSSheetViewController*) viewController;
+        }
+    }
+    
+    return nil;
 }
 
 //- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

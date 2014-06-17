@@ -14,6 +14,7 @@
 @dynamic displayName;
 @dynamic content;
 @dynamic creator;
+@dynamic dotBox;
 
 + (NSString *)parseClassName {
     return @"Comment";
