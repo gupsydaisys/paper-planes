@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIView *commentsViewContainer;
 @property (weak, nonatomic) IBOutlet UITableView *commentsTableView;
 @property (weak, nonatomic) IBOutlet UIView *commentsHandle;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *commentsTableViewHeightConstraint;
 
 enum commentStateTypes
 {

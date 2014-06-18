@@ -33,6 +33,7 @@
 #define animate 1
 #define animationDuration 0.2f
 const CGFloat imgMinHeight = 50.0f;
+const CGFloat addCommentHeight = 50.0f;
 const CGFloat commentsHandleHeight = 25.0f;
 const CGFloat commentsContainerHalfHeight = 202.0f;
 
@@ -69,13 +70,6 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
     self.commentsTableView.layer.borderColor = [UIColor redColor].CGColor;
 }
 
-- (void) setup {
-    [super viewDidLoad];
-    NSLog(@"viewDidLoad");
-    self.commentsViewContainer.frame = (CGRect){.origin = {0, self.mainView.frame.size.height - commentsHandleHeight}, .size = {self.mainView.frame.size.width, commentsHandleHeight}};
-    
-    self.commentsTableView.frame = (CGRect){.origin = {0, 0}, .size = {self.commentsViewContainer.frame.size.width, self.commentsViewContainer.frame.size.height}};
-}
 
 #pragma mark - Comments Scrolling and Resizing
 
@@ -183,14 +177,14 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
 
 #pragma mark - Handle Tap
 
-- (IBAction)tapCommentsHandle:(UITapGestureRecognizer *)sender {
+- (IBAction) tapCommentsHandle:(UITapGestureRecognizer *)sender {
     if ([sender state] == UIGestureRecognizerStateEnded) {
         CommentState next = (commentState + 1) % 4;
         [self setOpenedState:next animated:animate];
     }
 }
 
-- (void)setOpenedState:(CommentState)curr animated:(BOOL)anim {
+- (void) setOpenedState:(CommentState)curr animated:(BOOL)anim {
     commentState = curr;
     
     if (anim) {
@@ -201,12 +195,12 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
         [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
     }
 
-    [self updateCommentsPosition];
-    self.commentsTableView.frame = (CGRect){.origin = {0, 0}, .size = {self.commentsViewContainer.frame.size.width, self.commentsViewContainer.frame.size.height}};
-   
+    [self adjustHeightofCommentsContainer];
+    [self adjustHeightOfTableview];
     // WHEN COMBINING shrink the image Scroll as well here
     
-    NSLog(@"Center %@", NSStringFromCGPoint(self.commentsViewContainer.center));
+    NSLog(@"Comments Container Frame %@", NSStringFromCGRect(self.commentsViewContainer.frame));
+    NSLog(@"Comments TableView Frame %@", NSStringFromCGRect(self.commentsTableView.frame));
 
     if (anim) {
         
@@ -221,7 +215,7 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
     }
 }
 
-- (void) updateCommentsPosition {
+- (void) adjustHeightofCommentsContainer {
     switch (commentState) {
         case CLOSED:
             self.commentsViewContainer.frame = (CGRect){.origin = {0, self.mainView.frame.size.height - commentsHandleHeight}, .size = {self.mainView.frame.size.width, commentsHandleHeight}};
@@ -239,6 +233,13 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
             NSLog(@"how did i end up here");
             break;
     }
+    
+}
+
+- (void) adjustHeightOfTableview {
+    self.commentsTableView.frame = (CGRect){.origin = {0, commentsHandleHeight}, .size = {self.commentsViewContainer.frame.size.width, self.commentsViewContainer.frame.size.height}};
+    self.commentsTableViewHeightConstraint.constant = MIN(self.commentsTableView.contentSize.height, self.commentsViewContainer.frame.size.height - addCommentHeight / 2);;
+    [self.commentsTableView updateConstraints];
     
 }
 
