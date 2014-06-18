@@ -7,6 +7,7 @@
 //
 
 #import "HSConversationViewController.h"
+#import "HSSheetViewController.h"
 #import "HSComment.h"
 #import "HSUtilities.h"
 
@@ -57,10 +58,18 @@
 }
 
 - (void) addComment:(NSString*) commentText {
+    HSSheetViewController* sheetViewController = [self getSheetViewController];
+    
+    PPDotBox *selectedDotBox = sheetViewController.currentlySelectedDotBox.model;
     HSComment *comment = [HSComment object];
+    
     comment.content = commentText;
     comment.creator = [PFUser currentUser];
+//    comment.dotBox = selectedDotBox;
+
+    [selectedDotBox addObject:comment forKey:@"comments"];
     
+    [self.conversation addUniqueObject:selectedDotBox forKey:@"dotboxes"];
     [self.conversation addObject:comment forKey:@"comments"];
     [self.conversation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
@@ -97,6 +106,16 @@
         [self.view layoutIfNeeded];
     }];
     [self.childViewControllers makeObjectsPerformSelector:@selector(keyboardWillBeHidden)];
+}
+
+- (HSSheetViewController*) getSheetViewController {
+    for (UIViewController* viewController in self.childViewControllers) {
+        if ([viewController isKindOfClass:[HSSheetViewController class]]) {
+            return (HSSheetViewController*) viewController;
+        }
+    }
+    
+    return nil;
 }
 
 //- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

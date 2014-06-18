@@ -9,6 +9,7 @@
 #import "PPAppDelegate.h"
 #import "HSConversation.h"
 #import "HSComment.h"
+#import "PPDotBox.h"
 #import <Parse/Parse.h>
 
 @implementation PPAppDelegate
@@ -18,6 +19,7 @@
     // Override point for customization after application launch.
     [HSConversation registerSubclass];
     [HSComment registerSubclass];
+    [PPDotBox registerSubclass];
     [Parse setApplicationId:@"2LO16PKzVeyCkKJZpSjnCQvBuNqjP3gzdCAcbXWe"
                   clientKey:@"Yh2DwI5cs2IYTF8dvesiJsphydT3kb08yOAuBMXK"];
     // Tracking

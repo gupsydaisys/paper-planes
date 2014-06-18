@@ -47,7 +47,6 @@
     HSCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
     HSComment *comment = [self getComments][indexPath.row];
     
-    
     cell.content.text = comment.content;
     cell.timestamp.text = comment.updatedAt.timeAgoSinceNow;
     cell.creator.text = comment.creator.username;

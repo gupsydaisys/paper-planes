@@ -67,8 +67,11 @@
     comment.creator = [PFUser currentUser];
     conversation.comments = [NSArray arrayWithObject:comment];
     
+    NSLog(@"111111 image %@", image);
     NSData *imageData = UIImageJPEGRepresentation(image, 0.9f);
+    NSLog(@"2222222 image %@", imageData);
     conversation.image = imageData == nil ? nil : [PFFile fileWithName:@"image.jpg" data:imageData contentType:@"image"];
+    NSLog(@"3333333 image %@", conversation.image);
     //reset image
     return true;
 }
@@ -143,6 +146,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSLog(@"Did finish picking blackberries");
     image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    NSLog(@"0000000 image is %@", image);
     self.selectedImage.image = image;
     [self dismissViewControllerAnimated:YES completion:nil];
 }

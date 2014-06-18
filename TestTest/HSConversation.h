@@ -16,6 +16,7 @@
 @property NSString* title;
 @property BOOL isQuickQuestion;
 @property (retain, nonatomic) NSArray* comments;
+@property (retain, nonatomic) NSArray* dotboxes;
 @property (retain) PFFile *image;
 @property (retain) PFUser *creator;
 

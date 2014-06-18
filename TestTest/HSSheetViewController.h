@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PPDotBoxView.h"
 
 @interface HSSheetViewController : UIViewController <UIScrollViewDelegate, UITableViewDataSource,UITableViewDelegate>
 
@@ -32,10 +33,12 @@ enum commentStateTypes
     HALFDOWN = 3,
 } typedef CommentState;
 
-@property (weak, nonatomic) IBOutlet UIPanGestureRecognizer *dragRecognizer;
-@property (weak, nonatomic) IBOutlet UITapGestureRecognizer *tapRecognizer;
+@property (weak, nonatomic) IBOutlet UIPanGestureRecognizer *dragCommentsRecognizer;
+@property (weak, nonatomic) IBOutlet UITapGestureRecognizer *tapCommentsRecognizer;
 
 - (IBAction)dragCommentsHandle:(UIPanGestureRecognizer *)sender;
 - (IBAction)tapCommentsHandle:(UITapGestureRecognizer *)sender;
+
+@property (strong, nonatomic) PPDotBoxView* currentlySelectedDotBox;
 
 @end
