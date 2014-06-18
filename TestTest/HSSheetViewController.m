@@ -47,8 +47,8 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if ([self getConversationViewController].conversation.image != nil) {
-        NSLog(@"image for convo %@", [self getConversationViewController].conversation.image);
-              
+//        NSLog(@"image for convo %@", [self getConversationViewController].conversation.image);
+        
         PFFile* imageFile = [self getConversationViewController].conversation.image;
         NSURL *imageFileUrl = [[NSURL alloc] initWithString:imageFile.url];
         NSData *imageData = [NSData dataWithContentsOfURL:imageFileUrl];
@@ -296,7 +296,7 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
         [UIView commitAnimations];
         
     } else {
-        NSLog(@"Changing");
+//        NSLog(@"Changing");
     }
 }
 
@@ -351,7 +351,7 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
         // Restores interaction after the animation is over
         self.dragCommentsRecognizer.enabled = YES;
         self.tapCommentsRecognizer.enabled = YES;
-        NSLog(@"Finished");
+//        NSLog(@"Finished");
     }
 }
     

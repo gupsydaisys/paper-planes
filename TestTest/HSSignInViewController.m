@@ -7,6 +7,7 @@
 //
 
 #import "HSSignInViewController.h"
+#import "NSString+FontAwesome.h"
 
 @interface HSSignInViewController () {
     PFUser *user;
@@ -18,11 +19,11 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    if ([PFUser currentUser] != nil) {
-        [self performSegueWithIdentifier:@"SignInToFeedSegue" sender:self];
-    } else {
+//    if ([PFUser currentUser] != nil) {
+//        [self performSegueWithIdentifier:@"SignInToFeedSegue" sender:self];
+//    } else {
         user = [PFUser user];
-    }
+//    }
 }
 
 - (IBAction) signUp: (id)sender {
@@ -43,9 +44,9 @@
 }
 
 - (void)handleLogIn:(id)result error:(NSError *)error {
-    NSLog(@"login");
+//    NSLog(@"login");
     if (!error) {
-        NSLog(@"Success: %@", [PFUser currentUser]);
+//        NSLog(@"Success: %@", [PFUser currentUser]);
         [self performSegueWithIdentifier:@"SignInToFeedSegue" sender:self];
     } else {
         user = [PFUser user];  // Reset the user variable so they can try again

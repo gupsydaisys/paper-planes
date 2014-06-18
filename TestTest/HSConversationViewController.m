@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addObservers];;
-    NSLog(@"%@ img", self.conversation.image);
+//    NSLog(@"%@ img", self.conversation.image);
     if (self.conversation.image == nil) {
         self.flipButton.enabled = false;
     }

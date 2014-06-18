@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4846C2CC1952363300ED00C8 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4846C2CB1952363300ED00C8 /* FontAwesome.ttf */; };
+		4846C2CF1952375200ED00C8 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 4846C2CE1952375200ED00C8 /* NSString+FontAwesome.m */; };
+		4846C2D319524A5700ED00C8 /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 4846C2D219524A5700ED00C8 /* UIFont+FontAwesome.m */; };
 		48EC166F194BC29E000B3165 /* UIFont+SecretFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EC166A194BC29E000B3165 /* UIFont+SecretFont.m */; };
 		48EC1670194BC29E000B3165 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EC166C194BC29E000B3165 /* UIImage+ImageEffects.m */; };
 		48EC1671194BC29E000B3165 /* UIView+GradientMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EC166E194BC29E000B3165 /* UIView+GradientMask.m */; };
@@ -68,6 +71,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4846C2CB1952363300ED00C8 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = ../FontAwesome.ttf; sourceTree = "<group>"; };
+		4846C2CD1952375200ED00C8 /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
+		4846C2CE1952375200ED00C8 /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
+		4846C2D119524A5700ED00C8 /* UIFont+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+FontAwesome.h"; path = "../UIFont+FontAwesome.h"; sourceTree = "<group>"; };
+		4846C2D219524A5700ED00C8 /* UIFont+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIFont+FontAwesome.m"; path = "../UIFont+FontAwesome.m"; sourceTree = "<group>"; };
 		48EC1669194BC29E000B3165 /* UIFont+SecretFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+SecretFont.h"; sourceTree = "<group>"; };
 		48EC166A194BC29E000B3165 /* UIFont+SecretFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+SecretFont.m"; sourceTree = "<group>"; };
 		48EC166B194BC29E000B3165 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
@@ -182,6 +190,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4846C2D0195237AA00ED00C8 /* FontAwesome */ = {
+			isa = PBXGroup;
+			children = (
+				4846C2D119524A5700ED00C8 /* UIFont+FontAwesome.h */,
+				4846C2D219524A5700ED00C8 /* UIFont+FontAwesome.m */,
+				4846C2CD1952375200ED00C8 /* NSString+FontAwesome.h */,
+				4846C2CE1952375200ED00C8 /* NSString+FontAwesome.m */,
+			);
+			name = FontAwesome;
+			sourceTree = "<group>";
+		};
 		48EC1672194BC2BA000B3165 /* Secret Effects */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +257,7 @@
 		48EEE9BC194A285600863902 /* PaperPlanes */ = {
 			isa = PBXGroup;
 			children = (
+				4846C2CB1952363300ED00C8 /* FontAwesome.ttf */,
 				48EEE9C8194A285600863902 /* Main.storyboard */,
 				48EEE9C5194A285600863902 /* PPAppDelegate.h */,
 				48EEE9C6194A285600863902 /* PPAppDelegate.m */,
@@ -337,6 +357,7 @@
 		48FE6359194A2FDB009F98D0 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				4846C2D0195237AA00ED00C8 /* FontAwesome */,
 				48EC1672194BC2BA000B3165 /* Secret Effects */,
 				48FE635A194A2FE2009F98D0 /* DateTools */,
 			);
@@ -446,6 +467,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48EEE9CF194A285600863902 /* Images.xcassets in Resources */,
+				4846C2CC1952363300ED00C8 /* FontAwesome.ttf in Resources */,
 				48EEE9C1194A285600863902 /* InfoPlist.strings in Resources */,
 				48EEE9CA194A285600863902 /* Main.storyboard in Resources */,
 				48FE636A194A2FF2009F98D0 /* DateTools.bundle in Resources */,
@@ -478,6 +500,7 @@
 				48FE636B194A2FF2009F98D0 /* DTError.m in Sources */,
 				48FE638E194A3252009F98D0 /* HSSheetViewController.m in Sources */,
 				48FE636E194A2FF2009F98D0 /* DTTimePeriodCollection.m in Sources */,
+				4846C2D319524A5700ED00C8 /* UIFont+FontAwesome.m in Sources */,
 				48FE6352194A2F76009F98D0 /* HSConversationViewController.m in Sources */,
 				48FE6388194A3211009F98D0 /* HSNewConversationViewController.m in Sources */,
 				CA606040194FBBED00B71EB4 /* PPDotBox.m in Sources */,
@@ -487,6 +510,7 @@
 				48FE6370194A2FF2009F98D0 /* NSDate+DateTools.m in Sources */,
 				CAE40B07194A5AAA00EDA4CB /* PPDotBoxView.m in Sources */,
 				48FE6341194A2E43009F98D0 /* HSFeedViewController.m in Sources */,
+				4846C2CF1952375200ED00C8 /* NSString+FontAwesome.m in Sources */,
 				48FE634A194A2ED4009F98D0 /* HSSummaryCell.m in Sources */,
 				48FE636D194A2FF2009F98D0 /* DTTimePeriodChain.m in Sources */,
 				48EEE9C3194A285600863902 /* main.m in Sources */,

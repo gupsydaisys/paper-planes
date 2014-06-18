@@ -36,7 +36,7 @@
 }
 
 - (IBAction)postComment:(id)sender {
-    NSLog(@"in post");
+//    NSLog(@"in post");
     [[self getConversationViewController] addComment:self.commentField.text];
 }
 

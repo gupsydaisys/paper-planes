@@ -67,11 +67,11 @@
     comment.creator = [PFUser currentUser];
     conversation.comments = [NSArray arrayWithObject:comment];
     
-    NSLog(@"111111 image %@", image);
+//    NSLog(@"111111 image %@", image);
     NSData *imageData = UIImageJPEGRepresentation(image, 0.9f);
-    NSLog(@"2222222 image %@", imageData);
+//    NSLog(@"2222222 image %@", imageData);
     conversation.image = imageData == nil ? nil : [PFFile fileWithName:@"image.jpg" data:imageData contentType:@"image"];
-    NSLog(@"3333333 image %@", conversation.image);
+//    NSLog(@"3333333 image %@", conversation.image);
     //reset image
     return true;
 }
@@ -99,9 +99,9 @@
     HSConversationViewController *next = [storyboard instantiateViewControllerWithIdentifier:@"HSConversationViewController"];
    
     [self.navigationController pushViewController:next animated:YES];
-    NSLog(@"%@ current convo in perform segue", conversation);
+//    NSLog(@"%@ current convo in perform segue", conversation);
     next.conversation = conversation;
-    NSLog(@"%@ next convo", next.conversation);
+//    NSLog(@"%@ next convo", next.conversation);
     NSMutableArray * viewControllers = [NSMutableArray arrayWithArray:[self.navigationController viewControllers]];
     [viewControllers removeObject:self];
     [self.navigationController setViewControllers:[NSArray arrayWithArray:viewControllers]];
@@ -144,15 +144,15 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    NSLog(@"Did finish picking blackberries");
+//    NSLog(@"Did finish picking blackberries");
     image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    NSLog(@"0000000 image is %@", image);
+//    NSLog(@"0000000 image is %@", image);
     self.selectedImage.image = image;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    NSLog(@"Fell in a bush. Not picking blackberries.");
+//    NSLog(@"Fell in a bush. Not picking blackberries.");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -218,7 +218,7 @@
 }
 
 - (void) setScrollviewFrameFromHeight: (float) keyboardHeight {
-    NSLog(@"Setting scrollview on keyboard shown or hidden: %f", keyboardHeight);
+//    NSLog(@"Setting scrollview on keyboard shown or hidden: %f", keyboardHeight);
     float newScrollViewHeight = self.scrollView.frame.size.height + keyboardHeight;
     self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, newScrollViewHeight);
 }
