@@ -24,7 +24,6 @@
     CGPoint halfCenter;
     CGPoint fullCenter;
     CommentState commentState;
-
 }
 
 @end
@@ -32,7 +31,7 @@
 #define xCenter 160.0f
 #define animate 1
 #define animationDuration 0.2f
-const CGFloat imgMinHeight = 50.0f;
+const CGFloat imgMinHeight = 25.0f;
 const CGFloat addCommentHeight = 50.0f;
 const CGFloat commentsHandleHeight = 25.0f;
 const CGFloat commentsContainerHalfHeight = 202.0f;
@@ -62,12 +61,12 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
     self.imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.fadeView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.blurImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-//    self.mainView.layer.borderWidth = 5.0f;
-//    self.mainView.layer.borderColor = [UIColor redColor].CGColor;
+    self.mainView.layer.borderWidth = 5.0f;
+    self.mainView.layer.borderColor = [UIColor redColor].CGColor;
 //    self.commentsViewContainer.layer.borderWidth = 5.0f;
 //    self.commentsViewContainer.layer.borderColor = [UIColor redColor].CGColor;
-    self.commentsTableView.layer.borderWidth = 5.0f;
-    self.commentsTableView.layer.borderColor = [UIColor redColor].CGColor;
+//    self.commentsTableView.layer.borderWidth = 5.0f;
+//    self.commentsTableView.layer.borderColor = [UIColor redColor].CGColor;
 }
 
 
@@ -198,9 +197,7 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
     [self adjustHeightofCommentsContainer];
     [self adjustHeightOfTableview];
     // WHEN COMBINING shrink the image Scroll as well here
-    
-    NSLog(@"Comments Container Frame %@", NSStringFromCGRect(self.commentsViewContainer.frame));
-    NSLog(@"Comments TableView Frame %@", NSStringFromCGRect(self.commentsTableView.frame));
+
 
     if (anim) {
         
@@ -216,6 +213,15 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
 }
 
 - (void) adjustHeightofCommentsContainer {
+    if ([self isKeyboardShown]) {
+        [self adjustHeightofCommentsContainerKeyboardShown];
+    } else {
+        [self adjustHeightofCommentsContainerKeyboardHidden];
+    }
+    
+}
+
+- (void) adjustHeightofCommentsContainerKeyboardHidden {
     switch (commentState) {
         case CLOSED:
             self.commentsViewContainer.frame = (CGRect){.origin = {0, self.mainView.frame.size.height - commentsHandleHeight}, .size = {self.mainView.frame.size.width, commentsHandleHeight}};
@@ -223,14 +229,23 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
         case FULL:
             self.commentsViewContainer.frame = (CGRect){.origin = {0, imgMinHeight}, .size = {self.mainView.frame.size.width, self.mainView.frame.size.height - imgMinHeight}};
             break;
-        case HALFDOWN:
+        default:
             self.commentsViewContainer.frame = (CGRect){.origin = {0, self.mainView.frame.size.height - commentsContainerHalfHeight}, .size = {self.mainView.frame.size.width, commentsContainerHalfHeight}};
             break;
-        case HALFUP:
-            self.commentsViewContainer.frame = (CGRect){.origin = {0, self.mainView.frame.size.height - commentsContainerHalfHeight}, .size = {self.mainView.frame.size.width, commentsContainerHalfHeight}};
+    }
+    
+}
+
+- (void) adjustHeightofCommentsContainerKeyboardShown {
+    switch (commentState) {
+        case CLOSED:
+            self.commentsViewContainer.frame = (CGRect){.origin = {0, self.mainView.frame.size.height - commentsHandleHeight}, .size = {self.mainView.frame.size.width, commentsHandleHeight}};
+            break;
+        case FULL:
+            self.commentsViewContainer.frame = (CGRect){.origin = {0, self.mainView.frame.size.height - commentsHandleHeight}, .size = {self.mainView.frame.size.width, commentsHandleHeight}};
             break;
         default:
-            NSLog(@"how did i end up here");
+            self.commentsViewContainer.frame = (CGRect){.origin = {0, imgMinHeight}, .size = {self.mainView.frame.size.width, self.mainView.frame.size.height - imgMinHeight}};
             break;
     }
     
@@ -252,7 +267,7 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
     }
 }
 
-#pragma mark - Table view data source
+#pragma mark - Table View Data Load
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -275,6 +290,7 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
     return cell;
 }
 
+#pragma mark - Conversation Parent Data Load
 
 - (HSConversationViewController*) getConversationViewController {
     return (HSConversationViewController*)self.parentViewController;
@@ -290,6 +306,24 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
 
 - (void)commentAdded {
     // FIX ME
+}
+
+#pragma mark - Keyboard Showing / Hiding
+
+- (BOOL) isKeyboardShown {
+    return [self getConversationViewController].keyboardHeight.constant != 0;
+}
+
+- (void) keyboardWillShow {
+    commentState = commentState == FULL ? HALFDOWN : commentState;
+    [self adjustHeightofCommentsContainerKeyboardShown];
+    [self adjustHeightOfTableview];
+}
+
+- (void) keyboardWillBeHidden {
+    commentState == (commentState == FULL || commentState == CLOSED)? CLOSED : HALFUP;
+    [self adjustHeightofCommentsContainerKeyboardHidden];
+    [self adjustHeightOfTableview];
 }
 
 @end

@@ -83,6 +83,8 @@
     [UIView animateWithDuration:animationDuration animations:^{
         [self.view layoutIfNeeded];
     }];
+    
+    [self.childViewControllers makeObjectsPerformSelector:@selector(keyboardWillShow)];
 }
 
 - (void) keyboardWillBeHidden:(NSNotification *) aNotification {
@@ -94,6 +96,7 @@
     [UIView animateWithDuration:animationDuration animations:^{
         [self.view layoutIfNeeded];
     }];
+    [self.childViewControllers makeObjectsPerformSelector:@selector(keyboardWillBeHidden)];
 }
 
 //- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

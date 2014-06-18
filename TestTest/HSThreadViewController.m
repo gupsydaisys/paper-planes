@@ -54,6 +54,13 @@
     return cell;
 }
 
+- (void) keyboardWillShow {
+    
+}
+
+- (void) keyboardWillBeHidden {
+    
+}
 
 
 

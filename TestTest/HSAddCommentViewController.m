@@ -48,4 +48,11 @@
     [self.commentField resignFirstResponder];
 }
 
+- (void) keyboardWillShow {
+    
+}
+
+- (void) keyboardWillBeHidden {
+
+}
 @end
