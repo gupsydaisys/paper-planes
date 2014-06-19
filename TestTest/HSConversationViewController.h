@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIView *threadView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *keyboardHeight;
 @property (strong, nonatomic) HSConversation *conversation;
+@property (strong, nonatomic) UIImage *image;
+@property (strong, nonatomic) NSURL *imageFileUrl;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *flipButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *addCommentHeight;
 

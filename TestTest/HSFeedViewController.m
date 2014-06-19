@@ -13,8 +13,8 @@
 #import "DateTools.h"
 
 @interface HSFeedViewController () {
-    NSArray *conversations;
     HSConversation *selectedConversation;
+    NSURL *imageFileUrl;
 }
 
 @end
@@ -22,6 +22,7 @@
 @implementation HSFeedViewController
 
 - (void)viewDidLoad {
+    NSLog(@"viewDidLoad feed");
     [super viewDidLoad];
     PFQuery *query = [HSConversation query];
     [query orderByDescending:@"updatedAt"];
@@ -34,9 +35,10 @@
     [query findObjectsInBackgroundWithTarget:self selector:@selector(handleGetConversations:error:)];
 }
 
+
 - (void) handleGetConversations:(NSArray *)result error:(NSError *)error {
     if (!error) {
-        conversations = [NSArray arrayWithArray:result];
+        self.conversations = [NSMutableArray arrayWithArray:result];
         [self.tableView reloadData];
     } else {
         [HSUtilities showError:error];
@@ -47,17 +49,18 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    NSLog(@"all the conversations %@", self.conversations);
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return conversations.count;
+    return self.conversations.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HSSummaryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ConversationSummary" forIndexPath:indexPath];
-    HSConversation *curr = (HSConversation*) conversations[indexPath.row];
+    HSConversation *curr = (HSConversation*) self.conversations[indexPath.row];
 
     cell.headingLabel.text = curr.title;
     cell.commentCountLabel.text = @"3 comments";
@@ -67,7 +70,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    selectedConversation = conversations[indexPath.row];
+    selectedConversation = self.conversations[indexPath.row];
+    if (selectedConversation.image == nil || selectedConversation.image.url == nil) {
+        imageFileUrl = nil;
+    } else {
+        imageFileUrl = [[NSURL alloc] initWithString:selectedConversation.image.url];
+    }
     [self performSegueWithIdentifier:@"FeedToConversationSegue" sender:self];
 }
 
@@ -83,6 +91,7 @@
     if ([[segue identifier] isEqualToString:@"FeedToConversationSegue"]) {
         HSConversationViewController *next = (HSConversationViewController*)segue.destinationViewController;
         next.conversation = selectedConversation;
+        next.imageFileUrl = imageFileUrl;
     }
 }
 

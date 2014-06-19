@@ -19,11 +19,11 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-//    if ([PFUser currentUser] != nil) {
-//        [self performSegueWithIdentifier:@"SignInToFeedSegue" sender:self];
-//    } else {
+    if ([PFUser currentUser] != nil) {
+        [self performSegueWithIdentifier:@"SignInToFeedSegue" sender:self];
+    } else {
         user = [PFUser user];
-//    }
+    }
 }
 
 - (IBAction) signUp: (id)sender {

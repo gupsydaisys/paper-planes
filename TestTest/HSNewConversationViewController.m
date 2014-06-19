@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Learning Apps. All rights reserved.
 //
 
+#import "HSFeedViewController.h"
 #import "HSNewConversationViewController.h"
 #import "HSConversationViewController.h"
 #import "HSConversation.h"
@@ -17,6 +18,7 @@
     HSConversation *conversation;
     UIImagePickerController *imagePicker;
     UIImage* image;
+    NSData *imageData;
 }
 
 @end
@@ -34,21 +36,22 @@
 }
 
 - (IBAction)addConversation:(id)sender {
-//    NSLog(@"%@", self.titleField.text);
-//    NSLog(@"%@", self.contentField.text);
-//    NSLog(@"%hhd", self.quickQuestionSwitch.isOn);
     if ([self populateConversationProperties]) {
+        NSArray *arr = [self.navigationController viewControllers];
+        HSFeedViewController *feedController = (HSFeedViewController*)arr[arr.count - 2];
+        [feedController.conversations insertObject:conversation atIndex:0];
+        [feedController.tableView reloadData];
+//        NSLog(@"all the conversations %@", feedController.conversations);
         [conversation saveInBackgroundWithTarget:self selector:@selector(handleAddConversation:error:)];
+        [self performSegueToConversationViewController];
     }
     
 }
 
 - (void) handleAddConversation:(NSNumber *)result error:(NSError *)error {
-    NSLog(@"Add conversation");
     if (!error) {
-        [self performSegueToConversationViewController];
+        NSLog(@"Add conversation sucess");
     } else {
-//        conversation = [HSConversation object];
         [HSUtilities showError:error];
     }
 }
@@ -67,12 +70,10 @@
     comment.creator = [PFUser currentUser];
     conversation.comments = [NSArray arrayWithObject:comment];
     
-//    NSLog(@"111111 image %@", image);
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.9f);
-//    NSLog(@"2222222 image %@", imageData);
-    conversation.image = imageData == nil ? nil : [PFFile fileWithName:@"image.jpg" data:imageData contentType:@"image"];
-//    NSLog(@"3333333 image %@", conversation.image);
-    //reset image
+    if (image == nil) {
+        imageData = nil;
+        conversation.image = nil;
+    }
     return true;
 }
 
@@ -99,9 +100,8 @@
     HSConversationViewController *next = [storyboard instantiateViewControllerWithIdentifier:@"HSConversationViewController"];
    
     [self.navigationController pushViewController:next animated:YES];
-//    NSLog(@"%@ current convo in perform segue", conversation);
     next.conversation = conversation;
-//    NSLog(@"%@ next convo", next.conversation);
+    next.image = image;
     NSMutableArray * viewControllers = [NSMutableArray arrayWithArray:[self.navigationController viewControllers]];
     [viewControllers removeObject:self];
     [self.navigationController setViewControllers:[NSArray arrayWithArray:viewControllers]];
@@ -144,10 +144,17 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-//    NSLog(@"Did finish picking blackberries");
     image = [info objectForKey:UIImagePickerControllerOriginalImage];
-//    NSLog(@"0000000 image is %@", image);
     self.selectedImage.image = image;
+    imageData = UIImageJPEGRepresentation(image, 0.9f);
+    conversation.image = [PFFile fileWithName:@"image.jpg" data:imageData contentType:@"image"];
+    [conversation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (error) {
+            [HSUtilities showError:error];
+        }
+    }
+     ];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

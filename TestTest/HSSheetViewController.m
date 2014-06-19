@@ -46,35 +46,58 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if ([self getConversationViewController].conversation.image != nil) {
-//        NSLog(@"image for convo %@", [self getConversationViewController].conversation.image);
-        
-        PFFile* imageFile = [self getConversationViewController].conversation.image;
-        NSURL *imageFileUrl = [[NSURL alloc] initWithString:imageFile.url];
-        NSData *imageData = [NSData dataWithContentsOfURL:imageFileUrl];
-        img = [UIImage imageWithData:imageData];
-        
-        UITapGestureRecognizer* tapImageRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImageHandle:)];
-        [self.imageView addGestureRecognizer:tapImageRecognizer];
-        
-        UIPanGestureRecognizer* panImageRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panImageHandle:)];
-        [self.imageView addGestureRecognizer:panImageRecognizer];
-        
-        UILongPressGestureRecognizer* longPressImageRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressImageHandle:)];
-        [self.imageView addGestureRecognizer:longPressImageRecognizer];
-        
-        for (PPDotBox* dotBox in [self getDotboxes]) {
-            [self.imageView addSubview:[[PPDotBoxView alloc] initWithModel:dotBox]];
-        }
+    if ([self getConversationViewController].image != nil) {
+        [self initSheetWithImage:[self getConversationViewController].image];
+    } else if ([self getConversationViewController].imageFileUrl != nil) {
+        NSURL *imageFileUrl = [self getConversationViewController].imageFileUrl;
+        // Load image from disk on background thread
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            NSData *imageData = [NSData dataWithContentsOfURL:imageFileUrl];
+            UIImage *image = [UIImage imageWithData:imageData];
+            
+            // Load image into UI on UI thread
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self initSheetWithImage:image];
+//                [self getConversationViewController].image = image;
+//                [self initSheetWithImage:image];
+            });
+
+        });
+    } else {
+        // No image provided
+        NSLog(@"No image provided");
     }
-    self.imageView.image = img;
-    self.imageScrollView.contentSize = self.imageView.frame.size;
+}
+
+- (void) initSheetWithImage:(UIImage*) image {
+    self.imageView.image = image;
     
+    [self addGestureRecognizersToImageView];
+    
+    [self addDotboxesToImageView];
+    
+    self.imageScrollView.contentSize = self.imageView.frame.size;
     
     self.imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.fadeView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.blurImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+}
+
+- (void) addGestureRecognizersToImageView {
+    UITapGestureRecognizer* tapImageRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImageHandle:)];
+    [self.imageView addGestureRecognizer:tapImageRecognizer];
     
+    UIPanGestureRecognizer* panImageRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panImageHandle:)];
+    [self.imageView addGestureRecognizer:panImageRecognizer];
+    
+    UILongPressGestureRecognizer* longPressImageRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressImageHandle:)];
+    [self.imageView addGestureRecognizer:longPressImageRecognizer];
+}
+
+- (void) addDotboxesToImageView {
+    for (PPDotBox* dotBox in [self getDotboxes]) {
+        [self.imageView addSubview:[[PPDotBoxView alloc] initWithModel:dotBox]];
+    }
 }
 
 - (HSConversationViewController*) getConversationViewController {

@@ -13,4 +13,6 @@
 - (IBAction)tapSettings:(id)sender;
 - (IBAction)tapAddConversation:(id)sender;
 
+@property NSMutableArray *conversations;
+
 @end
