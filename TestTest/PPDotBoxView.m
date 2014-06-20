@@ -21,6 +21,7 @@
 @implementation PPDotBoxView
 
 #define kDotBoxDefaultWidth 34.0f
+#define kDeleteButtonDefaultWidth 30.0f
 #define kDefaultColor [UIColor colorWithRed:57/255.0f green:150/255.0f blue:219/255.0f alpha:1.0]
 #define kSelectedColor [UIColor colorWithRed:24/255.0f green:64/255.0f blue:93/255.0f alpha:1.0]
 
@@ -65,9 +66,8 @@
 }
 
 - (void) addDeleteButton {
-    float deleteButtonWidth = 30.0f;
-    CGRect deleteButtonRect = CGRectMake(2.0f, 0, deleteButtonWidth, deleteButtonWidth);
-    UIFont* deleteIconFont = [UIFont fontWithName:kFontAwesomeFamilyName size:deleteButtonWidth];
+    CGRect deleteButtonRect = CGRectMake(2.0f, 0, kDeleteButtonDefaultWidth, kDeleteButtonDefaultWidth);
+    UIFont* deleteIconFont = [UIFont fontWithName:kFontAwesomeFamilyName size:kDeleteButtonDefaultWidth];
 
     self.deleteButton = [[UIView alloc] initWithFrame:deleteButtonRect];
     UILabel* circle = [[UILabel alloc] initWithFrame:deleteButtonRect];
@@ -100,6 +100,11 @@
 - (void)drawRect:(CGRect)rect {
     UIBezierPath* rectPath = [UIBezierPath bezierPathWithRect:[self getBoxFrame:rect]];
     boxLayer.path = rectPath.CGPath;
+    if ([self isBox]) {
+        [boxLayer setHidden:FALSE];
+    } else {
+        [boxLayer setHidden:TRUE];
+    }
     
     UIBezierPath* dotPath = [UIBezierPath bezierPathWithOvalInRect:[self getDotFrame:rect]];
     self.dotLayer.path = dotPath.CGPath;
@@ -115,21 +120,37 @@
 }
 
 - (BOOL) toggleSelected {
-    selected = !selected;
-    [self setSelectionColor:selected];
-    return  selected;
+    return [self setSelected:![self isSelected]];
+//    selected = !selected;
+//    [self setSelectionColor:selected];
+//    return  selected;
 }
 
-- (void) setSelected:(BOOL) isSelected {
+- (BOOL) setSelected:(BOOL) isSelected {
     if (isSelected) {
         [self.deleteButton setHidden:FALSE];
         [self.dotLayer setHidden:FALSE];
+        [boxLayer setHidden:FALSE];
+        selected = TRUE;
+        [self setSelectionColor:TRUE];
     } else {
         [self.deleteButton setHidden:TRUE];
-        [self.dotLayer setHidden:TRUE];
+        if ([self isBox]) {
+            [self.dotLayer setHidden:TRUE];
+        } else {
+            [boxLayer setHidden:TRUE];
+        }
+        selected = FALSE;
+        [self setSelectionColor:FALSE];
     }
-    selected = isSelected;
-    [self setSelectionColor:isSelected];
+    
+    return selected;
+}
+
+- (BOOL) isBox {
+    // Returns whether this dotBox is big enough to be considered to be in "box mode"
+    return (self.frame.size.width > kDotBoxDefaultWidth + kDeleteButtonDefaultWidth) ||
+            (self.frame.size.height > kDotBoxDefaultWidth + kDeleteButtonDefaultWidth);
 }
 
 - (void) setSelectionColor:(BOOL) isSelected {
