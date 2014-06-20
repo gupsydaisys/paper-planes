@@ -127,13 +127,13 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
     
     if (touchedDotBox) {
         [self toggleSelectDotBox:touchedDotBox];
-    } else {
+    } //else {
         // Add a new dotbox at this location
-        CGPoint tapPoint = [tapGesture locationInView:tapGesture.view];
-        PPDotBoxView* newDotBox = [PPDotBoxView dotBoxAtPoint:tapPoint];
-        [self selectDotBox:newDotBox];
-        [tapGesture.view addSubview:newDotBox];
-    }
+        //CGPoint tapPoint = [tapGesture locationInView:tapGesture.view];
+        //PPDotBoxView* newDotBox = [PPDotBoxView dotBoxAtPoint:tapPoint];
+        //[self selectDotBox:newDotBox];
+        //[tapGesture.view addSubview:newDotBox];
+    //}
 }
 
 - (void) panImageHandle: (UIPanGestureRecognizer *) panGesture {
@@ -147,10 +147,6 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
             [self setPanningDotBox:touchedDotBox];
         } else {
             [self setPanningDotBox:nil];
-//            panGesture.state = UIGestureRecognizerStateFailed;
-//            [panGesture setState:UIGestureRecognizerStateFailed];
-//            panGesture.enabled = NO;
-//            panGesture.enabled = YES;
         }
     } else if (state == UIGestureRecognizerStateChanged) {
         CGPoint translation = [panGesture translationInView:panGesture.view];
@@ -168,11 +164,18 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
         initialLongPressPoint = [longPressGesture locationInView:longPressGesture.view];
         if (touchedDotBox) {
             [self selectDotBox:touchedDotBox];
-            [touchedDotBox blink];
-            [self setResizingDotBox:touchedDotBox];
+            //[touchedDotBox blink];
+            //[self setResizingDotBox:touchedDotBox];
         } else {
-            [self setResizingDotBox:nil];
+            CGPoint pressPoint = [longPressGesture locationInView:longPressGesture.view];
+            PPDotBoxView* newDotBox = [PPDotBoxView dotBoxAtPoint:pressPoint];
+            [self selectDotBox:newDotBox];
+            [longPressGesture.view addSubview:newDotBox];
+            touchedDotBox = newDotBox;
+            //[self setResizingDotBox:nil];
         }
+        [touchedDotBox blink];
+        [self setResizingDotBox:touchedDotBox];
     } else if (state == UIGestureRecognizerStateChanged) {
         CGPoint longPressPoint = [longPressGesture locationInView:longPressGesture.view];
         CGPoint translation = CGPointMake(longPressPoint.x - initialLongPressPoint.x, longPressPoint.y - initialLongPressPoint.y);
@@ -199,7 +202,7 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
 #pragma mark - Comments Scrolling and Resizing
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    NSLog(@"Scrollview zooming: %@", scrollView);
+//    NSLog(@"Scrollview zooming: %@", scrollView);
 }
     - (void)scrollViewDidScroll:(UIScrollView*)scrollView {
         //    NSLog(@"scrolling");
