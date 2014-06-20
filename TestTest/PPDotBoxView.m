@@ -8,12 +8,12 @@
 
 #import "PPDotBoxView.h"
 #import "HSComment.h"
+#import "NSString+FontAwesome.h"
 
 @interface PPDotBoxView () {
     UIColor* color;
     BOOL selected;
     CAShapeLayer *boxLayer;
-    CAShapeLayer *dotLayer;
 }
 
 @end
@@ -41,6 +41,7 @@
         self.minWidth = kDotBoxDefaultWidth;
         [self setSelectionColor:false];
         [self addBoxLayer];
+        [self addDeleteButton];
         [self addDotLayer];
     }
     return self;
@@ -58,10 +59,34 @@
 }
 
 - (void) addDotLayer {
-    dotLayer = [CAShapeLayer layer];
-    [dotLayer setFillColor:kDefaultColor.CGColor];
+    self.dotLayer = [CAShapeLayer layer];
+    [self.dotLayer setFillColor:kDefaultColor.CGColor];
+    [self.layer addSublayer:self.dotLayer];
+}
+
+- (void) addDeleteButton {
+    float deleteButtonWidth = 30.0f;
+    CGRect deleteButtonRect = CGRectMake(2.0f, 0, deleteButtonWidth, deleteButtonWidth);
+    UIFont* deleteIconFont = [UIFont fontWithName:kFontAwesomeFamilyName size:deleteButtonWidth];
+
+    self.deleteButton = [[UIView alloc] initWithFrame:deleteButtonRect];
+    UILabel* circle = [[UILabel alloc] initWithFrame:deleteButtonRect];
+    UILabel* xShape = [[UILabel alloc] initWithFrame:deleteButtonRect];
     
-    [self.layer addSublayer:dotLayer];
+    circle.font = deleteIconFont;
+    xShape.font = deleteIconFont;
+    
+    circle.text = [NSString fontAwesomeIconStringForEnum:FACircle];
+    xShape.text = [NSString fontAwesomeIconStringForEnum:FATimesCircleO];
+    
+    [circle setTextColor:[UIColor whiteColor]];
+//    [xShape setTextColor:[UIColor blackColor]];
+    [xShape setTextColor:kSelectedColor];
+    
+    [self.deleteButton addSubview:circle];
+    [self.deleteButton addSubview:xShape];
+    
+    [self addSubview:self.deleteButton];
 }
 
 - (CGRect) getDotFrame:(CGRect)frame {
@@ -77,12 +102,16 @@
     boxLayer.path = rectPath.CGPath;
     
     UIBezierPath* dotPath = [UIBezierPath bezierPathWithOvalInRect:[self getDotFrame:rect]];
-    dotLayer.path = dotPath.CGPath;
+    self.dotLayer.path = dotPath.CGPath;
     
     self.model.originX = self.frame.origin.x;
     self.model.originY = self.frame.origin.y;
     self.model.width  = self.frame.size.width;
     self.model.height = self.frame.size.height;
+}
+
+- (BOOL) isSelected {
+    return selected;
 }
 
 - (BOOL) toggleSelected {
@@ -98,10 +127,10 @@
 
 - (void) setSelectionColor:(BOOL) isSelected {
     if (isSelected) {
-        [dotLayer setFillColor:kSelectedColor.CGColor];
+        [self.dotLayer setFillColor:kSelectedColor.CGColor];
         [boxLayer setStrokeColor:kSelectedColor.CGColor];
     } else {
-        [dotLayer setFillColor:kDefaultColor.CGColor];
+        [self.dotLayer setFillColor:kDefaultColor.CGColor];
         [boxLayer setStrokeColor:kDefaultColor.CGColor];
     }
     
@@ -131,7 +160,7 @@
                          (__bridge id)kDefaultColor.CGColor,
                          (__bridge id)kSelectedColor.CGColor];
     
-    [dotLayer addAnimation:fillAnimation forKey:nil];
+    [self.dotLayer addAnimation:fillAnimation forKey:nil];
     [boxLayer addAnimation:strokeAnimation forKey:nil];
 }
 

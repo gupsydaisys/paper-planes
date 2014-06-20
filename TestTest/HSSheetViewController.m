@@ -124,16 +124,28 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
 
 - (void) tapImageHandle: (UITapGestureRecognizer *) tapGesture {
     PPDotBoxView* touchedDotBox = [self getTouchedDotBox:tapGesture];
-    
+    UIView *hitView = [self getHitView:tapGesture];
+    CGPoint locationInDotBox = [tapGesture locationInView:touchedDotBox];
     if (touchedDotBox) {
-        [self toggleSelectDotBox:touchedDotBox];
-    } //else {
+        UIBezierPath *dotPath = [UIBezierPath bezierPathWithCGPath:touchedDotBox.dotLayer.path];
+        BOOL touchedInsideDeleteButton = hitView == touchedDotBox.deleteButton;
+        BOOL touchedInsideDot = [dotPath containsPoint:locationInDotBox];
+        // Delete button and dot may be overlapping, thus we need to check both
+        if (touchedInsideDeleteButton && !touchedInsideDot) {
+            [touchedDotBox removeFromSuperview];
+        } else {
+            [self toggleSelectDotBox:touchedDotBox];
+        }
+    }
+    /* To re-enable adding dotboxes upon tap, uncomment these lines */
+    //else {
         // Add a new dotbox at this location
         //CGPoint tapPoint = [tapGesture locationInView:tapGesture.view];
         //PPDotBoxView* newDotBox = [PPDotBoxView dotBoxAtPoint:tapPoint];
         //[self selectDotBox:newDotBox];
         //[tapGesture.view addSubview:newDotBox];
     //}
+    /* */
 }
 
 - (void) panImageHandle: (UIPanGestureRecognizer *) panGesture {
@@ -164,15 +176,12 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
         initialLongPressPoint = [longPressGesture locationInView:longPressGesture.view];
         if (touchedDotBox) {
             [self selectDotBox:touchedDotBox];
-            //[touchedDotBox blink];
-            //[self setResizingDotBox:touchedDotBox];
         } else {
             CGPoint pressPoint = [longPressGesture locationInView:longPressGesture.view];
             PPDotBoxView* newDotBox = [PPDotBoxView dotBoxAtPoint:pressPoint];
             [self selectDotBox:newDotBox];
             [longPressGesture.view addSubview:newDotBox];
             touchedDotBox = newDotBox;
-            //[self setResizingDotBox:nil];
         }
         [touchedDotBox blink];
         [self setResizingDotBox:touchedDotBox];
@@ -423,35 +432,56 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
 }
     
 #pragma mark - DotBox Methods
-    
-- (PPDotBoxView*) getTouchedDotBox: (UIGestureRecognizer *) gesture {
+
+- (UIView*) getHitView: (UIGestureRecognizer *) gesture {
     CGPoint touchPoint = [gesture locationInView:gesture.view];
     UIView *hitView = [gesture.view hitTest:touchPoint withEvent:nil];
+    return  hitView;
+}
+
+
+- (PPDotBoxView*) getTouchedDotBox: (UIGestureRecognizer *) gesture {
+    UIView *hitView = [self getHitView:gesture];
     if ([hitView isKindOfClass:[PPDotBoxView class]]) {
         return (PPDotBoxView*)hitView;
+    } else if ([hitView.superview isKindOfClass:[PPDotBoxView class]]) {
+        // This happens if we touched the delete button
+        return (PPDotBoxView*)hitView.superview;
     } else {
         return nil;
     }
 }
 
+- (void) selectDotBox: (PPDotBoxView*) dotBox withSelectionState: (BOOL) selectState {
+    if (selectState) {
+        if (![dotBox isSelected]) {
+            [self.currentlySelectedDotBox setSelected:false];
+            [dotBox setSelected:true];
+            self.currentlySelectedDotBox = dotBox;
+            [dotBox logComments]; // Temporary
+        } else {
+            // do nothing
+        }
+    } else {
+        if ([dotBox isSelected]) {
+            [dotBox setSelected:false];
+            self.currentlySelectedDotBox = nil;
+        } else {
+            // do nothing
+        }
+    }
+    
+}
+
 - (void) selectDotBox: (PPDotBoxView*) dotBox {
-    [self.currentlySelectedDotBox setSelected:false];
-    [dotBox setSelected:true];
-    self.currentlySelectedDotBox = dotBox;
-    [dotBox logComments];
+    [self selectDotBox:dotBox withSelectionState:true];
 }
 
 - (void) toggleSelectDotBox: (PPDotBoxView*) dotBox {
-    BOOL didSelect = [dotBox toggleSelected];
-    
-    if (didSelect) {
-        [dotBox logComments];
-        if (self.currentlySelectedDotBox != nil) {
-            [self.currentlySelectedDotBox toggleSelected];
-        }
-        self.currentlySelectedDotBox = dotBox;
+    if ([dotBox isSelected]) {
+        [self selectDotBox:dotBox withSelectionState:false];
     } else {
-        self.currentlySelectedDotBox = nil;
+        [self selectDotBox:dotBox withSelectionState:true];
     }
 }
 

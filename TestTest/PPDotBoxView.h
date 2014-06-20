@@ -18,8 +18,11 @@
 - (void) setSelected:(BOOL) isSelected;
 - (void) blink;
 - (void) logComments;
+- (BOOL) isSelected;
 
 @property float minWidth;
 @property (nonatomic, strong) PPDotBox *model;
+@property (nonatomic, strong) UIView *deleteButton;
+@property (nonatomic, strong) CAShapeLayer* dotLayer;
 
 @end
