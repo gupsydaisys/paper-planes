@@ -49,7 +49,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    NSLog(@"all the conversations %@", self.conversations);
+//    NSLog(@"all the conversations %@", self.conversations);
     return 1;
 }
 

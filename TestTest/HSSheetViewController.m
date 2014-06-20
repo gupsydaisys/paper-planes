@@ -89,9 +89,19 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
     
     UIPanGestureRecognizer* panImageRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panImageHandle:)];
     [self.imageView addGestureRecognizer:panImageRecognizer];
+    panImageRecognizer.delegate = self;
+    [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:panImageRecognizer];
     
     UILongPressGestureRecognizer* longPressImageRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressImageHandle:)];
     [self.imageView addGestureRecognizer:longPressImageRecognizer];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([touch.view isKindOfClass:[PPDotBoxView class]]) {
+        return true;
+    }
+    
+    return false;
 }
 
 - (void) addDotboxesToImageView {
@@ -128,14 +138,19 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
 
 - (void) panImageHandle: (UIPanGestureRecognizer *) panGesture {
     UIGestureRecognizerState state = [panGesture state];
+    PPDotBoxView* touchedDotBox = [self getTouchedDotBox:panGesture];
+
     
     if (state == UIGestureRecognizerStateBegan) {
-        PPDotBoxView* touchedDotBox = [self getTouchedDotBox:panGesture];
         if (touchedDotBox) {
             [self selectDotBox:touchedDotBox];
             [self setPanningDotBox:touchedDotBox];
         } else {
             [self setPanningDotBox:nil];
+//            panGesture.state = UIGestureRecognizerStateFailed;
+//            [panGesture setState:UIGestureRecognizerStateFailed];
+//            panGesture.enabled = NO;
+//            panGesture.enabled = YES;
         }
     } else if (state == UIGestureRecognizerStateChanged) {
         CGPoint translation = [panGesture translationInView:panGesture.view];
@@ -182,7 +197,10 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
 }
 
 #pragma mark - Comments Scrolling and Resizing
-    
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    NSLog(@"Scrollview zooming: %@", scrollView);
+}
     - (void)scrollViewDidScroll:(UIScrollView*)scrollView {
         //    NSLog(@"scrolling");
         //
