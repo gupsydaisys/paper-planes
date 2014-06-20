@@ -121,6 +121,13 @@
 }
 
 - (void) setSelected:(BOOL) isSelected {
+    if (isSelected) {
+        [self.deleteButton setHidden:FALSE];
+        [self.dotLayer setHidden:FALSE];
+    } else {
+        [self.deleteButton setHidden:TRUE];
+        [self.dotLayer setHidden:TRUE];
+    }
     selected = isSelected;
     [self setSelectionColor:isSelected];
 }
