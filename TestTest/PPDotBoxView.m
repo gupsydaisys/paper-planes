@@ -14,6 +14,8 @@
     UIColor* color;
     BOOL selected;
     CAShapeLayer *boxLayer;
+    UIColor* kDefaultColor;
+    UIColor* kSelectedColor;
 }
 
 @end
@@ -21,8 +23,7 @@
 @implementation PPDotBoxView
 
 #define kDotBoxDefaultWidth 34.0f
-#define kDefaultColor [UIColor colorWithRed:57/255.0f green:150/255.0f blue:219/255.0f alpha:1.0]
-#define kSelectedColor [UIColor colorWithRed:24/255.0f green:64/255.0f blue:93/255.0f alpha:1.0]
+#define kDeleteButtonDefaultWidth 30.0f
 
 - (id)initWithModel:(PPDotBox*) model {
     self.model = model;
@@ -37,6 +38,9 @@
         if (!self.model) {
             self.model = [PPDotBox object];
         }
+        kSelectedColor = self.tintColor;
+        NSLog(@"tint color %@", kDefaultColor);
+        kDefaultColor = [kSelectedColor colorWithAlphaComponent:0.8f];
         self.opaque = NO;
         self.minWidth = kDotBoxDefaultWidth;
         [self setSelectionColor:false];
@@ -58,6 +62,29 @@
     [self.layer addSublayer:boxLayer];
 }
 
+- (void) setMarchingAnts:(BOOL)marchingAntsOn {
+    if (marchingAntsOn) {
+        CABasicAnimation *marchingAntsAnimation = [CABasicAnimation animationWithKeyPath:@"lineDashPhase"];
+        [marchingAntsAnimation setFromValue:[NSNumber numberWithFloat:0.0f]];
+        [marchingAntsAnimation setToValue:[NSNumber numberWithFloat:(10.0f)]];
+        [marchingAntsAnimation setDuration:0.75f];
+        [marchingAntsAnimation setRepeatCount:10000];
+        marchingAntsAnimation.timeOffset = (boxLayer.lineDashPhase / 10.0f) * 0.75f;
+        [boxLayer addAnimation:marchingAntsAnimation forKey:@"linePhase"];
+    } else {
+        [boxLayer setLineDashPhase:[boxLayer.presentationLayer lineDashPhase]];
+        [boxLayer removeAnimationForKey:@"linePhase"];
+    }
+}
+
+- (void) toggleMarchingAnts {
+    if ([boxLayer animationForKey:@"linePhase"]) {
+        [self setMarchingAnts:TRUE];
+    } else {
+        [self setMarchingAnts:FALSE];
+    }
+}
+
 - (void) addDotLayer {
     self.dotLayer = [CAShapeLayer layer];
     [self.dotLayer setFillColor:kDefaultColor.CGColor];
@@ -65,9 +92,8 @@
 }
 
 - (void) addDeleteButton {
-    float deleteButtonWidth = 30.0f;
-    CGRect deleteButtonRect = CGRectMake(2.0f, 0, deleteButtonWidth, deleteButtonWidth);
-    UIFont* deleteIconFont = [UIFont fontWithName:kFontAwesomeFamilyName size:deleteButtonWidth];
+    CGRect deleteButtonRect = [self getDeleteButtonFrame];
+    UIFont* deleteIconFont = [UIFont fontWithName:kFontAwesomeFamilyName size:kDeleteButtonDefaultWidth];
 
     self.deleteButton = [[UIView alloc] initWithFrame:deleteButtonRect];
     UILabel* circle = [[UILabel alloc] initWithFrame:deleteButtonRect];
@@ -79,7 +105,7 @@
     circle.text = [NSString fontAwesomeIconStringForEnum:FACircle];
     xShape.text = [NSString fontAwesomeIconStringForEnum:FATimesCircleO];
     
-    [circle setTextColor:[UIColor whiteColor]];
+    [circle setTextColor:[UIColor clearColor]];
 //    [xShape setTextColor:[UIColor blackColor]];
     [xShape setTextColor:kSelectedColor];
     
@@ -94,7 +120,11 @@
 }
 
 - (CGRect) getBoxFrame:(CGRect)frame {
-    return CGRectMake(frame.origin.x + kDotBoxDefaultWidth / 2, frame.origin.y + kDotBoxDefaultWidth / 2, frame.size.width - kDotBoxDefaultWidth, frame.size.height - kDotBoxDefaultWidth);
+    return CGRectMake(frame.origin.x + kDeleteButtonDefaultWidth / 2, frame.origin.y + kDeleteButtonDefaultWidth / 2, frame.size.width - kDotBoxDefaultWidth / 2 - kDeleteButtonDefaultWidth / 2, frame.size.height - kDotBoxDefaultWidth / 2 - kDeleteButtonDefaultWidth / 2);
+}
+
+- (CGRect) getDeleteButtonFrame {
+    return CGRectMake(1.0f, 0, kDeleteButtonDefaultWidth, kDeleteButtonDefaultWidth);
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -124,9 +154,11 @@
     if (isSelected) {
         [self.deleteButton setHidden:FALSE];
         [self.dotLayer setHidden:FALSE];
+        [self setMarchingAnts:TRUE];
     } else {
         [self.deleteButton setHidden:TRUE];
         [self.dotLayer setHidden:TRUE];
+        [self setMarchingAnts:FALSE];
     }
     selected = isSelected;
     [self setSelectionColor:isSelected];
@@ -185,7 +217,10 @@
 }
 
 + (PPDotBoxView *) dotBoxAtPoint: (CGPoint) point {
-    PPDotBoxView* dotBox = [[self alloc] initWithFrame:CGRectMake(point.x - kDotBoxDefaultWidth / 2, point.y - kDotBoxDefaultWidth / 2, kDotBoxDefaultWidth, kDotBoxDefaultWidth)];
+    float distanceBetweenCircleCenters = kDotBoxDefaultWidth / 2 + kDeleteButtonDefaultWidth / 2;
+    float widthOfSquareCircumscribingCircles = distanceBetweenCircleCenters / sqrtf(2) + distanceBetweenCircleCenters;
+    
+    PPDotBoxView* dotBox = [[self alloc] initWithFrame:CGRectMake(point.x - widthOfSquareCircumscribingCircles + kDotBoxDefaultWidth / 2, point.y - widthOfSquareCircumscribingCircles + kDotBoxDefaultWidth / 2, widthOfSquareCircumscribingCircles, widthOfSquareCircumscribingCircles)];
     return dotBox;
 }
 
