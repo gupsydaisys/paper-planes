@@ -130,6 +130,11 @@
 - (void)drawRect:(CGRect)rect {
     UIBezierPath* rectPath = [UIBezierPath bezierPathWithRect:[self getBoxFrame:rect]];
     boxLayer.path = rectPath.CGPath;
+    if ([self isBox]) {
+        [boxLayer setHidden:FALSE];
+    } else {
+        [boxLayer setHidden:TRUE];
+    }
     
     UIBezierPath* dotPath = [UIBezierPath bezierPathWithOvalInRect:[self getDotFrame:rect]];
     self.dotLayer.path = dotPath.CGPath;
@@ -145,23 +150,39 @@
 }
 
 - (BOOL) toggleSelected {
-    selected = !selected;
-    [self setSelectionColor:selected];
-    return  selected;
+    return [self setSelected:![self isSelected]];
+//    selected = !selected;
+//    [self setSelectionColor:selected];
+//    return  selected;
 }
 
-- (void) setSelected:(BOOL) isSelected {
+- (BOOL) setSelected:(BOOL) isSelected {
     if (isSelected) {
         [self.deleteButton setHidden:FALSE];
         [self.dotLayer setHidden:FALSE];
         [self setMarchingAnts:TRUE];
+        [boxLayer setHidden:FALSE];
+        selected = TRUE;
+        [self setSelectionColor:TRUE];
     } else {
         [self.deleteButton setHidden:TRUE];
-        [self.dotLayer setHidden:TRUE];
         [self setMarchingAnts:FALSE];
+        if ([self isBox]) {
+            [self.dotLayer setHidden:TRUE];
+        } else {
+            [boxLayer setHidden:TRUE];
+        }
+        selected = FALSE;
+        [self setSelectionColor:FALSE];
     }
-    selected = isSelected;
-    [self setSelectionColor:isSelected];
+    
+    return selected;
+}
+
+- (BOOL) isBox {
+    // Returns whether this dotBox is big enough to be considered to be in "box mode"
+    return (self.frame.size.width > kDotBoxDefaultWidth + kDeleteButtonDefaultWidth) ||
+            (self.frame.size.height > kDotBoxDefaultWidth + kDeleteButtonDefaultWidth);
 }
 
 - (void) setSelectionColor:(BOOL) isSelected {

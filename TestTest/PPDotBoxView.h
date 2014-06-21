@@ -15,7 +15,7 @@
 
 - (id) initWithModel:(PPDotBox*) model;
 - (BOOL) toggleSelected;
-- (void) setSelected:(BOOL) isSelected;
+- (BOOL) setSelected:(BOOL) isSelected;
 - (void) blink;
 - (void) logComments;
 - (BOOL) isSelected;
