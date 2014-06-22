@@ -14,6 +14,7 @@
     UIColor* color;
     BOOL selected;
     CAShapeLayer *boxLayer;
+    CATextLayer *resizeIconLayer;
     UIColor* kDefaultColor;
     UIColor* kSelectedColor;
 }
@@ -38,9 +39,13 @@
         if (!self.model) {
             self.model = [PPDotBox object];
         }
-        kSelectedColor = self.tintColor;
-        NSLog(@"tint color %@", kDefaultColor);
-        kDefaultColor = [kSelectedColor colorWithAlphaComponent:0.8f];
+        
+        kDefaultColor = self.tintColor;
+        
+        CGFloat hue, saturation, brightness, alpha;
+        [kDefaultColor getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
+        kSelectedColor = [UIColor colorWithHue:hue saturation:saturation brightness:brightness*.9  alpha:alpha];
+        
         self.opaque = NO;
         self.minWidth = kDotBoxDefaultWidth;
         [self setSelectionColor:false];
@@ -59,7 +64,10 @@
     [boxLayer setLineJoin:kCALineCapSquare];
     [boxLayer setLineDashPattern:[NSArray arrayWithObjects:[NSNumber numberWithInt:5], [NSNumber numberWithInt:5], nil]];
     
+    resizeIconLayer = [self resizeIconLayer];
+    resizeIconLayer.zPosition = 5;
     [self.layer addSublayer:boxLayer];
+    [boxLayer addSublayer:resizeIconLayer];
 }
 
 - (void) setMarchingAnts:(BOOL)marchingAntsOn {
@@ -86,11 +94,29 @@
 }
 
 - (void) addDotLayer {
+    CGRect dotBoxRect = CGRectMake(0, 0, kDotBoxDefaultWidth, kDotBoxDefaultWidth);
+    UIBezierPath* dotPath = [UIBezierPath bezierPathWithOvalInRect:dotBoxRect];
+    
     self.dotLayer = [CAShapeLayer layer];
+    self.dotLayer.path = dotPath.CGPath;
+    self.dotLayer.zPosition = -1;
     [self.dotLayer setFillColor:kDefaultColor.CGColor];
+    
     [self.layer addSublayer:self.dotLayer];
 }
 
+- (CATextLayer*) resizeIconLayer {
+    CATextLayer *resizeIcon = [[CATextLayer alloc] init];
+    
+    resizeIcon.font = (__bridge CFTypeRef)(kFontAwesomeFamilyName);
+    resizeIcon.fontSize = (kDotBoxDefaultWidth * 2) / 3;
+    resizeIcon.string = [NSString fontAwesomeIconStringForEnum:FAExpand];
+    resizeIcon.foregroundColor = [UIColor whiteColor].CGColor;
+    resizeIcon.contentsScale = [[UIScreen mainScreen] scale];
+    resizeIcon.transform = CATransform3DMakeRotation(M_PI_2, 0, 0, 1.0);
+    
+    return resizeIcon;
+}
 - (void) addDeleteButton {
     CGRect deleteButtonRect = [self getDeleteButtonFrame];
     UIFont* deleteIconFont = [UIFont fontWithName:kFontAwesomeFamilyName size:kDeleteButtonDefaultWidth];
@@ -103,10 +129,9 @@
     xShape.font = deleteIconFont;
     
     circle.text = [NSString fontAwesomeIconStringForEnum:FACircle];
-    xShape.text = [NSString fontAwesomeIconStringForEnum:FATimesCircleO];
-    
-    [circle setTextColor:[UIColor clearColor]];
-//    [xShape setTextColor:[UIColor blackColor]];
+    xShape.text = [NSString fontAwesomeIconStringForEnum:FATimesCircle];
+
+    [circle setTextColor:[UIColor whiteColor]];
     [xShape setTextColor:kSelectedColor];
     
     [self.deleteButton addSubview:circle];
@@ -127,6 +152,11 @@
     return CGRectMake(1.0f, 0, kDeleteButtonDefaultWidth, kDeleteButtonDefaultWidth);
 }
 
+- (CGRect) getResizeIconFrame:(CGRect)frame {
+    CGRect boxFrame = [self getBoxFrame:frame];
+    return CGRectMake(CGRectGetMaxX(boxFrame) - kDotBoxDefaultWidth / 2 - 5.0f, CGRectGetMaxY(boxFrame) - kDotBoxDefaultWidth / 2 + 8.0f, kDotBoxDefaultWidth, kDotBoxDefaultWidth);
+}
+
 - (void)drawRect:(CGRect)rect {
     UIBezierPath* rectPath = [UIBezierPath bezierPathWithRect:[self getBoxFrame:rect]];
     boxLayer.path = rectPath.CGPath;
@@ -136,8 +166,12 @@
         [boxLayer setHidden:TRUE];
     }
     
-    UIBezierPath* dotPath = [UIBezierPath bezierPathWithOvalInRect:[self getDotFrame:rect]];
-    self.dotLayer.path = dotPath.CGPath;
+    // Disables implicit animations
+    [CATransaction begin];
+    [CATransaction setDisableActions:TRUE];
+    self.dotLayer.frame = [self getDotFrame:rect];
+    resizeIconLayer.frame = [self getResizeIconFrame:rect];
+    [CATransaction commit];
     
     self.model.originX = self.frame.origin.x;
     self.model.originY = self.frame.origin.y;
@@ -151,27 +185,37 @@
 
 - (BOOL) toggleSelected {
     return [self setSelected:![self isSelected]];
-//    selected = !selected;
-//    [self setSelectionColor:selected];
-//    return  selected;
 }
 
 - (BOOL) setSelected:(BOOL) isSelected {
     if (isSelected) {
+        // Show delete button, dot and box
         [self.deleteButton setHidden:FALSE];
+        
+        if ([self isBox]) {
+            [boxLayer setHidden:FALSE];
+            [resizeIconLayer setHidden:FALSE];
+        }
+        
+        // Always show the dot upon selection
         [self.dotLayer setHidden:FALSE];
+        
+        // Turn on marching ants
         [self setMarchingAnts:TRUE];
-        [boxLayer setHidden:FALSE];
         selected = TRUE;
         [self setSelectionColor:TRUE];
     } else {
         [self.deleteButton setHidden:TRUE];
         [self setMarchingAnts:FALSE];
+        
         if ([self isBox]) {
             [self.dotLayer setHidden:TRUE];
+            [resizeIconLayer setHidden:TRUE];
         } else {
+            // Otherwise hide the box
             [boxLayer setHidden:TRUE];
         }
+        
         selected = FALSE;
         [self setSelectionColor:FALSE];
     }
@@ -228,13 +272,6 @@
     for(HSComment* comment in self.model.comments) {
         NSLog(@"comment %@", comment);
     }
-//    NSLog(@"logging comments");
-//    PFQuery *query = [PFQuery queryWithClassName:@"Comment"];
-//    NSLog(@"dotbox model %@", self.model);
-//    [query whereKey:@"dotBox" equalTo:self.model];
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//        NSLog(@"comments %@", objects);
-//    }];
 }
 
 + (PPDotBoxView *) dotBoxAtPoint: (CGPoint) point {
@@ -244,7 +281,5 @@
     PPDotBoxView* dotBox = [[self alloc] initWithFrame:CGRectMake(point.x - widthOfSquareCircumscribingCircles + kDotBoxDefaultWidth / 2, point.y - widthOfSquareCircumscribingCircles + kDotBoxDefaultWidth / 2, widthOfSquareCircumscribingCircles, widthOfSquareCircumscribingCircles)];
     return dotBox;
 }
-
-
 
 @end
