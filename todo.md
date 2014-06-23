@@ -11,12 +11,19 @@ unselected: dotted lines blue w/o dot
 Th - Fri
 Add Comments
 4. Multi-line comments
-3. Add icon indicator to add conversation and finished comment.
+3. Add icon indicator to add conversation and finished comm
+ent.
 
 Th - Fri
 Sheeting
 1. arrow point has to indicate correct direction / dragging SERENA
 2. dismissing keyboard SERENA
+
+SERENA
+
+0. Fix comments box so that resizing is ite.
+1. Table is fully covering image and make it translucent.
+4. Implement draggin to get rid of keyboard and changing comments bar
 
 Sun
 UI changes across devices + correctness 

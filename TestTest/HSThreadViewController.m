@@ -53,6 +53,8 @@
     return cell;
 }
 
+//http://www.howlin-interactive.com/2013/01/creating-a-self-sizing-uitextview-within-a-uitableviewcell-in-ios-6/
+
 - (void) keyboardWillShow {
     
 }
