@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4846A55B1954B2F4005E28EA /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4846A5581954B2F4005E28EA /* HPGrowingTextView.m */; };
+		4846A55C1954B2F4005E28EA /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 4846A55A1954B2F4005E28EA /* HPTextViewInternal.m */; };
 		4846C2CC1952363300ED00C8 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4846C2CB1952363300ED00C8 /* FontAwesome.ttf */; };
 		4846C2CF1952375200ED00C8 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 4846C2CE1952375200ED00C8 /* NSString+FontAwesome.m */; };
 		4846C2D319524A5700ED00C8 /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 4846C2D219524A5700ED00C8 /* UIFont+FontAwesome.m */; };
@@ -71,6 +73,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4846A5571954B2F4005E28EA /* HPGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPGrowingTextView.h; sourceTree = "<group>"; };
+		4846A5581954B2F4005E28EA /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
+		4846A5591954B2F4005E28EA /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
+		4846A55A1954B2F4005E28EA /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
 		4846C2CB1952363300ED00C8 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = ../FontAwesome.ttf; sourceTree = "<group>"; };
 		4846C2CD1952375200ED00C8 /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
 		4846C2CE1952375200ED00C8 /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
@@ -330,6 +336,10 @@
 		48FE6347194A2EC1009F98D0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4846A5571954B2F4005E28EA /* HPGrowingTextView.h */,
+				4846A5581954B2F4005E28EA /* HPGrowingTextView.m */,
+				4846A5591954B2F4005E28EA /* HPTextViewInternal.h */,
+				4846A55A1954B2F4005E28EA /* HPTextViewInternal.m */,
 				CAE40B05194A5AAA00EDA4CB /* PPDotBoxView.h */,
 				CAE40B06194A5AAA00EDA4CB /* PPDotBoxView.m */,
 				48FE6348194A2ED4009F98D0 /* HSSummaryCell.h */,
@@ -513,8 +523,10 @@
 				4846C2CF1952375200ED00C8 /* NSString+FontAwesome.m in Sources */,
 				48FE634A194A2ED4009F98D0 /* HSSummaryCell.m in Sources */,
 				48FE636D194A2FF2009F98D0 /* DTTimePeriodChain.m in Sources */,
+				4846A55C1954B2F4005E28EA /* HPTextViewInternal.m in Sources */,
 				48EEE9C3194A285600863902 /* main.m in Sources */,
 				48FE636C194A2FF2009F98D0 /* DTTimePeriod.m in Sources */,
+				4846A55B1954B2F4005E28EA /* HPGrowingTextView.m in Sources */,
 				48EC1671194BC29E000B3165 /* UIView+GradientMask.m in Sources */,
 				48EC166F194BC29E000B3165 /* UIFont+SecretFont.m in Sources */,
 			);

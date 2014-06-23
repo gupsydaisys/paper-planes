@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HPGrowingTextView.h"
 
-@interface HSAddCommentViewController : UIViewController
+@interface HSAddCommentViewController : UIViewController <HPGrowingTextViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *commentField;
-- (IBAction)addImage:(id)sender;
+@property (strong, nonatomic) HPGrowingTextView *textView;
+
+@property (weak, nonatomic) IBOutlet UIView *containerView;
+
 - (IBAction)postComment:(id)sender;
-
-- (void) commentAdded;
 @end
