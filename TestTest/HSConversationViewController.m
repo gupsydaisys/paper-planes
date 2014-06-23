@@ -120,6 +120,15 @@
     return nil;
 }
 
+- (HSAddCommentViewController*) getAddCommentController {
+    for (UIViewController* viewController in self.childViewControllers) {
+        if ([viewController isKindOfClass:[HSAddCommentViewController class]]) {
+            return (HSAddCommentViewController*) viewController;
+        }
+    }
+    return nil;
+}
+
 
 
 //- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

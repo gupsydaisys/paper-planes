@@ -10,6 +10,7 @@
 
 @interface HSSummaryCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *headingLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *updatedLastLabel;

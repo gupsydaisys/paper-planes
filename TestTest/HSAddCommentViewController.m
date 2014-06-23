@@ -94,6 +94,8 @@
     r.size.height -= diff;
     r.origin.y += diff;
 	self.containerView.frame = r;
+//    [self getConversationViewController].addCommentHeight.constant = r.size.height;
+//    [[self getConversationViewController].addCommentView setNeedsUpdateConstraints];
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation

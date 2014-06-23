@@ -10,6 +10,7 @@
 #import "HSSummaryCell.h"
 #import "HSConversation.h"
 #import "HSConversationViewController.h"
+#import "HSComment.h"
 #import "DateTools.h"
 
 @interface HSFeedViewController () {
@@ -60,11 +61,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HSSummaryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ConversationSummary" forIndexPath:indexPath];
     HSConversation *curr = (HSConversation*) self.conversations[indexPath.row];
+    HSComment *lastComment = (HSComment*)(curr.comments.lastObject);
 
     cell.headingLabel.text = curr.title;
-    cell.commentCountLabel.text = @"3 comments";
-    cell.updatedLastLabel.text = curr.updatedAt.timeAgoSinceNow;
-    //    @"Last Updated 3d ago by Serena";
+    cell.commentCountLabel.text = [NSString stringWithFormat:@"%d comments", curr.comments.count];
+    cell.usernameLabel.text = curr.creator.username;
+    
+    cell.updatedLastLabel.text = [NSString stringWithFormat:@"Last Updated %@ by %@", curr.updatedAt.timeAgoSinceNow, lastComment.creator.username];
     return cell;
 }
 
