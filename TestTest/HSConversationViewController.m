@@ -68,8 +68,11 @@
 //    comment.dotBox = selectedDotBox;
 
     [selectedDotBox addObject:comment forKey:@"comments"];
-    
-    [self.conversation addUniqueObject:selectedDotBox forKey:@"dotboxes"];
+
+    if (selectedDotBox != nil) {
+        [self.conversation addUniqueObject:selectedDotBox forKey:@"dotboxes"];
+    }
+
     [self.conversation addObject:comment forKey:@"comments"];
     [self.conversation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {

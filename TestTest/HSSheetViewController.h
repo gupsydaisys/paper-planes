@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PPDotBoxView.h"
 
-@interface HSSheetViewController : UIViewController <UIScrollViewDelegate, UITableViewDataSource,UITableViewDelegate>
+@interface HSSheetViewController : UIViewController <UIScrollViewDelegate, UITableViewDataSource,UITableViewDelegate, UIGestureRecognizerDelegate>
 
 - (void) commentAdded;
 
