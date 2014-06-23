@@ -8,6 +8,7 @@
 #import "HSUtilities.h"
 #import "HSFeedViewController.h"
 #import "HSSummaryCell.h"
+#import "HSComment.h"
 #import "HSConversation.h"
 #import "HSConversationViewController.h"
 #import "DateTools.h"
@@ -33,6 +34,7 @@
     [query includeKey:@"comments.creator"];
     [query includeKey:@"comments.dotBox"];
     [query findObjectsInBackgroundWithTarget:self selector:@selector(handleGetConversations:error:)];
+    
 }
 
 
@@ -63,8 +65,9 @@
     HSConversation *curr = (HSConversation*) self.conversations[indexPath.row];
 
     cell.headingLabel.text = curr.title;
-    cell.commentCountLabel.text = @"3 comments";
-    cell.updatedLastLabel.text = curr.updatedAt.timeAgoSinceNow;
+    cell.commentCountLabel.text =[NSString stringWithFormat:@"%d comments", curr.comments.count];
+    HSComment* lastComment = (HSComment*)(curr.comments.lastObject);
+    cell.updatedLastLabel.text = [NSString stringWithFormat:@"Last updated by %@ %@", lastComment.creator.username, curr.updatedAt.timeAgoSinceNow];
     //    @"Last Updated 3d ago by Serena";
     return cell;
 }
