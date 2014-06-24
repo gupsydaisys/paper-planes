@@ -25,6 +25,13 @@
     CGPoint fullCenter;
     CommentState commentState;
     
+    CGPoint startPos;
+    CGPoint minPos;
+    CGPoint maxPos;
+    
+    BOOL opened;
+    BOOL verticalAxis;
+    
     PPDotBoxView* currentlyPanningDotBox;
     PPDotBoxView* currentlyResizingDotBox;
     CGPoint initialLongPressPoint;
@@ -37,9 +44,10 @@
 #define xCenter 160.0f
 #define animate 1
 #define animationDuration 0.2f
+#define delta 0.0f
 const CGFloat imgMinHeight = 25.0f;
 const CGFloat addCommentHeight = 50.0f;
-const CGFloat commentsHandleHeight = 25.0f;
+const CGFloat commentsHandleHeight = 35.0f;
 const CGFloat commentsContainerHalfHeight = 202.0f;
 
 @implementation HSSheetViewController
@@ -67,6 +75,9 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
         // No image provided
         NSLog(@"No image provided");
     }
+    closedCenter = CGPointMake(160, 353.5);
+    fullCenter = CGPointMake(160, 183);
+    halfCenter = CGPointMake(160, 265);
 }
 
 - (void) initSheetWithImage:(UIImage*) image {
@@ -244,77 +255,67 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
     
 #pragma mark - Handle Drag Coments
     
-    - (IBAction)dragCommentsHandle:(UIPanGestureRecognizer *)sender {
-        //    if ([sender state] == UIGestureRecognizerStateBegan) {
-        //
-        //        startPos = self.center;
-        //
-        //        // Determines if the view can be pulled in the x or y axis
-        //        verticalAxis = closedCenter.x == openedCenter.x;
-        //
-        //        // Finds the minimum and maximum points in the axis
-        //        if (verticalAxis) {
-        //            minPos = closedCenter.y < openedCenter.y ? closedCenter : openedCenter;
-        //            maxPos = closedCenter.y > openedCenter.y ? closedCenter : openedCenter;
-        //        } else {
-        //            minPos = closedCenter.x < openedCenter.x ? closedCenter : openedCenter;
-        //            maxPos = closedCenter.x > openedCenter.x ? closedCenter : openedCenter;
-        //        }
-        //
-        //    } else if ([sender state] == UIGestureRecognizerStateChanged) {
-        //
-        //        CGPoint translate = [sender translationInView:self.superview];
-        //
-        //        CGPoint newPos;
-        //
-        //        // Moves the view, keeping it constrained between openedCenter and closedCenter
-        //        if (verticalAxis) {
-        //
-        //            newPos = CGPointMake(startPos.x, startPos.y + translate.y);
-        //
-        //            if (newPos.y < minPos.y) {
-        //                newPos.y = minPos.y;
-        //                translate = CGPointMake(0, newPos.y - startPos.y);
-        //            }
-        //
-        //            if (newPos.y > maxPos.y) {
-        //                newPos.y = maxPos.y;
-        //                translate = CGPointMake(0, newPos.y - startPos.y);
-        //            }
-        //        } else {
-        //
-        //            newPos = CGPointMake(startPos.x + translate.x, startPos.y);
-        //
-        //            if (newPos.x < minPos.x) {
-        //                newPos.x = minPos.x;
-        //                translate = CGPointMake(newPos.x - startPos.x, 0);
-        //            }
-        //
-        //            if (newPos.x > maxPos.x) {
-        //                newPos.x = maxPos.x;
-        //                translate = CGPointMake(newPos.x - startPos.x, 0);
-        //            }
-        //        }
-        //
-        //        [sender setTranslation:translate inView:self.superview];
-        //
-        //        self.center = newPos;
-        //
-        //    } else if ([sender state] == UIGestureRecognizerStateEnded) {
-        //
-        //        // Gets the velocity of the gesture in the axis, so it can be
-        //        // determined to which endpoint the state should be set.
-        //
-        //        CGPoint vectorVelocity = [sender velocityInView:self.superview];
-        //        CGFloat axisVelocity = verticalAxis ? vectorVelocity.y : vectorVelocity.x;
-        //
-        //        CGPoint target = axisVelocity < 0 ? minPos : maxPos;
-        //        BOOL op = CGPointEqualToPoint(target, openedCenter);
-        //
-        //        [self setOpened:op animated:animate];
-        //    }
+- (IBAction)dragCommentsHandle:(UIPanGestureRecognizer *)sender {
+    if ([sender state] == UIGestureRecognizerStateBegan) {
+
+        startPos = self.commentsViewContainer.center;
+
+        minPos = fullCenter;
+        maxPos = closedCenter;
+
+    } else if ([sender state] == UIGestureRecognizerStateChanged) {
+        // Moves the view, keeping it constrained between closed and full
+        
+        CGPoint translate = [sender translationInView:self.mainView];
+
+        CGPoint newPos = CGPointMake(startPos.x, startPos.y + translate.y);
+
+        if (newPos.y < minPos.y) {
+            newPos.y = minPos.y;
+            translate = CGPointMake(0, newPos.y - startPos.y);
+        }
+
+        if (newPos.y > maxPos.y) {
+            newPos.y = maxPos.y;
+            translate = CGPointMake(0, newPos.y - startPos.y);
+        }
+
+        [sender setTranslation:translate inView:self.mainView];
+
+        self.commentsViewContainer.center = newPos;
+    } else if ([sender state] == UIGestureRecognizerStateEnded) {
+
+        // decides which state to keep
+
+        CGPoint vectorVelocity = [sender velocityInView:self.mainView];
+        float yTranslation = self.commentsViewContainer.center.y;
+//        NSLog(@"vectorVelocity %f", vectorVelocity.y);
+        CommentState curr;
+
+        if (vectorVelocity.y > 0) {
+//            NSLog(@"pos");
+            if (yTranslation <= halfCenter.y) {
+//                NSLog(@"halfdown");
+                curr = HALFDOWN;
+            } else {
+//                NSLog(@"closed");
+                curr = CLOSED;
+            }
+        } else {
+//             NSLog(@"neg");
+            if (yTranslation >= halfCenter.y + delta) {
+//                NSLog(@"halfup");
+                curr = HALFUP;
+            } else {
+//                NSLog(@"full");
+                curr = FULL;
+            }
+        }
+//        CommentState curr = axisVelocity < 0 ? FULL : CLOSED;
+        [self setOpenedState:curr animated:animate];
     }
-    
+}
+
 #pragma mark - Handle Tap Comments
     
 - (IBAction) tapCommentsHandle:(UITapGestureRecognizer *)sender {
@@ -366,12 +367,15 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
     switch (commentState) {
         case CLOSED:
             self.commentsViewContainer.frame = (CGRect){.origin = {0, self.mainView.frame.size.height - commentsHandleHeight}, .size = {self.mainView.frame.size.width, commentsHandleHeight}};
+//            NSLog(@"Center point in closed mode %@", NSStringFromCGPoint(self.commentsViewContainer.center));
             break;
         case FULL:
-            self.commentsViewContainer.frame = (CGRect){.origin = {0, imgMinHeight}, .size = {self.mainView.frame.size.width, self.mainView.frame.size.height - imgMinHeight}};
+            self.commentsViewContainer.frame = (CGRect){.origin = {0, 0}, .size = {self.mainView.frame.size.width, self.mainView.frame.size.height}};
+//            NSLog(@"Center point in full mode %@", NSStringFromCGPoint(self.commentsViewContainer.center));
             break;
         default:
             self.commentsViewContainer.frame = (CGRect){.origin = {0, self.mainView.frame.size.height - commentsContainerHalfHeight}, .size = {self.mainView.frame.size.width, commentsContainerHalfHeight}};
+//            NSLog(@"Center point in half mode %@", NSStringFromCGPoint(self.commentsViewContainer.center));
             break;
     }
     
@@ -386,7 +390,7 @@ const CGFloat commentsContainerHalfHeight = 202.0f;
             self.commentsViewContainer.frame = (CGRect){.origin = {0, self.mainView.frame.size.height - commentsHandleHeight}, .size = {self.mainView.frame.size.width, commentsHandleHeight}};
             break;
         default:
-            self.commentsViewContainer.frame = (CGRect){.origin = {0, imgMinHeight}, .size = {self.mainView.frame.size.width, self.mainView.frame.size.height - imgMinHeight}};
+            self.commentsViewContainer.frame = (CGRect){.origin = {0, 0}, .size = {self.mainView.frame.size.width, self.mainView.frame.size.height}};
             break;
     }
     
