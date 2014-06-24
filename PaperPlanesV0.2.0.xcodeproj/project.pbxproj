@@ -1,0 +1,419 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CABC912A1959F99600B4AEF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC91291959F99600B4AEF5 /* main.m */; };
+		CABC912D1959F99600B4AEF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC912C1959F99600B4AEF5 /* AppDelegate.m */; };
+		CABC91301959F99600B4AEF5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC912F1959F99600B4AEF5 /* ViewController.m */; };
+		CABC91331959F99600B4AEF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CABC91311959F99600B4AEF5 /* Main.storyboard */; };
+		CABC91351959F99600B4AEF5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CABC91341959F99600B4AEF5 /* Images.xcassets */; };
+		CABC91411959F99600B4AEF5 /* PaperPlanesV0_2_0Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC91401959F99600B4AEF5 /* PaperPlanesV0_2_0Tests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CABC913B1959F99600B4AEF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CABC911C1959F99600B4AEF5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CABC91231959F99600B4AEF5;
+			remoteInfo = PaperPlanesV0.2.0;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CABC91241959F99600B4AEF5 /* PaperPlanesV0.2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaperPlanesV0.2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CABC91281959F99600B4AEF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CABC91291959F99600B4AEF5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CABC912B1959F99600B4AEF5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CABC912C1959F99600B4AEF5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CABC912E1959F99600B4AEF5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		CABC912F1959F99600B4AEF5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CABC91321959F99600B4AEF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CABC91341959F99600B4AEF5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CABC913A1959F99600B4AEF5 /* PaperPlanesV0.2.0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaperPlanesV0.2.0Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CABC913F1959F99600B4AEF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CABC91401959F99600B4AEF5 /* PaperPlanesV0_2_0Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaperPlanesV0_2_0Tests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CABC91211959F99600B4AEF5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CABC91371959F99600B4AEF5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CABC911B1959F99600B4AEF5 = {
+			isa = PBXGroup;
+			children = (
+				CABC91261959F99600B4AEF5 /* PaperPlanesV0.2.0 */,
+				CABC913D1959F99600B4AEF5 /* PaperPlanesV0.2.0Tests */,
+				CABC91251959F99600B4AEF5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CABC91251959F99600B4AEF5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CABC91241959F99600B4AEF5 /* PaperPlanesV0.2.0.app */,
+				CABC913A1959F99600B4AEF5 /* PaperPlanesV0.2.0Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CABC91261959F99600B4AEF5 /* PaperPlanesV0.2.0 */ = {
+			isa = PBXGroup;
+			children = (
+				CABC912B1959F99600B4AEF5 /* AppDelegate.h */,
+				CABC912C1959F99600B4AEF5 /* AppDelegate.m */,
+				CABC912E1959F99600B4AEF5 /* ViewController.h */,
+				CABC912F1959F99600B4AEF5 /* ViewController.m */,
+				CABC91311959F99600B4AEF5 /* Main.storyboard */,
+				CABC91341959F99600B4AEF5 /* Images.xcassets */,
+				CABC91271959F99600B4AEF5 /* Supporting Files */,
+			);
+			path = PaperPlanesV0.2.0;
+			sourceTree = "<group>";
+		};
+		CABC91271959F99600B4AEF5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CABC91281959F99600B4AEF5 /* Info.plist */,
+				CABC91291959F99600B4AEF5 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CABC913D1959F99600B4AEF5 /* PaperPlanesV0.2.0Tests */ = {
+			isa = PBXGroup;
+			children = (
+				CABC91401959F99600B4AEF5 /* PaperPlanesV0_2_0Tests.m */,
+				CABC913E1959F99600B4AEF5 /* Supporting Files */,
+			);
+			path = PaperPlanesV0.2.0Tests;
+			sourceTree = "<group>";
+		};
+		CABC913E1959F99600B4AEF5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CABC913F1959F99600B4AEF5 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CABC91231959F99600B4AEF5 /* PaperPlanesV0.2.0 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CABC91441959F99600B4AEF5 /* Build configuration list for PBXNativeTarget "PaperPlanesV0.2.0" */;
+			buildPhases = (
+				CABC91201959F99600B4AEF5 /* Sources */,
+				CABC91211959F99600B4AEF5 /* Frameworks */,
+				CABC91221959F99600B4AEF5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PaperPlanesV0.2.0;
+			productName = PaperPlanesV0.2.0;
+			productReference = CABC91241959F99600B4AEF5 /* PaperPlanesV0.2.0.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CABC91391959F99600B4AEF5 /* PaperPlanesV0.2.0Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CABC91471959F99600B4AEF5 /* Build configuration list for PBXNativeTarget "PaperPlanesV0.2.0Tests" */;
+			buildPhases = (
+				CABC91361959F99600B4AEF5 /* Sources */,
+				CABC91371959F99600B4AEF5 /* Frameworks */,
+				CABC91381959F99600B4AEF5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CABC913C1959F99600B4AEF5 /* PBXTargetDependency */,
+			);
+			name = PaperPlanesV0.2.0Tests;
+			productName = PaperPlanesV0.2.0Tests;
+			productReference = CABC913A1959F99600B4AEF5 /* PaperPlanesV0.2.0Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CABC911C1959F99600B4AEF5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Learning Public";
+				TargetAttributes = {
+					CABC91231959F99600B4AEF5 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					CABC91391959F99600B4AEF5 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = CABC91231959F99600B4AEF5;
+					};
+				};
+			};
+			buildConfigurationList = CABC911F1959F99600B4AEF5 /* Build configuration list for PBXProject "PaperPlanesV0.2.0" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CABC911B1959F99600B4AEF5;
+			productRefGroup = CABC91251959F99600B4AEF5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CABC91231959F99600B4AEF5 /* PaperPlanesV0.2.0 */,
+				CABC91391959F99600B4AEF5 /* PaperPlanesV0.2.0Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CABC91221959F99600B4AEF5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CABC91331959F99600B4AEF5 /* Main.storyboard in Resources */,
+				CABC91351959F99600B4AEF5 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CABC91381959F99600B4AEF5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CABC91201959F99600B4AEF5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CABC91301959F99600B4AEF5 /* ViewController.m in Sources */,
+				CABC912D1959F99600B4AEF5 /* AppDelegate.m in Sources */,
+				CABC912A1959F99600B4AEF5 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CABC91361959F99600B4AEF5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CABC91411959F99600B4AEF5 /* PaperPlanesV0_2_0Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CABC913C1959F99600B4AEF5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CABC91231959F99600B4AEF5 /* PaperPlanesV0.2.0 */;
+			targetProxy = CABC913B1959F99600B4AEF5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CABC91311959F99600B4AEF5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CABC91321959F99600B4AEF5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CABC91421959F99600B4AEF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				METAL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CABC91431959F99600B4AEF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				METAL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CABC91451959F99600B4AEF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = PaperPlanesV0.2.0/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CABC91461959F99600B4AEF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = PaperPlanesV0.2.0/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		CABC91481959F99600B4AEF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PaperPlanesV0.2.0.app/PaperPlanesV0.2.0";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PaperPlanesV0.2.0Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		CABC91491959F99600B4AEF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PaperPlanesV0.2.0.app/PaperPlanesV0.2.0";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PaperPlanesV0.2.0Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CABC911F1959F99600B4AEF5 /* Build configuration list for PBXProject "PaperPlanesV0.2.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CABC91421959F99600B4AEF5 /* Debug */,
+				CABC91431959F99600B4AEF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CABC91441959F99600B4AEF5 /* Build configuration list for PBXNativeTarget "PaperPlanesV0.2.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CABC91451959F99600B4AEF5 /* Debug */,
+				CABC91461959F99600B4AEF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CABC91471959F99600B4AEF5 /* Build configuration list for PBXNativeTarget "PaperPlanesV0.2.0Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CABC91481959F99600B4AEF5 /* Debug */,
+				CABC91491959F99600B4AEF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CABC911C1959F99600B4AEF5 /* Project object */;
+}
