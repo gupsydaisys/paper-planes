@@ -7,6 +7,7 @@
 //
 
 #import "PPBoxView.h"
+#import "PPDeleteButton.h"
 
 @interface PPBoxView () {
     CAShapeLayer* boxLayer;
@@ -20,11 +21,11 @@
 
 #pragma mark - Initialization
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self.layer addSublayer:[self boxLayer]];
+        [self addSubview:[self deleteButton]];
         [self setColor:self.tintColor];
         self.opaque = NO;
     }
@@ -78,6 +79,10 @@
     [boxLayer setLineDashPattern:[NSArray arrayWithObjects:[NSNumber numberWithInt:5], [NSNumber numberWithInt:5], nil]];
     
     return boxLayer;
+}
+
+- (UIView*) deleteButton {
+    return [PPDeleteButton deleteButtonCenteredAtPoint:CGPointZero];
 }
 
 #pragma mark - Convenience methods
