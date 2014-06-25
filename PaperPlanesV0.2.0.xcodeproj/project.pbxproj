@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		489652CB195A10AE002128B7 /* IMG_2602.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 489652CA195A10AE002128B7 /* IMG_2602.jpg */; };
+		CA384769195A39510083B949 /* PPBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA384768195A39510083B949 /* PPBoxView.m */; };
 		CABC912A1959F99600B4AEF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC91291959F99600B4AEF5 /* main.m */; };
 		CABC912D1959F99600B4AEF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC912C1959F99600B4AEF5 /* AppDelegate.m */; };
 		CABC91301959F99600B4AEF5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC912F1959F99600B4AEF5 /* ViewController.m */; };
@@ -28,6 +29,8 @@
 
 /* Begin PBXFileReference section */
 		489652CA195A10AE002128B7 /* IMG_2602.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_2602.jpg; sourceTree = "<group>"; };
+		CA384767195A39510083B949 /* PPBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPBoxView.h; sourceTree = "<group>"; };
+		CA384768195A39510083B949 /* PPBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPBoxView.m; sourceTree = "<group>"; };
 		CABC91241959F99600B4AEF5 /* PaperPlanesV0.2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaperPlanesV0.2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CABC91281959F99600B4AEF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CABC91291959F99600B4AEF5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -86,6 +89,8 @@
 				CABC912C1959F99600B4AEF5 /* AppDelegate.m */,
 				CABC912E1959F99600B4AEF5 /* ViewController.h */,
 				CABC912F1959F99600B4AEF5 /* ViewController.m */,
+				CA384767195A39510083B949 /* PPBoxView.h */,
+				CA384768195A39510083B949 /* PPBoxView.m */,
 				CABC91311959F99600B4AEF5 /* Main.storyboard */,
 				CABC91341959F99600B4AEF5 /* Images.xcassets */,
 				CABC91271959F99600B4AEF5 /* Supporting Files */,
@@ -221,6 +226,7 @@
 			files = (
 				CABC91301959F99600B4AEF5 /* ViewController.m in Sources */,
 				CABC912D1959F99600B4AEF5 /* AppDelegate.m in Sources */,
+				CA384769195A39510083B949 /* PPBoxView.m in Sources */,
 				CABC912A1959F99600B4AEF5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
