@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		489652CB195A10AE002128B7 /* IMG_2602.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 489652CA195A10AE002128B7 /* IMG_2602.jpg */; };
+		48987A5A195A3E64003C6EC6 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48987A57195A3E64003C6EC6 /* HPGrowingTextView.m */; };
+		48987A5B195A3E64003C6EC6 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 48987A59195A3E64003C6EC6 /* HPTextViewInternal.m */; };
 		CABC912A1959F99600B4AEF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC91291959F99600B4AEF5 /* main.m */; };
 		CABC912D1959F99600B4AEF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC912C1959F99600B4AEF5 /* AppDelegate.m */; };
 		CABC91301959F99600B4AEF5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC912F1959F99600B4AEF5 /* ViewController.m */; };
@@ -28,6 +30,10 @@
 
 /* Begin PBXFileReference section */
 		489652CA195A10AE002128B7 /* IMG_2602.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_2602.jpg; sourceTree = "<group>"; };
+		48987A56195A3E64003C6EC6 /* HPGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPGrowingTextView.h; sourceTree = "<group>"; };
+		48987A57195A3E64003C6EC6 /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
+		48987A58195A3E64003C6EC6 /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
+		48987A59195A3E64003C6EC6 /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
 		CABC91241959F99600B4AEF5 /* PaperPlanesV0.2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaperPlanesV0.2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CABC91281959F99600B4AEF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CABC91291959F99600B4AEF5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -60,6 +66,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		48987A5C195A3E6E003C6EC6 /* Growing Text View */ = {
+			isa = PBXGroup;
+			children = (
+				48987A56195A3E64003C6EC6 /* HPGrowingTextView.h */,
+				48987A57195A3E64003C6EC6 /* HPGrowingTextView.m */,
+				48987A58195A3E64003C6EC6 /* HPTextViewInternal.h */,
+				48987A59195A3E64003C6EC6 /* HPTextViewInternal.m */,
+			);
+			name = "Growing Text View";
+			sourceTree = "<group>";
+		};
 		CABC911B1959F99600B4AEF5 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +105,7 @@
 				CABC912F1959F99600B4AEF5 /* ViewController.m */,
 				CABC91311959F99600B4AEF5 /* Main.storyboard */,
 				CABC91341959F99600B4AEF5 /* Images.xcassets */,
+				48987A5C195A3E6E003C6EC6 /* Growing Text View */,
 				CABC91271959F99600B4AEF5 /* Supporting Files */,
 			);
 			path = PaperPlanesV0.2.0;
@@ -222,6 +240,8 @@
 				CABC91301959F99600B4AEF5 /* ViewController.m in Sources */,
 				CABC912D1959F99600B4AEF5 /* AppDelegate.m in Sources */,
 				CABC912A1959F99600B4AEF5 /* main.m in Sources */,
+				48987A5A195A3E64003C6EC6 /* HPGrowingTextView.m in Sources */,
+				48987A5B195A3E64003C6EC6 /* HPTextViewInternal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

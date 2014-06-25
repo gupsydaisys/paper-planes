@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="MG2-EZ-iBC">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" minimumZoomScale="0.5" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="MG2-EZ-iBC" userLabel="Image Scroll View">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IMG_2602.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ti2-Iv-j7X">
@@ -26,49 +26,84 @@
                                             <rect key="frame" x="-715" y="0.0" width="3264" height="2448"/>
                                         </variation>
                                         <variation key="heightClass=regular" fixedFrame="YES">
-                                            <rect key="frame" x="0.0" y="0.0" width="480" height="640"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="480" height="645"/>
                                         </variation>
                                     </imageView>
                                 </subviews>
                                 <variation key="heightClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                                 </variation>
-                                <variation key="heightClass=regular" ambiguous="YES">
+                                <variation key="heightClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="480" height="640"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="640" height="640"/>
                                 </variation>
                                 <connections>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="yOn-Hy-XmG"/>
                                 </connections>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nT-b2-373" userLabel="Post Comment Container">
+                                <rect key="frame" x="0.0" y="435" width="480" height="45"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SpW-XB-g4h">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Post">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="heightClass=regular" fixedFrame="YES">
+                                            <rect key="frame" x="160" y="10" width="48" height="26"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="tapPostComment:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="dxK-Y5-hUt"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="DbQ-ZV-WV9" userLabel="postComment height"/>
+                                </constraints>
+                                <variation key="heightClass=regular">
+                                    <mask key="subviews">
+                                        <include reference="SpW-XB-g4h"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="MG2-EZ-iBC" secondAttribute="bottom" id="4JV-gI-uLf"/>
-                            <constraint firstAttribute="trailing" secondItem="MG2-EZ-iBC" secondAttribute="trailing" id="ebC-tw-rt5"/>
-                            <constraint firstItem="MG2-EZ-iBC" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="jbz-dx-DYL"/>
-                            <constraint firstItem="MG2-EZ-iBC" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="qQA-gQ-enQ"/>
+                            <constraint firstItem="9nT-b2-373" firstAttribute="top" secondItem="MG2-EZ-iBC" secondAttribute="bottom" id="HAi-MV-SeO" userLabel="scroll to postComment"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="9nT-b2-373" secondAttribute="bottom" id="LEf-T9-Len" userLabel="keyboard height"/>
+                            <constraint firstItem="9nT-b2-373" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="TJI-nN-ziv" userLabel="postComment to leading"/>
+                            <constraint firstAttribute="trailing" secondItem="9nT-b2-373" secondAttribute="trailing" id="TMO-Z8-YdR" userLabel="postComment to trailing"/>
+                            <constraint firstAttribute="trailing" secondItem="MG2-EZ-iBC" secondAttribute="trailing" id="ebC-tw-rt5" userLabel="scroll to trailing"/>
+                            <constraint firstItem="MG2-EZ-iBC" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="jbz-dx-DYL" userLabel="scroll to leading"/>
+                            <constraint firstItem="MG2-EZ-iBC" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="qQA-gQ-enQ" userLabel="scroll to top"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="ebC-tw-rt5"/>
-                                <exclude reference="jbz-dx-DYL"/>
-                                <exclude reference="qQA-gQ-enQ"/>
-                                <exclude reference="4JV-gI-uLf"/>
-                            </mask>
-                        </variation>
                         <variation key="heightClass=regular">
+                            <mask key="subviews">
+                                <include reference="9nT-b2-373"/>
+                            </mask>
                             <mask key="constraints">
                                 <include reference="ebC-tw-rt5"/>
                                 <include reference="jbz-dx-DYL"/>
                                 <include reference="qQA-gQ-enQ"/>
-                                <include reference="4JV-gI-uLf"/>
+                                <include reference="HAi-MV-SeO"/>
+                                <include reference="TJI-nN-ziv"/>
+                                <include reference="TMO-Z8-YdR"/>
+                                <include reference="LEf-T9-Len"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="imageScrollView" destination="MG2-EZ-iBC" id="tIS-G4-UQh"/>
                         <outlet property="imageView" destination="Ti2-Iv-j7X" id="p0V-7J-VsH"/>
+                        <outlet property="keyboardHeight" destination="LEf-T9-Len" id="sUO-Wx-uYz"/>
+                        <outlet property="postButton" destination="SpW-XB-g4h" id="NOK-it-jri"/>
+                        <outlet property="postCommentContainer" destination="9nT-b2-373" id="GNx-Je-CBU"/>
+                        <outlet property="postCommentHeight" destination="DbQ-ZV-WV9" id="bsY-OC-blF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
