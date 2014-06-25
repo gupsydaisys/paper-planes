@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "HPGrowingTextView.h"
 
-@interface ViewController : UIViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate>
+@interface ViewController : UIViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate>
 
 /* Main View */
 @property (weak, nonatomic) IBOutlet UIView *mainView;

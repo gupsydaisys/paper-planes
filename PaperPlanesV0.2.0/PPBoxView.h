@@ -15,5 +15,6 @@
 + (PPBoxView *) boxViewAtPoint: (CGPoint) point withSize: (CGSize) size;
 
 - (void) marchingAnts: (BOOL) turnOn;
+- (void) showControls: (BOOL) show;
 
 @end
