@@ -75,9 +75,34 @@
                                     <outletCollection property="gestureRecognizers" destination="vbP-cQ-Mtw" appends="YES" id="t9O-MG-f3s"/>
                                 </connections>
                             </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zdy-ft-VoQ" userLabel="Table Container">
+                                <rect key="frame" x="0.0" y="410" width="480" height="25"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hdq-26-8O3" userLabel="Table Handle">
+                                        <rect key="frame" x="0.0" y="0.0" width="480" height="25"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="HVb-qO-S9D" userLabel="tableHandle height"/>
+                                            <constraint firstAttribute="width" constant="480" id="e92-O8-4PD" userLabel="tableHandle width"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="xpW-Oy-5w3" appends="YES" id="dW9-6R-JzY"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="hdq-26-8O3" firstAttribute="leading" secondItem="Zdy-ft-VoQ" secondAttribute="leading" id="NJl-pY-Jvc"/>
+                                    <constraint firstAttribute="trailing" secondItem="hdq-26-8O3" secondAttribute="trailing" id="Qn3-Bk-f2E"/>
+                                    <constraint firstItem="hdq-26-8O3" firstAttribute="top" secondItem="Zdy-ft-VoQ" secondAttribute="top" id="kXF-Hg-mjw"/>
+                                    <constraint firstAttribute="height" constant="25" id="kg3-eB-f1Y" userLabel="tableContainer height"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="9nT-b2-373" firstAttribute="top" secondItem="Zdy-ft-VoQ" secondAttribute="bottom" id="Ejg-yU-VQf" userLabel="tableContainer to postComment"/>
                             <constraint firstItem="9nT-b2-373" firstAttribute="top" secondItem="MG2-EZ-iBC" secondAttribute="bottom" id="HAi-MV-SeO" userLabel="scroll to postComment"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="9nT-b2-373" secondAttribute="bottom" id="LEf-T9-Len" userLabel="keyboard height"/>
                             <constraint firstItem="9nT-b2-373" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="TJI-nN-ziv" userLabel="postComment to leading"/>
@@ -104,13 +129,16 @@
                     </view>
                     <connections>
                         <outlet property="dragPostCommentContainerRecognizer" destination="vbP-cQ-Mtw" id="ile-5C-IdK"/>
+                        <outlet property="dragTableHandleRecognizer" destination="xpW-Oy-5w3" id="4c7-3R-6RX"/>
                         <outlet property="imageScrollView" destination="MG2-EZ-iBC" id="tIS-G4-UQh"/>
                         <outlet property="imageView" destination="Ti2-Iv-j7X" id="p0V-7J-VsH"/>
                         <outlet property="keyboardHeight" destination="LEf-T9-Len" id="sUO-Wx-uYz"/>
                         <outlet property="mainView" destination="kh9-bI-dsS" id="0Ff-qQ-bY0"/>
                         <outlet property="postButton" destination="SpW-XB-g4h" id="NOK-it-jri"/>
                         <outlet property="postCommentContainer" destination="9nT-b2-373" id="GNx-Je-CBU"/>
-                        <outlet property="postCommentHeight" destination="DbQ-ZV-WV9" id="bsY-OC-blF"/>
+                        <outlet property="postCommentHeight" destination="DbQ-ZV-WV9" id="voe-Zw-LJI"/>
+                        <outlet property="tableContainer" destination="Zdy-ft-VoQ" id="kvL-fG-gmm"/>
+                        <outlet property="tableContainerHeight" destination="kg3-eB-f1Y" id="mej-wx-SyI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -119,8 +147,13 @@
                         <action selector="dragPostCommentContainer:" destination="vXZ-lx-hvc" id="Iy8-iD-lqr"/>
                     </connections>
                 </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" maximumNumberOfTouches="1" id="xpW-Oy-5w3">
+                    <connections>
+                        <action selector="dragTableHandle:" destination="vXZ-lx-hvc" id="buc-Ps-H7i"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="69" y="63"/>
+            <point key="canvasLocation" x="58" y="-23"/>
         </scene>
     </scenes>
     <resources>
