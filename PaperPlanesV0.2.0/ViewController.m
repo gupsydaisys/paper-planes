@@ -53,6 +53,7 @@
 
 - (void) addGestureRecognizers {
     UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImageHandler:)];
+    tapRecognizer.delegate = self;
     [self.imageView addGestureRecognizer:tapRecognizer];
 }
 
@@ -130,6 +131,13 @@
     [self selectBox:touchedBox];
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([touch.view isKindOfClass:[PPBoxView class]] || touch.view == self.imageView) {
+        return YES;
+    }
+    return NO;
+}
+
 - (UIView*) getHitView: (UIGestureRecognizer *) gesture {
     CGPoint touchPoint = [gesture locationInView:gesture.view];
     return [gesture.view hitTest:touchPoint withEvent:nil];
@@ -139,11 +147,13 @@
 
 - (void) deselect: (PPBoxView*) box {
     [box marchingAnts:FALSE];
+    [box showControls:FALSE];
     selectedBox = nil;
 }
 
 - (void) select: (PPBoxView*) box {
     [box marchingAnts:TRUE];
+    [box showControls:TRUE];
     selectedBox = box;
 }
 

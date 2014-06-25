@@ -11,6 +11,7 @@
 
 @interface PPBoxView () {
     CAShapeLayer* boxLayer;
+    PPDeleteButton* deleteButton;
 }
 
 @end
@@ -35,7 +36,8 @@
 #pragma mark - Drawing
 
 - (void) drawRect:(CGRect)rect {
-    UIBezierPath *rectPath = [UIBezierPath bezierPathWithRect:rect];
+    self.bounds = CGRectUnion([self boxRect], deleteButton.frame);
+    UIBezierPath *rectPath = [UIBezierPath bezierPathWithRect:[self boxRect]];
     boxLayer.path = rectPath.CGPath;
 }
 
@@ -69,7 +71,11 @@
     }
 }
 
-#pragma mark - Layers
+- (void) showControls:(BOOL)show {
+    [deleteButton setHidden:!show];
+}
+
+#pragma mark - Subviews/Sublayers
 
 - (CAShapeLayer*) boxLayer {
     boxLayer = [CAShapeLayer layer];
@@ -81,14 +87,26 @@
     return boxLayer;
 }
 
+- (CGRect) boxRect {
+    return CGRectMake(deleteButton.center.x, deleteButton.center.y, BOX_DEFAULT_WIDTH, BOX_DEFAULT_WIDTH);
+}
+
 - (UIView*) deleteButton {
-    return [PPDeleteButton deleteButtonCenteredAtPoint:CGPointZero];
+    deleteButton = [PPDeleteButton deleteButtonCenteredAtPoint:CGPointZero];
+    [deleteButton addTarget:self action:@selector(deleteButtonTouched) forControlEvents:UIControlEventTouchUpInside];
+    return deleteButton;
+}
+
+#pragma mark - Action methods
+- (void) deleteButtonTouched {
+    [self removeFromSuperview];
 }
 
 #pragma mark - Convenience methods
 
 - (void) setColor:(UIColor*) color {
     [boxLayer setStrokeColor:color.CGColor];
+    [deleteButton setColor:color];
 }
 
 + (PPBoxView*) boxViewCenteredAtPoint: (CGPoint) point {

@@ -13,6 +13,7 @@
 
 @interface PPDeleteButton () {
     UILabel* circle;
+    UILabel* xShape;
 }
 
 @end
@@ -24,23 +25,36 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self addSubview:[self circleWithFrame:frame]];
+        [self addSubview:[self xShapeWithFrame:frame]];
         [self setColor:self.tintColor];
     }
     return self;
 }
 
 - (UIView*) circleWithFrame:(CGRect) rect {
-    CGPoint fontAwesomeAdjustment = CGPointMake(2.0f, 0);
-    CGRect circleRect = CGRectMake(fontAwesomeAdjustment.x, fontAwesomeAdjustment.y, rect.size.width, rect.size.height);
-    circle = [[UILabel alloc] initWithFrame:circleRect];
-    circle.font = [UIFont fontWithName:kFontAwesomeFamilyName size:rect.size.width];
-    circle.text = [NSString fontAwesomeIconStringForEnum:FACircle];
+    circle = [self fontAwesomeLabel:FACircle withFrame:rect];
     return circle;
 }
 
+- (UIView*) xShapeWithFrame:(CGRect) rect {
+    xShape = [self fontAwesomeLabel:FATimesCircle withFrame:rect];
+    return xShape;
+}
+
+- (UILabel*) fontAwesomeLabel:(FAIcon) iconName withFrame:(CGRect) rect {
+    CGPoint fontAwesomeAdjustment = CGPointMake(2.0f, 0);
+    CGRect fontIconRect = CGRectMake(fontAwesomeAdjustment.x, fontAwesomeAdjustment.y, rect.size.width, rect.size.height);
+    UILabel* fontIcon = [[UILabel alloc] initWithFrame:fontIconRect];
+    fontIcon.font = [UIFont fontWithName:kFontAwesomeFamilyName size:rect.size.width];
+    fontIcon.text = [NSString fontAwesomeIconStringForEnum:iconName];
+    return fontIcon;
+}
+
+
 #pragma mark - Convenience methods
 - (void) setColor: (UIColor*) color {
-    [circle setTextColor:color];
+    [xShape setTextColor:color];
+    [circle setTextColor:[UIColor whiteColor]];
 }
 
 + (PPDeleteButton*) deleteButtonCenteredAtPoint: (CGPoint) point {

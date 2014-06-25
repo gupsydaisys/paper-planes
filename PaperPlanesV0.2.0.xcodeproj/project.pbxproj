@@ -80,6 +80,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		48987A5C195A3E6E003C6EC6 /* Growing Text View */ = {
+			isa = PBXGroup;
+			children = (
+				48987A56195A3E64003C6EC6 /* HPGrowingTextView.h */,
+				48987A57195A3E64003C6EC6 /* HPGrowingTextView.m */,
+				48987A58195A3E64003C6EC6 /* HPTextViewInternal.h */,
+				48987A59195A3E64003C6EC6 /* HPTextViewInternal.m */,
+			);
+			name = "Growing Text View";
+			sourceTree = "<group>";
+		};
 		CA384773195B3AD20083B949 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,17 +109,6 @@
 				CA384770195B3AC10083B949 /* UIFont+FontAwesome.m */,
 			);
 			name = FontAwesome;
-			sourceTree = "<group>";
-		};
-		48987A5C195A3E6E003C6EC6 /* Growing Text View */ = {
-			isa = PBXGroup;
-			children = (
-				48987A56195A3E64003C6EC6 /* HPGrowingTextView.h */,
-				48987A57195A3E64003C6EC6 /* HPGrowingTextView.m */,
-				48987A58195A3E64003C6EC6 /* HPTextViewInternal.h */,
-				48987A59195A3E64003C6EC6 /* HPTextViewInternal.m */,
-			);
-			name = "Growing Text View";
 			sourceTree = "<group>";
 		};
 		CABC911B1959F99600B4AEF5 = {

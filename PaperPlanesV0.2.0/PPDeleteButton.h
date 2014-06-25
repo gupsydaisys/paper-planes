@@ -13,5 +13,6 @@
 + (PPDeleteButton *) deleteButtonAtPoint: (CGPoint) point;
 + (PPDeleteButton *) deleteButtonCenteredAtPoint: (CGPoint) point;
 + (PPDeleteButton *) deleteButtonAtPoint: (CGPoint) point withSize: (CGSize) size;
+- (void) setColor: (UIColor*) color;
 
 @end
