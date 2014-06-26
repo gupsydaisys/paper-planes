@@ -21,6 +21,7 @@
 		CABC91331959F99600B4AEF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CABC91311959F99600B4AEF5 /* Main.storyboard */; };
 		CABC91351959F99600B4AEF5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CABC91341959F99600B4AEF5 /* Images.xcassets */; };
 		CABC91411959F99600B4AEF5 /* PaperPlanesV0_2_0Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC91401959F99600B4AEF5 /* PaperPlanesV0_2_0Tests.m */; };
+		CAE99DE7195B8E240050B584 /* PPResizeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE99DE6195B8E240050B584 /* PPResizeButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,8 @@
 		CABC913A1959F99600B4AEF5 /* PaperPlanesV0.2.0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaperPlanesV0.2.0Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CABC913F1959F99600B4AEF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CABC91401959F99600B4AEF5 /* PaperPlanesV0_2_0Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PaperPlanesV0_2_0Tests.m; sourceTree = "<group>"; };
+		CAE99DE5195B8E240050B584 /* PPResizeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPResizeButton.h; sourceTree = "<group>"; };
+		CAE99DE6195B8E240050B584 /* PPResizeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPResizeButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +149,8 @@
 				CABC91341959F99600B4AEF5 /* Images.xcassets */,
 				48987A5C195A3E6E003C6EC6 /* Growing Text View */,
 				CABC91271959F99600B4AEF5 /* Supporting Files */,
+				CAE99DE5195B8E240050B584 /* PPResizeButton.h */,
+				CAE99DE6195B8E240050B584 /* PPResizeButton.m */,
 			);
 			path = PaperPlanesV0.2.0;
 			sourceTree = "<group>";
@@ -284,6 +289,7 @@
 				CA384772195B3AC10083B949 /* UIFont+FontAwesome.m in Sources */,
 				CA384769195A39510083B949 /* PPBoxView.m in Sources */,
 				CABC912A1959F99600B4AEF5 /* main.m in Sources */,
+				CAE99DE7195B8E240050B584 /* PPResizeButton.m in Sources */,
 				48987A5A195A3E64003C6EC6 /* HPGrowingTextView.m in Sources */,
 				48987A5B195A3E64003C6EC6 /* HPTextViewInternal.m in Sources */,
 			);

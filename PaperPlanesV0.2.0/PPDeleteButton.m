@@ -57,16 +57,17 @@
     [circle setTextColor:[UIColor whiteColor]];
 }
 
-+ (PPDeleteButton*) deleteButtonCenteredAtPoint: (CGPoint) point {
-    CGSize size = CGSizeMake(BUTTON_DEFAULT_WIDTH, BUTTON_DEFAULT_WIDTH);
-    return [self deleteButtonAtPoint:CGPointMake(point.x - size.width / 2, point.y - size.height / 2) withSize:size];
++ (PPDeleteButton*) centeredAtPoint: (CGPoint) point {
+    PPDeleteButton* view = [self atPoint:point];
+    view.center = CGPointMake(view.frame.origin.x - view.frame.size.width / 2, view.frame.origin.y - view.frame.size.height / 2);
+    return view;
 }
 
-+ (PPDeleteButton*) deleteButtonAtPoint: (CGPoint) point {
-    return [self deleteButtonAtPoint:point withSize:CGSizeMake(BUTTON_DEFAULT_WIDTH, BUTTON_DEFAULT_WIDTH)];
++ (PPDeleteButton*) atPoint: (CGPoint) point {
+    return [self atPoint:point withSize:CGSizeMake(BUTTON_DEFAULT_WIDTH, BUTTON_DEFAULT_WIDTH)];
 }
 
-+ (PPDeleteButton*) deleteButtonAtPoint: (CGPoint) point withSize: (CGSize) size {
++ (PPDeleteButton*) atPoint: (CGPoint) point withSize: (CGSize) size {
     CGRect buttonRect = CGRectMake(point.x, point.y, size.width, size.height);
     return [[self alloc] initWithFrame:buttonRect];
 }

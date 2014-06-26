@@ -10,9 +10,9 @@
 
 @interface PPDeleteButton : UIControl
 
-+ (PPDeleteButton *) deleteButtonAtPoint: (CGPoint) point;
-+ (PPDeleteButton *) deleteButtonCenteredAtPoint: (CGPoint) point;
-+ (PPDeleteButton *) deleteButtonAtPoint: (CGPoint) point withSize: (CGSize) size;
++ (PPDeleteButton *) atPoint: (CGPoint) point;
++ (PPDeleteButton *) centeredAtPoint: (CGPoint) point;
++ (PPDeleteButton *) atPoint: (CGPoint) point withSize: (CGSize) size;
 - (void) setColor: (UIColor*) color;
 
 @end

@@ -124,7 +124,7 @@
     CGPoint touchPoint = [gesture locationInView:gesture.view];
     PPBoxView* touchedBox = [self getTouchedBox:gesture];
     if (touchedBox == nil) {
-        touchedBox = [PPBoxView boxViewCenteredAtPoint:touchPoint];
+        touchedBox = [PPBoxView centeredAtPoint:touchPoint];
         [gesture.view addSubview:touchedBox];
     }
 
