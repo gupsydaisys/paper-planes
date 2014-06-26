@@ -42,16 +42,6 @@
     return xShape;
 }
 
-- (UILabel*) fontAwesomeLabel:(FAIcon) iconName withFrame:(CGRect) rect {
-    CGPoint fontAwesomeAdjustment = CGPointMake(2.0f, 0);
-    CGRect fontIconRect = CGRectMake(rect.origin.x + fontAwesomeAdjustment.x, rect.origin.y + fontAwesomeAdjustment.y, rect.size.width, rect.size.height);
-    UILabel* fontIcon = [[UILabel alloc] initWithFrame:fontIconRect];
-    fontIcon.font = [UIFont fontWithName:kFontAwesomeFamilyName size:rect.size.width];
-    fontIcon.text = [NSString fontAwesomeIconStringForEnum:iconName];
-    return fontIcon;
-}
-
-
 #pragma mark - Convenience methods
 - (void) setColor: (UIColor*) color {
     [xShape setTextColor:color];

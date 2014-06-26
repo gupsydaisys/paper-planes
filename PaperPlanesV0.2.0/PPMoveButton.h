@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PPButton.h"
 
-@interface PPMoveButton : UIView
+@interface PPMoveButton : PPButton
 
 - (void) setColor: (UIColor*) color;
 

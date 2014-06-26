@@ -46,15 +46,6 @@
     return moveShape;
 }
 
-- (UILabel*) fontAwesomeLabel:(FAIcon) iconName withFrame:(CGRect) rect {
-    CGPoint fontAwesomeAdjustment = CGPointMake(2.0f, 0);
-    CGRect fontIconRect = CGRectMake(rect.origin.x + fontAwesomeAdjustment.x, rect.origin.y + fontAwesomeAdjustment.y, rect.size.width, rect.size.height);
-    UILabel* fontIcon = [[UILabel alloc] initWithFrame:fontIconRect];
-    fontIcon.font = [UIFont fontWithName:kFontAwesomeFamilyName size:rect.size.width];
-    fontIcon.text = [NSString fontAwesomeIconStringForEnum:iconName];
-    return fontIcon;
-}
-
 - (void) setColor: (UIColor*) color {
     [moveShape setTextColor:[UIColor whiteColor]];
     [circle setTextColor:color];

@@ -28,7 +28,6 @@
         [self addSubview:[self circleWithFrame:self.bounds]];
         [self addSubview:[self resizeShapeWithFrame:self.bounds]];
         [self setColor:self.tintColor];
-//        [self setBackgroundColor:[UIColor blackColor]];
     }
     return self;
 }
@@ -48,16 +47,6 @@
     return resizeShape;
 }
 
-
-- (UILabel*) fontAwesomeLabel:(FAIcon) iconName withFrame:(CGRect) rect {
-    CGPoint fontAwesomeAdjustment = CGPointMake(2.0f, 0);
-    CGRect fontIconRect = CGRectMake(rect.origin.x + fontAwesomeAdjustment.x, rect.origin.y + fontAwesomeAdjustment.y, rect.size.width, rect.size.height);
-    UILabel* fontIcon = [[UILabel alloc] initWithFrame:fontIconRect];
-    fontIcon.font = [UIFont fontWithName:kFontAwesomeFamilyName size:rect.size.width];
-    fontIcon.text = [NSString fontAwesomeIconStringForEnum:iconName];
-    return fontIcon;
-}
-
 - (void) setColor: (UIColor*) color {
     [resizeShape setTextColor:[UIColor whiteColor]];
     [circle setTextColor:color];
@@ -67,14 +56,5 @@
     return BUTTON_DEFAULT_WIDTH;
 }
 
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

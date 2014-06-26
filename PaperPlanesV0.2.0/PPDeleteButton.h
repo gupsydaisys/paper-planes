@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PPButton.h"
 
-@interface PPDeleteButton : UIView
+@interface PPDeleteButton : PPButton
 
 - (void) setColor: (UIColor*) color;
 
