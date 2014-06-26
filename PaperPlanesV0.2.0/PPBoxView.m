@@ -8,15 +8,20 @@
 
 #import "PPBoxView.h"
 #import "PPDeleteButton.h"
+#import "PPResizeButton.h"
+#import "PPMoveButton.h"
+#import "UIView+Util.h"
 
 @interface PPBoxView () {
     CAShapeLayer* boxLayer;
     PPDeleteButton* deleteButton;
+    PPResizeButton* resizeButton;
+    PPMoveButton* moveButton;
 }
 
 @end
 
-#define BOX_DEFAULT_WIDTH 30.0f
+#define BOX_DEFAULT_WIDTH 60.0f
 
 @implementation PPBoxView
 
@@ -27,6 +32,8 @@
     if (self) {
         [self.layer addSublayer:[self boxLayer]];
         [self addSubview:[self deleteButton]];
+        [self addSubview:[self resizeButton]];
+        [self addSubview:[self moveButton]];
         [self setColor:self.tintColor];
         self.opaque = NO;
     }
@@ -36,9 +43,22 @@
 #pragma mark - Drawing
 
 - (void) drawRect:(CGRect)rect {
-    self.bounds = CGRectUnion([self boxRect], deleteButton.frame);
-    UIBezierPath *rectPath = [UIBezierPath bezierPathWithRect:[self boxRect]];
+    [self resizeBoundsToFitSubviews];
+    CGRect boxRect = [self boxRect];
+    moveButton.center = CGPointMake(CGRectGetMaxX(boxRect), CGRectGetMinY(boxRect));
+    UIBezierPath *rectPath = [UIBezierPath bezierPathWithRect:boxRect];
     boxLayer.path = rectPath.CGPath;
+}
+
+- (void) resizeBoundsToFitSubviews {
+    CGPoint initialOrigin = self.frame.origin;
+    CGRect bounds = CGRectZero;
+    bounds = CGRectUnion(bounds, [self boxRect]);
+    bounds = CGRectUnion(bounds, deleteButton.frame);
+    bounds = CGRectUnion(bounds, resizeButton.frame);
+    bounds = CGRectUnion(bounds, moveButton.frame);
+    self.bounds = bounds;
+    self.frame = CGRectMake(initialOrigin.x, initialOrigin.y, self.frame.size.width, self.frame.size.height);
 }
 
 #pragma mark - Animation
@@ -73,6 +93,8 @@
 
 - (void) showControls:(BOOL)show {
     [deleteButton setHidden:!show];
+    [resizeButton setHidden:!show];
+    [moveButton setHidden:!show];
 }
 
 #pragma mark - Subviews/Sublayers
@@ -88,18 +110,51 @@
 }
 
 - (CGRect) boxRect {
-    return CGRectMake(deleteButton.center.x, deleteButton.center.y, BOX_DEFAULT_WIDTH, BOX_DEFAULT_WIDTH);
+    float width = resizeButton.center.x - deleteButton.center.x;
+    float height = resizeButton.center.y - deleteButton.center.y;
+    return CGRectMake(deleteButton.center.x, deleteButton.center.y, width, height);
 }
 
 - (UIView*) deleteButton {
-    deleteButton = [PPDeleteButton deleteButtonCenteredAtPoint:CGPointZero];
-    [deleteButton addTarget:self action:@selector(deleteButtonTouched) forControlEvents:UIControlEventTouchUpInside];
+    deleteButton = [PPDeleteButton centeredAtPoint:CGPointZero];
+    UITapGestureRecognizer* recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteButtonTapped)];
+    [deleteButton addGestureRecognizer:recognizer];
     return deleteButton;
 }
 
+- (UIView*) resizeButton {
+    resizeButton = [PPResizeButton centeredAtPoint:CGPointMake(CGRectGetMaxX(self.bounds), CGRectGetMaxY(self.bounds))];
+    self.resizeButtonPanGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(resizeButtonPanned:)];
+    [resizeButton addGestureRecognizer:self.resizeButtonPanGestureRecognizer];
+    return resizeButton;
+    
+}
+
+- (UIView*) moveButton {
+    moveButton = [PPMoveButton centeredAtPoint:CGPointMake(CGRectGetMaxX(self.bounds), 0)];
+    
+    self.moveButtonPanGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveButtonPanned:)];
+    [moveButton addGestureRecognizer:self.moveButtonPanGestureRecognizer];
+    return moveButton;
+}
+
 #pragma mark - Action methods
-- (void) deleteButtonTouched {
+- (void) deleteButtonTapped {
     [self removeFromSuperview];
+}
+
+- (void) resizeButtonPanned: (UIPanGestureRecognizer *) gesture {
+    CGPoint translation = [gesture translationInView:gesture.view];
+    resizeButton.frame = CGRectOffset(resizeButton.frame, translation.x, translation.y);
+    [self setNeedsDisplay];
+    [gesture setTranslation:CGPointZero inView:gesture.view];
+}
+
+- (void) moveButtonPanned: (UIPanGestureRecognizer* ) gesture {
+    CGPoint translation = [gesture translationInView:gesture.view];
+    self.frame = CGRectOffset(self.frame, translation.x, translation.y);
+    [self setNeedsDisplay];
+    [gesture setTranslation:CGPointZero inView:gesture.view];
 }
 
 #pragma mark - Convenience methods
@@ -107,22 +162,12 @@
 - (void) setColor:(UIColor*) color {
     [boxLayer setStrokeColor:color.CGColor];
     [deleteButton setColor:color];
+    [resizeButton setColor:color];
+    [moveButton setColor:color];
 }
 
-+ (PPBoxView*) boxViewCenteredAtPoint: (CGPoint) point {
-    CGSize size = CGSizeMake(BOX_DEFAULT_WIDTH, BOX_DEFAULT_WIDTH);
-    return [self boxViewAtPoint:CGPointMake(point.x - size.width / 2, point.y - size.height / 2) withSize:size];
++ (float) getDefaultWidth {
+    return BOX_DEFAULT_WIDTH;
 }
-
-+ (PPBoxView*) boxViewAtPoint: (CGPoint) point {
-    return [self boxViewAtPoint:point withSize:CGSizeMake(BOX_DEFAULT_WIDTH, BOX_DEFAULT_WIDTH)];
-}
-
-+ (PPBoxView*) boxViewAtPoint: (CGPoint) point withSize: (CGSize) size {
-    CGRect boxRect = CGRectMake(point.x, point.y, size.width, size.height);
-    return [[self alloc] initWithFrame:boxRect];
-}
-
-
 
 @end

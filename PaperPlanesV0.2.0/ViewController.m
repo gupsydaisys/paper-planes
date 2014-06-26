@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "PPBoxView.h"
+#import "UIView+Util.h"
 
 /* Post Comment Constants */
 #define POST_COMMENT_CONTAINTER_WIDTH 480.0f
@@ -427,7 +428,9 @@
     CGPoint touchPoint = [gesture locationInView:gesture.view];
     PPBoxView* touchedBox = [self getTouchedBox:gesture];
     if (touchedBox == nil) {
-        touchedBox = [PPBoxView boxViewCenteredAtPoint:touchPoint];
+        touchedBox = [PPBoxView centeredAtPoint:touchPoint];
+        [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:touchedBox.moveButtonPanGestureRecognizer];
+        [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:touchedBox.resizeButtonPanGestureRecognizer];
         [gesture.view addSubview:touchedBox];
     }
 

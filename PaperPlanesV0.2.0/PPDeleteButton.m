@@ -8,8 +8,9 @@
 
 #import "PPDeleteButton.h"
 #import "NSString+FontAwesome.h"
+#import "UIView+Util.h"
 
-#define BUTTON_DEFAULT_WIDTH 30.0f
+#define BUTTON_DEFAULT_WIDTH 60.0f
 
 @interface PPDeleteButton () {
     UILabel* circle;
@@ -24,8 +25,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self addSubview:[self circleWithFrame:frame]];
-        [self addSubview:[self xShapeWithFrame:frame]];
+        [self addSubview:[self circleWithFrame:self.bounds]];
+        [self addSubview:[self xShapeWithFrame:self.bounds]];
         [self setColor:self.tintColor];
     }
     return self;
@@ -41,43 +42,14 @@
     return xShape;
 }
 
-- (UILabel*) fontAwesomeLabel:(FAIcon) iconName withFrame:(CGRect) rect {
-    CGPoint fontAwesomeAdjustment = CGPointMake(2.0f, 0);
-    CGRect fontIconRect = CGRectMake(fontAwesomeAdjustment.x, fontAwesomeAdjustment.y, rect.size.width, rect.size.height);
-    UILabel* fontIcon = [[UILabel alloc] initWithFrame:fontIconRect];
-    fontIcon.font = [UIFont fontWithName:kFontAwesomeFamilyName size:rect.size.width];
-    fontIcon.text = [NSString fontAwesomeIconStringForEnum:iconName];
-    return fontIcon;
-}
-
-
 #pragma mark - Convenience methods
 - (void) setColor: (UIColor*) color {
     [xShape setTextColor:color];
     [circle setTextColor:[UIColor whiteColor]];
 }
 
-+ (PPDeleteButton*) deleteButtonCenteredAtPoint: (CGPoint) point {
-    CGSize size = CGSizeMake(BUTTON_DEFAULT_WIDTH, BUTTON_DEFAULT_WIDTH);
-    return [self deleteButtonAtPoint:CGPointMake(point.x - size.width / 2, point.y - size.height / 2) withSize:size];
++ (float) getDefaultWidth {
+    return BUTTON_DEFAULT_WIDTH;
 }
-
-+ (PPDeleteButton*) deleteButtonAtPoint: (CGPoint) point {
-    return [self deleteButtonAtPoint:point withSize:CGSizeMake(BUTTON_DEFAULT_WIDTH, BUTTON_DEFAULT_WIDTH)];
-}
-
-+ (PPDeleteButton*) deleteButtonAtPoint: (CGPoint) point withSize: (CGSize) size {
-    CGRect buttonRect = CGRectMake(point.x, point.y, size.width, size.height);
-    return [[self alloc] initWithFrame:buttonRect];
-}
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end
