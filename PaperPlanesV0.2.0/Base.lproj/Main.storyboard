@@ -99,6 +99,10 @@
                                     <constraint firstAttribute="height" constant="25" id="kg3-eB-f1Y" userLabel="tableContainer height"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ndI-Zr-fon" userLabel="Heading View">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="20"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -139,6 +143,7 @@
                         <outlet property="postCommentHeight" destination="DbQ-ZV-WV9" id="voe-Zw-LJI"/>
                         <outlet property="tableContainer" destination="Zdy-ft-VoQ" id="kvL-fG-gmm"/>
                         <outlet property="tableContainerHeight" destination="kg3-eB-f1Y" id="mej-wx-SyI"/>
+                        <outlet property="tableHandle" destination="hdq-26-8O3" id="KIG-vh-gJl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -147,7 +152,7 @@
                         <action selector="dragPostCommentContainer:" destination="vXZ-lx-hvc" id="Iy8-iD-lqr"/>
                     </connections>
                 </panGestureRecognizer>
-                <panGestureRecognizer minimumNumberOfTouches="1" maximumNumberOfTouches="1" id="xpW-Oy-5w3">
+                <panGestureRecognizer cancelsTouchesInView="NO" minimumNumberOfTouches="1" maximumNumberOfTouches="1" id="xpW-Oy-5w3">
                     <connections>
                         <action selector="dragTableHandle:" destination="vXZ-lx-hvc" id="buc-Ps-H7i"/>
                     </connections>

@@ -10,8 +10,8 @@
 #import "PPBoxView.h"
 
 /* Post Comment Constants */
-#define COMMENT_CONTAINTER_WIDTH 480.0f
-#define COMMENT_CONTAINTER_HEIGHT 45.0f
+#define POST_COMMENT_CONTAINTER_WIDTH 480.0f
+#define POST_COMMENT_CONTAINTER_HEIGHT 45.0f
 #define POST_BUTTON_WIDTH 40.0f
 #define SIDE_MARGIN 10.0f
 
@@ -23,16 +23,25 @@
 #define TEXT_SIZE 18.0f
 #define PLACEHOLDER_TEXT @"Give Feedback here..."
 
+/* Table Comments Constants */
+#define TABLE_HANDLE_HEIGHT 25.0f
+#define TABLE_CONTAINER_HALF_HEIGHT 202.0f
+
+/* Other Constants */
+#define HEADING_HEIGHT 20.0f
+#define ANIMATE 1
+#define ANIMATION_DURATION 0.2f
+
 @interface ViewController () {
     PPBoxView* selectedBox;
 
     NSMutableArray* comments;
+    
     CommentState tableHandleState;
     CGPoint startPos;
     CGPoint minPos;
     CGPoint maxPos;
 }
-
 
 @end
 
@@ -48,8 +57,9 @@
     /* Comment Drawer initalization Stuff */
     comments = [NSMutableArray new];
     tableHandleState = CLOSED;
+
 }
-  
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.imageScrollView.contentSize = self.imageView.frame.size;
@@ -99,17 +109,22 @@
     r.size.height -= diff;
     r.origin.y += diff;
     self.postCommentContainer.frame = r;
-    
     self.postCommentHeight.constant = r.size.height;
     [self.view setNeedsUpdateConstraints];
+    
+    if (diff > 0) {
+        if (tableHandleState == CLOSED) {
+            [self updateTableContainerFrame:CLOSED];
+        } else { // FULL (can't be half in this stage)
+            [self updateTableContainerFrame:FULL];
+        }
+    } else {
+        [self updateTableContainerFrame:self.tableContainer.frame.origin.x
+                                       :self.tableContainer.frame.origin.y + diff
+                                       :self.tableContainer.frame.size.width
+                                       :self.tableContainer.frame.size.height];
+    }
 
-    
-    r = self.tableContainer.frame;
-    r.origin.y += diff;
-    self.tableContainer.frame = r;
-    self.tableContainerHeight.constant = r.size.height;
-    [self.view setNeedsUpdateConstraints];
-    
 }
 
 - (void) growingTextViewDidChange:(HPGrowingTextView *) growingTextView {
@@ -121,148 +136,288 @@
 }
 
 #pragma mark - Comments Table Handle Methods
-- (IBAction) dragTableHandle:(UIPanGestureRecognizer *) sender {
-//
-//    // NEXT STEP call correct updateBLAHCenter to get what each should actually be
-//    CGPoint closedCenter;
-//    CGPoint halfCenter;
-//    CGPoint fullCenter;
-//    closedCenter = CGPointMake(160, 353.5);
-//    fullCenter = CGPointMake(160, 183);
-//    halfCenter = CGPointMake(160, 265);
-//
-//    if ([sender state] == UIGestureRecognizerStateBegan) {
-//        
-//        startPos = self.tableContainer.center;
-//        
-//        minPos = fullCenter;
-//        maxPos = closedCenter;
-//        
-//    } else if ([sender state] == UIGestureRecognizerStateChanged) {
-//        // Moves the view, keeping it constrained between closed and full
-//        
-//        CGPoint translate = [sender translationInView:self.mainView];
-//        
-//        CGPoint newPos = CGPointMake(startPos.x, startPos.y + translate.y);
-//        
-//        if (newPos.y < minPos.y) {
-//            newPos.y = minPos.y;
-//            translate = CGPointMake(0, newPos.y - startPos.y);
-//        }
-//        
-//        if (newPos.y > maxPos.y) {
-//            newPos.y = maxPos.y;
-//            translate = CGPointMake(0, newPos.y - startPos.y);
-//        }
-//        
-//        [sender setTranslation:translate inView:self.mainView];
-//        
-//        self.commentsViewContainer.center = newPos;
-//    } else if ([sender state] == UIGestureRecognizerStateEnded) {
-//        
-//        // decides which state to keep
-//        
-//        CGPoint vectorVelocity = [sender velocityInView:self.mainView];
-//        float yTranslation = self.commentsViewContainer.center.y;
-//        CommentState curr;
-//        
-//        if (vectorVelocity.y > 0) {
-//            if (yTranslation <= halfCenter.y) {
-//                curr = HALFDOWN;
-//            } else {
-//                curr = CLOSED;
-//            }
-//        } else {
-//            if (yTranslation >= halfCenter.y + delta) {
-//                curr = HALFUP;
-//            } else {
-//                curr = FULL;
-//            }
-//        }
-//
-//        [self setOpenedState:curr animated:animate];
-//
-//    }
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
 }
-//
-//- (void) setOpenedState:(CommentState)curr animated:(BOOL)anim {
-//    commentState = curr;
-//    
-//    if (anim) {
-//        [UIView beginAnimations:nil context:nil];
-//        [UIView setAnimationDuration:animationDuration];
-//        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-//        [UIView setAnimationDelegate:self];
-//        [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
-//    }
-//    
-//    [self adjustHeightofTableContainer];
-////    [self adjustHeightOfTableview];
-//    
-//    if (anim) {
-//        
-//        // For the duration of the animation, no further interaction with the view is permitted
-//        self.dragCommentsRecognizer.enabled = NO;
-//        self.tapCommentsRecognizer.enabled = NO;
-//        
-//        [UIView commitAnimations];
-//        
-//    } else {
-//        NSLog(@"Changing");
-//    }
-//}
-//
-//- (void) adjustHeightofTableContainer {
-//    switch (commentState) {
-//        case CLOSED:
-//            self.commentsViewContainer.frame = (CGRect){.origin = {0, self.mainView.frame.size.height - commentsHandleHeight}, .size = {self.mainView.frame.size.width, commentsHandleHeight}};
-//            //            NSLog(@"Center point in closed mode %@", NSStringFromCGPoint(self.commentsViewContainer.center));
-//            break;
-//        case FULL:
-//            self.commentsViewContainer.frame = (CGRect){.origin = {0, 0}, .size = {self.mainView.frame.size.width, self.mainView.frame.size.height}};
-//            //            NSLog(@"Center point in full mode %@", NSStringFromCGPoint(self.commentsViewContainer.center));
-//            break;
-//        /* HALF */
-//        default:
-//            self.commentsViewContainer.frame = (CGRect){.origin = {0, self.mainView.frame.size.height - commentsContainerHalfHeight}, .size = {self.mainView.frame.size.width, commentsContainerHalfHeight}};
-//            //            NSLog(@"Center point in half mode %@", NSStringFromCGPoint(self.commentsViewContainer.center));
-//            break;
-//    }
-//}
+
+- (IBAction) dragTableHandle:(UIPanGestureRecognizer *) sender {
+    // NEXT STEP call correct updateBLAHCenter to get what each should actually be
+    CGPoint closedCenter;
+    CGPoint halfCenter;
+    CGPoint fullCenter;
+    closedCenter = CGPointMake(160, 422.5);
+    halfCenter = CGPointMake(160, 334);
+    fullCenter = CGPointMake(160, 227.5);
+
+    if ([sender state] == UIGestureRecognizerStateBegan) {
+        NSLog(@"did begin");
+        startPos = self.tableContainer.center;
+        minPos = fullCenter;
+        maxPos = closedCenter;
+        
+    } else if ([sender state] == UIGestureRecognizerStateChanged) {
+        NSLog(@"is changing");
+        CGPoint translate = [sender translationInView:self.mainView];
+        
+        CGPoint newPos = CGPointMake(startPos.x, startPos.y + translate.y);
+        
+        if (newPos.y < minPos.y) {
+            newPos.y = minPos.y;
+            translate = CGPointMake(0, newPos.y - startPos.y);
+        }
+        
+        if (newPos.y > maxPos.y) {
+            newPos.y = maxPos.y;
+            translate = CGPointMake(0, newPos.y - startPos.y);
+        }
+        
+        [sender setTranslation:translate inView:self.mainView];
+        self.tableContainer.center = newPos;
+
+    } else if ([sender state] == UIGestureRecognizerStateEnded) {
+        NSLog(@"did end");
+        CGPoint vectorVelocity = [sender velocityInView:self.mainView];
+        float yTranslation = self.tableContainer.center.y;
+        CommentState curr;
+        if (vectorVelocity.y > 0) {
+//            NSLog(@"pos");
+            if (yTranslation <= halfCenter.y) {
+//                NSLog(@"half");
+                curr = HALF;
+                // MORE SPECIALIZED CASE
+            } else {
+                curr = CLOSED;
+//                NSLog(@"closed");
+            }
+        } else {
+//            NSLog(@"neg");
+            if (yTranslation >= halfCenter.y) {
+//                NSLog(@"half");
+                curr = HALF;
+                // MORE SPECIALIZED CASE
+            } else {
+//                NSLog(@"full");
+                curr = FULL;
+            }
+        }
+        [self setOpenedState:curr animated:ANIMATE];
+    }
+}
+
+- (IBAction) dragTableHandle2:(UIPanGestureRecognizer *) sender {
+    // NEXT STEP call correct updateBLAHCenter to get what each should actually be
+    CGPoint closedCenter;
+    CGPoint halfCenter;
+    CGPoint fullCenter;
+    closedCenter = CGPointMake(160, 422.5);
+    halfCenter = CGPointMake(160, 334);
+    fullCenter = CGPointMake(160, 227.5);
+    
+    //close 410
+    //half 233
+    //full 20
+    
+    if ([sender state] == UIGestureRecognizerStateBegan) {
+        NSLog(@"did begin");
+        startPos = self.tableContainer.frame.origin;
+        minPos = CGPointMake(0, 20);
+        maxPos = CGPointMake(0, 410);
+        
+    } else if ([sender state] == UIGestureRecognizerStateChanged) {
+        NSLog(@"is changing");
+        CGPoint translate = [sender translationInView:self.mainView];
+        CGFloat diff = translate.y;
+        CGPoint newPos = CGPointMake(startPos.x, startPos.y + translate.y);
+        
+        if (newPos.y < minPos.y) {
+            newPos.y = minPos.y;
+            translate = CGPointMake(0, newPos.y - startPos.y);
+            diff = minPos.y - startPos.y;
+        }
+        
+        if (newPos.y > maxPos.y) {
+            newPos.y = maxPos.y;
+            translate = CGPointMake(0, newPos.y - startPos.y);
+            diff = maxPos.y - startPos.y;
+            
+        }
+        
+        [sender setTranslation:translate inView:self.mainView];
+        [self updateTableContainerFrame:newPos.x
+                                       :newPos.y
+                                       :self.tableContainer.frame.size.width
+                                       :self.tableContainer.frame.size.height + diff];
+
+    } else if ([sender state] == UIGestureRecognizerStateEnded) {
+        NSLog(@"did end");
+        CGPoint vectorVelocity = [sender velocityInView:self.mainView];
+        float yTranslation = self.tableContainer.center.y;
+        CommentState curr;
+        if (vectorVelocity.y > 0) {
+            //            NSLog(@"pos");
+            if (yTranslation <= halfCenter.y) {
+                //                NSLog(@"half");
+                curr = HALF;
+                // MORE SPECIALIZED CASE
+            } else {
+                curr = CLOSED;
+                //                NSLog(@"closed");
+            }
+        } else {
+            //            NSLog(@"neg");
+            if (yTranslation >= halfCenter.y) {
+                //                NSLog(@"half");
+                curr = HALF;
+                // MORE SPECIALIZED CASE
+            } else {
+                //                NSLog(@"full");
+                curr = FULL;
+            }
+        }
+        [self setOpenedState:curr animated:ANIMATE];
+    }
+}
+
+- (void) setOpenedState:(CommentState) curr animated:(BOOL) anim {
+    if (anim) {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:ANIMATION_DURATION];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDidStopSelector:@selector(animationForTableHandleDidStop:finished:context:)];
+    }
+    
+    [self updateTableContainerFrame:curr];
+//    [self adjustHeightOfTableview];
+    
+    if (anim) {
+        self.dragTableHandleRecognizer.enabled = NO;
+        [UIView commitAnimations];
+        
+    } else {
+        NSLog(@"Changing");
+    }
+}
+
+- (void) animationForTableHandleDidStop:(NSString *) animationID finished:(NSNumber *) finished context:(void *) context {
+    if (finished) {
+        self.dragTableHandleRecognizer.enabled = YES;
+    }
+}
+
+- (void) updateTableContainerFrame:(CommentState) curr {
+    switch (curr) {
+        case CLOSED:
+        [self updateTableContainerFrame:self.tableContainer.frame.origin.x
+                                       :self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - TABLE_HANDLE_HEIGHT
+                                       :self.tableContainer.frame.size.width
+                                       :TABLE_HANDLE_HEIGHT];
+        break;
+
+        case FULL:
+        [self updateTableContainerFrame:self.tableContainer.frame.origin.x
+                                       :HEADING_HEIGHT
+                                       :self.tableContainer.frame.size.width
+                                       :self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT];
+        break;
+
+        /* HALF */
+        default:
+        [self updateTableContainerFrame:self.tableContainer.frame.origin.x
+                                       :self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - TABLE_CONTAINER_HALF_HEIGHT
+                                       :self.tableContainer.frame.size.width
+                                       :TABLE_CONTAINER_HALF_HEIGHT];
+        break;
+    }
+    NSLog(@"min y %f", self.tableContainer.frame.origin.y);
+}
+
+- (void) updateTableContainerFrame:(float) x :(float) y :(float) w :(float) h {
+    float maxHeight = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT;
+    float minHeight = TABLE_HANDLE_HEIGHT;
+
+    if (maxHeight < h) {
+        [self updateTableContainerFrame:FULL];
+    } else if (minHeight > h) {
+        [self updateTableContainerFrame:CLOSED];
+    } else {
+        self.tableContainer.frame = (CGRect){.origin = {x, y}, .size = {w, h}};
+    }
+
+    self.tableContainerHeight.constant = self.tableContainer.frame.size.height;
+    [self.view setNeedsUpdateConstraints];
+
+    [self updateTableHandleState];
+}
+
+- (void) updateTableHandleState {
+    if (self.tableContainer.frame.origin.y == HEADING_HEIGHT) {
+        tableHandleState = FULL;
+    } else if (self.tableContainer.frame.size.height == TABLE_HANDLE_HEIGHT) {
+        tableHandleState = CLOSED;
+    } else {
+        tableHandleState = HALF;
+    }
+}
 
 #pragma mark - Keyboard Hiding and Showing
 - (void) keyboardWillShow:(NSNotification *) aNotification {
     NSDictionary* info = [aNotification userInfo];
     CGSize KbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-    self.keyboardHeight.constant = KbSize.height;
-    [self.view setNeedsUpdateConstraints];
-    
+    [self updateKeyboardHeight:KbSize.height];
+
+
+
     float animationDuration = [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
-    
     [UIView animateWithDuration:animationDuration animations:^{
         [self.view layoutIfNeeded];
     }];
-    
+    [UIView setAnimationDidStopSelector:@selector(animationForKeyboardShowDidStop:finished:context:)];
+
+}
+
+- (void) animationForKeyboardShowDidStop:(NSString *) animationID finished:(NSNumber *) finished context:(void *) context {
+    if (finished) {
+        //if half & closed -> closed
+        if (tableHandleState == HALF) {
+            [self updateTableContainerFrame:CLOSED];
+        }
+
+        // so that FULL mode is corrected
+        [self updateTableContainerFrame:self.tableContainer.frame.origin.x
+                                       :self.tableContainer.frame.origin.y
+                                       :self.tableContainer.frame.size.width
+                                       :self.tableContainer.frame.size.height];
+    }
 }
 
 - (void) keyboardWillBeHidden:(NSNotification *) aNotification {
-    self.keyboardHeight.constant = 0;
-    [self.view setNeedsUpdateConstraints];
+    [self updateKeyboardHeight:0];
+    
+    //call updateTableContainerFrame ??
+    
+    //if half and full -> half
+    //if closed -> closed
+    
     
     float animationDuration = [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
-    
     [UIView animateWithDuration:animationDuration animations:^{
         [self.view layoutIfNeeded];
     }];
 }
 
 /* Dismiss Keyboard */
-- (IBAction)dragPostCommentContainer:(id)sender {
+- (IBAction)dragPostCommentContainer:(id) sender {
     CGPoint vectorVelocity = [sender velocityInView:self.mainView];
     if (vectorVelocity.y > 0) {
         [self.view endEditing:YES];
     }
+}
+        
+- (void) updateKeyboardHeight:(float) newHeight {
+    self.keyboardHeight.constant = newHeight;
+    [self.view setNeedsUpdateConstraints];
 }
 
 

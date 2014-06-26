@@ -21,6 +21,7 @@
 /* Comment Table Container */
 @property (weak, nonatomic) IBOutlet UIView *tableContainer;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableContainerHeight;
+@property (weak, nonatomic) IBOutlet UIView *tableHandle;
 
 /* Post Comment Paraphenilia */
 @property (strong, nonatomic) HPGrowingTextView *textView;
@@ -38,15 +39,14 @@
 - (IBAction) dragPostCommentContainer:(id) sender;
 
 /* Drag Comments Table Container */
-@property (strong, nonatomic) IBOutlet UIPanGestureRecognizer *dragTableHandleRecognizer;
+@property (weak, nonatomic) IBOutlet UIPanGestureRecognizer *dragTableHandleRecognizer;
 - (IBAction)dragTableHandle:(UIPanGestureRecognizer *)sender;
 
 enum commentStateTypes
 {
     CLOSED = 0,
-    HALFUP = 1,
+    HALF = 1,
     FULL = 2,
-    HALFDOWN = 3,
 } typedef CommentState;
 
 @end
