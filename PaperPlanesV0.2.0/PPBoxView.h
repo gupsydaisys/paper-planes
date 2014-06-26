@@ -10,10 +10,6 @@
 
 @interface PPBoxView : UIView
 
-+ (PPBoxView *) atPoint: (CGPoint) point;
-+ (PPBoxView *) centeredAtPoint: (CGPoint) point;
-+ (PPBoxView *) atPoint: (CGPoint) point withSize: (CGSize) size;
-
 - (void) marchingAnts: (BOOL) turnOn;
 - (void) showControls: (BOOL) show;
 

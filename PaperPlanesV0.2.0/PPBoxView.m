@@ -9,6 +9,7 @@
 #import "PPBoxView.h"
 #import "PPDeleteButton.h"
 #import "PPResizeButton.h"
+#import "UIView+Util.h"
 
 @interface PPBoxView () {
     CAShapeLayer* boxLayer;
@@ -142,21 +143,8 @@
     [resizeButton setColor:color];
 }
 
-+ (PPBoxView*) centeredAtPoint: (CGPoint) point {
-    PPBoxView* view = [self atPoint:point];
-    view.center = CGPointMake(view.frame.origin.x - view.frame.size.width / 2, view.frame.origin.y - view.frame.size.height / 2);
-    return view;
++ (float) getDefaultWidth {
+    return BOX_DEFAULT_WIDTH;
 }
-
-+ (PPBoxView*) atPoint: (CGPoint) point {
-    return [self atPoint:point withSize:CGSizeMake(BOX_DEFAULT_WIDTH, BOX_DEFAULT_WIDTH)];
-}
-
-+ (PPBoxView*) atPoint: (CGPoint) point withSize: (CGSize) size {
-    CGRect boxRect = CGRectMake(point.x, point.y, size.width, size.height);
-    return [[self alloc] initWithFrame:boxRect];
-}
-
-
 
 @end

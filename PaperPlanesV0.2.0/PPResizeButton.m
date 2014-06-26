@@ -8,6 +8,7 @@
 
 #import "PPResizeButton.h"
 #import "NSString+FontAwesome.h"
+#import "UIView+Util.h"
 
 #define BUTTON_DEFAULT_WIDTH 30.0f
 
@@ -62,6 +63,10 @@
     [circle setTextColor:color];
 }
 
++ (float) getDefaultWidth {
+    return BUTTON_DEFAULT_WIDTH;
+}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -71,20 +76,5 @@
     // Drawing code
 }
 */
-
-+ (PPResizeButton*) centeredAtPoint: (CGPoint) point {
-    PPResizeButton* view = [self atPoint:point];
-    view.center = CGPointMake(view.frame.origin.x - view.frame.size.width / 2, view.frame.origin.y - view.frame.size.height / 2);
-    return view;
-}
-
-+ (PPResizeButton*) atPoint: (CGPoint) point {
-    return [self atPoint:point withSize:CGSizeMake(BUTTON_DEFAULT_WIDTH, BUTTON_DEFAULT_WIDTH)];
-}
-
-+ (PPResizeButton*) atPoint: (CGPoint) point withSize: (CGSize) size {
-    CGRect boxRect = CGRectMake(point.x, point.y, size.width, size.height);
-    return [[self alloc] initWithFrame:boxRect];
-}
 
 @end

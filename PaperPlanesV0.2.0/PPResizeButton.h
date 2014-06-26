@@ -10,9 +10,6 @@
 
 @interface PPResizeButton : UIView
 
-+ (PPResizeButton *) atPoint: (CGPoint) point;
-+ (PPResizeButton *) centeredAtPoint: (CGPoint) point;
-+ (PPResizeButton *) atPoint: (CGPoint) point withSize: (CGSize) size;
 - (void) setColor: (UIColor*) color;
 
 @end
