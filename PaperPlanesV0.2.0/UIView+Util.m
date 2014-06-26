@@ -11,7 +11,6 @@
 @implementation UIView (Util)
 
 + (instancetype) centeredAtPoint: (CGPoint) point {
-    NSLog(@"Foo");
     UIView* view = [self atPoint:point];
     view.center = CGPointMake(view.frame.origin.x - view.frame.size.width / 2, view.frame.origin.y - view.frame.size.height / 2);
     return view;
