@@ -23,6 +23,7 @@
 		CABC91411959F99600B4AEF5 /* PaperPlanesV0_2_0Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC91401959F99600B4AEF5 /* PaperPlanesV0_2_0Tests.m */; };
 		CAE99DE7195B8E240050B584 /* PPResizeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE99DE6195B8E240050B584 /* PPResizeButton.m */; };
 		CAE99DEA195BA0970050B584 /* UIView+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE99DE9195BA0970050B584 /* UIView+Util.m */; };
+		CAE99DEE195BA4FF0050B584 /* PPMoveButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE99DED195BA4FF0050B584 /* PPMoveButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,8 @@
 		CAE99DE6195B8E240050B584 /* PPResizeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPResizeButton.m; sourceTree = "<group>"; };
 		CAE99DE8195BA0970050B584 /* UIView+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Util.h"; sourceTree = "<group>"; };
 		CAE99DE9195BA0970050B584 /* UIView+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Util.m"; sourceTree = "<group>"; };
+		CAE99DEC195BA4FF0050B584 /* PPMoveButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPMoveButton.h; sourceTree = "<group>"; };
+		CAE99DED195BA4FF0050B584 /* PPMoveButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPMoveButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +189,8 @@
 				CA384768195A39510083B949 /* PPBoxView.m */,
 				CAE99DE8195BA0970050B584 /* UIView+Util.h */,
 				CAE99DE9195BA0970050B584 /* UIView+Util.m */,
+				CAE99DEC195BA4FF0050B584 /* PPMoveButton.h */,
+				CAE99DED195BA4FF0050B584 /* PPMoveButton.m */,
 				CA38476A195A52340083B949 /* PPDeleteButton.h */,
 				CA38476B195A52340083B949 /* PPDeleteButton.m */,
 				CAE99DE5195B8E240050B584 /* PPResizeButton.h */,
@@ -295,6 +300,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAE99DEE195BA4FF0050B584 /* PPMoveButton.m in Sources */,
 				CABC91301959F99600B4AEF5 /* ViewController.m in Sources */,
 				CABC912D1959F99600B4AEF5 /* AppDelegate.m in Sources */,
 				CA384771195B3AC10083B949 /* NSString+FontAwesome.m in Sources */,
