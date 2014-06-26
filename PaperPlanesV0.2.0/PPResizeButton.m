@@ -10,7 +10,7 @@
 #import "NSString+FontAwesome.h"
 #import "UIView+Util.h"
 
-#define BUTTON_DEFAULT_WIDTH 30.0f
+#define BUTTON_DEFAULT_WIDTH 60.0f
 
 @interface PPResizeButton () {
     UILabel* circle;
@@ -38,8 +38,12 @@
 }
 
 - (UIView*) resizeShapeWithFrame:(CGRect) rect {
-    CGSize sizeAdjustment = CGSizeMake(-6.0f, -6.0f);
-    CGPoint positionAdjustment = CGPointMake(-2.0f, 1.0f);
+    float sizeTweak = -[PPResizeButton getDefaultWidth] / 5;
+    float positionXTweak = -[PPResizeButton getDefaultWidth] / 15;
+    float positionYTweak = [PPResizeButton getDefaultWidth] / 30;
+    
+    CGSize sizeAdjustment = CGSizeMake(sizeTweak, sizeTweak);
+    CGPoint positionAdjustment = CGPointMake(positionXTweak, positionYTweak);
     rect = CGRectInset(rect, -sizeAdjustment.width, -sizeAdjustment.height);
     rect = CGRectOffset(rect, positionAdjustment.x, positionAdjustment.y);
     resizeShape = [self fontAwesomeLabel:FAExpand withFrame:rect];

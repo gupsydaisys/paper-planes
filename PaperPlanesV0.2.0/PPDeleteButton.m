@@ -10,7 +10,7 @@
 #import "NSString+FontAwesome.h"
 #import "UIView+Util.h"
 
-#define BUTTON_DEFAULT_WIDTH 30.0f
+#define BUTTON_DEFAULT_WIDTH 60.0f
 
 @interface PPDeleteButton () {
     UILabel* circle;

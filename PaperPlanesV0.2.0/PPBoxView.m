@@ -21,7 +21,7 @@
 
 @end
 
-#define BOX_DEFAULT_WIDTH 30.0f
+#define BOX_DEFAULT_WIDTH 60.0f
 
 @implementation PPBoxView
 

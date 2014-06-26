@@ -10,7 +10,7 @@
 #import "NSString+FontAwesome.h"
 #import "UIView+Util.h"
 
-#define BUTTON_DEFAULT_WIDTH 30.0f
+#define BUTTON_DEFAULT_WIDTH 60.0f
 
 @interface PPMoveButton () {
     UILabel* circle;
@@ -38,8 +38,10 @@
 }
 
 - (UIView*) moveShapeWithFrame:(CGRect) rect {
-    CGSize sizeAdjustment = CGSizeMake(-6.0f, -6.0f);
-    CGPoint positionAdjustment = CGPointMake(-2.0f, 0.0f);
+    float sizeTweak = -[PPMoveButton getDefaultWidth] / 5;
+    float positionTweak = -[PPMoveButton getDefaultWidth] / 15;
+    CGSize sizeAdjustment = CGSizeMake(sizeTweak, sizeTweak);
+    CGPoint positionAdjustment = CGPointMake(positionTweak, 0.0f);
     rect = CGRectInset(rect, -sizeAdjustment.width, -sizeAdjustment.height);
     rect = CGRectOffset(rect, positionAdjustment.x, positionAdjustment.y);
     moveShape = [self fontAwesomeLabel:FAArrows withFrame:rect];
