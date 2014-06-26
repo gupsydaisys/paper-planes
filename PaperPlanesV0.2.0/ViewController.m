@@ -274,6 +274,8 @@
     PPBoxView* touchedBox = [self getTouchedBox:gesture];
     if (touchedBox == nil) {
         touchedBox = [PPBoxView centeredAtPoint:touchPoint];
+        [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:touchedBox.moveButtonPanGestureRecognizer];
+        [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:touchedBox.resizeButtonPanGestureRecognizer];
         [gesture.view addSubview:touchedBox];
     }
 

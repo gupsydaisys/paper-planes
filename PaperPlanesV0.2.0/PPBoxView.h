@@ -13,4 +13,7 @@
 - (void) marchingAnts: (BOOL) turnOn;
 - (void) showControls: (BOOL) show;
 
+@property (nonatomic, strong) UIPanGestureRecognizer* moveButtonPanGestureRecognizer;
+@property (nonatomic, strong) UIPanGestureRecognizer* resizeButtonPanGestureRecognizer;
+
 @end

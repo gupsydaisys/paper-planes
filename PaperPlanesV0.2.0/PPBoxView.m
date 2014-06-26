@@ -124,16 +124,17 @@
 
 - (UIView*) resizeButton {
     resizeButton = [PPResizeButton centeredAtPoint:CGPointMake(CGRectGetMaxX(self.bounds), CGRectGetMaxY(self.bounds))];
-    UIPanGestureRecognizer* recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(resizeButtonPanned:)];
-    [resizeButton addGestureRecognizer:recognizer];
+    self.resizeButtonPanGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(resizeButtonPanned:)];
+    [resizeButton addGestureRecognizer:self.resizeButtonPanGestureRecognizer];
     return resizeButton;
     
 }
 
 - (UIView*) moveButton {
     moveButton = [PPMoveButton centeredAtPoint:CGPointMake(CGRectGetMaxX(self.bounds), 0)];
-    UIPanGestureRecognizer* recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveButtonPanned:)];
-    [moveButton addGestureRecognizer:recognizer];
+    
+    self.moveButtonPanGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveButtonPanned:)];
+    [moveButton addGestureRecognizer:self.moveButtonPanGestureRecognizer];
     return moveButton;
 }
 
