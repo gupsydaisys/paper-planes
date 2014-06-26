@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="14A238x" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
+        <deployment defaultVersion="1808" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,25 +17,65 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" minimumZoomScale="0.69999999999999996" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="MG2-EZ-iBC" userLabel="Image Scroll View">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" misplaced="YES" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="MG2-EZ-iBC" userLabel="Image Scroll View">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                                 <subviews>
                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IMG_2602.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ti2-Iv-j7X">
                                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                                         <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="480" id="63e-j8-tCI"/>
+                                            <constraint firstAttribute="width" constant="320" id="isT-9u-13e"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="63e-j8-tCI"/>
+                                                <exclude reference="isT-9u-13e"/>
+                                            </mask>
+                                        </variation>
                                         <variation key="heightClass=compact" fixedFrame="YES">
                                             <rect key="frame" x="-715" y="0.0" width="3264" height="2448"/>
                                         </variation>
                                         <variation key="heightClass=regular" fixedFrame="YES">
                                             <rect key="frame" x="0.0" y="0.0" width="480" height="645"/>
                                         </variation>
+                                        <variation key="widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="63e-j8-tCI"/>
+                                                <include reference="isT-9u-13e"/>
+                                            </mask>
+                                        </variation>
                                     </imageView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="Ti2-Iv-j7X" firstAttribute="leading" secondItem="MG2-EZ-iBC" secondAttribute="leading" id="ALJ-3v-eRc"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ti2-Iv-j7X" secondAttribute="bottom" id="FC6-V8-BWq"/>
+                                    <constraint firstItem="Ti2-Iv-j7X" firstAttribute="top" secondItem="MG2-EZ-iBC" secondAttribute="top" constant="-22" id="aR5-sv-awe">
+                                        <variation key="widthClass=compact"/>
+                                    </constraint>
+                                    <constraint firstAttribute="trailing" secondItem="Ti2-Iv-j7X" secondAttribute="trailing" id="k7f-MV-2X7"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="ALJ-3v-eRc"/>
+                                        <exclude reference="FC6-V8-BWq"/>
+                                        <exclude reference="aR5-sv-awe"/>
+                                        <exclude reference="k7f-MV-2X7"/>
+                                    </mask>
+                                </variation>
                                 <variation key="heightClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                                 </variation>
                                 <variation key="heightClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="480" height="640"/>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="ALJ-3v-eRc"/>
+                                        <include reference="FC6-V8-BWq"/>
+                                        <include reference="aR5-sv-awe"/>
+                                        <include reference="k7f-MV-2X7"/>
+                                    </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="640" height="640"/>
@@ -153,7 +194,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="58" y="-23"/>
+            <point key="canvasLocation" x="57" y="-23"/>
         </scene>
     </scenes>
     <resources>
