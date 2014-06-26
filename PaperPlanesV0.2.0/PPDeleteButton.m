@@ -25,8 +25,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self addSubview:[self circleWithFrame:frame]];
-        [self addSubview:[self xShapeWithFrame:frame]];
+        [self addSubview:[self circleWithFrame:self.bounds]];
+        [self addSubview:[self xShapeWithFrame:self.bounds]];
         [self setColor:self.tintColor];
     }
     return self;
@@ -44,7 +44,7 @@
 
 - (UILabel*) fontAwesomeLabel:(FAIcon) iconName withFrame:(CGRect) rect {
     CGPoint fontAwesomeAdjustment = CGPointMake(2.0f, 0);
-    CGRect fontIconRect = CGRectMake(fontAwesomeAdjustment.x, fontAwesomeAdjustment.y, rect.size.width, rect.size.height);
+    CGRect fontIconRect = CGRectMake(rect.origin.x + fontAwesomeAdjustment.x, rect.origin.y + fontAwesomeAdjustment.y, rect.size.width, rect.size.height);
     UILabel* fontIcon = [[UILabel alloc] initWithFrame:fontIconRect];
     fontIcon.font = [UIFont fontWithName:kFontAwesomeFamilyName size:rect.size.width];
     fontIcon.text = [NSString fontAwesomeIconStringForEnum:iconName];
@@ -61,14 +61,5 @@
 + (float) getDefaultWidth {
     return BUTTON_DEFAULT_WIDTH;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end
