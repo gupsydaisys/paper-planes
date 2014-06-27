@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="14A238x" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,10 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" misplaced="YES" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="MG2-EZ-iBC" userLabel="Image Scroll View">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" ambiguous="YES" misplaced="YES" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="MG2-EZ-iBC" userLabel="Image Scroll View">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                                 <subviews>
-                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IMG_2602.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ti2-Iv-j7X">
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="IMG_2602.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ti2-Iv-j7X">
                                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -50,9 +49,7 @@
                                 <constraints>
                                     <constraint firstItem="Ti2-Iv-j7X" firstAttribute="leading" secondItem="MG2-EZ-iBC" secondAttribute="leading" id="ALJ-3v-eRc"/>
                                     <constraint firstAttribute="bottom" secondItem="Ti2-Iv-j7X" secondAttribute="bottom" id="FC6-V8-BWq"/>
-                                    <constraint firstItem="Ti2-Iv-j7X" firstAttribute="top" secondItem="MG2-EZ-iBC" secondAttribute="top" constant="-22" id="aR5-sv-awe">
-                                        <variation key="widthClass=compact"/>
-                                    </constraint>
+                                    <constraint firstItem="Ti2-Iv-j7X" firstAttribute="top" secondItem="MG2-EZ-iBC" secondAttribute="top" constant="-22" id="aR5-sv-awe"/>
                                     <constraint firstAttribute="trailing" secondItem="Ti2-Iv-j7X" secondAttribute="trailing" id="k7f-MV-2X7"/>
                                 </constraints>
                                 <variation key="default">
@@ -106,6 +103,7 @@
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="DbQ-ZV-WV9" userLabel="postComment height"/>
+                                    <constraint firstAttribute="width" constant="480" id="awG-D9-Die" userLabel="postComment width"/>
                                 </constraints>
                                 <variation key="heightClass=regular">
                                     <mask key="subviews">
@@ -116,10 +114,10 @@
                                     <outletCollection property="gestureRecognizers" destination="vbP-cQ-Mtw" appends="YES" id="t9O-MG-f3s"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zdy-ft-VoQ" userLabel="Table Container">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zdy-ft-VoQ" userLabel="Table Container">
                                 <rect key="frame" x="0.0" y="410" width="480" height="25"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hdq-26-8O3" userLabel="Table Handle">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hdq-26-8O3" userLabel="Table Handle">
                                         <rect key="frame" x="0.0" y="0.0" width="480" height="25"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <gestureRecognizers/>
@@ -134,9 +132,10 @@
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="hdq-26-8O3" firstAttribute="leading" secondItem="Zdy-ft-VoQ" secondAttribute="leading" id="NJl-pY-Jvc"/>
-                                    <constraint firstAttribute="trailing" secondItem="hdq-26-8O3" secondAttribute="trailing" id="Qn3-Bk-f2E"/>
-                                    <constraint firstItem="hdq-26-8O3" firstAttribute="top" secondItem="Zdy-ft-VoQ" secondAttribute="top" id="kXF-Hg-mjw"/>
+                                    <constraint firstAttribute="width" constant="480" id="De6-zf-J9z" userLabel="tableContainer width"/>
+                                    <constraint firstItem="hdq-26-8O3" firstAttribute="leading" secondItem="Zdy-ft-VoQ" secondAttribute="leading" id="NJl-pY-Jvc" userLabel="tableHandle to leading"/>
+                                    <constraint firstAttribute="trailing" secondItem="hdq-26-8O3" secondAttribute="trailing" id="Qn3-Bk-f2E" userLabel="tableHandle to trailing"/>
+                                    <constraint firstItem="hdq-26-8O3" firstAttribute="top" secondItem="Zdy-ft-VoQ" secondAttribute="top" id="kXF-Hg-mjw" userLabel="tableHandle to top"/>
                                     <constraint firstAttribute="height" constant="25" id="kg3-eB-f1Y" userLabel="tableContainer height"/>
                                 </constraints>
                             </view>
@@ -149,11 +148,13 @@
                         <constraints>
                             <constraint firstItem="9nT-b2-373" firstAttribute="top" secondItem="Zdy-ft-VoQ" secondAttribute="bottom" id="Ejg-yU-VQf" userLabel="tableContainer to postComment"/>
                             <constraint firstItem="9nT-b2-373" firstAttribute="top" secondItem="MG2-EZ-iBC" secondAttribute="bottom" id="HAi-MV-SeO" userLabel="scroll to postComment"/>
+                            <constraint firstItem="Zdy-ft-VoQ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="HGU-h3-PpV" userLabel="tableContainer to leading"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="9nT-b2-373" secondAttribute="bottom" id="LEf-T9-Len" userLabel="keyboard height"/>
                             <constraint firstItem="9nT-b2-373" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="TJI-nN-ziv" userLabel="postComment to leading"/>
                             <constraint firstAttribute="trailing" secondItem="9nT-b2-373" secondAttribute="trailing" id="TMO-Z8-YdR" userLabel="postComment to trailing"/>
                             <constraint firstAttribute="trailing" secondItem="MG2-EZ-iBC" secondAttribute="trailing" id="ebC-tw-rt5" userLabel="scroll to trailing"/>
                             <constraint firstItem="MG2-EZ-iBC" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="jbz-dx-DYL" userLabel="scroll to leading"/>
+                            <constraint firstAttribute="trailing" secondItem="Zdy-ft-VoQ" secondAttribute="trailing" id="pqL-7y-QyZ" userLabel="tableContainer to trailing"/>
                             <constraint firstItem="MG2-EZ-iBC" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="qQA-gQ-enQ" userLabel="scroll to top"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>

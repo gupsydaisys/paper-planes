@@ -42,6 +42,11 @@
     CGPoint startPos;
     CGPoint minPos;
     CGPoint maxPos;
+    
+    BOOL isKeyboardUp;
+
+    UIView *heightTEMP;
+    
 }
 
 @end
@@ -58,7 +63,19 @@
     /* Comment Drawer initalization Stuff */
     comments = [NSMutableArray new];
     tableHandleState = CLOSED;
-
+    isKeyboardUp = NO;
+    
+    
+    
+    /* Temporarliy there for debugging */
+    self.tableContainer.layer.borderWidth = 3;
+    self.tableContainer.layer.borderColor = [[UIColor greenColor] CGColor];
+    
+    heightTEMP = [UIView new];
+    [self.mainView addSubview:heightTEMP];
+    heightTEMP.layer.backgroundColor = [UIColor redColor].CGColor;
+//    self.postCommentContainer.layer.borderWidth = 3;
+//    self.postCommentContainer.layer.borderColor = [[UIColor redColor] CGColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -144,23 +161,19 @@
 
 - (IBAction) dragTableHandle:(UIPanGestureRecognizer *) sender {
     // NEXT STEP call correct updateBLAHCenter to get what each should actually be
-    CGPoint closedCenter;
-    CGPoint halfCenter;
-    CGPoint fullCenter;
-    closedCenter = CGPointMake(160, 422.5);
-    halfCenter = CGPointMake(160, 334);
-    fullCenter = CGPointMake(160, 227.5);
+    CGPoint closedCenter = CGPointMake(160, 422.5);
+    CGPoint halfCenter = CGPointMake(160, 334);
+    CGPoint fullCenter = CGPointMake(160, 227.5);
 
     if ([sender state] == UIGestureRecognizerStateBegan) {
-        NSLog(@"did begin");
         startPos = self.tableContainer.center;
-        minPos = fullCenter;
-        maxPos = closedCenter;
-        
+        [self setBoundsDragTableHandle];
+
     } else if ([sender state] == UIGestureRecognizerStateChanged) {
-        NSLog(@"is changing");
-        CGPoint translate = [sender translationInView:self.mainView];
         
+        // NEXT STEP height still doesn't quite work
+        
+        CGPoint translate = [sender translationInView:self.mainView];
         CGPoint newPos = CGPointMake(startPos.x, startPos.y + translate.y);
         
         if (newPos.y < minPos.y) {
@@ -174,111 +187,41 @@
         }
         
         [sender setTranslation:translate inView:self.mainView];
-        self.tableContainer.center = newPos;
+//        self.tableContainer.center = newPos;
+        
+        float maxHeight = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT;
+        float minHeight = TABLE_HANDLE_HEIGHT;
+        float newOriginY = newPos.y - self.tableContainer.frame.size.height / 2;
+        float newHeight = self.postCommentContainer.frame.origin.y - newOriginY;
+//        float newHeight = self.postCommentContainer.frame.origin.y - self.tableContainer.frame.origin.y;
+        if (newHeight > maxHeight) {
+            newHeight = maxHeight;
+        }
+        
+        if (newHeight < minHeight) {
+            newHeight = minHeight;
+        }
+//
+        self.tableContainerHeight.constant = newHeight;
+        [self.view setNeedsUpdateConstraints];
+//        self.tableContainer.center = newPos;
+
+//         center.y - height / 2
+//        heightTEMP.frame = CGRectMake(0, newPos.y - self.tableContainer.frame.size.height / 2, 3.0f, 3.0f);
+//        heightTEMP.frame = CGRectMake(self.tableContainer.frame.origin.x, self.tableContainer.frame.origin.y, 3.0f, newHeight);
+        
+        
+//        self.tableContainer.frame = CGRectMake(self.tableContainer.frame.origin.x, newOriginY, self.tableContainer.frame.size.width, newHeight);
+//        self.tableContainerHeight.constant = self.tableContainer.frame.size.height;
+//        [self.view setNeedsUpdateConstraints];
 
     } else if ([sender state] == UIGestureRecognizerStateEnded) {
-        NSLog(@"did end");
         CGPoint vectorVelocity = [sender velocityInView:self.mainView];
-        float yTranslation = self.tableContainer.center.y;
-        CommentState curr;
-        if (vectorVelocity.y > 0) {
-//            NSLog(@"pos");
-            if (yTranslation <= halfCenter.y) {
-//                NSLog(@"half");
-                curr = HALF;
-                // MORE SPECIALIZED CASE
-            } else {
-                curr = CLOSED;
-//                NSLog(@"closed");
-            }
-        } else {
-//            NSLog(@"neg");
-            if (yTranslation >= halfCenter.y) {
-//                NSLog(@"half");
-                curr = HALF;
-                // MORE SPECIALIZED CASE
-            } else {
-//                NSLog(@"full");
-                curr = FULL;
-            }
-        }
+        CommentState curr = [self getNextTableHandleState:vectorVelocity];
         [self setOpenedState:curr animated:ANIMATE];
     }
 }
 
-- (IBAction) dragTableHandle2:(UIPanGestureRecognizer *) sender {
-    // NEXT STEP call correct updateBLAHCenter to get what each should actually be
-    CGPoint closedCenter;
-    CGPoint halfCenter;
-    CGPoint fullCenter;
-    closedCenter = CGPointMake(160, 422.5);
-    halfCenter = CGPointMake(160, 334);
-    fullCenter = CGPointMake(160, 227.5);
-    
-    //close 410
-    //half 233
-    //full 20
-    
-    if ([sender state] == UIGestureRecognizerStateBegan) {
-        NSLog(@"did begin");
-        startPos = self.tableContainer.frame.origin;
-        minPos = CGPointMake(0, 20);
-        maxPos = CGPointMake(0, 410);
-        
-    } else if ([sender state] == UIGestureRecognizerStateChanged) {
-        NSLog(@"is changing");
-        CGPoint translate = [sender translationInView:self.mainView];
-        CGFloat diff = translate.y;
-        CGPoint newPos = CGPointMake(startPos.x, startPos.y + translate.y);
-        
-        if (newPos.y < minPos.y) {
-            newPos.y = minPos.y;
-            translate = CGPointMake(0, newPos.y - startPos.y);
-            diff = minPos.y - startPos.y;
-        }
-        
-        if (newPos.y > maxPos.y) {
-            newPos.y = maxPos.y;
-            translate = CGPointMake(0, newPos.y - startPos.y);
-            diff = maxPos.y - startPos.y;
-            
-        }
-        
-        [sender setTranslation:translate inView:self.mainView];
-        [self updateTableContainerFrame:newPos.x
-                                       :newPos.y
-                                       :self.tableContainer.frame.size.width
-                                       :self.tableContainer.frame.size.height + diff];
-
-    } else if ([sender state] == UIGestureRecognizerStateEnded) {
-        NSLog(@"did end");
-        CGPoint vectorVelocity = [sender velocityInView:self.mainView];
-        float yTranslation = self.tableContainer.center.y;
-        CommentState curr;
-        if (vectorVelocity.y > 0) {
-            //            NSLog(@"pos");
-            if (yTranslation <= halfCenter.y) {
-                //                NSLog(@"half");
-                curr = HALF;
-                // MORE SPECIALIZED CASE
-            } else {
-                curr = CLOSED;
-                //                NSLog(@"closed");
-            }
-        } else {
-            //            NSLog(@"neg");
-            if (yTranslation >= halfCenter.y) {
-                //                NSLog(@"half");
-                curr = HALF;
-                // MORE SPECIALIZED CASE
-            } else {
-                //                NSLog(@"full");
-                curr = FULL;
-            }
-        }
-        [self setOpenedState:curr animated:ANIMATE];
-    }
-}
 
 - (void) setOpenedState:(CommentState) curr animated:(BOOL) anim {
     if (anim) {
@@ -307,6 +250,46 @@
     }
 }
 
+- (void) setBoundsDragTableHandle {
+    // NEXT STEP call to procure correct values / calculated ones
+    CGPoint closedCenter = CGPointMake(160, 422.5);
+    CGPoint halfCenter = CGPointMake(160, 334);
+    CGPoint fullCenter = CGPointMake(160, 227.5);
+    
+    if (isKeyboardUp) {
+            minPos = CGPointMake(160, 119);
+            maxPos = CGPointMake(160, 207);
+
+    } else {
+        if (tableHandleState == CLOSED) {
+            minPos = CGPointMake(160, HEADING_HEIGHT + TABLE_HANDLE_HEIGHT / 2);
+            maxPos = closedCenter;
+        } else if (tableHandleState == HALF) {
+            minPos = CGPointMake(160, halfCenter.y - TABLE_CONTAINER_HALF_HEIGHT - TABLE_HANDLE_HEIGHT / 2);
+            maxPos = CGPointMake(160, halfCenter.y + TABLE_CONTAINER_HALF_HEIGHT - TABLE_HANDLE_HEIGHT / 2);
+        } else { // FULL
+            minPos = fullCenter;
+            maxPos = CGPointMake(160, 620);;
+        }
+    }
+}
+
+- (CommentState) getNextTableHandleState:(CGPoint) vectorVelocity {
+    // NEXT STEP change so that if you are half-way or something and change direction it still snaps in place
+    
+    CGPoint halfCenter = CGPointMake(160, 334);
+    float yTranslation = self.tableContainer.center.y;
+
+    if (vectorVelocity.y > 0) {
+        if (yTranslation <= halfCenter.y && !isKeyboardUp) return HALF;
+        else return CLOSED;
+    } else {
+        if (yTranslation >= halfCenter.y && !isKeyboardUp) return HALF;
+        else return FULL;
+    }
+
+}
+
 - (void) updateTableContainerFrame:(CommentState) curr {
     switch (curr) {
         case CLOSED:
@@ -331,7 +314,7 @@
                                        :TABLE_CONTAINER_HALF_HEIGHT];
         break;
     }
-    NSLog(@"min y %f", self.tableContainer.frame.origin.y);
+
 }
 
 - (void) updateTableContainerFrame:(float) x :(float) y :(float) w :(float) h {
@@ -350,6 +333,7 @@
     [self.view setNeedsUpdateConstraints];
 
     [self updateTableHandleState];
+    
 }
 
 - (void) updateTableHandleState {
@@ -375,7 +359,8 @@
         [self.view layoutIfNeeded];
     }];
     [UIView setAnimationDidStopSelector:@selector(animationForKeyboardShowDidStop:finished:context:)];
-
+    
+    isKeyboardUp = YES;
 }
 
 - (void) animationForKeyboardShowDidStop:(NSString *) animationID finished:(NSNumber *) finished context:(void *) context {
@@ -406,6 +391,7 @@
     [UIView animateWithDuration:animationDuration animations:^{
         [self.view layoutIfNeeded];
     }];
+    isKeyboardUp = NO;
 }
 
 /* Dismiss Keyboard */
