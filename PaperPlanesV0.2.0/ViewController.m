@@ -371,28 +371,13 @@
     NSDictionary* info = [aNotification userInfo];
     CGSize KbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     [self updateKeyboardHeight:KbSize.height];
-    self.imageScrollView.contentInset = UIEdgeInsetsMake(0, 0, KbSize.height, 0);
-
+    
     float animationDuration = [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
     [UIView animateWithDuration:animationDuration animations:^{
-        if (scrollViewDidLayoutOnce) {
-            /* In this code we intend to smoothly animate the scrollview to scroll to the currently selected box,
-             * while at the same time, smoothly animating the keyboard up.
-             * The first time layoutIfNeeded is called results in a slow, jerky layout. Thus the first time around
-             * we defer the scrollRect call until the completion block. The second time around, we can animate both
-             * scrollRect and keyboard together with no problems. The reason for this is unknown, but likely has something
-             * to do with autolayout on the scrollview. I suspect the problem would be fixed if you isolated the layoutIfNeeded
-             * call to act on the post comment container only.
-             */
-            [self.imageScrollView scrollRectToVisibleCenteredOn:selectedBox.frame animated:NO];
-        }
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
-        if (!scrollViewDidLayoutOnce) {
-            [self.imageScrollView scrollRectToVisibleCenteredOn:selectedBox.frame animated:YES];
-            scrollViewDidLayoutOnce = true;
-        }
+        [self.imageScrollView zoomToRect:selectedBox.frame animated:YES];
     }];
     [UIView setAnimationDidStopSelector:@selector(animationForKeyboardShowDidStop:finished:context:)];
 }
@@ -422,7 +407,6 @@
     
     float animationDuration = [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     [UIView animateWithDuration:animationDuration animations:^{
-        self.imageScrollView.contentInset = UIEdgeInsetsZero;
         [self.view layoutIfNeeded];
     }];
 }
