@@ -15,6 +15,7 @@
 		CA384771195B3AC10083B949 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = CA38476E195B3AC10083B949 /* NSString+FontAwesome.m */; };
 		CA384772195B3AC10083B949 /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = CA384770195B3AC10083B949 /* UIFont+FontAwesome.m */; };
 		CA384776195B3BD70083B949 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA384775195B3AFE0083B949 /* FontAwesome.ttf */; };
+		CA3C07F3195CE9ED005C52FC /* UIScrollView+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3C07F2195CE9ED005C52FC /* UIScrollView+Util.m */; };
 		CA9216E2195C86DF001ABA86 /* PPButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9216E1195C86DF001ABA86 /* PPButton.m */; };
 		CABC912A1959F99600B4AEF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC91291959F99600B4AEF5 /* main.m */; };
 		CABC912D1959F99600B4AEF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC912C1959F99600B4AEF5 /* AppDelegate.m */; };
@@ -52,6 +53,8 @@
 		CA38476F195B3AC10083B949 /* UIFont+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+FontAwesome.h"; sourceTree = "<group>"; };
 		CA384770195B3AC10083B949 /* UIFont+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FontAwesome.m"; sourceTree = "<group>"; };
 		CA384775195B3AFE0083B949 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		CA3C07F1195CE9ED005C52FC /* UIScrollView+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Util.h"; sourceTree = "<group>"; };
+		CA3C07F2195CE9ED005C52FC /* UIScrollView+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Util.m"; sourceTree = "<group>"; };
 		CA9216E0195C86DF001ABA86 /* PPButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPButton.h; sourceTree = "<group>"; };
 		CA9216E1195C86DF001ABA86 /* PPButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPButton.m; sourceTree = "<group>"; };
 		CABC91241959F99600B4AEF5 /* PaperPlanesV0.2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaperPlanesV0.2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -188,6 +191,8 @@
 		CAE99DEB195BA3610050B584 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CA3C07F1195CE9ED005C52FC /* UIScrollView+Util.h */,
+				CA3C07F2195CE9ED005C52FC /* UIScrollView+Util.m */,
 				CA384767195A39510083B949 /* PPBoxView.h */,
 				CA384768195A39510083B949 /* PPBoxView.m */,
 				CAE99DE8195BA0970050B584 /* UIView+Util.h */,
@@ -315,6 +320,7 @@
 				CA384769195A39510083B949 /* PPBoxView.m in Sources */,
 				CABC912A1959F99600B4AEF5 /* main.m in Sources */,
 				CAE99DE7195B8E240050B584 /* PPResizeButton.m in Sources */,
+				CA3C07F3195CE9ED005C52FC /* UIScrollView+Util.m in Sources */,
 				CAE99DEA195BA0970050B584 /* UIView+Util.m in Sources */,
 				48987A5A195A3E64003C6EC6 /* HPGrowingTextView.m in Sources */,
 				48987A5B195A3E64003C6EC6 /* HPTextViewInternal.m in Sources */,

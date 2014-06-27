@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="14A238x" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
     </dependencies>
     <scenes>
@@ -17,10 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" misplaced="YES" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="MG2-EZ-iBC" userLabel="Image Scroll View">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" misplaced="YES" bounces="NO" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="MG2-EZ-iBC" userLabel="Image Scroll View">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                                 <subviews>
-                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IMG_2602.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ti2-Iv-j7X">
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="IMG_2602.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ti2-Iv-j7X">
                                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -50,9 +49,7 @@
                                 <constraints>
                                     <constraint firstItem="Ti2-Iv-j7X" firstAttribute="leading" secondItem="MG2-EZ-iBC" secondAttribute="leading" id="ALJ-3v-eRc"/>
                                     <constraint firstAttribute="bottom" secondItem="Ti2-Iv-j7X" secondAttribute="bottom" id="FC6-V8-BWq"/>
-                                    <constraint firstItem="Ti2-Iv-j7X" firstAttribute="top" secondItem="MG2-EZ-iBC" secondAttribute="top" constant="-22" id="aR5-sv-awe">
-                                        <variation key="widthClass=compact"/>
-                                    </constraint>
+                                    <constraint firstItem="Ti2-Iv-j7X" firstAttribute="top" secondItem="MG2-EZ-iBC" secondAttribute="top" constant="-22" id="aR5-sv-awe"/>
                                     <constraint firstAttribute="trailing" secondItem="Ti2-Iv-j7X" secondAttribute="trailing" id="k7f-MV-2X7"/>
                                 </constraints>
                                 <variation key="default">
@@ -69,13 +66,16 @@
                                 <variation key="heightClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="480" height="640"/>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <mask key="constraints">
                                         <include reference="ALJ-3v-eRc"/>
                                         <include reference="FC6-V8-BWq"/>
                                         <include reference="aR5-sv-awe"/>
                                         <include reference="k7f-MV-2X7"/>
                                     </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="435"/>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="640" height="640"/>
@@ -148,7 +148,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="9nT-b2-373" firstAttribute="top" secondItem="Zdy-ft-VoQ" secondAttribute="bottom" id="Ejg-yU-VQf" userLabel="tableContainer to postComment"/>
-                            <constraint firstItem="9nT-b2-373" firstAttribute="top" secondItem="MG2-EZ-iBC" secondAttribute="bottom" id="HAi-MV-SeO" userLabel="scroll to postComment"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="9nT-b2-373" secondAttribute="bottom" id="LEf-T9-Len" userLabel="keyboard height"/>
                             <constraint firstItem="9nT-b2-373" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="TJI-nN-ziv" userLabel="postComment to leading"/>
                             <constraint firstAttribute="trailing" secondItem="9nT-b2-373" secondAttribute="trailing" id="TMO-Z8-YdR" userLabel="postComment to trailing"/>
@@ -165,7 +164,6 @@
                                 <include reference="ebC-tw-rt5"/>
                                 <include reference="jbz-dx-DYL"/>
                                 <include reference="qQA-gQ-enQ"/>
-                                <include reference="HAi-MV-SeO"/>
                                 <include reference="TJI-nN-ziv"/>
                                 <include reference="TMO-Z8-YdR"/>
                                 <include reference="LEf-T9-Len"/>
