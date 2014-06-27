@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "HPGrowingTextView.h"
 
-@interface ViewController : UIViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate>
+@interface ViewController : UIViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 /* Main View */
 @property (weak, nonatomic) IBOutlet UIView *mainView;
@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIView *tableContainer;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableContainerHeight;
 @property (weak, nonatomic) IBOutlet UIView *tableHandle;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 /* Post Comment Paraphenilia */
 @property (strong, nonatomic) HPGrowingTextView *textView;

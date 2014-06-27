@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "HSCommentCell.h"
 #import "PPBoxView.h"
 #import "UIView+Util.h"
 
@@ -407,6 +408,25 @@
     [self.view setNeedsUpdateConstraints];
 }
 
+#pragma mark - Table View Data Load
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return comments.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    HSCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
+    NSString *comment = comments[indexPath.row];
+
+    cell.content.text = comment;
+    return cell;
+}
 
 #pragma mark - Gesture recognizer delegate
 
@@ -471,7 +491,8 @@
 #pragma mark - Post Comment Methods
 - (IBAction)tapPostComment:(id)sender {
     [comments addObject:self.textView.text];
-    NSLog(@"comments %@", comments);
+    [self.tableView reloadData];
+    
     [self didPostComment];
 }
 

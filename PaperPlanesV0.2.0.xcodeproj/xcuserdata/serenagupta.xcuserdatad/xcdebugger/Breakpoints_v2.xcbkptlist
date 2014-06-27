@@ -38,11 +38,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PaperPlanesV0.2.0/ViewController.h"
-            timestampString = "425597626.78265"
+            timestampString = "425598494.697682"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "keyboardHeight"
             landmarkType = "19">
          </BreakpointContent>
@@ -54,11 +54,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PaperPlanesV0.2.0/ViewController.h"
-            timestampString = "425597626.78265"
+            timestampString = "425598494.697682"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "textView"
             landmarkType = "19">
          </BreakpointContent>
@@ -70,11 +70,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PaperPlanesV0.2.0/ViewController.h"
-            timestampString = "425597626.78265"
+            timestampString = "425598494.697682"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "textView"
             landmarkType = "19">
          </BreakpointContent>
@@ -93,6 +93,94 @@
             endingLineNumber = "24"
             landmarkName = "tableHandle"
             landmarkType = "19">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PaperPlanesV0.2.0/ViewController.h"
+            timestampString = "425598249.211565"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "5"
+            endingLineNumber = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ViewController mainView]"
+                  moduleName = "PaperPlanesV0.2.0"
+                  urlString = "file:///Users/serenagupta/Desktop/Projects/TestingiOS/PaperPlanesV0.2.0/PaperPlanesV0.2.0/ViewController.h"
+                  timestampString = "425598249.259043"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "10">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ViewController setMainView:]"
+                  moduleName = "PaperPlanesV0.2.0"
+                  urlString = "file:///Users/serenagupta/Desktop/Projects/TestingiOS/PaperPlanesV0.2.0/PaperPlanesV0.2.0/ViewController.h"
+                  timestampString = "425598249.25933"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "22">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PaperPlanesV0.2.0/ViewController.h"
+            timestampString = "425598263.916432"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2"
+            endingLineNumber = "2">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ViewController mainView]"
+                  moduleName = "PaperPlanesV0.2.0"
+                  urlString = "file:///Users/serenagupta/Desktop/Projects/TestingiOS/PaperPlanesV0.2.0/PaperPlanesV0.2.0/ViewController.h"
+                  timestampString = "425598263.928319"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "10">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ViewController setMainView:]"
+                  moduleName = "PaperPlanesV0.2.0"
+                  urlString = "file:///Users/serenagupta/Desktop/Projects/TestingiOS/PaperPlanesV0.2.0/PaperPlanesV0.2.0/ViewController.h"
+                  timestampString = "425598263.928565"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "22">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
