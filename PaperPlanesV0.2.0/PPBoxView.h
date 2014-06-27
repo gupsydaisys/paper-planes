@@ -15,5 +15,6 @@
 
 @property (nonatomic, strong) UIPanGestureRecognizer* moveButtonPanGestureRecognizer;
 @property (nonatomic, strong) UIPanGestureRecognizer* resizeButtonPanGestureRecognizer;
+@property (nonatomic, strong) NSMutableArray* controls;
 
 @end
