@@ -10,6 +10,7 @@
 #import "HSCommentCell.h"
 #import "PPBoxView.h"
 #import "UIView+Util.h"
+#import "UIScrollView+Util.h"
 
 /* Post Comment Constants */
 #define POST_COMMENT_CONTAINTER_WIDTH 480.0f
@@ -48,6 +49,7 @@
 
     UIView *heightTEMP;
     
+    BOOL scrollViewDidLayoutOnce;
 }
 
 @end
@@ -349,19 +351,23 @@
 
 #pragma mark - Keyboard Hiding and Showing
 - (void) keyboardWillShow:(NSNotification *) aNotification {
+
     NSDictionary* info = [aNotification userInfo];
     CGSize KbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     [self updateKeyboardHeight:KbSize.height];
-
-
-
+    
     float animationDuration = [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    
     [UIView animateWithDuration:animationDuration animations:^{
         [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        if (selectedBox) {
+            [self.imageScrollView zoomToRect:selectedBox.frame animated:YES];
+        }
     }];
     [UIView setAnimationDidStopSelector:@selector(animationForKeyboardShowDidStop:finished:context:)];
-    
     isKeyboardUp = YES;
+
 }
 
 - (void) animationForKeyboardShowDidStop:(NSString *) animationID finished:(NSNumber *) finished context:(void *) context {
@@ -386,7 +392,6 @@
     
     //if half and full -> half
     //if closed -> closed
-    
     
     float animationDuration = [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     [UIView animateWithDuration:animationDuration animations:^{

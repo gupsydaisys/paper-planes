@@ -31,10 +31,11 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self.layer addSublayer:[self boxLayer]];
-        [self addSubview:[self deleteButton]];
-        [self addSubview:[self resizeButton]];
-        [self addSubview:[self moveButton]];
+        [self addControl:[self deleteButton]];
+        [self addControl:[self resizeButton]];
+        [self addControl:[self moveButton]];
         [self setColor:self.tintColor];
+//        [self setBackgroundColor:[UIColor blackColor]];
         self.opaque = NO;
     }
     return self;
@@ -45,20 +46,30 @@
 - (void) drawRect:(CGRect)rect {
     [self resizeBoundsToFitSubviews];
     CGRect boxRect = [self boxRect];
+    // boxRect is drawn based on positions of top left button and bottom right button
+    // So we must 'manually' set the moveButton on the top right corner
     moveButton.center = CGPointMake(CGRectGetMaxX(boxRect), CGRectGetMinY(boxRect));
     UIBezierPath *rectPath = [UIBezierPath bezierPathWithRect:boxRect];
     boxLayer.path = rectPath.CGPath;
 }
 
+- (void) addControl:(UIView*) control {
+    if (self.controls == nil) {
+        self.controls = [[NSMutableArray alloc] init];
+    }
+    
+    [self.controls addObject:control];
+    [self addSubview:control];
+}
+
 - (void) resizeBoundsToFitSubviews {
-    CGPoint initialOrigin = self.frame.origin;
     CGRect bounds = CGRectZero;
     bounds = CGRectUnion(bounds, [self boxRect]);
     bounds = CGRectUnion(bounds, deleteButton.frame);
     bounds = CGRectUnion(bounds, resizeButton.frame);
     bounds = CGRectUnion(bounds, moveButton.frame);
+    
     self.bounds = bounds;
-    self.frame = CGRectMake(initialOrigin.x, initialOrigin.y, self.frame.size.width, self.frame.size.height);
 }
 
 #pragma mark - Animation
@@ -144,17 +155,18 @@
 }
 
 - (void) resizeButtonPanned: (UIPanGestureRecognizer *) gesture {
-    CGPoint translation = [gesture translationInView:gesture.view];
+    CGPoint translation = [gesture translationInView:gesture.view.superview];
     resizeButton.frame = CGRectOffset(resizeButton.frame, translation.x, translation.y);
+    self.center = CGPointMake(self.center.x + translation.x / 2, self.center.y + translation.y / 2);
     [self setNeedsDisplay];
-    [gesture setTranslation:CGPointZero inView:gesture.view];
+    [gesture setTranslation:CGPointZero inView:gesture.view.superview];
 }
 
 - (void) moveButtonPanned: (UIPanGestureRecognizer* ) gesture {
-    CGPoint translation = [gesture translationInView:gesture.view];
+    CGPoint translation = [gesture translationInView:gesture.view.superview];
     self.frame = CGRectOffset(self.frame, translation.x, translation.y);
     [self setNeedsDisplay];
-    [gesture setTranslation:CGPointZero inView:gesture.view];
+    [gesture setTranslation:CGPointZero inView:gesture.view.superview];
 }
 
 #pragma mark - Convenience methods

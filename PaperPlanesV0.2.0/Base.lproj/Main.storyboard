@@ -16,10 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" ambiguous="YES" misplaced="YES" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="MG2-EZ-iBC" userLabel="Image Scroll View">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" ambiguous="YES" misplaced="YES" bounces="NO" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="MG2-EZ-iBC" userLabel="Image Scroll View">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                                 <subviews>
-                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="IMG_2602.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ti2-Iv-j7X">
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="IMG_2602.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ti2-Iv-j7X" customClass="PPFeedbackImageView">
                                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -216,6 +216,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="MG2-EZ-iBC" firstAttribute="bottom" secondItem="Zdy-ft-VoQ" secondAttribute="bottom" id="1A8-u2-kC0"/>
                             <constraint firstItem="9nT-b2-373" firstAttribute="top" secondItem="Zdy-ft-VoQ" secondAttribute="bottom" id="Ejg-yU-VQf" userLabel="tableContainer to postComment"/>
                             <constraint firstItem="9nT-b2-373" firstAttribute="top" secondItem="MG2-EZ-iBC" secondAttribute="bottom" id="HAi-MV-SeO" userLabel="scroll to postComment"/>
                             <constraint firstItem="Zdy-ft-VoQ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="HGU-h3-PpV" userLabel="tableContainer to leading"/>
@@ -228,6 +229,11 @@
                             <constraint firstItem="MG2-EZ-iBC" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="qQA-gQ-enQ" userLabel="scroll to top"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="1A8-u2-kC0"/>
+                            </mask>
+                        </variation>
                         <variation key="heightClass=regular">
                             <mask key="subviews">
                                 <include reference="9nT-b2-373"/>
@@ -236,10 +242,14 @@
                                 <include reference="ebC-tw-rt5"/>
                                 <include reference="jbz-dx-DYL"/>
                                 <include reference="qQA-gQ-enQ"/>
-                                <include reference="HAi-MV-SeO"/>
                                 <include reference="TJI-nN-ziv"/>
                                 <include reference="TMO-Z8-YdR"/>
                                 <include reference="LEf-T9-Len"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="1A8-u2-kC0"/>
                             </mask>
                         </variation>
                     </view>
