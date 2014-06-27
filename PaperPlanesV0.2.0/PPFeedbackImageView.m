@@ -9,23 +9,39 @@
 #import "PPFeedbackImageView.h"
 #import "PPBoxView.h"
 
+@interface PPFeedbackImageView () {
+    CGAffineTransform invertedTransform;
+}
+
+@end
+
 @implementation PPFeedbackImageView
 
 - (void) setTransform:(CGAffineTransform)transform {
     [super setTransform:transform];
     
-    // We want the control buttons on boxViews to stay the same size when we zoom in
-    CGAffineTransform invertedTransform = CGAffineTransformInvert(transform);
+    invertedTransform = CGAffineTransformInvert(transform);
     for (UIView *view in self.subviews) {
         if ([view isKindOfClass:[PPBoxView class]]) {
-            PPBoxView* boxView = (PPBoxView*) view;
-            for (UIView *control in boxView.controls) {
-                [control setTransform:invertedTransform];
-//                NSLog(@"Inverting control transform");
-            }
-            [boxView setNeedsDisplay];
+            [self resizeBoxViewControls:(PPBoxView*) view];
         }
     }
+}
+
+- (void) addSubview:(UIView *)view {
+    [super addSubview:view];
+    
+    if ([view isKindOfClass:[PPBoxView class]]) {
+        [self resizeBoxViewControls:(PPBoxView*) view];
+    }
+}
+
+// We want the control buttons on boxViews to stay the same size when we zoom in
+- (void) resizeBoxViewControls:(PPBoxView*) boxView {
+    for (UIView *control in boxView.controls) {
+        [control setTransform:invertedTransform];
+    }
+    [boxView setNeedsDisplay];
 }
 
 @end

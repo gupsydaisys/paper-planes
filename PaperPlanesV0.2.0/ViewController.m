@@ -377,7 +377,9 @@
     [UIView animateWithDuration:animationDuration animations:^{
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
-        [self.imageScrollView zoomToRect:selectedBox.frame animated:YES];
+        if (selectedBox) {
+            [self.imageScrollView zoomToRect:selectedBox.frame animated:YES];
+        }
     }];
     [UIView setAnimationDidStopSelector:@selector(animationForKeyboardShowDidStop:finished:context:)];
 }
