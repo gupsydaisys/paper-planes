@@ -17,4 +17,13 @@
 @property (nonatomic, strong) UIPanGestureRecognizer* resizeButtonPanGestureRecognizer;
 @property (nonatomic, strong) NSMutableArray* controls;
 
+@property (nonatomic, assign) id delegate;
+
 @end
+
+@protocol BoxViewDelegate
+
+- (void) boxViewWasDeleted:(PPBoxView*) boxView;
+
+@end
+

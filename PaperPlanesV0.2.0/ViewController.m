@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "PPBoxView.h"
 #import "UIView+Util.h"
 #import "UIScrollView+Util.h"
 
@@ -436,6 +435,7 @@
         touchedBox = [PPBoxView centeredAtPoint:touchPoint];
         [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:touchedBox.moveButtonPanGestureRecognizer];
         [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:touchedBox.resizeButtonPanGestureRecognizer];
+        touchedBox.delegate = self;
         [gesture.view addSubview:touchedBox];
     }
 
@@ -497,6 +497,12 @@
 - (void) didPostComment {
     self.textView.text = @"";
     [self.view endEditing:YES];
+}
+
+- (void) boxViewWasDeleted:(PPBoxView *)boxView {
+    if (selectedBox == boxView) {
+        selectedBox = nil;
+    }
 }
 
 @end
