@@ -46,8 +46,9 @@
 enum commentStateTypes
 {
     CLOSED = 0,
-    HALF = 1,
-    FULL = 2,
+    ONE = 1,
+    HALF = 2,
+    FULL = 3,
 } typedef CommentState;
 
 @end

@@ -29,6 +29,7 @@
 /* Table Comments Constants */
 #define TABLE_HANDLE_HEIGHT 25.0f
 #define TABLE_CONTAINER_HALF_HEIGHT 202.0f
+#define TABLE_ROW_HEIGHT 146.0f
 
 /* Other Constants */
 #define HEADING_HEIGHT 20.0f
@@ -47,7 +48,7 @@
     
     BOOL isKeyboardUp;
 
-    UIView *heightTEMP;
+//    UIView *heightTEMP;
     
     BOOL scrollViewDidLayoutOnce;
 }
@@ -67,16 +68,15 @@
     comments = [NSMutableArray new];
     tableHandleState = CLOSED;
     isKeyboardUp = NO;
-    [self showComments:NO];
-    
-    
+    [self showComments:NO state:CLOSED];
+
     /* Temporarliy there for debugging */
-    self.tableContainer.layer.borderWidth = 3;
-    self.tableContainer.layer.borderColor = [[UIColor greenColor] CGColor];
+//    self.tableContainer.layer.borderWidth = 3;
+//    self.tableContainer.layer.borderColor = [[UIColor greenColor] CGColor];
     
-    heightTEMP = [UIView new];
-    [self.mainView addSubview:heightTEMP];
-    heightTEMP.layer.backgroundColor = [UIColor redColor].CGColor;
+//    heightTEMP = [UIView new];
+//    [self.mainView addSubview:heightTEMP];
+//    heightTEMP.layer.backgroundColor = [UIColor redColor].CGColor;
 //    self.postCommentContainer.layer.borderWidth = 3;
 //    self.postCommentContainer.layer.borderColor = [[UIColor redColor] CGColor];
 }
@@ -293,6 +293,7 @@
 
 }
 
+#pragma mark - Table Resize/Update Methods
 - (void) updateTableContainerFrame:(CommentState) curr {
     switch (curr) {
         case CLOSED:
@@ -300,6 +301,13 @@
                                        :self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - TABLE_HANDLE_HEIGHT
                                        :self.tableContainer.frame.size.width
                                        :TABLE_HANDLE_HEIGHT];
+        break;
+
+        case ONE:
+            [self updateTableContainerFrame:self.tableContainer.frame.origin.x
+                                           :self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - TABLE_HANDLE_HEIGHT - TABLE_ROW_HEIGHT
+                                           :self.tableContainer.frame.size.width
+                                           :TABLE_HANDLE_HEIGHT + TABLE_ROW_HEIGHT];
         break;
 
         case FULL:
@@ -344,6 +352,8 @@
         tableHandleState = FULL;
     } else if (self.tableContainer.frame.size.height == TABLE_HANDLE_HEIGHT) {
         tableHandleState = CLOSED;
+    } else if (self.tableContainer.frame.size.height == TABLE_HANDLE_HEIGHT + TABLE_ROW_HEIGHT) {
+        tableHandleState = ONE;
     } else {
         tableHandleState = HALF;
     }
@@ -373,7 +383,7 @@
 - (void) animationForKeyboardShowDidStop:(NSString *) animationID finished:(NSNumber *) finished context:(void *) context {
     if (finished) {
         //if half & closed -> closed
-        if (tableHandleState == HALF) {
+        if (tableHandleState == HALF || tableHandleState == ONE) {
             [self updateTableContainerFrame:CLOSED];
         }
 
@@ -391,6 +401,7 @@
     //call updateTableContainerFrame ??
     
     //if half and full -> half
+    //if one -> one
     //if closed -> closed
     
     float animationDuration = [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
@@ -424,7 +435,6 @@
 }
 
 - (UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *) indexPath {
-    
     HSCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
     NSString *comment = comments[indexPath.row];
 
@@ -470,14 +480,14 @@
     [box marchingAnts:FALSE];
     [box showControls:FALSE];
     selectedBox = nil;
-    [self showComments:NO];
+    [self showComments:NO state:-1];
 }
 
 - (void) select: (PPBoxView*) box {
     [box marchingAnts:TRUE];
     [box showControls:TRUE];
     selectedBox = box;
-    [self showComments:YES];
+    [self showComments:YES state:CLOSED];
 }
 
 - (void) selectBox: (PPBoxView*) box {
@@ -493,12 +503,18 @@
     return nil;
 }
 
-- (void) showComments:(BOOL) shouldShow {
+- (void) showComments:(BOOL) shouldShow state:(CommentState) curr {
     if (shouldShow) {
-        [self setOpenedState:CLOSED animated:ANIMATE];
         self.textView.text = @"";
-        self.tableContainer.hidden = NO;
         self.postCommentContainer.hidden = NO;
+
+        if (comments.count != 0) {
+            [self setOpenedState:curr animated:NO];
+            self.tableContainer.hidden = NO;
+        } else {
+            self.tableContainer.hidden = YES;
+        }
+
     } else {
         self.tableContainer.hidden = YES;
         self.postCommentContainer.hidden = YES;
@@ -506,21 +522,26 @@
 }
 
 #pragma mark - Scroll view delegate
-- (UIView *) viewForZoomingInScrollView:(UIScrollView *)scrollView {
+- (UIView *) viewForZoomingInScrollView:(UIScrollView *) scrollView {
     return self.imageView;
 }
 
 
 #pragma mark - Post Comment Methods
-- (IBAction)tapPostComment:(id)sender {
+- (IBAction) tapPostComment:(id) sender {
     [comments addObject:self.textView.text];
-    [self.tableView reloadData];
-    
     [self didPostComment];
 }
 
 - (void) didPostComment {
-    self.textView.text = @"";
+    
+    // First reolad is so that it doesn't error on comments.count - 1
+    [self.tableView reloadData];
+    NSIndexPath *index = [NSIndexPath indexPathForItem:(comments.count - 1) inSection:0];
+    [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+//    [self.tableView reloadData];
+
+    [self showComments:TRUE state:ONE];
     [self.view endEditing:YES];
 }
 

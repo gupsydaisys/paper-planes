@@ -228,11 +228,6 @@
                             <constraint firstItem="MG2-EZ-iBC" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="qQA-gQ-enQ" userLabel="scroll to top"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="1A8-u2-kC0"/>
-                            </mask>
-                        </variation>
                         <variation key="heightClass=regular">
                             <mask key="subviews">
                                 <include reference="9nT-b2-373"/>
