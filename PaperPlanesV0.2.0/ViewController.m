@@ -67,7 +67,7 @@
     comments = [NSMutableArray new];
     tableHandleState = CLOSED;
     isKeyboardUp = NO;
-    
+    [self showComments:NO];
     
     
     /* Temporarliy there for debugging */
@@ -415,21 +415,25 @@
 
 #pragma mark - Table View Data Load
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger) numberOfSectionsInTableView:(UITableView *) tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger) tableView:(UITableView *) tableView numberOfRowsInSection:(NSInteger) section {
     return comments.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *) indexPath {
     
     HSCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
     NSString *comment = comments[indexPath.row];
 
     cell.content.text = comment;
+    
+    // NEXT TIME change this so that when you access cell it goes into the cell
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+
     return cell;
 }
 
@@ -448,7 +452,7 @@
     [self selectBox:touchedBox];
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *) gestureRecognizer shouldReceiveTouch:(UITouch *) touch {
     if ([touch.view isKindOfClass:[PPBoxView class]] || touch.view == self.imageView) {
         return YES;
     }
@@ -466,12 +470,14 @@
     [box marchingAnts:FALSE];
     [box showControls:FALSE];
     selectedBox = nil;
+    [self showComments:NO];
 }
 
 - (void) select: (PPBoxView*) box {
     [box marchingAnts:TRUE];
     [box showControls:TRUE];
     selectedBox = box;
+    [self showComments:YES];
 }
 
 - (void) selectBox: (PPBoxView*) box {
@@ -479,12 +485,24 @@
     [self select:box];
 }
 
-- (PPBoxView*) getTouchedBox: (UIGestureRecognizer*) gesture {
+- (PPBoxView*) getTouchedBox:(UIGestureRecognizer*) gesture {
     UIView *hitView = [self getHitView:gesture];
     if ([hitView isKindOfClass:[PPBoxView class]]) {
         return (PPBoxView*)hitView;
     }
     return nil;
+}
+
+- (void) showComments:(BOOL) shouldShow {
+    if (shouldShow) {
+        [self setOpenedState:CLOSED animated:ANIMATE];
+        self.textView.text = @"";
+        self.tableContainer.hidden = NO;
+        self.postCommentContainer.hidden = NO;
+    } else {
+        self.tableContainer.hidden = YES;
+        self.postCommentContainer.hidden = YES;
+    }
 }
 
 #pragma mark - Scroll view delegate

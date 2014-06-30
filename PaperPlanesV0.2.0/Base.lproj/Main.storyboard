@@ -172,7 +172,6 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </view>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2d ago" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSH-Sl-GxX">
                                                             <rect key="frame" x="237" y="3" width="43" height="16"/>
@@ -181,7 +180,7 @@
                                                         </label>
                                                     </subviews>
                                                 </tableViewCellContentView>
-                                                <color key="backgroundColor" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <connections>
                                                     <outlet property="content" destination="IdH-DH-9iw" id="sLj-WE-2Pi"/>
                                                     <outlet property="creator" destination="f2f-8R-7hq" id="bth-v2-q7l"/>
@@ -196,7 +195,7 @@
                                         </connections>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="Uze-VR-py1" firstAttribute="top" secondItem="hdq-26-8O3" secondAttribute="bottom" id="2Z5-LM-Bwd" userLabel="tableView trailing"/>
                                     <constraint firstAttribute="width" constant="480" id="De6-zf-J9z" userLabel="tableContainer width"/>
