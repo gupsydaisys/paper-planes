@@ -42,8 +42,6 @@
 @interface ViewController () {
     PPBoxViewController* selectedBox;
 
-    NSMutableArray* comments;
-    
     CommentState tableHandleState;
     CGPoint startPos;
     CGPoint minPos;
@@ -163,8 +161,6 @@
 
 #pragma mark - Comments Table Handle Methods
 - (void) initCommentDrawer {
-    comments = [NSMutableArray new];
-    
     tableHandleState = CLOSED;
     isKeyboardUp = NO;
     [self showComments:NO state:-1];
@@ -268,7 +264,7 @@
 
 #pragma mark - Table Resize/Update Methods
 - (void) updateTableContainerFrame:(CommentState) curr {
-    float cumulativeCommentHeight = (float) comments.count * TABLE_ROW_HEIGHT + TABLE_HANDLE_HEIGHT;
+    float cumulativeCommentHeight = (float) selectedBox.comments.count * TABLE_ROW_HEIGHT + TABLE_HANDLE_HEIGHT;
     float fullHeight = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT;
     
     switch (curr) {
@@ -413,12 +409,12 @@
 }
 
 - (NSInteger) tableView:(UITableView *) tableView numberOfRowsInSection:(NSInteger) section {
-    return comments.count;
+    return selectedBox.comments.count;
 }
 
 - (UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *) indexPath {
     HSCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
-    NSString *comment = comments[indexPath.row];
+    NSString *comment = selectedBox.comments[indexPath.row];
 
     cell.content.text = comment;
     
@@ -459,7 +455,6 @@
     box.view = [PPBoxView centeredAtPoint:touchPoint];
     [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:box.view.moveButtonPanGestureRecognizer];
     [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:box.view.resizeButtonPanGestureRecognizer];
-//    box.view.delegate = self;
     box.delegate = self;
     [box makeSelection:true];
     [gesture.view addSubview:box.view];
@@ -479,7 +474,7 @@
         self.textView.text = @"";
         self.postCommentContainer.hidden = NO;
 
-        if (comments.count != 0) {
+        if (selectedBox.comments.count != 0) {
             [self setOpenedState:curr animated:NO];
             self.tableContainer.hidden = NO;
         } else {
@@ -500,7 +495,7 @@
 
 #pragma mark - Post Comment Methods
 - (IBAction) tapPostComment:(id) sender {
-    [comments addObject:self.textView.text];
+    [selectedBox.comments addObject:self.textView.text];
     [self didPostComment];
 }
 
@@ -508,9 +503,8 @@
     
     // First reolad is so that it doesn't error on comments.count - 1
     [self.tableView reloadData];
-    NSIndexPath *index = [NSIndexPath indexPathForItem:(comments.count - 1) inSection:0];
+    NSIndexPath *index = [NSIndexPath indexPathForItem:(selectedBox.comments.count - 1) inSection:0];
     [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-//    [self.tableView reloadData];
 
     [self showComments:TRUE state:ONE];
     [self.view endEditing:YES];
@@ -527,8 +521,9 @@
     if (selectionState) {
         [selectedBox makeSelection:false];
         selectedBox = box;
+        [self.tableView reloadData];
         [self showComments:YES state:CLOSED];
-    } else if (selectedBox == box) {
+    } else if (selectionState == false && selectedBox == box) {
         selectedBox = nil;
         [self showComments:NO state:-1];
     }

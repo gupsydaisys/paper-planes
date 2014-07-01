@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) PPBoxView *view;
 @property (nonatomic, assign) id delegate;
+@property (nonatomic, strong) NSMutableArray* comments;
 
 @end
 

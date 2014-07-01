@@ -39,6 +39,7 @@
     boxTapGestureRecognizer.delegate = self;
     [self.view addGestureRecognizer:boxTapGestureRecognizer];
     self.view.delegate = self;
+    self.comments = [[NSMutableArray alloc] init];
 }
 
 - (BOOL) gestureRecognizer:(UIGestureRecognizer *) gestureRecognizer shouldReceiveTouch:(UITouch *) touch {
