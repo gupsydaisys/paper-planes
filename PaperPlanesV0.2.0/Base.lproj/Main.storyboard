@@ -16,22 +16,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" ambiguous="YES" misplaced="YES" bounces="NO" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="MG2-EZ-iBC" userLabel="Image Scroll View">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" misplaced="YES" bounces="NO" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="MG2-EZ-iBC" userLabel="Image Scroll View">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                                 <subviews>
-                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="IMG_2602.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ti2-Iv-j7X" customClass="PPFeedbackImageView">
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="IMG_2602.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ti2-Iv-j7X" customClass="PPFeedbackImageView">
                                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="480" id="63e-j8-tCI"/>
                                             <constraint firstAttribute="width" constant="320" id="isT-9u-13e"/>
                                         </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="63e-j8-tCI"/>
-                                                <exclude reference="isT-9u-13e"/>
-                                            </mask>
-                                        </variation>
                                         <variation key="heightClass=compact" fixedFrame="YES">
                                             <rect key="frame" x="-715" y="0.0" width="3264" height="2448"/>
                                         </variation>
@@ -52,14 +46,6 @@
                                     <constraint firstItem="Ti2-Iv-j7X" firstAttribute="top" secondItem="MG2-EZ-iBC" secondAttribute="top" constant="-22" id="aR5-sv-awe"/>
                                     <constraint firstAttribute="trailing" secondItem="Ti2-Iv-j7X" secondAttribute="trailing" id="k7f-MV-2X7"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="ALJ-3v-eRc"/>
-                                        <exclude reference="FC6-V8-BWq"/>
-                                        <exclude reference="aR5-sv-awe"/>
-                                        <exclude reference="k7f-MV-2X7"/>
-                                    </mask>
-                                </variation>
                                 <variation key="heightClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                                 </variation>
@@ -198,7 +184,6 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="Uze-VR-py1" firstAttribute="top" secondItem="hdq-26-8O3" secondAttribute="bottom" id="2Z5-LM-Bwd" userLabel="tableView trailing"/>
-                                    <constraint firstAttribute="width" constant="480" id="De6-zf-J9z" userLabel="tableContainer width"/>
                                     <constraint firstAttribute="trailing" secondItem="Uze-VR-py1" secondAttribute="trailing" id="K3k-hK-lbP" userLabel="tableView to tableHandle"/>
                                     <constraint firstItem="hdq-26-8O3" firstAttribute="leading" secondItem="Zdy-ft-VoQ" secondAttribute="leading" id="NJl-pY-Jvc" userLabel="tableHandle to leading"/>
                                     <constraint firstAttribute="trailing" secondItem="hdq-26-8O3" secondAttribute="trailing" id="Qn3-Bk-f2E" userLabel="tableHandle to trailing"/>
@@ -206,6 +191,7 @@
                                     <constraint firstItem="hdq-26-8O3" firstAttribute="top" secondItem="Zdy-ft-VoQ" secondAttribute="top" id="kXF-Hg-mjw" userLabel="tableHandle to top"/>
                                     <constraint firstAttribute="height" constant="25" id="kg3-eB-f1Y" userLabel="tableContainer height"/>
                                     <constraint firstItem="Uze-VR-py1" firstAttribute="leading" secondItem="Zdy-ft-VoQ" secondAttribute="leading" id="mTv-fJ-L0G" userLabel="tableView leading"/>
+                                    <constraint firstAttribute="width" constant="480" id="w1K-wr-10s" userLabel="tableContainer width"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ndI-Zr-fon" userLabel="Heading View">
