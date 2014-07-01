@@ -520,6 +520,7 @@
         touchedBox = [PPBoxView centeredAtPoint:touchPoint];
         [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:touchedBox.moveButtonPanGestureRecognizer];
         [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:touchedBox.resizeButtonPanGestureRecognizer];
+        touchedBox.delegate = self;
         [gesture.view addSubview:touchedBox];
     }
 
@@ -607,6 +608,12 @@
 
     [self showComments:TRUE state:ONE];
     [self.view endEditing:YES];
+}
+
+- (void) boxViewWasDeleted:(PPBoxView *)boxView {
+    if (selectedBox == boxView) {
+        selectedBox = nil;
+    }
 }
 
 @end

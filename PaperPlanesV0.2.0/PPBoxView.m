@@ -25,6 +25,8 @@
 
 @implementation PPBoxView
 
+@synthesize delegate;
+
 #pragma mark - Initialization
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -153,6 +155,7 @@
 - (void) deleteButtonTapped {
     NSLog(@"DELETE");
     [self removeFromSuperview];
+    [delegate boxViewWasDeleted:self];
 }
 
 - (void) resizeButtonPanned: (UIPanGestureRecognizer *) gesture {

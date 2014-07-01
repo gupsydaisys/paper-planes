@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "HPGrowingTextView.h"
+#import "PPBoxView.h"
 
-@interface ViewController : UIViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface ViewController : UIViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate, BoxViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 /* Main View */
 @property (weak, nonatomic) IBOutlet UIView *mainView;
