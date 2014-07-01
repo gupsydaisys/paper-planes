@@ -320,12 +320,12 @@
 
 #pragma mark - Table Resize/Update Methods
 - (void) updateTableContainerFrame:(CommentState) curr {
-    NSLog(@"%u STATE", curr);
+//    NSLog(@"%u STATE", curr);
     // CLEAN UP variables
 
     float cumulativeCommentHeight = (float) comments.count * TABLE_ROW_HEIGHT + TABLE_HANDLE_HEIGHT;
     float fullHeight = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT;
-    NSLog(@"%f CUMM", cumulativeCommentHeight);
+//    NSLog(@"%f CUMM", cumulativeCommentHeight);
 
     switch (curr) {
         case CLOSED:
@@ -499,7 +499,6 @@
 //    if (indexPath.section == 0 && indexPath.row == 0) {
 //        
 //        if (self.textView.contentSize.height >= 44) {
-//            float height = [self heightForTextView:self.textView containingString:self.model];
 //            return height + 8; // a little extra padding is needed
 //        }
 //        else {
@@ -509,7 +508,7 @@
 //    }
 //    else {
         return self.tableView.rowHeight;
-    }
+//    }
 }
 
 #pragma mark - Gesture recognizer delegate

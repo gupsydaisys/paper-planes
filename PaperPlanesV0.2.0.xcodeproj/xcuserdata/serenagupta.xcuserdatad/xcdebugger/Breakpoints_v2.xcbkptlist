@@ -190,13 +190,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PaperPlanesV0.2.0/ViewController.m"
-            timestampString = "425866129.323285"
+            timestampString = "425929364.484099"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "541"
-            endingLineNumber = "541"
-            landmarkName = "-selectBox:"
-            landmarkType = "5">
+            startingLineNumber = "540"
+            endingLineNumber = "540"
+            landmarkName = "@implementation ViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
