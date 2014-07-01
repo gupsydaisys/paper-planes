@@ -209,7 +209,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ndI-Zr-fon" userLabel="Heading View">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="20"/>
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="25"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </view>
                         </subviews>

@@ -11,6 +11,7 @@
 #import "PPBoxView.h"
 #import "UIView+Util.h"
 #import "UIScrollView+Util.h"
+#import "NSString+FontAwesome.h"
 
 /* Post Comment Constants */
 #define POST_COMMENT_CONTAINTER_WIDTH 480.0f
@@ -28,11 +29,12 @@
 
 /* Table Comments Constants */
 #define TABLE_HANDLE_HEIGHT 25.0f
+#define TABLE_HANDLE_WIDTH 480.0f
 #define TABLE_CONTAINER_HALF_HEIGHT 202.0f
 #define TABLE_ROW_HEIGHT 146.0f
 
 /* Other Constants */
-#define HEADING_HEIGHT 20.0f
+#define HEADING_HEIGHT 25.0f
 #define ANIMATE 1
 #define ANIMATION_DURATION 0.2f
 
@@ -61,24 +63,9 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     [self initTextView];
+    [self initCommentDrawer];
     [self addObservers];
     [self addGestureRecognizers];
-    
-    /* Comment Drawer initalization Stuff */
-    comments = [NSMutableArray new];
-    tableHandleState = CLOSED;
-    isKeyboardUp = NO;
-    [self showComments:NO state:CLOSED];
-
-    /* Temporarliy there for debugging */
-//    self.tableContainer.layer.borderWidth = 3;
-//    self.tableContainer.layer.borderColor = [[UIColor greenColor] CGColor];
-    
-//    heightTEMP = [UIView new];
-//    [self.mainView addSubview:heightTEMP];
-//    heightTEMP.layer.backgroundColor = [UIColor redColor].CGColor;
-//    self.postCommentContainer.layer.borderWidth = 3;
-//    self.postCommentContainer.layer.borderColor = [[UIColor redColor] CGColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -157,6 +144,43 @@
 }
 
 #pragma mark - Comments Table Handle Methods
+- (void) initCommentDrawer {
+    /* Comment Drawer initalization Stuff */
+    comments = [NSMutableArray new];
+    
+    tableHandleState = CLOSED;
+    isKeyboardUp = NO;
+//    [comments addObject:@"hello"];
+//    [self showComments:YES state:CLOSED];
+        [self showComments:NO state:-1];
+    
+    
+    // NEXT TIME rever to old
+    UILabel *barRight = [[UILabel alloc] initWithFrame:(CGRect){0, 0, 20.0f, 20.0f}];
+    barRight.center = CGPointMake(TABLE_HANDLE_WIDTH / 2 - 70.0f, TABLE_HANDLE_HEIGHT / 2);
+    barRight.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18.0f];
+    barRight.text = [NSString fontAwesomeIconStringForEnum:FABars];
+    barRight.textColor = [UIColor whiteColor];
+    [self.tableHandle addSubview:barRight];
+    
+    UILabel *barLeft = [[UILabel alloc] initWithFrame:(CGRect){0, 0, 20.0f, 20.0f}];
+    barLeft.center = CGPointMake(TABLE_HANDLE_WIDTH / 2 - 84.0f, TABLE_HANDLE_HEIGHT / 2);
+    barLeft.font = [UIFont fontWithName:kFontAwesomeFamilyName size:18.0f];
+    barLeft.text = [NSString fontAwesomeIconStringForEnum:FABars];
+    barLeft.textColor = [UIColor whiteColor];
+    [self.tableHandle addSubview:barLeft];
+    
+    
+    /* Temporarliy there for debugging */
+    //    self.tableHandle.layer.borderWidth = 3;
+    //    self.tableHandle.layer.borderColor = [[UIColor greenColor] CGColor];
+    
+    //    heightTEMP = [UIView new];
+    //    [self.mainView addSubview:heightTEMP];
+    //    heightTEMP.layer.backgroundColor = [UIColor redColor].CGColor;
+    //    self.postCommentContainer.layer.borderWidth = 3;
+    //    self.postCommentContainer.layer.borderColor = [[UIColor redColor] CGColor];
+}
 
 - (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
@@ -241,10 +265,11 @@
     if (anim) {
         self.dragTableHandleRecognizer.enabled = NO;
         [UIView commitAnimations];
-        
-    } else {
-        NSLog(@"Changing");
     }
+    
+//    } else {
+//        NSLog(@"Changing");
+//    }
 }
 
 - (void) animationForTableHandleDidStop:(NSString *) animationID finished:(NSNumber *) finished context:(void *) context {
@@ -295,34 +320,55 @@
 
 #pragma mark - Table Resize/Update Methods
 - (void) updateTableContainerFrame:(CommentState) curr {
+    NSLog(@"%u STATE", curr);
+    // CLEAN UP variables
+
+    float cumulativeCommentHeight = (float) comments.count * TABLE_ROW_HEIGHT + TABLE_HANDLE_HEIGHT;
+    float fullHeight = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT;
+    NSLog(@"%f CUMM", cumulativeCommentHeight);
+
     switch (curr) {
         case CLOSED:
-        [self updateTableContainerFrame:self.tableContainer.frame.origin.x
+            [self updateTableContainerFrame:self.tableContainer.frame.origin.x
                                        :self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - TABLE_HANDLE_HEIGHT
                                        :self.tableContainer.frame.size.width
                                        :TABLE_HANDLE_HEIGHT];
-        break;
+            break;
 
         case ONE:
             [self updateTableContainerFrame:self.tableContainer.frame.origin.x
                                            :self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - TABLE_HANDLE_HEIGHT - TABLE_ROW_HEIGHT
                                            :self.tableContainer.frame.size.width
                                            :TABLE_HANDLE_HEIGHT + TABLE_ROW_HEIGHT];
-        break;
+            break;
 
         case FULL:
-        [self updateTableContainerFrame:self.tableContainer.frame.origin.x
-                                       :HEADING_HEIGHT
-                                       :self.tableContainer.frame.size.width
-                                       :self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT];
+            if (cumulativeCommentHeight < fullHeight) {
+                [self updateTableContainerFrame:self.tableContainer.frame.origin.x
+                                               :self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - cumulativeCommentHeight
+                                               :self.tableContainer.frame.size.width
+                                               :cumulativeCommentHeight];
+            } else {
+                [self updateTableContainerFrame:self.tableContainer.frame.origin.x
+                                               :HEADING_HEIGHT
+                                               :self.tableContainer.frame.size.width
+                                               :fullHeight];
+            }
         break;
 
         /* HALF */
         default:
-        [self updateTableContainerFrame:self.tableContainer.frame.origin.x
-                                       :self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - TABLE_CONTAINER_HALF_HEIGHT
-                                       :self.tableContainer.frame.size.width
-                                       :TABLE_CONTAINER_HALF_HEIGHT];
+            if (cumulativeCommentHeight < TABLE_CONTAINER_HALF_HEIGHT) {
+                [self updateTableContainerFrame:self.tableContainer.frame.origin.x
+                                               :self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - cumulativeCommentHeight
+                                               :self.tableContainer.frame.size.width
+                                               :cumulativeCommentHeight];
+            } else {
+                [self updateTableContainerFrame:self.tableContainer.frame.origin.x
+                                               :self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - TABLE_CONTAINER_HALF_HEIGHT
+                                               :self.tableContainer.frame.size.width
+                                               :TABLE_CONTAINER_HALF_HEIGHT];
+            }
         break;
     }
 
@@ -445,6 +491,25 @@
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 
     return cell;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    
+//    if (indexPath.section == 0 && indexPath.row == 0) {
+//        
+//        if (self.textView.contentSize.height >= 44) {
+//            float height = [self heightForTextView:self.textView containingString:self.model];
+//            return height + 8; // a little extra padding is needed
+//        }
+//        else {
+//            return self.tableView.rowHeight;
+//        }
+//        
+//    }
+//    else {
+        return self.tableView.rowHeight;
+    }
 }
 
 #pragma mark - Gesture recognizer delegate
