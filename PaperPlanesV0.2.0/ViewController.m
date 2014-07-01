@@ -527,8 +527,10 @@
     if (selectionState) {
         [selectedBox makeSelection:false];
         selectedBox = box;
+        [self showComments:YES state:CLOSED];
     } else if (selectedBox == box) {
         selectedBox = nil;
+        [self showComments:NO state:-1];
     }
 }
 
