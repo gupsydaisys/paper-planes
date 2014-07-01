@@ -190,13 +190,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PaperPlanesV0.2.0/ViewController.m"
-            timestampString = "425929364.484099"
+            timestampString = "425932377.995098"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "540"
-            endingLineNumber = "540"
-            landmarkName = "@implementation ViewController"
-            landmarkType = "3">
+            startingLineNumber = "545"
+            endingLineNumber = "545"
+            landmarkName = "-getHitView:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -206,11 +206,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PaperPlanesV0.2.0/ViewController.m"
-            timestampString = "425866129.323285"
+            timestampString = "425931274.538958"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "324"
-            endingLineNumber = "324"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
             landmarkName = "-updateTableContainerFrame:"
             landmarkType = "5">
          </BreakpointContent>

@@ -50,7 +50,7 @@
     
     BOOL isKeyboardUp;
 
-//    UIView *heightTEMP;
+    UIView *heightTEMP;
     
     BOOL scrollViewDidLayoutOnce;
 }
@@ -175,11 +175,11 @@
     //    self.tableHandle.layer.borderWidth = 3;
     //    self.tableHandle.layer.borderColor = [[UIColor greenColor] CGColor];
     
-    //    heightTEMP = [UIView new];
-    //    [self.mainView addSubview:heightTEMP];
-    //    heightTEMP.layer.backgroundColor = [UIColor redColor].CGColor;
-    //    self.postCommentContainer.layer.borderWidth = 3;
-    //    self.postCommentContainer.layer.borderColor = [[UIColor redColor] CGColor];
+    heightTEMP = [UIView new];
+    [self.mainView addSubview:heightTEMP];
+    heightTEMP.layer.backgroundColor = [UIColor redColor].CGColor;
+//    self.postCommentContainer.layer.borderWidth = 3;
+//    self.postCommentContainer.layer.borderColor = [[UIColor redColor] CGColor];
 }
 
 - (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
@@ -188,13 +188,13 @@
 
 - (IBAction) dragTableHandle:(UIPanGestureRecognizer *) sender {
     // NEXT STEP call correct updateBLAHCenter to get what each should actually be
-    CGPoint closedCenter = CGPointMake(160, 422.5);
-    CGPoint halfCenter = CGPointMake(160, 334);
-    CGPoint fullCenter = CGPointMake(160, 227.5);
+//    CGPoint closedCenter = CGPointMake(160, 422.5);
+//    CGPoint halfCenter = CGPointMake(160, 334);
+//    CGPoint fullCenter = CGPointMake(160, 227.5);
 
     if ([sender state] == UIGestureRecognizerStateBegan) {
-        startPos = self.tableContainer.center;
-        [self setBoundsDragTableHandle];
+        startPos = self.tableContainer.frame.origin;
+//        [self setBoundsDragTableHandle];
 
     } else if ([sender state] == UIGestureRecognizerStateChanged) {
         
@@ -203,23 +203,26 @@
         CGPoint translate = [sender translationInView:self.mainView];
         CGPoint newPos = CGPointMake(startPos.x, startPos.y + translate.y);
         
-        if (newPos.y < minPos.y) {
-            newPos.y = minPos.y;
-            translate = CGPointMake(0, newPos.y - startPos.y);
-        }
+//        if (newPos.y < minPos.y) {
+//            newPos.y = minPos.y;
+//            translate = CGPointMake(0, newPos.y - startPos.y);
+//        }
+//        
+//        if (newPos.y > maxPos.y) {
+//            newPos.y = maxPos.y;
+//            translate = CGPointMake(0, newPos.y - startPos.y);
+//        }
         
-        if (newPos.y > maxPos.y) {
-            newPos.y = maxPos.y;
-            translate = CGPointMake(0, newPos.y - startPos.y);
-        }
-        
-        [sender setTranslation:translate inView:self.mainView];
+//        [sender setTranslation:translate inView:self.mainView];
 //        self.tableContainer.center = newPos;
         
         float maxHeight = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT;
         float minHeight = TABLE_HANDLE_HEIGHT;
-        float newOriginY = newPos.y - self.tableContainer.frame.size.height / 2;
-        float newHeight = self.postCommentContainer.frame.origin.y - newOriginY;
+
+//        float newOriginY = newPos.y - self.tableContainer.frame.size.height / 2;
+//        float newOriginY = newPos.y - self.tableContainerHeight.constant / 2;
+//        float newHeight = self.postCommentContainer.frame.origin.y - newOriginY;
+        float newHeight = self.postCommentContainer.frame.origin.y - newPos.y;
 //        float newHeight = self.postCommentContainer.frame.origin.y - self.tableContainer.frame.origin.y;
         if (newHeight > maxHeight) {
             newHeight = maxHeight;
@@ -429,15 +432,17 @@
 - (void) animationForKeyboardShowDidStop:(NSString *) animationID finished:(NSNumber *) finished context:(void *) context {
     if (finished) {
         //if half & closed -> closed
-        if (tableHandleState == HALF || tableHandleState == ONE) {
+        if (tableHandleState == FULL) {
+            [self updateTableContainerFrame:FULL];
+        } else {
             [self updateTableContainerFrame:CLOSED];
         }
 
         // so that FULL mode is corrected
-        [self updateTableContainerFrame:self.tableContainer.frame.origin.x
-                                       :self.tableContainer.frame.origin.y
-                                       :self.tableContainer.frame.size.width
-                                       :self.tableContainer.frame.size.height];
+//        [self updateTableContainerFrame:self.tableContainer.frame.origin.x
+//                                       :self.tableContainer.frame.origin.y
+//                                       :self.tableContainer.frame.size.width
+//                                       :self.tableContainer.frame.size.height];
     }
 }
 
