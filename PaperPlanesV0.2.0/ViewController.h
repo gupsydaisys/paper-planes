@@ -10,7 +10,7 @@
 #import "HPGrowingTextView.h"
 #import "PPBoxView.h"
 
-@interface ViewController : UIViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate, BoxViewDelegate>
+@interface ViewController : UIViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate, BoxViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 /* Main View */
 @property (weak, nonatomic) IBOutlet UIView *mainView;
@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIView *tableContainer;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableContainerHeight;
 @property (weak, nonatomic) IBOutlet UIView *tableHandle;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 /* Post Comment Paraphenilia */
 @property (strong, nonatomic) HPGrowingTextView *textView;
@@ -46,8 +47,9 @@
 enum commentStateTypes
 {
     CLOSED = 0,
-    HALF = 1,
-    FULL = 2,
+    ONE = 1,
+    HALF = 2,
+    FULL = 3,
 } typedef CommentState;
 
 @end

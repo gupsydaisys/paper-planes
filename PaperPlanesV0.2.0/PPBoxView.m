@@ -153,6 +153,7 @@
 
 #pragma mark - Action methods
 - (void) deleteButtonTapped {
+    NSLog(@"DELETE");
     [self removeFromSuperview];
     [delegate boxViewWasDeleted:self];
 }
