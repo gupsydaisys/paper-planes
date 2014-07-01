@@ -17,7 +17,11 @@
     PPDeleteButton* deleteButton;
     PPResizeButton* resizeButton;
     PPMoveButton* moveButton;
+    BOOL selectionState;
 }
+
+@property (nonatomic, strong) UITapGestureRecognizer* boxLayerTapGestureRecognizer;
+
 
 @end
 
@@ -37,7 +41,7 @@
         [self addControl:[self resizeButton]];
         [self addControl:[self moveButton]];
         [self setColor:self.tintColor];
-//        [self setBackgroundColor:[UIColor blackColor]];
+        self.userInteractionEnabled = YES;
         self.opaque = NO;
     }
     return self;
@@ -119,9 +123,41 @@
     [boxLayer setLineJoin:kCALineCapSquare];
     [boxLayer setLineDashPattern:[NSArray arrayWithObjects:[NSNumber numberWithInt:5], [NSNumber numberWithInt:5], nil]];
     
+    // See gestureRecognizer:shouldReceiveTouch for details on why there is no target-action pattern here
+    self.boxLayerTapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
+    self.boxLayerTapGestureRecognizer.delegate = self;
+    [self addGestureRecognizer:self.boxLayerTapGestureRecognizer];
+    
     return boxLayer;
 }
 
+- (void) toggleSelection {
+    selectionState = !selectionState;
+    [self makeSelection:selectionState];
+}
+
+- (void) makeSelection:(BOOL) select {
+    selectionState = select;
+    [self showControls:selectionState];
+    [self marchingAnts:selectionState];
+    [delegate boxViewSelectionChanged:self toState:selectionState];
+}
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *) gestureRecognizer shouldReceiveTouch:(UITouch *) touch {
+    if (gestureRecognizer == self.boxLayerTapGestureRecognizer) {
+        if (touch.view == self) {
+            // For some bizarre and unknown reason, although taps on boxLayer portion of PPBoxView will make it to this method,
+            // they don't get sent to the action method as we would expect. So this is a hack that
+            // manually sends the action method from here. I couldn't think of any other way to do it
+            // that wouldn't overly complicate the code.
+            [self boxLayerTapped:(UITapGestureRecognizer*) gestureRecognizer];
+        }
+        // Since we are manually sending the action, we don't need to say YES for shouldReceiveTouch
+        return NO;
+    }
+    
+    return YES;
+}
 - (CGRect) boxRect {
     float width = resizeButton.center.x - deleteButton.center.x;
     float height = resizeButton.center.y - deleteButton.center.y;
@@ -152,8 +188,12 @@
 }
 
 #pragma mark - Action methods
+
+- (void) boxLayerTapped: (UITapGestureRecognizer *) gesture {
+    [self toggleSelection];
+}
+
 - (void) deleteButtonTapped {
-    NSLog(@"DELETE");
     [self removeFromSuperview];
     [delegate boxViewWasDeleted:self];
 }

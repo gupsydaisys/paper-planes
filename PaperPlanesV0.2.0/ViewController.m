@@ -12,6 +12,7 @@
 #import "UIView+Util.h"
 #import "UIScrollView+Util.h"
 #import "NSString+FontAwesome.h"
+#import "PPBoxViewController.h"
 
 /* Post Comment Constants */
 #define POST_COMMENT_CONTAINTER_WIDTH 480.0f
@@ -509,64 +510,25 @@
 //    }
 //    else {
         return self.tableView.rowHeight;
-    }
 }
 
 #pragma mark - Gesture recognizer delegate
 
 - (void) tapImageHandler: (UITapGestureRecognizer *) gesture {
     CGPoint touchPoint = [gesture locationInView:gesture.view];
-    PPBoxView* touchedBox = [self getTouchedBox:gesture];
-    if (touchedBox == nil) {
-        touchedBox = [PPBoxView centeredAtPoint:touchPoint];
-        [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:touchedBox.moveButtonPanGestureRecognizer];
-        [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:touchedBox.resizeButtonPanGestureRecognizer];
-        touchedBox.delegate = self;
-        [gesture.view addSubview:touchedBox];
-    }
-
-    [self selectBox:touchedBox];
+    PPBoxView* touchedBox = [PPBoxView centeredAtPoint:touchPoint];
+    [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:touchedBox.moveButtonPanGestureRecognizer];
+    [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:touchedBox.resizeButtonPanGestureRecognizer];
+    touchedBox.delegate = self;
+    [touchedBox makeSelection:true];
+    [gesture.view addSubview:touchedBox];
 }
 
 - (BOOL) gestureRecognizer:(UIGestureRecognizer *) gestureRecognizer shouldReceiveTouch:(UITouch *) touch {
-    if ([touch.view isKindOfClass:[PPBoxView class]] || touch.view == self.imageView) {
+    if (touch.view == self.imageView) {
         return YES;
     }
     return NO;
-}
-
-- (UIView*) getHitView: (UIGestureRecognizer *) gesture {
-    CGPoint touchPoint = [gesture locationInView:gesture.view];
-    return [gesture.view hitTest:touchPoint withEvent:nil];
-}
-
-#pragma mark - Box methods
-
-- (void) deselect: (PPBoxView*) box {
-    [box marchingAnts:FALSE];
-    [box showControls:FALSE];
-    selectedBox = nil;
-    [self showComments:NO state:-1];
-}
-
-- (void) select: (PPBoxView*) box {
-    [box marchingAnts:TRUE];
-    [box showControls:TRUE];
-    selectedBox = box;
-    [self showComments:YES state:CLOSED];
-}
-
-- (void) selectBox: (PPBoxView*) box {
-    [self deselect:selectedBox];
-    [self select:box];
-}
-
-- (PPBoxView*) getTouchedBox:(UIGestureRecognizer*) gesture {
-    UIView *hitView = [self getHitView:gesture];
-    if ([hitView isKindOfClass:[PPBoxView class]]) {
-        return (PPBoxView*)hitView;
-    }
-    return nil;
 }
 
 - (void) showComments:(BOOL) shouldShow state:(CommentState) curr {
@@ -613,6 +575,15 @@
 
 - (void) boxViewWasDeleted:(PPBoxView *)boxView {
     if (selectedBox == boxView) {
+        selectedBox = nil;
+    }
+}
+
+- (void) boxViewSelectionChanged:(PPBoxView *)boxView toState:(BOOL)selectionState {
+    if (selectionState) {
+        [selectedBox makeSelection:false];
+        selectedBox = boxView;
+    } else if (selectedBox == boxView) {
         selectedBox = nil;
     }
 }
