@@ -12,7 +12,6 @@
 
 - (void) marchingAnts: (BOOL) turnOn;
 - (void) showControls: (BOOL) show;
-- (void) makeSelection: (BOOL) select;
 
 @property (nonatomic, strong) UIPanGestureRecognizer* moveButtonPanGestureRecognizer;
 @property (nonatomic, strong) UIPanGestureRecognizer* resizeButtonPanGestureRecognizer;
@@ -25,7 +24,6 @@
 @protocol BoxViewDelegate
 
 - (void) boxViewWasDeleted:(PPBoxView*) boxView;
-- (void) boxViewSelectionChanged:(PPBoxView*) boxView toState:(BOOL) selectionState;
 
 @end
 

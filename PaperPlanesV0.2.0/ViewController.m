@@ -40,7 +40,7 @@
 #define ANIMATION_DURATION 0.2f
 
 @interface ViewController () {
-    PPBoxView* selectedBox;
+    PPBoxViewController* selectedBox;
 
     NSMutableArray* comments;
     
@@ -419,7 +419,7 @@
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
         if (selectedBox) {
-            [self.imageScrollView zoomToRect:selectedBox.frame animated:YES];
+            [self.imageScrollView zoomToRect:selectedBox.view.frame animated:YES];
         }
     }];
     [UIView setAnimationDidStopSelector:@selector(animationForKeyboardShowDidStop:finished:context:)];
@@ -516,12 +516,19 @@
 
 - (void) tapImageHandler: (UITapGestureRecognizer *) gesture {
     CGPoint touchPoint = [gesture locationInView:gesture.view];
-    PPBoxView* touchedBox = [PPBoxView centeredAtPoint:touchPoint];
-    [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:touchedBox.moveButtonPanGestureRecognizer];
-    [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:touchedBox.resizeButtonPanGestureRecognizer];
-    touchedBox.delegate = self;
-    [touchedBox makeSelection:true];
-    [gesture.view addSubview:touchedBox];
+    
+    PPBoxViewController* box = [[PPBoxViewController alloc] init];
+    [self addChildViewController:box];
+    
+    box.view = [PPBoxView centeredAtPoint:touchPoint];
+    [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:box.view.moveButtonPanGestureRecognizer];
+    [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:box.view.resizeButtonPanGestureRecognizer];
+//    box.view.delegate = self;
+    box.delegate = self;
+    [box makeSelection:true];
+    [gesture.view addSubview:box.view];
+    
+    [box didMoveToParentViewController:self];
 }
 
 - (BOOL) gestureRecognizer:(UIGestureRecognizer *) gestureRecognizer shouldReceiveTouch:(UITouch *) touch {
@@ -573,17 +580,17 @@
     [self.view endEditing:YES];
 }
 
-- (void) boxViewWasDeleted:(PPBoxView *)boxView {
-    if (selectedBox == boxView) {
+- (void) boxWasDeleted:(PPBoxViewController *)box {
+    if (selectedBox == box) {
         selectedBox = nil;
     }
 }
 
-- (void) boxViewSelectionChanged:(PPBoxView *)boxView toState:(BOOL)selectionState {
+- (void) boxSelectionChanged:(PPBoxViewController *)box toState:(BOOL)selectionState {
     if (selectionState) {
         [selectedBox makeSelection:false];
-        selectedBox = boxView;
-    } else if (selectedBox == boxView) {
+        selectedBox = box;
+    } else if (selectedBox == box) {
         selectedBox = nil;
     }
 }

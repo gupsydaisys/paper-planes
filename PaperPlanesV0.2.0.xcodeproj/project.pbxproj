@@ -19,6 +19,7 @@
 		CA384776195B3BD70083B949 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA384775195B3AFE0083B949 /* FontAwesome.ttf */; };
 		CA3C07F3195CE9ED005C52FC /* UIScrollView+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3C07F2195CE9ED005C52FC /* UIScrollView+Util.m */; };
 		CA3C07F6195DDDE9005C52FC /* PPFeedbackImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3C07F5195DDDE9005C52FC /* PPFeedbackImageView.m */; };
+		CA3C07FD19632AB8005C52FC /* PPBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3C07FC19632AB8005C52FC /* PPBoxViewController.m */; };
 		CA9216E2195C86DF001ABA86 /* PPButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9216E1195C86DF001ABA86 /* PPButton.m */; };
 		CABC912A1959F99600B4AEF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC91291959F99600B4AEF5 /* main.m */; };
 		CABC912D1959F99600B4AEF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC912C1959F99600B4AEF5 /* AppDelegate.m */; };
@@ -64,6 +65,8 @@
 		CA3C07F2195CE9ED005C52FC /* UIScrollView+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Util.m"; sourceTree = "<group>"; };
 		CA3C07F4195DDDE9005C52FC /* PPFeedbackImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPFeedbackImageView.h; sourceTree = "<group>"; };
 		CA3C07F5195DDDE9005C52FC /* PPFeedbackImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPFeedbackImageView.m; sourceTree = "<group>"; };
+		CA3C07FB19632AB8005C52FC /* PPBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPBoxViewController.h; sourceTree = "<group>"; };
+		CA3C07FC19632AB8005C52FC /* PPBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPBoxViewController.m; sourceTree = "<group>"; };
 		CA9216E0195C86DF001ABA86 /* PPButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPButton.h; sourceTree = "<group>"; };
 		CA9216E1195C86DF001ABA86 /* PPButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPButton.m; sourceTree = "<group>"; };
 		CABC91241959F99600B4AEF5 /* PaperPlanesV0.2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaperPlanesV0.2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +147,17 @@
 			name = FontAwesome;
 			sourceTree = "<group>";
 		};
+		CA3C07FE19632ABF005C52FC /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CABC912E1959F99600B4AEF5 /* ViewController.h */,
+				CABC912F1959F99600B4AEF5 /* ViewController.m */,
+				CA3C07FB19632AB8005C52FC /* PPBoxViewController.h */,
+				CA3C07FC19632AB8005C52FC /* PPBoxViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
 		CABC911B1959F99600B4AEF5 = {
 			isa = PBXGroup;
 			children = (
@@ -169,8 +183,7 @@
 				489652CA195A10AE002128B7 /* IMG_2602.jpg */,
 				CABC912B1959F99600B4AEF5 /* AppDelegate.h */,
 				CABC912C1959F99600B4AEF5 /* AppDelegate.m */,
-				CABC912E1959F99600B4AEF5 /* ViewController.h */,
-				CABC912F1959F99600B4AEF5 /* ViewController.m */,
+				CA3C07FE19632ABF005C52FC /* View Controllers */,
 				483F32E2195E135D009788C0 /* Models */,
 				CAE99DEB195BA3610050B584 /* Views */,
 				CABC91311959F99600B4AEF5 /* Main.storyboard */,
@@ -335,6 +348,7 @@
 			files = (
 				483F32DE195E0EF2009788C0 /* HSCommentCell.m in Sources */,
 				483F32E5195E13E2009788C0 /* PPComment.m in Sources */,
+				CA3C07FD19632AB8005C52FC /* PPBoxViewController.m in Sources */,
 				CAE99DEE195BA4FF0050B584 /* PPMoveButton.m in Sources */,
 				CABC91301959F99600B4AEF5 /* ViewController.m in Sources */,
 				CABC912D1959F99600B4AEF5 /* AppDelegate.m in Sources */,
