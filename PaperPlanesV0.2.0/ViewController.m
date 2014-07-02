@@ -53,6 +53,9 @@
 //    UIView *heightTEMP2;
     
     BOOL scrollViewDidLayoutOnce;
+
+    BOOL willZoomToRectOnSelectedBox;
+    BOOL didZoomToRectOnSelectedBox;
 }
 
 @end
@@ -358,7 +361,11 @@
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
         if (selectedBox) {
-            [self.imageScrollView zoomToRect:selectedBox.view.frame animated:YES];
+            if (!didZoomToRectOnSelectedBox) {
+                // See scrollViewDidEndZooming for an explanation of these boolean flags
+                willZoomToRectOnSelectedBox = YES;
+                [self.imageScrollView zoomToRect:selectedBox.view.frame animated:YES];
+            }
         }
         if (finished) {
             if (tableHandleState == CLOSED) {
@@ -371,7 +378,6 @@
     isKeyboardUp = YES;
 
 }
-
 
 - (void) keyboardWillBeHidden:(NSNotification *) aNotification {
     [self updateKeyboardHeight:0];
@@ -498,6 +504,28 @@
 #pragma mark - Scroll view delegate
 - (UIView *) viewForZoomingInScrollView:(UIScrollView *) scrollView {
     return self.imageView;
+}
+
+- (void) scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
+    // zoomToRect will change selectedBox.view.frame, so
+    // if we allow zoomToRect to be called multiple times subsequently,
+    // then you get a bug where the first zoomToRect does the proper thing,
+    // but subsequent zoomToRect calls just inch in ever closer to the selectedBox,
+    // which is useless and distracting for the user.
+    // Panning or zooming manually will reset the flags, to allow for another zoomToRect call.
+    if (willZoomToRectOnSelectedBox) {
+        willZoomToRectOnSelectedBox = NO;
+        didZoomToRectOnSelectedBox = YES;
+    } else {
+        // User manually zoomed, reset flag
+        didZoomToRectOnSelectedBox = NO;
+    }
+}
+
+- (void) scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    // User manually panned, reset flags
+    willZoomToRectOnSelectedBox = NO;
+    didZoomToRectOnSelectedBox = NO;
 }
 
 
