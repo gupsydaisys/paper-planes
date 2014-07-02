@@ -49,9 +49,6 @@
     
     BOOL isKeyboardUp;
 
-//    UIView *heightTEMP;
-//    UIView *heightTEMP2;
-    
     BOOL scrollViewDidLayoutOnce;
 
     BOOL willZoomToRectOnSelectedBox;
@@ -69,22 +66,6 @@
     [self initCommentDrawer];
     [self addObservers];
     [self addGestureRecognizers];
-    
-//    heightTEMP = [UIView new];
-//    [self.mainView addSubview:heightTEMP];
-//    heightTEMP.layer.backgroundColor = [UIColor redColor].CGColor;
-//    
-//    heightTEMP2 = [UIView new];
-//    [self.mainView addSubview:heightTEMP2];
-//    heightTEMP2.layer.backgroundColor = [UIColor blackColor].CGColor;
-    
-/* Temporarliy there for debugging */
-//    self.tableHandle.layer.borderWidth = 3;
-//    self.tableHandle.layer.borderColor = [[UIColor greenColor] CGColor];
-
-
-//    self.postCommentContainer.layer.borderWidth = 3;
-//    self.postCommentContainer.layer.borderColor = [[UIColor redColor] CGColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -250,19 +231,19 @@
 
 - (CommentState) getNextTableHandleState:(CGPoint) vectorVelocity {
     // NEXT STEP call to procure correct values / calculated ones
-    // NEXT STEP change so that if you are half-way or something and change direction it still snaps in place
-    
-    CGPoint halfCenter = CGPointMake(160, 334);
+
+    float halfY = 320.0f;
+    float delta = 100.0f;
+    BOOL isSlow = fabsf(vectorVelocity.y) < 1050.0f;
     float yTranslation = self.tableContainer.center.y;
 
     if (vectorVelocity.y > 0) {
-        if (yTranslation <= halfCenter.y && !isKeyboardUp) return HALF;
+        if (FULL == tableHandleState && yTranslation <= halfY + delta && yTranslation >= halfY - delta && !isKeyboardUp && isSlow) return HALF;
         else return CLOSED;
     } else {
-        if (yTranslation >= halfCenter.y && !isKeyboardUp) return HALF;
+        if (CLOSED == tableHandleState && yTranslation <= halfY + delta && yTranslation >= halfY - delta && !isKeyboardUp && isSlow) return HALF;
         else return FULL;
     }
-
 }
 
 #pragma mark - Table Resize/Update Methods
@@ -337,7 +318,7 @@
 }
 
 - (void) updateTableHandleState {
-    if (self.tableContainer.frame.origin.y == HEADING_HEIGHT) {
+    if (self.tableContainer.frame.size.height > TABLE_CONTAINER_HALF_HEIGHT) {
         tableHandleState = FULL;
     } else if (self.tableContainer.frame.size.height == TABLE_HANDLE_HEIGHT) {
         tableHandleState = CLOSED;
@@ -358,6 +339,12 @@
     float animationDuration = [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
     [UIView animateWithDuration:animationDuration animations:^{
+        
+        if (tableHandleState == FULL) {
+            float maxHeight = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT;
+            self.tableContainerHeight.constant = maxHeight;
+            [self.view setNeedsUpdateConstraints];
+        }
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
         if (selectedBox) {
@@ -368,22 +355,17 @@
             }
         }
         if (finished) {
-            if (tableHandleState == CLOSED) {
-                [self updateTableContainerFrame:CLOSED];
-            } else {
+            if (tableHandleState == HALF || tableHandleState == ONE) {
                 [self updateTableContainerFrame:FULL];
             }
         }
     }];
     isKeyboardUp = YES;
-
 }
 
 - (void) keyboardWillBeHidden:(NSNotification *) aNotification {
     [self updateKeyboardHeight:0];
-    
-    //call updateTableContainerFrame ??
-    
+
     //if half and full -> half
     //if one -> one
     //if closed -> closed
@@ -434,20 +416,8 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    
-//    if (indexPath.section == 0 && indexPath.row == 0) {
-//        
-//        if (self.textView.contentSize.height >= 44) {
-//            return height + 8; // a little extra padding is needed
-//        }
-//        else {
-//            return self.tableView.rowHeight;
-//        }
-//        
-//    }
-//    else {
+    // NEXT TIME change this to grow with content
         return self.tableView.rowHeight;
-//    }
 }
 
 #pragma mark - Gesture recognizer delegate
@@ -484,21 +454,23 @@
 }
 
 - (void) showComments:(BOOL) shouldShow state:(CommentState) curr {
-    if (shouldShow) {
-        self.textView.text = @"";
-        self.postCommentContainer.hidden = NO;
-
-        if (selectedBox.comments.count != 0) {
-            [self setOpenedState:curr animated:NO];
-            self.tableContainer.hidden = NO;
+    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+        if (shouldShow) {
+            self.textView.text = @"";
+            self.postCommentContainer.hidden = NO;
+            
+            if (selectedBox.comments.count != 0) {
+                self.tableContainer.hidden = NO;
+                [self setOpenedState:curr animated:NO];
+            } else {
+                self.tableContainer.hidden = YES;
+            }
+            
         } else {
             self.tableContainer.hidden = YES;
+            self.postCommentContainer.hidden = YES;
         }
-
-    } else {
-        self.tableContainer.hidden = YES;
-        self.postCommentContainer.hidden = YES;
-    }
+    }];
 }
 
 #pragma mark - Scroll view delegate
@@ -536,20 +508,16 @@
 }
 
 - (void) didPostComment {
-    
-    // First reolad is so that it doesn't error on comments.count - 1
     [self.tableView reloadData];
-    NSIndexPath *index = [NSIndexPath indexPathForItem:(selectedBox.comments.count - 1) inSection:0];
-    [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-
     [self showComments:TRUE state:ONE];
     [self.view endEditing:YES];
+    NSIndexPath *index = [NSIndexPath indexPathForItem:(selectedBox.comments.count - 1) inSection:0];
+    [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 }
 
 - (void) boxWasDeleted:(PPBoxViewController *)box {
     if (selectedBox == box) {
-        selectedBox = nil;
-        [self showComments:NO state:-1];
+        [self boxSelectionChanged:box toState:NO];
     }
 }
 
@@ -566,10 +534,17 @@
         [selectedBox makeSelection:false];
         selectedBox = box;
         [self.tableView reloadData];
-        [self showComments:YES state:CLOSED];
+        if (tableHandleState) {
+            [self showComments:YES state:tableHandleState];
+        } else {
+            [self showComments:YES state:CLOSED];
+        }
     } else if (selectionState == false && selectedBox == box) {
         selectedBox = nil;
         [self showComments:NO state:-1];
+        if (isKeyboardUp) {
+            [self.view endEditing:YES];
+        }
     }
 }
 
