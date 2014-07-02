@@ -40,14 +40,13 @@
 - (UIView*) resizeShapeWithFrame:(CGRect) rect {
     float sizeTweak = -[PPResizeButton getDefaultWidth] / 5;
     float positionXTweak = -[PPResizeButton getDefaultWidth] / 15;
-    float positionYTweak = [PPResizeButton getDefaultWidth] / 30;
     
     CGSize sizeAdjustment = CGSizeMake(sizeTweak, sizeTweak);
-    CGPoint positionAdjustment = CGPointMake(positionXTweak, positionYTweak);
+    CGPoint positionAdjustment = CGPointMake(positionXTweak, 0);
     rect = CGRectInset(rect, -sizeAdjustment.width, -sizeAdjustment.height);
     rect = CGRectOffset(rect, positionAdjustment.x, positionAdjustment.y);
-    resizeShape = [self fontAwesomeLabel:FAExpand withFrame:rect];
-    resizeShape.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI_2);
+    resizeShape = [self fontAwesomeLabel:FAArrowsH withFrame:rect];
+    resizeShape.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI_4);
     return resizeShape;
 }
 
