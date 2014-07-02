@@ -475,21 +475,23 @@
 }
 
 - (void) showComments:(BOOL) shouldShow state:(CommentState) curr {
-    if (shouldShow) {
-        self.textView.text = @"";
-        self.postCommentContainer.hidden = NO;
-
-        if (selectedBox.comments.count != 0) {
-            self.tableContainer.hidden = NO;
-            [self setOpenedState:curr animated:NO];
+    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+        if (shouldShow) {
+            self.textView.text = @"";
+            self.postCommentContainer.hidden = NO;
+            
+            if (selectedBox.comments.count != 0) {
+                self.tableContainer.hidden = NO;
+                [self setOpenedState:curr animated:NO];
+            } else {
+                self.tableContainer.hidden = YES;
+            }
+            
         } else {
             self.tableContainer.hidden = YES;
+            self.postCommentContainer.hidden = YES;
         }
-
-    } else {
-        self.tableContainer.hidden = YES;
-        self.postCommentContainer.hidden = YES;
-    }
+    }];
 }
 
 #pragma mark - Scroll view delegate
