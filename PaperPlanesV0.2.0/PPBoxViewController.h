@@ -23,6 +23,7 @@
 
 - (void) boxSelectionChanged:(PPBoxViewController*) box toState:(BOOL) selectionState;
 - (void) boxWasDeleted:(PPBoxViewController*) box;
+- (void) boxWasPanned:(PPBoxViewController*) box;
 
 @end
 

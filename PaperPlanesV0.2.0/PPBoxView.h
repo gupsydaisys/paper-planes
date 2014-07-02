@@ -24,6 +24,7 @@
 @protocol BoxViewDelegate
 
 - (void) boxViewWasDeleted:(PPBoxView*) boxView;
+- (void) boxViewWasPanned:(PPBoxView*) boxView;
 
 @end
 

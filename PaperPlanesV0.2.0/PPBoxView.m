@@ -178,6 +178,7 @@
 - (void) moveButtonPanned: (UIPanGestureRecognizer* ) gesture {
     CGPoint translation = [gesture translationInView:gesture.view.superview];
     self.frame = CGRectOffset(self.frame, translation.x, translation.y);
+    [delegate boxViewWasPanned:self];
     [self setNeedsDisplay];
     [gesture setTranslation:CGPointZero inView:gesture.view.superview];
 }

@@ -553,6 +553,14 @@
     }
 }
 
+- (void) boxWasPanned:(PPBoxViewController *)box {
+    if (selectedBox == box) {
+        // User moved box, reset and allow another zoomToRect call
+        willZoomToRectOnSelectedBox = NO;
+        didZoomToRectOnSelectedBox = NO;
+    }
+}
+
 - (void) boxSelectionChanged:(PPBoxViewController *)box toState:(BOOL)selectionState {
     if (selectionState) {
         [selectedBox makeSelection:false];

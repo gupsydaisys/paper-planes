@@ -49,6 +49,10 @@
     [delegate boxWasDeleted:self];
 }
 
+- (void) boxViewWasPanned:(PPBoxView *) boxView {
+    [delegate boxWasPanned:self];
+}
+
 
 //- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 //{
