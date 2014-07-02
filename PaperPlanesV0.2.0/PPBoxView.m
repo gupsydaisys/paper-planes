@@ -70,9 +70,14 @@
 - (void) resizeBoundsToFitSubviews {
     CGRect bounds = CGRectZero;
     bounds = CGRectUnion(bounds, [self boxRect]);
-    bounds = CGRectUnion(bounds, deleteButton.frame);
-    bounds = CGRectUnion(bounds, resizeButton.frame);
-    bounds = CGRectUnion(bounds, moveButton.frame);
+    float deleteButtonInset = deleteButton.frame.size.width / 2;
+    float resizeButtonInset = resizeButton.frame.size.width / 2;
+    float moveButtonInset = moveButton.frame.size.width / 2;
+    
+    bounds = CGRectMake(bounds.origin.x - deleteButtonInset,
+                        bounds.origin.y - deleteButtonInset,
+                        bounds.size.width + MAX(resizeButtonInset, moveButtonInset) + deleteButtonInset,
+                        bounds.size.height + MAX(resizeButtonInset, moveButtonInset) + deleteButtonInset);
     
     self.bounds = bounds;
 }
@@ -165,7 +170,7 @@
 - (void) resizeButtonPanned: (UIPanGestureRecognizer *) gesture {
     CGPoint translation = [gesture translationInView:gesture.view.superview];
     resizeButton.frame = CGRectOffset(resizeButton.frame, translation.x, translation.y);
-    self.center = CGPointMake(self.center.x + translation.x / 2, self.center.y + translation.y / 2);
+    self.frame = CGRectOffset(self.frame, translation.x / 2, translation.y / 2);
     [self setNeedsDisplay];
     [gesture setTranslation:CGPointZero inView:gesture.view.superview];
 }
