@@ -453,6 +453,14 @@
     [self addChildViewController:box];
     
     box.view = [PPBoxView centeredAtPoint:touchPoint];
+    if (box.view.frame.origin.x < self.imageView.frame.origin.x) {
+        box.view.center = CGPointMake(self.imageView.frame.origin.x + (box.view.frame.size.width / 2), box.view.center.y);
+    }
+    
+    if (box.view.frame.origin.y < self.imageView.frame.origin.y) {
+        box.view.center = CGPointMake(box.view.center.x, self.imageView.frame.origin.y + (box.view.frame.size.height / 2) + 2);
+    }
+
     [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:box.view.moveButtonPanGestureRecognizer];
     [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:box.view.resizeButtonPanGestureRecognizer];
     box.delegate = self;
