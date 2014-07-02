@@ -355,6 +355,14 @@
     float animationDuration = [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
     [UIView animateWithDuration:animationDuration animations:^{
+        
+        if (tableHandleState == FULL) {
+            float maxHeight = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT;
+            //                CGRect r = self.tableContainer.frame;
+            //                self.tableContainer.frame = (CGRect){.origin = {r.origin.x, r.origin.y}, .size = {r.size.width, maxHeight}};
+            self.tableContainerHeight.constant = maxHeight;
+            [self.view setNeedsUpdateConstraints];
+        }
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
         if (selectedBox) {
@@ -363,12 +371,6 @@
         if (finished) {
             if (tableHandleState == HALF || tableHandleState == ONE) {
                 [self updateTableContainerFrame:FULL];
-            } else if (tableHandleState == FULL) {
-                float maxHeight = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT;
-//                CGRect r = self.tableContainer.frame;
-//                self.tableContainer.frame = (CGRect){.origin = {r.origin.x, r.origin.y}, .size = {r.size.width, maxHeight}};
-                self.tableContainerHeight.constant = maxHeight;
-                [self.view setNeedsUpdateConstraints];
             }
         }
     }];
@@ -478,8 +480,8 @@
         self.postCommentContainer.hidden = NO;
 
         if (selectedBox.comments.count != 0) {
-            [self setOpenedState:curr animated:NO];
             self.tableContainer.hidden = NO;
+            [self setOpenedState:curr animated:NO];
         } else {
             self.tableContainer.hidden = YES;
         }
@@ -506,17 +508,15 @@
     
     // First reolad is so that it doesn't error on comments.count - 1
     [self.tableView reloadData];
-    NSIndexPath *index = [NSIndexPath indexPathForItem:(selectedBox.comments.count - 1) inSection:0];
-    [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-
     [self showComments:TRUE state:ONE];
     [self.view endEditing:YES];
+    NSIndexPath *index = [NSIndexPath indexPathForItem:(selectedBox.comments.count - 1) inSection:0];
+    [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 }
 
 - (void) boxWasDeleted:(PPBoxViewController *)box {
     if (selectedBox == box) {
-        selectedBox = nil;
-        [self showComments:NO state:-1];
+        [self boxSelectionChanged:box toState:NO];
     }
 }
 
