@@ -35,27 +35,10 @@
 }
 
 - (void) didMoveToParentViewController:(UIViewController *)parent {
-    boxTapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
-    boxTapGestureRecognizer.delegate = self;
+    boxTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(boxTapped:)];
     [self.view addGestureRecognizer:boxTapGestureRecognizer];
     self.view.delegate = self;
     self.comments = [[NSMutableArray alloc] init];
-}
-
-- (BOOL) gestureRecognizer:(UIGestureRecognizer *) gestureRecognizer shouldReceiveTouch:(UITouch *) touch {
-    if (gestureRecognizer == boxTapGestureRecognizer) {
-        if (touch.view == self.view) {
-            // For some bizarre and unknown reason, although taps on boxLayer portion of PPBoxView will make it to this method,
-            // they don't get sent to the action method as we would expect. So this is a hack that
-            // manually sends the action method from here. I couldn't think of any other way to do it
-            // that wouldn't overly complicate the code.
-            [self boxTapped:(UITapGestureRecognizer*) gestureRecognizer];
-        }
-        // Since we are manually sending the action, we don't need to say YES for shouldReceiveTouch
-        return NO;
-    }
-    
-    return YES;
 }
 
 - (void) boxTapped: (UITapGestureRecognizer *) gesture {
