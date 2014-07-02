@@ -249,14 +249,21 @@
     // NEXT STEP call to procure correct values / calculated ones
     // NEXT STEP change so that if you are half-way or something and change direction it still snaps in place
     
-    CGPoint halfCenter = CGPointMake(160, 334);
+    float cumulativeCommentHeight = (float) selectedBox.comments.count * TABLE_ROW_HEIGHT + TABLE_HANDLE_HEIGHT;
+    float halfCenterY;
+    if (cumulativeCommentHeight < TABLE_CONTAINER_HALF_HEIGHT) {
+        halfCenterY = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - cumulativeCommentHeight;
+    } else {
+        halfCenterY = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - TABLE_CONTAINER_HALF_HEIGHT;
+    }
+
     float yTranslation = self.tableContainer.center.y;
 
     if (vectorVelocity.y > 0) {
-        if (yTranslation <= halfCenter.y && !isKeyboardUp) return HALF;
+        if (yTranslation <= halfCenterY && !isKeyboardUp) return HALF;
         else return CLOSED;
     } else {
-        if (yTranslation >= halfCenter.y && !isKeyboardUp) return HALF;
+        if (yTranslation >= halfCenterY && !isKeyboardUp) return HALF;
         else return FULL;
     }
 
