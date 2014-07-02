@@ -190,12 +190,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PaperPlanesV0.2.0/ViewController.m"
-            timestampString = "425936911.19539"
+            timestampString = "425956274.325745"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "476"
-            endingLineNumber = "476"
-            landmarkName = "-getHitView:"
+            startingLineNumber = "479"
+            endingLineNumber = "479"
+            landmarkName = "-showComments:state:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

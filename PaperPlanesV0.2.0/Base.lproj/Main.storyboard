@@ -67,39 +67,6 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="yOn-Hy-XmG"/>
                                 </connections>
                             </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nT-b2-373" userLabel="Post Comment Container">
-                                <rect key="frame" x="0.0" y="435" width="480" height="45"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SpW-XB-g4h">
-                                        <rect key="frame" x="448" y="12" width="40" height="21"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <state key="normal" title="Post">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <variation key="heightClass=regular" fixedFrame="YES">
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                            <rect key="frame" x="258" y="10" width="48" height="26"/>
-                                        </variation>
-                                        <connections>
-                                            <action selector="tapPostComment:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="dxK-Y5-hUt"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="DbQ-ZV-WV9" userLabel="postComment height"/>
-                                    <constraint firstAttribute="width" constant="480" id="awG-D9-Die" userLabel="postComment width"/>
-                                </constraints>
-                                <variation key="heightClass=regular">
-                                    <mask key="subviews">
-                                        <include reference="SpW-XB-g4h"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="vbP-cQ-Mtw" appends="YES" id="t9O-MG-f3s"/>
-                                </connections>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zdy-ft-VoQ" userLabel="Table Container">
                                 <rect key="frame" x="0.0" y="410" width="480" height="25"/>
                                 <subviews>
@@ -193,6 +160,39 @@
                                     <constraint firstItem="Uze-VR-py1" firstAttribute="leading" secondItem="Zdy-ft-VoQ" secondAttribute="leading" id="mTv-fJ-L0G" userLabel="tableView leading"/>
                                     <constraint firstAttribute="width" constant="480" id="w1K-wr-10s" userLabel="tableContainer width"/>
                                 </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nT-b2-373" userLabel="Post Comment Container">
+                                <rect key="frame" x="0.0" y="435" width="480" height="45"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SpW-XB-g4h">
+                                        <rect key="frame" x="448" y="12" width="45" height="25"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="Post">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="heightClass=regular" fixedFrame="YES">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <rect key="frame" x="258" y="10" width="48" height="26"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="tapPostComment:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="dxK-Y5-hUt"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="DbQ-ZV-WV9" userLabel="postComment height"/>
+                                    <constraint firstAttribute="width" constant="480" id="awG-D9-Die" userLabel="postComment width"/>
+                                </constraints>
+                                <variation key="heightClass=regular">
+                                    <mask key="subviews">
+                                        <include reference="SpW-XB-g4h"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="vbP-cQ-Mtw" appends="YES" id="t9O-MG-f3s"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ndI-Zr-fon" userLabel="Heading View">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="25"/>

@@ -361,15 +361,18 @@
             [self.imageScrollView zoomToRect:selectedBox.view.frame animated:YES];
         }
         if (finished) {
-            if (tableHandleState == CLOSED) {
-                [self updateTableContainerFrame:CLOSED];
-            } else {
+            if (tableHandleState == HALF || tableHandleState == ONE) {
                 [self updateTableContainerFrame:FULL];
+            } else if (tableHandleState == FULL) {
+                float maxHeight = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT;
+//                CGRect r = self.tableContainer.frame;
+//                self.tableContainer.frame = (CGRect){.origin = {r.origin.x, r.origin.y}, .size = {r.size.width, maxHeight}};
+                self.tableContainerHeight.constant = maxHeight;
+                [self.view setNeedsUpdateConstraints];
             }
         }
     }];
     isKeyboardUp = YES;
-
 }
 
 
@@ -522,10 +525,17 @@
         [selectedBox makeSelection:false];
         selectedBox = box;
         [self.tableView reloadData];
-        [self showComments:YES state:CLOSED];
+        if (tableHandleState) {
+            [self showComments:YES state:tableHandleState];
+        } else {
+            [self showComments:YES state:CLOSED];
+        }
     } else if (selectionState == false && selectedBox == box) {
         selectedBox = nil;
         [self showComments:NO state:-1];
+        if (isKeyboardUp) {
+            [self.view endEditing:YES];
+        }
     }
 }
 
