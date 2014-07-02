@@ -247,26 +247,19 @@
 
 - (CommentState) getNextTableHandleState:(CGPoint) vectorVelocity {
     // NEXT STEP call to procure correct values / calculated ones
-    // NEXT STEP change so that if you are half-way or something and change direction it still snaps in place
-    
-    float cumulativeCommentHeight = (float) selectedBox.comments.count * TABLE_ROW_HEIGHT + TABLE_HANDLE_HEIGHT;
-    float halfCenterY;
-    if (cumulativeCommentHeight < TABLE_CONTAINER_HALF_HEIGHT) {
-        halfCenterY = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - cumulativeCommentHeight;
-    } else {
-        halfCenterY = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - TABLE_CONTAINER_HALF_HEIGHT;
-    }
 
+    float halfY = 320.0f;
+    float delta = 100.0f;
+    BOOL isSlow = fabsf(vectorVelocity.y) < 1050.0f;
     float yTranslation = self.tableContainer.center.y;
 
     if (vectorVelocity.y > 0) {
-        if (yTranslation <= halfCenterY && !isKeyboardUp) return HALF;
+        if (FULL == tableHandleState && yTranslation <= halfY + delta && yTranslation >= halfY - delta && !isKeyboardUp && isSlow) return HALF;
         else return CLOSED;
     } else {
-        if (yTranslation >= halfCenterY && !isKeyboardUp) return HALF;
+        if (CLOSED == tableHandleState && yTranslation <= halfY + delta && yTranslation >= halfY - delta && !isKeyboardUp && isSlow) return HALF;
         else return FULL;
     }
-
 }
 
 #pragma mark - Table Resize/Update Methods
@@ -341,7 +334,7 @@
 }
 
 - (void) updateTableHandleState {
-    if (self.tableContainer.frame.origin.y == HEADING_HEIGHT) {
+    if (self.tableContainer.frame.size.height > TABLE_CONTAINER_HALF_HEIGHT) {
         tableHandleState = FULL;
     } else if (self.tableContainer.frame.size.height == TABLE_HANDLE_HEIGHT) {
         tableHandleState = CLOSED;
