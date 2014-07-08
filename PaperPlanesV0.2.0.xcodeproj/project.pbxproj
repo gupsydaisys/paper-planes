@@ -20,10 +20,11 @@
 		CA3C07F3195CE9ED005C52FC /* UIScrollView+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3C07F2195CE9ED005C52FC /* UIScrollView+Util.m */; };
 		CA3C07F6195DDDE9005C52FC /* PPFeedbackImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3C07F5195DDDE9005C52FC /* PPFeedbackImageView.m */; };
 		CA3C07FD19632AB8005C52FC /* PPBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3C07FC19632AB8005C52FC /* PPBoxViewController.m */; };
+		CA8B5E47196CAD58004BE4F3 /* PPCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8B5E46196CAD58004BE4F3 /* PPCameraViewController.m */; };
 		CA9216E2195C86DF001ABA86 /* PPButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9216E1195C86DF001ABA86 /* PPButton.m */; };
 		CABC912A1959F99600B4AEF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC91291959F99600B4AEF5 /* main.m */; };
 		CABC912D1959F99600B4AEF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC912C1959F99600B4AEF5 /* AppDelegate.m */; };
-		CABC91301959F99600B4AEF5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC912F1959F99600B4AEF5 /* ViewController.m */; };
+		CABC91301959F99600B4AEF5 /* PPFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC912F1959F99600B4AEF5 /* PPFeedbackViewController.m */; };
 		CABC91331959F99600B4AEF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CABC91311959F99600B4AEF5 /* Main.storyboard */; };
 		CABC91351959F99600B4AEF5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CABC91341959F99600B4AEF5 /* Images.xcassets */; };
 		CABC91411959F99600B4AEF5 /* PaperPlanesV0_2_0Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC91401959F99600B4AEF5 /* PaperPlanesV0_2_0Tests.m */; };
@@ -67,6 +68,8 @@
 		CA3C07F5195DDDE9005C52FC /* PPFeedbackImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPFeedbackImageView.m; sourceTree = "<group>"; };
 		CA3C07FB19632AB8005C52FC /* PPBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPBoxViewController.h; sourceTree = "<group>"; };
 		CA3C07FC19632AB8005C52FC /* PPBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPBoxViewController.m; sourceTree = "<group>"; };
+		CA8B5E45196CAD58004BE4F3 /* PPCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCameraViewController.h; sourceTree = "<group>"; };
+		CA8B5E46196CAD58004BE4F3 /* PPCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPCameraViewController.m; sourceTree = "<group>"; };
 		CA9216E0195C86DF001ABA86 /* PPButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPButton.h; sourceTree = "<group>"; };
 		CA9216E1195C86DF001ABA86 /* PPButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPButton.m; sourceTree = "<group>"; };
 		CABC91241959F99600B4AEF5 /* PaperPlanesV0.2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaperPlanesV0.2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,8 +77,8 @@
 		CABC91291959F99600B4AEF5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CABC912B1959F99600B4AEF5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CABC912C1959F99600B4AEF5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CABC912E1959F99600B4AEF5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CABC912F1959F99600B4AEF5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CABC912E1959F99600B4AEF5 /* PPFeedbackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PPFeedbackViewController.h; sourceTree = "<group>"; };
+		CABC912F1959F99600B4AEF5 /* PPFeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PPFeedbackViewController.m; sourceTree = "<group>"; };
 		CABC91321959F99600B4AEF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CABC91341959F99600B4AEF5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CABC913A1959F99600B4AEF5 /* PaperPlanesV0.2.0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaperPlanesV0.2.0Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,8 +153,10 @@
 		CA3C07FE19632ABF005C52FC /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CABC912E1959F99600B4AEF5 /* ViewController.h */,
-				CABC912F1959F99600B4AEF5 /* ViewController.m */,
+				CA8B5E45196CAD58004BE4F3 /* PPCameraViewController.h */,
+				CA8B5E46196CAD58004BE4F3 /* PPCameraViewController.m */,
+				CABC912E1959F99600B4AEF5 /* PPFeedbackViewController.h */,
+				CABC912F1959F99600B4AEF5 /* PPFeedbackViewController.m */,
 				CA3C07FB19632AB8005C52FC /* PPBoxViewController.h */,
 				CA3C07FC19632AB8005C52FC /* PPBoxViewController.m */,
 			);
@@ -349,8 +354,9 @@
 				483F32DE195E0EF2009788C0 /* HSCommentCell.m in Sources */,
 				483F32E5195E13E2009788C0 /* PPComment.m in Sources */,
 				CA3C07FD19632AB8005C52FC /* PPBoxViewController.m in Sources */,
+				CA8B5E47196CAD58004BE4F3 /* PPCameraViewController.m in Sources */,
 				CAE99DEE195BA4FF0050B584 /* PPMoveButton.m in Sources */,
-				CABC91301959F99600B4AEF5 /* ViewController.m in Sources */,
+				CABC91301959F99600B4AEF5 /* PPFeedbackViewController.m in Sources */,
 				CABC912D1959F99600B4AEF5 /* AppDelegate.m in Sources */,
 				CA9216E2195C86DF001ABA86 /* PPButton.m in Sources */,
 				CA384771195B3AC10083B949 /* NSString+FontAwesome.m in Sources */,
