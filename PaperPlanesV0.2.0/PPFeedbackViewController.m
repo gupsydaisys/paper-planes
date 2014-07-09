@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Learning Public. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "PPFeedbackViewController.h"
 #import "HSCommentCell.h"
 #import "PPBoxView.h"
 #import "UIView+Util.h"
@@ -46,7 +46,7 @@
 #define ANIMATE 1
 #define ANIMATION_DURATION 0.2f
 
-@interface ViewController () {
+@interface PPFeedbackViewController () {
     PPBoxViewController* selectedBox;
 
     CommentState tableHandleState;
@@ -64,7 +64,7 @@
 
 @end
 
-@implementation ViewController
+@implementation PPFeedbackViewController
 
 #pragma mark - Initialization of Views
 - (void) viewDidLoad {

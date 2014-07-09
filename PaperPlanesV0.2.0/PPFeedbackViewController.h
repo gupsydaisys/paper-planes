@@ -11,7 +11,7 @@
 #import "PPBoxView.h"
 #import "PPBoxViewController.h"
 
-@interface ViewController : UIViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate, BoxViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface PPFeedbackViewController : UIViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate, BoxViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 /* Main View */
 @property (weak, nonatomic) IBOutlet UIView *mainView;
