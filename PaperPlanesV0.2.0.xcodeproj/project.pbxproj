@@ -31,6 +31,7 @@
 		CA8B5E47196CAD58004BE4F3 /* PPCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8B5E46196CAD58004BE4F3 /* PPCameraViewController.m */; };
 		CA8B5E4D196CB478004BE4F3 /* PPPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8B5E4C196CB478004BE4F3 /* PPPageViewController.m */; };
 		CA8B5E50196CDD11004BE4F3 /* IKCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8B5E4F196CDD11004BE4F3 /* IKCapture.m */; };
+		CA8B5E54196DC072004BE4F3 /* PPCenteredScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8B5E53196DC072004BE4F3 /* PPCenteredScrollView.m */; };
 		CA9216E2195C86DF001ABA86 /* PPButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9216E1195C86DF001ABA86 /* PPButton.m */; };
 		CABC912A1959F99600B4AEF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC91291959F99600B4AEF5 /* main.m */; };
 		CABC912D1959F99600B4AEF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC912C1959F99600B4AEF5 /* AppDelegate.m */; };
@@ -100,6 +101,8 @@
 		CA8B5E4C196CB478004BE4F3 /* PPPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPageViewController.m; sourceTree = "<group>"; };
 		CA8B5E4E196CDD11004BE4F3 /* IKCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKCapture.h; sourceTree = "<group>"; };
 		CA8B5E4F196CDD11004BE4F3 /* IKCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKCapture.m; sourceTree = "<group>"; };
+		CA8B5E52196DC072004BE4F3 /* PPCenteredScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCenteredScrollView.h; sourceTree = "<group>"; };
+		CA8B5E53196DC072004BE4F3 /* PPCenteredScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPCenteredScrollView.m; sourceTree = "<group>"; };
 		CA9216E0195C86DF001ABA86 /* PPButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPButton.h; sourceTree = "<group>"; };
 		CA9216E1195C86DF001ABA86 /* PPButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPButton.m; sourceTree = "<group>"; };
 		CABC91241959F99600B4AEF5 /* PaperPlanesV0.2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaperPlanesV0.2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -212,6 +215,8 @@
 				CA8B5E46196CAD58004BE4F3 /* PPCameraViewController.m */,
 				CABC912E1959F99600B4AEF5 /* PPFeedbackViewController.h */,
 				CABC912F1959F99600B4AEF5 /* PPFeedbackViewController.m */,
+				CA8B5E52196DC072004BE4F3 /* PPCenteredScrollView.h */,
+				CA8B5E53196DC072004BE4F3 /* PPCenteredScrollView.m */,
 				CA3C07FB19632AB8005C52FC /* PPBoxViewController.h */,
 				CA3C07FC19632AB8005C52FC /* PPBoxViewController.m */,
 				CA8B5E4B196CB478004BE4F3 /* PPPageViewController.h */,
@@ -424,6 +429,7 @@
 				CA3C07FD19632AB8005C52FC /* PPBoxViewController.m in Sources */,
 				CA8B5E47196CAD58004BE4F3 /* PPCameraViewController.m in Sources */,
 				CAE99DEE195BA4FF0050B584 /* PPMoveButton.m in Sources */,
+				CA8B5E54196DC072004BE4F3 /* PPCenteredScrollView.m in Sources */,
 				CABC91301959F99600B4AEF5 /* PPFeedbackViewController.m in Sources */,
 				484CCCF3196DAF2900823F64 /* DTTimePeriodChain.m in Sources */,
 				CABC912D1959F99600B4AEF5 /* AppDelegate.m in Sources */,

@@ -532,6 +532,10 @@
     return self.imageView;
 }
 
+- (void) scrollViewDidZoom:(UIScrollView *)scrollView {
+    [(PPCenteredScrollView*)scrollView centerContent];
+}
+
 - (void) scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
     // zoomToRect will change selectedBox.view.frame, so
     // if we allow zoomToRect to be called multiple times subsequently,

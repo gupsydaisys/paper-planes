@@ -10,6 +10,7 @@
 #import "HPGrowingTextView.h"
 #import "PPBoxView.h"
 #import "PPBoxViewController.h"
+#import "PPCenteredScrollView.h"
 
 @interface PPFeedbackViewController : UIViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate, BoxViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -18,7 +19,7 @@
 
 /* Image View */
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UIScrollView *imageScrollView;
+@property (weak, nonatomic) IBOutlet PPCenteredScrollView *imageScrollView;
 
 /* Comment Table Container */
 @property (weak, nonatomic) IBOutlet UIView *tableContainer;
