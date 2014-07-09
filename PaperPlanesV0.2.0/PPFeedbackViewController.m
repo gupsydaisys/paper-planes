@@ -32,7 +32,7 @@
 /* Table Comments Constants */
 #define TABLE_HANDLE_HEIGHT 25.0f
 #define TABLE_HANDLE_WIDTH 480.0f
-#define TABLE_CONTAINER_HALF_HEIGHT 202.0f
+#define TABLE_CONTAINER_HALF_HEIGHT 194.0f
 #define TABLE_ROW_HEIGHT 146.0f
 
 /* Table Cell Constants */
@@ -255,8 +255,13 @@
 
 #pragma mark - Table Resize/Update Methods
 - (void) updateTableContainerFrame:(CommentState) curr {
-    float cumulativeCommentHeight = (float) selectedBox.comments.count * TABLE_ROW_HEIGHT + TABLE_HANDLE_HEIGHT;
     float fullHeight = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT;
+    float singleHeight = [self getTableCellHeight:[selectedBox.comments lastObject]];
+    float cumulativeCommentHeight = TABLE_HANDLE_HEIGHT;
+    
+    for (NSString *comment in selectedBox.comments) {
+        cumulativeCommentHeight += [self getTableCellHeight:comment];
+    }
     
     switch (curr) {
         case CLOSED:
@@ -267,10 +272,12 @@
             break;
 
         case ONE:
+            // TODO
+            
             [self updateTableContainerFrame:self.tableContainer.frame.origin.x
-                                           :self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - TABLE_HANDLE_HEIGHT - TABLE_ROW_HEIGHT
+                                           :self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - TABLE_HANDLE_HEIGHT - singleHeight
                                            :self.tableContainer.frame.size.width
-                                           :TABLE_HANDLE_HEIGHT + TABLE_ROW_HEIGHT];
+                                           :TABLE_HANDLE_HEIGHT + singleHeight];
             break;
 
         case FULL:
@@ -329,11 +336,18 @@
         tableHandleState = FULL;
     } else if (self.tableContainer.frame.size.height == TABLE_HANDLE_HEIGHT) {
         tableHandleState = CLOSED;
-    } else if (self.tableContainer.frame.size.height == TABLE_HANDLE_HEIGHT + TABLE_ROW_HEIGHT) {
-        tableHandleState = ONE;
-    } else {
+    } else if (self.tableContainer.frame.size.height == TABLE_CONTAINER_HALF_HEIGHT) {
         tableHandleState = HALF;
+    } else {
+        tableHandleState = ONE;
     }
+}
+
+- (float) getTableCellHeight:(NSString *) comment {
+    float verticalPadding = 10.0f + 25.0f + 20.0f + 10.0f;
+    float maxWidth = CGRectGetWidth(self.tableView.bounds) - 20.0f;
+    float height = [comment sizeWithFont:[UIFont systemFontOfSize:TABLE_CELL_CONTENT_FONT_SIZE] constrainedToSize:CGSizeMake(maxWidth, 999999.0f) lineBreakMode:NSLineBreakByWordWrapping].height + verticalPadding;
+    return height;
 }
 
 #pragma mark - Keyboard Hiding and Showing
@@ -346,12 +360,17 @@
     float animationDuration = [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
     [UIView animateWithDuration:animationDuration animations:^{
-        
-        if (tableHandleState == FULL) {
-            float maxHeight = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT;
+        float maxHeight = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT;
+        if (self.tableContainer.frame.size.height > maxHeight) {
             self.tableContainerHeight.constant = maxHeight;
             [self.view setNeedsUpdateConstraints];
         }
+//        if (tableHandleState == FULL) {
+//            
+//            float maxHeight = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT;
+//            self.tableContainerHeight.constant = maxHeight;
+//            [self.view setNeedsUpdateConstraints];
+//        }
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
         if (selectedBox) {
@@ -359,11 +378,6 @@
                 // See scrollViewDidEndZooming for an explanation of these boolean flags
                 willZoomToRectOnSelectedBox = YES;
                 [self.imageScrollView zoomToRect:selectedBox.view.frame animated:YES];
-            }
-        }
-        if (finished) {
-            if (tableHandleState == HALF || tableHandleState == ONE) {
-                [self updateTableContainerFrame:FULL];
             }
         }
     }];
@@ -437,64 +451,8 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *comment = selectedBox.comments[indexPath.row];
-    
-    float verticalPadding = 10.0f + 25.0f + 20.0f + 10.0f;
-
-    
-    float maxWidth = CGRectGetWidth(tableView.bounds) - 20.0f;
-    float height = [comment sizeWithFont:[UIFont systemFontOfSize:TABLE_CELL_CONTENT_FONT_SIZE] constrainedToSize:CGSizeMake(maxWidth, 999999.0f) lineBreakMode:NSLineBreakByWordWrapping].height + verticalPadding;
-    
-//    float height = [comment boundingRectWithSize:<#(CGSize)#> options:<#(NSStringDrawingOptions)#> attributes:<#(NSDictionary *)#> context:(NSStringDrawingContext *)]
-    
-    return height;
-//    // Use a dictionary of offscreen cells to get a cell for the reuse identifier, creating a cell and storing
-//    // it in the dictionary if one hasn't already been added for the reuse identifier.
-//    // WARNING: Don't call the table view's dequeueReusableCellWithIdentifier: method here because this will result
-//    // in a memory leak as the cell is created but never returned from the tableView:cellForRowAtIndexPath: method!
-//    HSCommentCell *cell = [HSCommentCell new];
-//
-//    
-//    // Configure the cell with content for the given indexPath, for example:
-//    // cell.textLabel.text = someTextForThisCell;
-//    NSString *comment = selectedBox.comments[indexPath.row];
-//    cell.creator.text = @"dempsey";
-//    cell.timestamp.text = @"2 days ago";
-//    cell.content.text = comment;
-//    
-//    // Make sure the constraints have been set up for this cell, since it may have just been created from scratch.
-//    // Use the following lines, assuming you are setting up constraints from within the cell's updateConstraints method:
-//    [cell setNeedsUpdateConstraints];
-//    [cell updateConstraintsIfNeeded];
-//    
-//    // Set the width of the cell to match the width of the table view. This is important so that we'll get the
-//    // correct cell height for different table view widths if the cell's height depends on its width (due to
-//    // multi-line UILabels word wrapping, etc). We don't need to do this above in -[tableView:cellForRowAtIndexPath]
-//    // because it happens automatically when the cell is used in the table view.
-//    // Also note, the final width of the cell may not be the width of the table view in some cases, for example when a
-//    // section index is displayed along the right side of the table view. You must account for the reduced cell width.
-//    cell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(tableView.bounds), CGRectGetHeight(cell.bounds));
-//    
-//    // Do the layout pass on the cell, which will calculate the frames for all the views based on the constraints.
-//    // (Note that you must set the preferredMaxLayoutWidth on multi-line UILabels inside the -[layoutSubviews] method
-//    // of the UITableViewCell subclass, or do it manually at this point before the below 2 lines!)
-//    cell.content.preferredMaxLayoutWidth = tableView.frame.size.width - 20.0f;
-//    [cell setNeedsLayout];
-//    [cell layoutIfNeeded];
-//    
-//    // Get the actual height required for the cell's contentView
-//    CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-//    
-//    // Add an extra point to the height to account for the cell separator, which is added between the bottom
-//    // of the cell's contentView and the bottom of the table view cell.
-//    height += 1.0f;
-//    
-//    return height;
+    return [self getTableCellHeight:selectedBox.comments[indexPath.row]];
 }
-
-//- (CGFloat) tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return 0;
-//}
 
 #pragma mark - Gesture recognizer delegate
 
