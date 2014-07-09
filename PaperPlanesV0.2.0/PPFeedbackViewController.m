@@ -10,7 +10,6 @@
 #import "HSCommentCell.h"
 #import "PPBoxView.h"
 #import "UIView+Util.h"
-#import "UIScrollView+Util.h"
 #import "NSString+FontAwesome.h"
 #import "PPBoxViewController.h"
 #import "DateTools.h"

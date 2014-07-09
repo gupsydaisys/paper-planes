@@ -25,7 +25,6 @@
 		CA384771195B3AC10083B949 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = CA38476E195B3AC10083B949 /* NSString+FontAwesome.m */; };
 		CA384772195B3AC10083B949 /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = CA384770195B3AC10083B949 /* UIFont+FontAwesome.m */; };
 		CA384776195B3BD70083B949 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA384775195B3AFE0083B949 /* FontAwesome.ttf */; };
-		CA3C07F3195CE9ED005C52FC /* UIScrollView+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3C07F2195CE9ED005C52FC /* UIScrollView+Util.m */; };
 		CA3C07F6195DDDE9005C52FC /* PPFeedbackImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3C07F5195DDDE9005C52FC /* PPFeedbackImageView.m */; };
 		CA3C07FD19632AB8005C52FC /* PPBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3C07FC19632AB8005C52FC /* PPBoxViewController.m */; };
 		CA8B5E47196CAD58004BE4F3 /* PPCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8B5E46196CAD58004BE4F3 /* PPCameraViewController.m */; };
@@ -89,8 +88,6 @@
 		CA38476F195B3AC10083B949 /* UIFont+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+FontAwesome.h"; sourceTree = "<group>"; };
 		CA384770195B3AC10083B949 /* UIFont+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FontAwesome.m"; sourceTree = "<group>"; };
 		CA384775195B3AFE0083B949 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
-		CA3C07F1195CE9ED005C52FC /* UIScrollView+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Util.h"; sourceTree = "<group>"; };
-		CA3C07F2195CE9ED005C52FC /* UIScrollView+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Util.m"; sourceTree = "<group>"; };
 		CA3C07F4195DDDE9005C52FC /* PPFeedbackImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPFeedbackImageView.h; sourceTree = "<group>"; };
 		CA3C07F5195DDDE9005C52FC /* PPFeedbackImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPFeedbackImageView.m; sourceTree = "<group>"; };
 		CA3C07FB19632AB8005C52FC /* PPBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPBoxViewController.h; sourceTree = "<group>"; };
@@ -299,8 +296,6 @@
 		CAE99DEB195BA3610050B584 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CA3C07F1195CE9ED005C52FC /* UIScrollView+Util.h */,
-				CA3C07F2195CE9ED005C52FC /* UIScrollView+Util.m */,
 				CA384767195A39510083B949 /* PPBoxView.h */,
 				CA384768195A39510083B949 /* PPBoxView.m */,
 				CAE99DE8195BA0970050B584 /* UIView+Util.h */,
@@ -445,7 +440,6 @@
 				484CCCF1196DAF2900823F64 /* DTError.m in Sources */,
 				CA3C07F6195DDDE9005C52FC /* PPFeedbackImageView.m in Sources */,
 				484CCCF2196DAF2900823F64 /* DTTimePeriod.m in Sources */,
-				CA3C07F3195CE9ED005C52FC /* UIScrollView+Util.m in Sources */,
 				CAE99DEA195BA0970050B584 /* UIView+Util.m in Sources */,
 				484CCCF4196DAF2900823F64 /* DTTimePeriodCollection.m in Sources */,
 				48987A5A195A3E64003C6EC6 /* HPGrowingTextView.m in Sources */,
