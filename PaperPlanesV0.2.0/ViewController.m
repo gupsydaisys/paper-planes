@@ -35,6 +35,12 @@
 #define TABLE_CONTAINER_HALF_HEIGHT 202.0f
 #define TABLE_ROW_HEIGHT 146.0f
 
+/* Table Cell Constants */
+#define TABLE_CELL_CREATOR_LABEL_HEIGHT 25.0f
+#define TABLE_CELL_LABEL_MARGIN 10.0f
+#define TABLE_CELL_LABEL_TO_CONTENT 20.0f
+#define TABLE_CELL_CONTENT_FONT_SIZE 16.0f
+
 /* Other Constants */
 #define HEADING_HEIGHT 25.0f
 #define ANIMATE 1
@@ -412,20 +418,36 @@
     HSCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
     NSString *comment = selectedBox.comments[indexPath.row];
 
+    
+    // NEXT TIME change this so that when you access cell it goes into the cell
+    
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+
     cell.creator.text = @"dempsey";
     cell.timestamp.text = @"2 days ago";
     cell.content.text = comment;
-    
-    // NEXT TIME change this so that when you access cell it goes into the cell
 
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [cell setNeedsUpdateConstraints];
+    [cell updateConstraintsIfNeeded];
+
 
     return cell;
 }
 
-//- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *comment = selectedBox.comments[indexPath.row];
+    
+    float verticalPadding = 10.0f + 25.0f + 20.0f + 10.0f;
+
+    
+    float maxWidth = CGRectGetWidth(tableView.bounds) - 20.0f;
+    float height = [comment sizeWithFont:[UIFont systemFontOfSize:TABLE_CELL_CONTENT_FONT_SIZE] constrainedToSize:CGSizeMake(maxWidth, 999999.0f) lineBreakMode:NSLineBreakByWordWrapping].height + verticalPadding;
+    
+//    float height = [comment boundingRectWithSize:<#(CGSize)#> options:<#(NSStringDrawingOptions)#> attributes:<#(NSDictionary *)#> context:(NSStringDrawingContext *)]
+    
+    return height;
 //    // Use a dictionary of offscreen cells to get a cell for the reuse identifier, creating a cell and storing
 //    // it in the dictionary if one hasn't already been added for the reuse identifier.
 //    // WARNING: Don't call the table view's dequeueReusableCellWithIdentifier: method here because this will result
@@ -468,8 +490,8 @@
 //    height += 1.0f;
 //    
 //    return height;
-//}
-//
+}
+
 //- (CGFloat) tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    return 0;
 //}
