@@ -337,37 +337,45 @@
     CGSize KbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     [self updateKeyboardHeight:KbSize.height];
     
-    float animationDuration = [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    // Matching the keyboard animation curve in ios 7.
+    // see: http://stackoverflow.com/questions/18957476/ios-7-keyboard-animation
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:[[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue]];
+    [UIView setAnimationCurve:[[[aNotification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue]];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(keyboardDidShow)];
     
-    [UIView animateWithDuration:animationDuration animations:^{
-        
-        if (tableHandleState == FULL) {
-            float maxHeight = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT;
-            self.tableContainerHeight.constant = maxHeight;
-            [self.view setNeedsUpdateConstraints];
-        }
-        [self.view layoutIfNeeded];
-    } completion:^(BOOL finished) {
-        if (selectedBox) {
-            if (!didZoomToRectOnSelectedBox) {
-                // zoomToRect will change selectedBox.view.frame, so
-                // if we allow zoomToRect to be called multiple times subsequently,
-                // then you get a bug where the first zoomToRect does the proper thing,
-                // but subsequent zoomToRect calls just inch in ever closer to the selectedBox,
-                // which is useless and distracting for the user.
-                // Panning or zooming manually will reset the flags, to allow for another zoomToRect call.
+    if (tableHandleState == FULL) {
+        float maxHeight = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT;
+        self.tableContainerHeight.constant = maxHeight;
+        [self.view setNeedsUpdateConstraints];
+    }
+    [self.view layoutIfNeeded];
+    
+    [UIView commitAnimations];
 
-                [self scrollViewWillZoomToRect];
-                [self.imageScrollView zoomToRect:selectedBox.view.frame animated:YES];
-            }
-        }
-        if (finished) {
-            if (tableHandleState == HALF || tableHandleState == ONE) {
-                [self updateTableContainerFrame:FULL];
-            }
-        }
-    }];
     isKeyboardUp = YES;
+}
+
+- (void) keyboardDidShow {
+    if (selectedBox) {
+        if (!didZoomToRectOnSelectedBox) {
+            // zoomToRect will change selectedBox.view.frame, so
+            // if we allow zoomToRect to be called multiple times subsequently,
+            // then you get a bug where the first zoomToRect does the proper thing,
+            // but subsequent zoomToRect calls just inch in ever closer to the selectedBox,
+            // which is useless and distracting for the user.
+            // Panning or zooming manually will reset the flags, to allow for another zoomToRect call.
+            
+            [self scrollViewWillZoomToRect];
+            [self.imageScrollView zoomToRect:selectedBox.view.frame animated:YES];
+        }
+    }
+    
+    if (tableHandleState == HALF || tableHandleState == ONE) {
+        [self updateTableContainerFrame:FULL];
+    }
 }
 
 - (void) keyboardWillBeHidden:(NSNotification *) aNotification {
@@ -380,14 +388,17 @@
         [self updateTableContainerFrame:FULL];
     }
     
-    float animationDuration = [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
-    [UIView animateWithDuration:animationDuration animations:^{
-        [self.view layoutIfNeeded];
-
-    } completion:^(BOOL finished) {
-        if (finished) {
-        }
-    }];
+    // Matching the keyboard animation curve in ios 7.
+    // see: http://stackoverflow.com/questions/18957476/ios-7-keyboard-animation
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:[[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue]];
+    [UIView setAnimationCurve:[[[aNotification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue]];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    
+    [self.view layoutIfNeeded];
+    
+    [UIView commitAnimations];
+    
     isKeyboardUp = NO;
 }
 
