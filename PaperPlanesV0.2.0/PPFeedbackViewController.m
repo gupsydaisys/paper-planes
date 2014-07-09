@@ -350,8 +350,14 @@
     } completion:^(BOOL finished) {
         if (selectedBox) {
             if (!didZoomToRectOnSelectedBox) {
-                // See scrollViewDidEndZooming for an explanation of these boolean flags
-                willZoomToRectOnSelectedBox = YES;
+                // zoomToRect will change selectedBox.view.frame, so
+                // if we allow zoomToRect to be called multiple times subsequently,
+                // then you get a bug where the first zoomToRect does the proper thing,
+                // but subsequent zoomToRect calls just inch in ever closer to the selectedBox,
+                // which is useless and distracting for the user.
+                // Panning or zooming manually will reset the flags, to allow for another zoomToRect call.
+
+                [self scrollViewWillZoomToRect];
                 [self.imageScrollView zoomToRect:selectedBox.view.frame animated:YES];
             }
         }
@@ -537,25 +543,32 @@
 }
 
 - (void) scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
-    // zoomToRect will change selectedBox.view.frame, so
-    // if we allow zoomToRect to be called multiple times subsequently,
-    // then you get a bug where the first zoomToRect does the proper thing,
-    // but subsequent zoomToRect calls just inch in ever closer to the selectedBox,
-    // which is useless and distracting for the user.
-    // Panning or zooming manually will reset the flags, to allow for another zoomToRect call.
     if (willZoomToRectOnSelectedBox) {
-        willZoomToRectOnSelectedBox = NO;
-        didZoomToRectOnSelectedBox = YES;
+        [self scrollViewDidZoomToRect];
     } else {
-        // User manually zoomed, reset flag
-        didZoomToRectOnSelectedBox = NO;
+        [self scrollViewCanZoomToRect];
     }
 }
 
-- (void) scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    // User manually panned, reset flags
+- (void) scrollViewWillZoomToRect {
+    willZoomToRectOnSelectedBox = YES;
+    didZoomToRectOnSelectedBox = NO;
+}
+
+- (void) scrollViewDidZoomToRect {
+    willZoomToRectOnSelectedBox = NO;
+    didZoomToRectOnSelectedBox = YES;
+}
+
+- (void) scrollViewCanZoomToRect {
     willZoomToRectOnSelectedBox = NO;
     didZoomToRectOnSelectedBox = NO;
+}
+
+
+- (void) scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    // User manually panned, allow zoomToRect
+    [self scrollViewCanZoomToRect];
 }
 
 
@@ -581,9 +594,8 @@
 
 - (void) boxWasPanned:(PPBoxViewController *)box {
     if (selectedBox == box) {
-        // User moved box, reset and allow another zoomToRect call
-        willZoomToRectOnSelectedBox = NO;
-        didZoomToRectOnSelectedBox = NO;
+        // User moved box, allow another zoomToRect call
+        [self scrollViewCanZoomToRect];
     }
 }
 
