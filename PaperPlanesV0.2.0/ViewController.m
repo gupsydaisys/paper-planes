@@ -13,6 +13,7 @@
 #import "UIScrollView+Util.h"
 #import "NSString+FontAwesome.h"
 #import "PPBoxViewController.h"
+#import "DateTools.h"
 
 /* Post Comment Constants */
 #define POST_COMMENT_CONTAINTER_WIDTH 480.0f
@@ -369,10 +370,17 @@
     //if half and full -> half
     //if one -> one
     //if closed -> closed
+    if (tableHandleState == FULL) {
+        [self updateTableContainerFrame:FULL];
+    }
     
     float animationDuration = [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     [UIView animateWithDuration:animationDuration animations:^{
         [self.view layoutIfNeeded];
+
+    } completion:^(BOOL finished) {
+        if (finished) {
+        }
     }];
     isKeyboardUp = NO;
 }
@@ -404,6 +412,8 @@
     HSCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
     NSString *comment = selectedBox.comments[indexPath.row];
 
+    cell.creator.text = @"dempsey";
+    cell.timestamp.text = @"2 days ago";
     cell.content.text = comment;
     
     // NEXT TIME change this so that when you access cell it goes into the cell
@@ -414,11 +424,55 @@
     return cell;
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // NEXT TIME change this to grow with content
-        return self.tableView.rowHeight;
-}
+//- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    // Use a dictionary of offscreen cells to get a cell for the reuse identifier, creating a cell and storing
+//    // it in the dictionary if one hasn't already been added for the reuse identifier.
+//    // WARNING: Don't call the table view's dequeueReusableCellWithIdentifier: method here because this will result
+//    // in a memory leak as the cell is created but never returned from the tableView:cellForRowAtIndexPath: method!
+//    HSCommentCell *cell = [HSCommentCell new];
+//
+//    
+//    // Configure the cell with content for the given indexPath, for example:
+//    // cell.textLabel.text = someTextForThisCell;
+//    NSString *comment = selectedBox.comments[indexPath.row];
+//    cell.creator.text = @"dempsey";
+//    cell.timestamp.text = @"2 days ago";
+//    cell.content.text = comment;
+//    
+//    // Make sure the constraints have been set up for this cell, since it may have just been created from scratch.
+//    // Use the following lines, assuming you are setting up constraints from within the cell's updateConstraints method:
+//    [cell setNeedsUpdateConstraints];
+//    [cell updateConstraintsIfNeeded];
+//    
+//    // Set the width of the cell to match the width of the table view. This is important so that we'll get the
+//    // correct cell height for different table view widths if the cell's height depends on its width (due to
+//    // multi-line UILabels word wrapping, etc). We don't need to do this above in -[tableView:cellForRowAtIndexPath]
+//    // because it happens automatically when the cell is used in the table view.
+//    // Also note, the final width of the cell may not be the width of the table view in some cases, for example when a
+//    // section index is displayed along the right side of the table view. You must account for the reduced cell width.
+//    cell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(tableView.bounds), CGRectGetHeight(cell.bounds));
+//    
+//    // Do the layout pass on the cell, which will calculate the frames for all the views based on the constraints.
+//    // (Note that you must set the preferredMaxLayoutWidth on multi-line UILabels inside the -[layoutSubviews] method
+//    // of the UITableViewCell subclass, or do it manually at this point before the below 2 lines!)
+//    cell.content.preferredMaxLayoutWidth = tableView.frame.size.width - 20.0f;
+//    [cell setNeedsLayout];
+//    [cell layoutIfNeeded];
+//    
+//    // Get the actual height required for the cell's contentView
+//    CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+//    
+//    // Add an extra point to the height to account for the cell separator, which is added between the bottom
+//    // of the cell's contentView and the bottom of the table view cell.
+//    height += 1.0f;
+//    
+//    return height;
+//}
+//
+//- (CGFloat) tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return 0;
+//}
 
 #pragma mark - Gesture recognizer delegate
 
@@ -454,7 +508,7 @@
 }
 
 - (void) showComments:(BOOL) shouldShow state:(CommentState) curr {
-    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+//    [UIView animateWithDuration:.5 animations:^{
         if (shouldShow) {
             self.textView.text = @"";
             self.postCommentContainer.hidden = NO;
@@ -470,7 +524,7 @@
             self.tableContainer.hidden = YES;
             self.postCommentContainer.hidden = YES;
         }
-    }];
+//    }];
 }
 
 #pragma mark - Scroll view delegate
