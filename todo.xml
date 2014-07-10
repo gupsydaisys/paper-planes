@@ -1,8 +1,14 @@
 Serena
-1. you have to be able to create deeper comments with elipsis
-2. should go into full from full in comment mode
-3. remove flash -- 0 comments to first ??? what should animation be?
+1. fix height resizing
+2. make into constants
+<!-- 1. you have to be able to create deeper comments with elipsis
+ --><!-- 2. should go into full from full in comment mode -->
+<!-- 3. remove flash -- 0 comments to first ??? what should animation be? -->
 4. animate the textfield
+5. fix labels in post comment
+6. be able to highlight text in tableview
+7. cutting off lines in post comment
+8. add ellipsis
 
 Hani
 1. shouldn't be able to put box handles off screen
