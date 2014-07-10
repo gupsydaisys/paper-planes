@@ -499,21 +499,14 @@
     [self addChildViewController:box];
     
     box.view = [PPBoxView centeredAtPoint:touchPoint];
-    if (box.view.frame.origin.x < self.imageView.frame.origin.x) {
-        box.view.center = CGPointMake(self.imageView.frame.origin.x + (box.view.frame.size.width / 2), box.view.center.y);
-    }
-    
-    if (box.view.frame.origin.y < self.imageView.frame.origin.y) {
-        box.view.center = CGPointMake(box.view.center.x, self.imageView.frame.origin.y + (box.view.frame.size.height / 2) + 2);
-    }
 
     [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:box.view.moveButtonPanGestureRecognizer];
     [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:box.view.resizeButtonPanGestureRecognizer];
     box.delegate = self;
     [box makeSelection:true];
     [gesture.view addSubview:box.view];
-    
     [box didMoveToParentViewController:self];
+    [self restrictBoxView:box.view toBounds:self.imageView.frame];
 }
 
 - (BOOL) gestureRecognizer:(UIGestureRecognizer *) gestureRecognizer shouldReceiveTouch:(UITouch *) touch {
@@ -560,22 +553,6 @@
     }
 }
 
-- (void) scrollViewWillZoomToRect {
-    willZoomToRectOnSelectedBox = YES;
-    didZoomToRectOnSelectedBox = NO;
-}
-
-- (void) scrollViewDidZoomToRect {
-    willZoomToRectOnSelectedBox = NO;
-    didZoomToRectOnSelectedBox = YES;
-}
-
-- (void) scrollViewCanZoomToRect {
-    willZoomToRectOnSelectedBox = NO;
-    didZoomToRectOnSelectedBox = NO;
-}
-
-
 - (void) scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
     // User manually panned, allow zoomToRect
     [self scrollViewCanZoomToRect];
@@ -606,6 +583,8 @@
     if (selectedBox == box) {
         // User moved box, allow another zoomToRect call
         [self scrollViewCanZoomToRect];
+        
+        [self restrictBoxView:box.view toBounds:self.imageView.frame];
     }
 }
 
@@ -627,5 +606,50 @@
         }
     }
 }
+
+#pragma mark - Helper methods
+
+- (void) restrictBoxView:(PPBoxView *) boxView toBounds:(CGRect) bounds {
+    // Allow the box's buttons to go past the bounds
+    UIEdgeInsets buttonInsets = UIEdgeInsetsMake(30, 30, 30, 30);
+    [self restrictView:boxView toBounds:self.imageView.bounds withInset:buttonInsets];
+}
+
+- (void) restrictView:(UIView *) view toBounds:(CGRect) bounds withInset:(UIEdgeInsets) insets {
+    CGRect frame = UIEdgeInsetsInsetRect(view.frame, insets);
+    
+    if (frame.origin.x < bounds.origin.x) {
+        view.center = CGPointMake(bounds.origin.x + frame.size.width / 2, view.center.y);
+    }
+    
+    if (frame.origin.y < bounds.origin.y) {
+        view.center = CGPointMake(view.center.x, bounds.origin.y + frame.size.height / 2);
+    }
+    
+    if (CGRectGetMaxX(frame) > CGRectGetMaxX(bounds)) {
+        view.center = CGPointMake(CGRectGetMaxX(bounds) - frame.size.width / 2, view.center.y);
+    }
+
+    if (CGRectGetMaxY(frame) > CGRectGetMaxY(bounds)) {
+        view.center = CGPointMake(view.center.x, CGRectGetMaxY(bounds) - frame.size.height / 2);
+    }
+}
+
+- (void) scrollViewWillZoomToRect {
+    willZoomToRectOnSelectedBox = YES;
+    didZoomToRectOnSelectedBox = NO;
+}
+
+- (void) scrollViewDidZoomToRect {
+    willZoomToRectOnSelectedBox = NO;
+    didZoomToRectOnSelectedBox = YES;
+}
+
+- (void) scrollViewCanZoomToRect {
+    willZoomToRectOnSelectedBox = NO;
+    didZoomToRectOnSelectedBox = NO;
+}
+
+
 
 @end

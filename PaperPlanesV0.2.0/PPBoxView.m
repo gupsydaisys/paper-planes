@@ -40,6 +40,7 @@
         [self addControl:[self resizeButton]];
         [self addControl:[self moveButton]];
         [self setColor:self.tintColor];
+        [self resizeBoundsToFitSubviews];
         self.userInteractionEnabled = YES;
         self.opaque = NO;
     }
