@@ -60,6 +60,8 @@
 
     BOOL willZoomToRectOnSelectedBox;
     BOOL didZoomToRectOnSelectedBox;
+    
+    UIView *temp;
 }
 
 @end
@@ -73,6 +75,9 @@
     [self initCommentDrawer];
     [self addObservers];
     [self addGestureRecognizers];
+    
+    temp = [UIView new];
+    [self.mainView addSubview:temp];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -272,8 +277,6 @@
             break;
 
         case ONE:
-            // TODO
-            
             [self updateTableContainerFrame:self.tableContainer.frame.origin.x
                                            :self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - TABLE_HANDLE_HEIGHT - singleHeight
                                            :self.tableContainer.frame.size.width
@@ -344,10 +347,26 @@
 }
 
 - (float) getTableCellHeight:(NSString *) comment {
-    float verticalPadding = 10.0f + 25.0f + 20.0f + 10.0f;
-    float maxWidth = CGRectGetWidth(self.tableView.bounds) - 20.0f;
-    float height = [comment sizeWithFont:[UIFont systemFontOfSize:TABLE_CELL_CONTENT_FONT_SIZE] constrainedToSize:CGSizeMake(maxWidth, 999999.0f) lineBreakMode:NSLineBreakByWordWrapping].height + verticalPadding;
-    return height;
+    // NEXT STEP remove hard coded size and figure out how to correctly get height
+    
+    float verticalPadding = 30.0f + TABLE_CELL_LABEL_TO_CONTENT + TABLE_CELL_LABEL_MARGIN + 50.0f;
+    float maxWidth = 454.0f - (TABLE_CELL_LABEL_MARGIN * 2);
+//    float height = [comment sizeWithFont:[UIFont systemFontOfSize:TABLE_CELL_CONTENT_FONT_SIZE] constrainedToSize:CGSizeMake(maxWidth, 999999.0f) lineBreakMode:NSLineBreakByWordWrapping].height + verticalPadding;
+//    return height;
+    
+    UIFont *font = [UIFont systemFontOfSize:TABLE_CELL_CONTENT_FONT_SIZE];
+    // Make a copy of the default paragraph style
+    NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    // Set line break mode
+    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    // Set text alignment
+    paragraphStyle.alignment = NSTextAlignmentRight;
+    
+    NSDictionary *attributes = @{ NSFontAttributeName: font,
+                                  NSParagraphStyleAttributeName: paragraphStyle };
+    
+    CGRect rect = [comment boundingRectWithSize:CGSizeMake(maxWidth, 999999.0f) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:Nil];
+    return rect.size.height + verticalPadding;
 }
 
 #pragma mark - Keyboard Hiding and Showing
@@ -365,12 +384,6 @@
             self.tableContainerHeight.constant = maxHeight;
             [self.view setNeedsUpdateConstraints];
         }
-//        if (tableHandleState == FULL) {
-//            
-//            float maxHeight = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT;
-//            self.tableContainerHeight.constant = maxHeight;
-//            [self.view setNeedsUpdateConstraints];
-//        }
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
         if (selectedBox) {
@@ -449,8 +462,7 @@
     return cell;
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *) indexPath {
     return [self getTableCellHeight:selectedBox.comments[indexPath.row]];
 }
 
@@ -543,7 +555,12 @@
 
 - (void) didPostComment {
     [self.tableView reloadData];
-    [self showComments:TRUE state:ONE];
+    if (selectedBox.comments.count == 1) {
+        [self showComments:TRUE state:ONE];
+    } else {
+        [self showComments:TRUE state:tableHandleState];
+    }
+    
     [self.view endEditing:YES];
     NSIndexPath *index = [NSIndexPath indexPathForItem:(selectedBox.comments.count - 1) inSection:0];
     [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:NO];
