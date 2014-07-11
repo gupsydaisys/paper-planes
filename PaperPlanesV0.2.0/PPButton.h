@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "NSString+FontAwesome.h"
 
-@interface PPButton : UIView
+@interface PPButton : UIButton
 
 - (UILabel*) fontAwesomeLabel:(FAIcon) iconName withFrame:(CGRect) rect;
 

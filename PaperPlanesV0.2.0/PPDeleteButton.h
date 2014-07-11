@@ -11,6 +11,7 @@
 
 @interface PPDeleteButton : PPButton
 
+- (instancetype)initWithFrame:(CGRect)frame circleShown:(BOOL)isShown;
 - (void) setColor: (UIColor*) color;
 
 @end

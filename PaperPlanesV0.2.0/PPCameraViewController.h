@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PPCameraViewController : UIViewController
+@interface PPCameraViewController : UIViewController <UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *logo;
 
 @end

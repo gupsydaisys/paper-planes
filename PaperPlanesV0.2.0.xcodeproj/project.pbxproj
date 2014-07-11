@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4831DF191964B72700445877 /* photo1 (6).jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4831DF181964B72700445877 /* photo1 (6).jpg */; };
+		483DD01A197064A3009EE161 /* UIOutlineLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 483DD019197064A3009EE161 /* UIOutlineLabel.m */; };
 		483F32DE195E0EF2009788C0 /* HSCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 483F32DD195E0EF2009788C0 /* HSCommentCell.m */; };
 		483F32E5195E13E2009788C0 /* PPComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 483F32E4195E13E2009788C0 /* PPComment.m */; };
 		484CCCF0196DAF2900823F64 /* DateTools.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 484CCCE1196DAF2900823F64 /* DateTools.bundle */; };
@@ -20,6 +21,8 @@
 		489652CB195A10AE002128B7 /* IMG_2602.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 489652CA195A10AE002128B7 /* IMG_2602.jpg */; };
 		48987A5A195A3E64003C6EC6 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48987A57195A3E64003C6EC6 /* HPGrowingTextView.m */; };
 		48987A5B195A3E64003C6EC6 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 48987A59195A3E64003C6EC6 /* HPTextViewInternal.m */; };
+		48ECD4E5196F563C001A66C5 /* PPTakePhotoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 48ECD4E4196F563C001A66C5 /* PPTakePhotoButton.m */; };
+		48ECD4E8196F71FD001A66C5 /* PPPushNoAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 48ECD4E7196F71FD001A66C5 /* PPPushNoAnimationSegue.m */; };
 		CA384769195A39510083B949 /* PPBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA384768195A39510083B949 /* PPBoxView.m */; };
 		CA38476C195A52340083B949 /* PPDeleteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CA38476B195A52340083B949 /* PPDeleteButton.m */; };
 		CA384771195B3AC10083B949 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = CA38476E195B3AC10083B949 /* NSString+FontAwesome.m */; };
@@ -28,7 +31,6 @@
 		CA3C07F6195DDDE9005C52FC /* PPFeedbackImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3C07F5195DDDE9005C52FC /* PPFeedbackImageView.m */; };
 		CA3C07FD19632AB8005C52FC /* PPBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3C07FC19632AB8005C52FC /* PPBoxViewController.m */; };
 		CA8B5E47196CAD58004BE4F3 /* PPCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8B5E46196CAD58004BE4F3 /* PPCameraViewController.m */; };
-		CA8B5E4D196CB478004BE4F3 /* PPPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8B5E4C196CB478004BE4F3 /* PPPageViewController.m */; };
 		CA8B5E50196CDD11004BE4F3 /* IKCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8B5E4F196CDD11004BE4F3 /* IKCapture.m */; };
 		CA8B5E54196DC072004BE4F3 /* PPCenteredScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8B5E53196DC072004BE4F3 /* PPCenteredScrollView.m */; };
 		CA9216E2195C86DF001ABA86 /* PPButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9216E1195C86DF001ABA86 /* PPButton.m */; };
@@ -55,6 +57,8 @@
 
 /* Begin PBXFileReference section */
 		4831DF181964B72700445877 /* photo1 (6).jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "photo1 (6).jpg"; sourceTree = "<group>"; };
+		483DD018197064A3009EE161 /* UIOutlineLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIOutlineLabel.h; sourceTree = "<group>"; };
+		483DD019197064A3009EE161 /* UIOutlineLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIOutlineLabel.m; sourceTree = "<group>"; };
 		483F32DC195E0EF2009788C0 /* HSCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSCommentCell.h; sourceTree = "<group>"; };
 		483F32DD195E0EF2009788C0 /* HSCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSCommentCell.m; sourceTree = "<group>"; };
 		483F32E3195E13E2009788C0 /* PPComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPComment.h; sourceTree = "<group>"; };
@@ -79,6 +83,10 @@
 		48987A57195A3E64003C6EC6 /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
 		48987A58195A3E64003C6EC6 /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
 		48987A59195A3E64003C6EC6 /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
+		48ECD4E3196F563C001A66C5 /* PPTakePhotoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPTakePhotoButton.h; sourceTree = "<group>"; };
+		48ECD4E4196F563C001A66C5 /* PPTakePhotoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPTakePhotoButton.m; sourceTree = "<group>"; };
+		48ECD4E6196F71FD001A66C5 /* PPPushNoAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPushNoAnimationSegue.h; sourceTree = "<group>"; };
+		48ECD4E7196F71FD001A66C5 /* PPPushNoAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPushNoAnimationSegue.m; sourceTree = "<group>"; };
 		CA384767195A39510083B949 /* PPBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPBoxView.h; sourceTree = "<group>"; };
 		CA384768195A39510083B949 /* PPBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPBoxView.m; sourceTree = "<group>"; };
 		CA38476A195A52340083B949 /* PPDeleteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPDeleteButton.h; sourceTree = "<group>"; };
@@ -94,8 +102,6 @@
 		CA3C07FC19632AB8005C52FC /* PPBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPBoxViewController.m; sourceTree = "<group>"; };
 		CA8B5E45196CAD58004BE4F3 /* PPCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCameraViewController.h; sourceTree = "<group>"; };
 		CA8B5E46196CAD58004BE4F3 /* PPCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPCameraViewController.m; sourceTree = "<group>"; };
-		CA8B5E4B196CB478004BE4F3 /* PPPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPageViewController.h; sourceTree = "<group>"; };
-		CA8B5E4C196CB478004BE4F3 /* PPPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPageViewController.m; sourceTree = "<group>"; };
 		CA8B5E4E196CDD11004BE4F3 /* IKCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKCapture.h; sourceTree = "<group>"; };
 		CA8B5E4F196CDD11004BE4F3 /* IKCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKCapture.m; sourceTree = "<group>"; };
 		CA8B5E52196DC072004BE4F3 /* PPCenteredScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCenteredScrollView.h; sourceTree = "<group>"; };
@@ -216,8 +222,6 @@
 				CA8B5E53196DC072004BE4F3 /* PPCenteredScrollView.m */,
 				CA3C07FB19632AB8005C52FC /* PPBoxViewController.h */,
 				CA3C07FC19632AB8005C52FC /* PPBoxViewController.m */,
-				CA8B5E4B196CB478004BE4F3 /* PPPageViewController.h */,
-				CA8B5E4C196CB478004BE4F3 /* PPPageViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -257,6 +261,8 @@
 				4831DF181964B72700445877 /* photo1 (6).jpg */,
 				CABC912B1959F99600B4AEF5 /* AppDelegate.h */,
 				CABC912C1959F99600B4AEF5 /* AppDelegate.m */,
+				48ECD4E6196F71FD001A66C5 /* PPPushNoAnimationSegue.h */,
+				48ECD4E7196F71FD001A66C5 /* PPPushNoAnimationSegue.m */,
 				CA3C07FE19632ABF005C52FC /* View Controllers */,
 				483F32E2195E135D009788C0 /* Models */,
 				CAE99DEB195BA3610050B584 /* Views */,
@@ -301,11 +307,15 @@
 				CAE99DE8195BA0970050B584 /* UIView+Util.h */,
 				CAE99DE9195BA0970050B584 /* UIView+Util.m */,
 				CAE99DEC195BA4FF0050B584 /* PPMoveButton.h */,
+				48ECD4E3196F563C001A66C5 /* PPTakePhotoButton.h */,
+				48ECD4E4196F563C001A66C5 /* PPTakePhotoButton.m */,
 				CAE99DED195BA4FF0050B584 /* PPMoveButton.m */,
 				CA9216E0195C86DF001ABA86 /* PPButton.h */,
 				CA9216E1195C86DF001ABA86 /* PPButton.m */,
 				CA38476A195A52340083B949 /* PPDeleteButton.h */,
 				CA38476B195A52340083B949 /* PPDeleteButton.m */,
+				483DD018197064A3009EE161 /* UIOutlineLabel.h */,
+				483DD019197064A3009EE161 /* UIOutlineLabel.m */,
 				CAE99DE5195B8E240050B584 /* PPResizeButton.h */,
 				CAE99DE6195B8E240050B584 /* PPResizeButton.m */,
 				483F32DC195E0EF2009788C0 /* HSCommentCell.h */,
@@ -424,6 +434,7 @@
 				CA3C07FD19632AB8005C52FC /* PPBoxViewController.m in Sources */,
 				CA8B5E47196CAD58004BE4F3 /* PPCameraViewController.m in Sources */,
 				CAE99DEE195BA4FF0050B584 /* PPMoveButton.m in Sources */,
+				48ECD4E5196F563C001A66C5 /* PPTakePhotoButton.m in Sources */,
 				CA8B5E54196DC072004BE4F3 /* PPCenteredScrollView.m in Sources */,
 				CABC91301959F99600B4AEF5 /* PPFeedbackViewController.m in Sources */,
 				484CCCF3196DAF2900823F64 /* DTTimePeriodChain.m in Sources */,
@@ -435,7 +446,7 @@
 				CA384769195A39510083B949 /* PPBoxView.m in Sources */,
 				484CCCF5196DAF2900823F64 /* DTTimePeriodGroup.m in Sources */,
 				CABC912A1959F99600B4AEF5 /* main.m in Sources */,
-				CA8B5E4D196CB478004BE4F3 /* PPPageViewController.m in Sources */,
+				48ECD4E8196F71FD001A66C5 /* PPPushNoAnimationSegue.m in Sources */,
 				CAE99DE7195B8E240050B584 /* PPResizeButton.m in Sources */,
 				484CCCF1196DAF2900823F64 /* DTError.m in Sources */,
 				CA3C07F6195DDDE9005C52FC /* PPFeedbackImageView.m in Sources */,
@@ -445,6 +456,7 @@
 				48987A5A195A3E64003C6EC6 /* HPGrowingTextView.m in Sources */,
 				484CCCF6196DAF2900823F64 /* NSDate+DateTools.m in Sources */,
 				48987A5B195A3E64003C6EC6 /* HPTextViewInternal.m in Sources */,
+				483DD01A197064A3009EE161 /* UIOutlineLabel.m in Sources */,
 				CA8B5E50196CDD11004BE4F3 /* IKCapture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

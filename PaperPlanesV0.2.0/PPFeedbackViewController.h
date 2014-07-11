@@ -14,6 +14,9 @@
 
 @interface PPFeedbackViewController : UIViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate, BoxViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
+
+@property (weak, nonatomic) UIImage *image;
+
 /* Main View */
 @property (weak, nonatomic) IBOutlet UIView *mainView;
 

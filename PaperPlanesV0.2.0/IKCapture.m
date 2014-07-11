@@ -139,16 +139,20 @@
 }
 
 -(void)takeSnapshotWithCompletionHandler:(void (^)(UIImage *image))completion{
+    
     AVCaptureInput* currentCameraInput = [self.session.inputs objectAtIndex:0];
     
     [self.outputStillImage captureStillImageAsynchronouslyFromConnection:	[self.outputStillImage connectionWithMediaType:AVMediaTypeVideo] completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
-        
+        [self.session stopRunning];
         NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
         UIImage *image = [[UIImage alloc] initWithData:imageData];
-
+        
         if(((AVCaptureDeviceInput*)currentCameraInput).device.position == AVCaptureDevicePositionFront){
             image = [UIImage imageWithCGImage:image.CGImage scale:image.scale orientation:UIImageOrientationLeftMirrored];
         }
+
+//        UIImageView* capturedImageView = [[UIImageView alloc] initWithImage:image];
+//        self.overlay = capturedImageView;
 
         if (completion) {
             completion(image);

@@ -12,7 +12,10 @@
 #import "UIView+Util.h"
 #import "NSString+FontAwesome.h"
 #import "PPBoxViewController.h"
+#import "PPDeleteButton.h"
+#import "PPTakePhotoButton.h"
 #import "DateTools.h"
+#import "IKCapture.h"
 
 /* Post Comment Constants */
 #define POST_COMMENT_CONTAINTER_WIDTH 480.0f
@@ -41,7 +44,7 @@
 #define TABLE_CELL_CONTENT_FONT_SIZE 16.0f
 
 /* Other Constants */
-#define HEADING_HEIGHT 25.0f
+#define HEADING_HEIGHT 42.0f
 #define ANIMATE 1
 #define ANIMATION_DURATION 0.2f
 
@@ -57,29 +60,119 @@
 
     BOOL scrollViewDidLayoutOnce;
     
-    UIView *temp;
+    PPDeleteButton* exitButton;
+    PPTakePhotoButton* takePhotoButton;
+    IKCapture* captureView;
 }
 
 @end
 
 @implementation PPFeedbackViewController
 
-#pragma mark - Initialization of Views
-- (void) viewDidLoad {
-    [super viewDidLoad];
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+//    UIView* cameraOverlay = [self cameraOverlay];
+//    
+//    if ([IKCapture isCameraAvailable]) {
+//        captureView = [[IKCapture alloc] initWithFrame:self.view.frame];
+//        [captureView startRunning];
+//        captureView.overlay = cameraOverlay;
+//        self.mainView.hidden = true;
+        [self initMainView];
+//        [self.mainView removeFromSuperview];
+//        [self.view addSubview:captureView];
+    }
+//}
+
+#pragma mark - Camera view
+-(UIView*)cameraOverlay {
+    UIView* cameraOverlay = [[UIView alloc] initWithFrame:self.view.frame];
+    CGFloat buttonSize = 80;
+    takePhotoButton = [PPTakePhotoButton new];
+    takePhotoButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [cameraOverlay addSubview:takePhotoButton];
+    
+    [cameraOverlay addConstraint:
+     [NSLayoutConstraint constraintWithItem:takePhotoButton
+                                  attribute:NSLayoutAttributeHeight
+                                  relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                     toItem:nil
+                                  attribute:NSLayoutAttributeNotAnAttribute
+                                 multiplier:1
+                                   constant:buttonSize]];
+    [cameraOverlay addConstraint:
+     [NSLayoutConstraint constraintWithItem:takePhotoButton
+                                  attribute:NSLayoutAttributeWidth
+                                  relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                     toItem:nil
+                                  attribute:NSLayoutAttributeNotAnAttribute
+                                 multiplier:1
+                                   constant:buttonSize]];
+    
+    UIView *hSpacerLeft = [UIView new];
+    UIView *hSpacerRight = [UIView new];
+    
+    hSpacerLeft.translatesAutoresizingMaskIntoConstraints = NO;
+    hSpacerRight.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [cameraOverlay addSubview:hSpacerLeft];
+    [cameraOverlay addSubview:hSpacerRight];
+    
+    [cameraOverlay addConstraints:[NSLayoutConstraint
+                                   constraintsWithVisualFormat:@"H:|[hSpacerLeft][takePhotoButton][hSpacerRight(==hSpacerLeft)]|"
+                                   options:0
+                                   metrics:nil
+                                   views:NSDictionaryOfVariableBindings(takePhotoButton, hSpacerLeft, hSpacerRight)]];
+    
+    [cameraOverlay addConstraints:[NSLayoutConstraint
+                                   constraintsWithVisualFormat:@"V:[takePhotoButton]-20-|"
+                                   options:0
+                                   metrics:nil
+                                   views:NSDictionaryOfVariableBindings(takePhotoButton)]];
+    
+    [takePhotoButton addTarget:self action:@selector(touchDownTakePhotoButton) forControlEvents:UIControlEventTouchDown];
+    [takePhotoButton addTarget:self action:@selector(touchUpInsideTakePhotoButton) forControlEvents:UIControlEventTouchUpInside];
+    
+    return cameraOverlay;
+}
+
+- (void) touchDownTakePhotoButton {
+    takePhotoButton.selected = TRUE;
+}
+
+- (void) touchUpInsideTakePhotoButton {
+    takePhotoButton.selected = FALSE;
+    takePhotoButton.hidden = YES;
+    
+    [captureView takeSnapshotWithCompletionHandler:^(UIImage *image) {
+//        [captureView removeFromSuperview];
+        captureView.hidden = YES;
+        self.imageView.image = image;
+        self.imageScrollView.contentSize = self.imageView.frame.size;
+        [captureView startRunning];
+        
+//        [self initMainView];
+//        [self.view addSubview:self.mainView];
+    }];
+    
+}
+
+#pragma mark - Initialization of main view
+
+- (void) initMainView {
+    
+    self.imageView.image = [UIImage imageNamed:@"IMG_2602.jpg"];
+    self.imageScrollView.contentSize = self.imageView.frame.size;
+    
     [self initTextView];
     [self initCommentDrawer];
     [self addObservers];
     [self addGestureRecognizers];
-    
-    temp = [UIView new];
-    [self.mainView addSubview:temp];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    self.imageScrollView.contentSize = self.imageView.frame.size;
+    [self initExitButton];
     self.postButton.enabled = NO;
+
 }
 
 - (void)addObservers {
@@ -96,6 +189,32 @@
     UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImageHandler:)];
     tapRecognizer.delegate = self;
     [self.imageView addGestureRecognizer:tapRecognizer];
+}
+
+- (void) initExitButton {
+    exitButton = [[PPDeleteButton alloc] initWithFrame:CGRectMake(-4, -4, 50, 50) circleShown:FALSE];
+    [self.mainView addSubview:exitButton];
+    
+    [exitButton addTarget:self action:@selector(touchDownExitButton) forControlEvents:UIControlEventTouchDown];
+    [exitButton addTarget:self action:@selector(touchUpInsideExitButton) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (BOOL) prefersStatusBarHidden {
+    return TRUE;
+}
+
+#pragma mark - Exit and Send Buttons for Feedback Mode
+- (void) touchDownExitButton {
+    exitButton.selected = TRUE;
+}
+
+- (void) touchUpInsideExitButton {
+    exitButton.selected = FALSE;
+    self.mainView.hidden = YES;
+    
+    [captureView startRunning];
+    captureView.hidden = NO;
+    takePhotoButton.hidden = NO;
 }
 
 # pragma mark - Resizing Text View Methods
@@ -501,6 +620,8 @@
 //    [UIView animateWithDuration:.5 animations:^{
         if (shouldShow) {
             self.textView.text = @"";
+            self.postCommentHeight.constant = 45;
+            [self.view setNeedsUpdateConstraints];
             self.postCommentContainer.hidden = NO;
             
             if (selectedBox.comments.count != 0) {
@@ -512,7 +633,10 @@
             
         } else {
             self.tableContainer.hidden = YES;
+            self.postCommentHeight.constant = 0;
+            [self.view setNeedsUpdateConstraints];
             self.postCommentContainer.hidden = YES;
+
         }
 //    }];
 }

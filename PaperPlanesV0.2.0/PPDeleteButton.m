@@ -9,12 +9,14 @@
 #import "PPDeleteButton.h"
 #import "NSString+FontAwesome.h"
 #import "UIView+Util.h"
+#import "UIOutlineLabel.h"
 
 #define BUTTON_DEFAULT_WIDTH 60.0f
 
 @interface PPDeleteButton () {
     UILabel* circle;
     UILabel* xShape;
+    UIOutlineLabel* outlinedXShape;
 }
 
 @end
@@ -25,28 +27,59 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self addSubview:[self circleWithFrame:self.bounds]];
-        [self addSubview:[self xShapeWithFrame:self.bounds]];
+        circle = [self circleWithFrame:self.bounds];
+        xShape = [self xShapeWithFrame:self.bounds];
+        [self addSubview:circle];
+        [self addSubview:xShape];
         [self setColor:self.tintColor];
     }
     return self;
 }
 
-- (UIView*) circleWithFrame:(CGRect) rect {
-    circle = [self fontAwesomeLabel:FACircle withFrame:rect];
-    return circle;
+- (instancetype)initWithFrame:(CGRect)frame circleShown:(BOOL)isShown
+{
+    self = [self initWithFrame:frame];
+    if (self) {
+        if (!isShown) {
+            [circle removeFromSuperview];
+            [xShape removeFromSuperview];
+            
+            CGRect outlinedXShapeRect = CGRectInset(self.bounds, 10, 10);
+            outlinedXShape = [[UIOutlineLabel alloc] initWithFrame:outlinedXShapeRect];
+            outlinedXShape.font = [UIFont fontWithName:kFontAwesomeFamilyName size:outlinedXShapeRect.size.width];
+            outlinedXShape.text = [NSString fontAwesomeIconStringForEnum:FATimes];
+            [outlinedXShape setTextColor:[UIColor whiteColor]];
+            
+            [self addSubview:outlinedXShape];
+        }
+    }
+    return self;
 }
 
-- (UIView*) xShapeWithFrame:(CGRect) rect {
-    xShape = [self fontAwesomeLabel:FATimesCircle withFrame:rect];
-    return xShape;
+
+- (UILabel*) circleWithFrame:(CGRect) rect {
+    return [self fontAwesomeLabel:FACircle withFrame:rect];
+}
+
+- (UILabel*) xShapeWithFrame:(CGRect) rect {
+    CGRect xShapeFrame = CGRectOffset(CGRectInset(rect, 10, 10), 0, -2);
+    return [self fontAwesomeLabel:FATimes withFrame:xShapeFrame];
 }
 
 #pragma mark - Convenience methods
 - (void) setColor: (UIColor*) color {
-    [xShape setTextColor:color];
-    [circle setTextColor:[UIColor whiteColor]];
+    [xShape setTextColor:[UIColor whiteColor]];
+    [circle setTextColor:color];
 }
+
+- (void) setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    if (selected) {
+        [outlinedXShape setTextColor:self.tintColor];
+    } else {
+        [outlinedXShape setTextColor:[UIColor whiteColor]];
+    }
+    }
 
 + (float) getDefaultWidth {
     return BUTTON_DEFAULT_WIDTH;

@@ -1,3 +1,21 @@
+To do tommorrow:
+<!-- 1. need x on feedbackview to go back to camera view controller -->
+2. next button to send (future to transition add friends view controller)
+<!-- 3. When you click takephotobutton make feedbackviewcontroller image be full screen -->
+4. Dotbox tutorial for feedbackviewcontroller
+
+
+Future:
+- flash
+- focus
+- filters
+
+
+
+
+
+
+
 Serena
 
 <!-- 1. fix height resizing -->
@@ -5,6 +23,8 @@ Serena
  --><!-- 1. you have to be able to create deeper comments with elipsis
  --><!-- 2. should go into full from full in comment mode -->
 <!-- 3. remove flash -- 0 comments to first ??? what should animation be? -->
+1. Make into UITextView instead of UILabel which should fix height shit on table cell.
+2. be able to highlight text in table view
 4. animate the textfield
 5. fix labels in post comment
 6. be able to highlight text in tableview
@@ -18,7 +38,7 @@ Hani
 
 OUR SCHEDULE
 
-A. fix fundemntal flaws by thursday afternoon if can't then talk to other person and be done by (Thursday Night)
+<!-- A. fix fundemntal flaws by thursday afternoon if can't then talk to other person and be done by (Thursday Night) -->
 
 1) snapchat style add conversation (1 day)
 2) individual converastion - fix views so that creator privlages, different colors (1 days)
