@@ -12,6 +12,7 @@
 
 @property (nonatomic,readonly,getter=isFlashOn) BOOL flashON;
 @property (nonatomic,strong) UIView *overlay;
+@property (nonatomic) dispatch_queue_t sessionQueue;
 +(BOOL)isCameraAvailable;
 -(void)takeSnapshotWithCompletionHandler:(void (^)(UIImage *image))completion;
 -(void)changeCamera;

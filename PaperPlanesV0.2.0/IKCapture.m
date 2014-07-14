@@ -30,6 +30,8 @@
         self.session = [[AVCaptureSession alloc] init];
         self.session.sessionPreset = AVCaptureSessionPresetHigh;
         
+        self.sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
+        
         self.captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
         
         self.captureVideoPreviewLayer.frame = self.bounds;
@@ -126,11 +128,15 @@
 }
 
 -(void)startRunning{
-    [self.session startRunning];
+    dispatch_async(self.sessionQueue, ^{
+        [self.session startRunning];
+    });
 }
 
 -(void)stopRunning{
-    [self.session stopRunning];
+    dispatch_async(self.sessionQueue, ^{
+        [self.session stopRunning];
+    });
 }
 
 +(BOOL)isCameraAvailable{

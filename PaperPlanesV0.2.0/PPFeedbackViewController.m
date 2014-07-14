@@ -70,20 +70,22 @@
 @implementation PPFeedbackViewController
 
 
-- (void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-//    UIView* cameraOverlay = [self cameraOverlay];
-//    
-//    if ([IKCapture isCameraAvailable]) {
-//        captureView = [[IKCapture alloc] initWithFrame:self.view.frame];
-//        [captureView startRunning];
-//        captureView.overlay = cameraOverlay;
-//        self.mainView.hidden = true;
+- (void) viewDidLoad {
+    [super viewDidLoad];
+    UIView* cameraOverlay = [self cameraOverlay];
+    
+    if ([IKCapture isCameraAvailable]) {
+        captureView = [[IKCapture alloc] initWithFrame:self.view.frame];
+        [captureView startRunning];
+        captureView.overlay = cameraOverlay;
+        [self.view addSubview:captureView];
+        
         [self initMainView];
+        self.mainView.hidden = true;
 //        [self.mainView removeFromSuperview];
-//        [self.view addSubview:captureView];
+        
     }
-//}
+}
 
 #pragma mark - Camera view
 -(UIView*)cameraOverlay {
@@ -149,10 +151,13 @@
     [captureView takeSnapshotWithCompletionHandler:^(UIImage *image) {
 //        [captureView removeFromSuperview];
         captureView.hidden = YES;
+
+
+        self.mainView.hidden = NO;
         self.imageView.image = image;
         self.imageScrollView.contentSize = self.imageView.frame.size;
         [captureView startRunning];
-        
+
 //        [self initMainView];
 //        [self.view addSubview:self.mainView];
     }];
@@ -162,10 +167,8 @@
 #pragma mark - Initialization of main view
 
 - (void) initMainView {
-    
-    self.imageView.image = [UIImage imageNamed:@"IMG_2602.jpg"];
-    self.imageScrollView.contentSize = self.imageView.frame.size;
-    
+//    self.imageView.image = [UIImage imageNamed:@"IMG_2602.jpg"];
+//    self.imageScrollView.contentSize = self.imageView.frame.size;
     [self initTextView];
     [self initCommentDrawer];
     [self addObservers];
@@ -212,9 +215,12 @@
     exitButton.selected = FALSE;
     self.mainView.hidden = YES;
     
-    [captureView startRunning];
-    captureView.hidden = NO;
+//    [captureView startRunning];
     takePhotoButton.hidden = NO;
+    captureView.hidden = NO;
+    
+
+
 }
 
 # pragma mark - Resizing Text View Methods
