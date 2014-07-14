@@ -20,7 +20,7 @@
     CGContextSetLineJoin(c, kCGLineJoinRound);
     
     CGContextSetTextDrawingMode(c, kCGTextStroke);
-    self.textColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+    self.textColor = self.outlineColor ? self.outlineColor : [[UIColor blackColor] colorWithAlphaComponent:0.7];
     
     CGRect insetRect = CGRectOffset(rect, 1, 0);
     [super drawTextInRect:insetRect];

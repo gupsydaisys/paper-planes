@@ -14,6 +14,7 @@
 #import "PPBoxViewController.h"
 #import "PPDeleteButton.h"
 #import "PPTakePhotoButton.h"
+#import "PPSendButton.h"
 #import "DateTools.h"
 #import "IKCapture.h"
 
@@ -44,7 +45,7 @@
 #define TABLE_CELL_CONTENT_FONT_SIZE 16.0f
 
 /* Other Constants */
-#define HEADING_HEIGHT 42.0f
+#define HEADING_HEIGHT 50.0f
 #define ANIMATE 1
 #define ANIMATION_DURATION 0.2f
 
@@ -61,6 +62,8 @@
     BOOL scrollViewDidLayoutOnce;
     
     PPDeleteButton* exitButton;
+    PPSendButton* sendButton;
+
     PPTakePhotoButton* takePhotoButton;
     IKCapture* captureView;
 }
@@ -81,9 +84,7 @@
         [self.view addSubview:captureView];
         
         [self initMainView];
-        self.mainView.hidden = true;
-//        [self.mainView removeFromSuperview];
-        
+        self.mainView.hidden = true;        
     }
 }
 
@@ -149,17 +150,13 @@
     takePhotoButton.hidden = YES;
     
     [captureView takeSnapshotWithCompletionHandler:^(UIImage *image) {
-//        [captureView removeFromSuperview];
         captureView.hidden = YES;
-
 
         self.mainView.hidden = NO;
         self.imageView.image = image;
         self.imageScrollView.contentSize = self.imageView.frame.size;
-        [captureView startRunning];
 
-//        [self initMainView];
-//        [self.view addSubview:self.mainView];
+        [captureView startRunning];
     }];
     
 }
@@ -167,13 +164,12 @@
 #pragma mark - Initialization of main view
 
 - (void) initMainView {
-//    self.imageView.image = [UIImage imageNamed:@"IMG_2602.jpg"];
-//    self.imageScrollView.contentSize = self.imageView.frame.size;
     [self initTextView];
     [self initCommentDrawer];
     [self addObservers];
     [self addGestureRecognizers];
     [self initExitButton];
+    [self initSendButton];
     self.postButton.enabled = NO;
 
 }
@@ -194,9 +190,87 @@
     [self.imageView addGestureRecognizer:tapRecognizer];
 }
 
+- (void) initSendButton {
+    float buttonSize = 39;
+    
+    sendButton = [[PPSendButton alloc] initWithFrame:CGRectMake(0, 0, buttonSize, buttonSize)];
+    sendButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.mainView addSubview:sendButton];
+    
+    [self.mainView addConstraint:
+     [NSLayoutConstraint constraintWithItem:sendButton
+                                  attribute:NSLayoutAttributeHeight
+                                  relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                     toItem:nil
+                                  attribute:NSLayoutAttributeNotAnAttribute
+                                 multiplier:1
+                                   constant:buttonSize]];
+    [self.mainView addConstraint:
+     [NSLayoutConstraint constraintWithItem:sendButton
+                                  attribute:NSLayoutAttributeWidth
+                                  relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                     toItem:nil
+                                  attribute:NSLayoutAttributeNotAnAttribute
+                                 multiplier:1
+                                   constant:buttonSize]];
+
+    [self.mainView addConstraints:[NSLayoutConstraint
+                                   constraintsWithVisualFormat:@"H:[sendButton]-0-|"
+                                   options:0
+                                   metrics:nil
+                                   views:NSDictionaryOfVariableBindings(sendButton)]];
+
+    [self.mainView addConstraints:[NSLayoutConstraint
+                                   constraintsWithVisualFormat:@"V:|-5-[sendButton]"
+                                   options:0
+                                   metrics:nil
+                                   views:NSDictionaryOfVariableBindings(sendButton)]];
+    
+//    [self.view updateConstraints];
+//    [self.view layoutIfNeeded];
+    // left, top, width, height
+    
+    
+}
+
 - (void) initExitButton {
-    exitButton = [[PPDeleteButton alloc] initWithFrame:CGRectMake(-4, -4, 50, 50) circleShown:FALSE];
+    float buttonSize = 57;
+    exitButton = [[PPDeleteButton alloc] initWithFrame:CGRectMake(0, 0, buttonSize, buttonSize) circleShown:FALSE];
+    exitButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.mainView addSubview:exitButton];
+    
+    
+    [self.mainView addConstraint:
+     [NSLayoutConstraint constraintWithItem:exitButton
+                                  attribute:NSLayoutAttributeHeight
+                                  relatedBy:NSLayoutRelationEqual
+                                     toItem:nil
+                                  attribute:NSLayoutAttributeNotAnAttribute
+                                 multiplier:1
+                                   constant:buttonSize]];
+    [self.mainView addConstraint:
+     [NSLayoutConstraint constraintWithItem:exitButton
+                                  attribute:NSLayoutAttributeWidth
+                                  relatedBy:NSLayoutRelationEqual
+                                     toItem:nil
+                                  attribute:NSLayoutAttributeNotAnAttribute
+                                 multiplier:1
+                                   constant:buttonSize]];
+    
+    NSNumber *marginX = [NSNumber numberWithInt:-4];
+    NSNumber *marginY = [NSNumber numberWithFloat:-11.5];
+    
+    [self.mainView addConstraints:[NSLayoutConstraint
+                                   constraintsWithVisualFormat:@"H:|-marginX-[exitButton]"
+                                   options:0
+                                   metrics:NSDictionaryOfVariableBindings(marginX)
+                                   views:NSDictionaryOfVariableBindings(exitButton)]];
+    
+    [self.mainView addConstraints:[NSLayoutConstraint
+                                   constraintsWithVisualFormat:@"V:|-marginY-[exitButton]"
+                                   options:0
+                                   metrics:NSDictionaryOfVariableBindings(marginY)
+                                   views:NSDictionaryOfVariableBindings(exitButton)]];
     
     [exitButton addTarget:self action:@selector(touchDownExitButton) forControlEvents:UIControlEventTouchDown];
     [exitButton addTarget:self action:@selector(touchUpInsideExitButton) forControlEvents:UIControlEventTouchUpInside];

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4831DF191964B72700445877 /* photo1 (6).jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4831DF181964B72700445877 /* photo1 (6).jpg */; };
+		483CEE751974691E0030E4B9 /* PPSendButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 483CEE741974691E0030E4B9 /* PPSendButton.m */; };
 		483DD01A197064A3009EE161 /* UIOutlineLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 483DD019197064A3009EE161 /* UIOutlineLabel.m */; };
 		483F32DE195E0EF2009788C0 /* HSCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 483F32DD195E0EF2009788C0 /* HSCommentCell.m */; };
 		483F32E5195E13E2009788C0 /* PPComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 483F32E4195E13E2009788C0 /* PPComment.m */; };
@@ -57,6 +58,8 @@
 
 /* Begin PBXFileReference section */
 		4831DF181964B72700445877 /* photo1 (6).jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "photo1 (6).jpg"; sourceTree = "<group>"; };
+		483CEE731974691E0030E4B9 /* PPSendButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPSendButton.h; sourceTree = "<group>"; };
+		483CEE741974691E0030E4B9 /* PPSendButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPSendButton.m; sourceTree = "<group>"; };
 		483DD018197064A3009EE161 /* UIOutlineLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIOutlineLabel.h; sourceTree = "<group>"; };
 		483DD019197064A3009EE161 /* UIOutlineLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIOutlineLabel.m; sourceTree = "<group>"; };
 		483F32DC195E0EF2009788C0 /* HSCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSCommentCell.h; sourceTree = "<group>"; };
@@ -314,6 +317,8 @@
 				CA9216E1195C86DF001ABA86 /* PPButton.m */,
 				CA38476A195A52340083B949 /* PPDeleteButton.h */,
 				CA38476B195A52340083B949 /* PPDeleteButton.m */,
+				483CEE731974691E0030E4B9 /* PPSendButton.h */,
+				483CEE741974691E0030E4B9 /* PPSendButton.m */,
 				483DD018197064A3009EE161 /* UIOutlineLabel.h */,
 				483DD019197064A3009EE161 /* UIOutlineLabel.m */,
 				CAE99DE5195B8E240050B584 /* PPResizeButton.h */,
@@ -444,6 +449,7 @@
 				CA38476C195A52340083B949 /* PPDeleteButton.m in Sources */,
 				CA384772195B3AC10083B949 /* UIFont+FontAwesome.m in Sources */,
 				CA384769195A39510083B949 /* PPBoxView.m in Sources */,
+				483CEE751974691E0030E4B9 /* PPSendButton.m in Sources */,
 				484CCCF5196DAF2900823F64 /* DTTimePeriodGroup.m in Sources */,
 				CABC912A1959F99600B4AEF5 /* main.m in Sources */,
 				48ECD4E8196F71FD001A66C5 /* PPPushNoAnimationSegue.m in Sources */,

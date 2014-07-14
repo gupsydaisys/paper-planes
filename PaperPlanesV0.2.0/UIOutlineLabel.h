@@ -10,4 +10,6 @@
 
 @interface UIOutlineLabel : UILabel
 
+@property (nonatomic, strong) UIColor* outlineColor;
+
 @end

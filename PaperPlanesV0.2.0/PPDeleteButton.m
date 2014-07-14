@@ -44,6 +44,7 @@
             [circle removeFromSuperview];
             [xShape removeFromSuperview];
             
+            // TODO: Remove this sizing magic-ness
             CGRect outlinedXShapeRect = CGRectInset(self.bounds, 10, 10);
             outlinedXShape = [[UIOutlineLabel alloc] initWithFrame:outlinedXShapeRect];
             outlinedXShape.font = [UIFont fontWithName:kFontAwesomeFamilyName size:outlinedXShapeRect.size.width];
