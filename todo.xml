@@ -1,15 +1,28 @@
 To do tommorrow:
-<!-- 1. need x on feedbackview to go back to camera view controller -->
-2. next button to send (future to transition add friends view controller)
-<!-- 3. When you click takephotobutton make feedbackviewcontroller image be full screen -->
-4. Dotbox tutorial for feedbackviewcontroller
+1. delete when you add a dotbox without a comment 
+2. double tap zooms out.
+3. what to do with unselected dotboxes
 
+Future Adds
+- create bounds around the buttons
+- figure out a better button then the x for exit button feedback mode
+- don't have overlapping dotboxes
+
+Future Testing
+0. Do we need more of a way to look at the overview of everything you have done?
+1. Should you add a box when you dismiss tutorial alert?
+2. Should you create bounds around the buttons?
+3. "tap where you want feedback" how does this feel? >>>>
+
+(Pieter and co)
+People don't know you can leave boxes (not dots or something)
+and that you can do this multiple places
 
 Future:
 - flash
 - focus
 - filters
-
+- rotation
 
 
 
