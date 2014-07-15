@@ -213,6 +213,12 @@
     UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImageHandler:)];
     tapRecognizer.delegate = self;
     [self.imageView addGestureRecognizer:tapRecognizer];
+    
+    UITapGestureRecognizer* doubleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapImageHandler:)];
+    doubleTapRecognizer.numberOfTapsRequired = 2;
+    [self.imageView addGestureRecognizer:doubleTapRecognizer];
+    
+//    [tapRecognizer requireGestureRecognizerToFail:doubleTapRecognizer];
 }
 
 - (void) initTutorialAlert {
@@ -255,12 +261,6 @@
                                    options:0
                                    metrics:nil
                                    views:NSDictionaryOfVariableBindings(sendButton)]];
-    
-//    [self.view updateConstraints];
-//    [self.view layoutIfNeeded];
-    // left, top, width, height
-    
-    
 }
 
 - (void) initExitButton {
@@ -398,9 +398,10 @@
 
 }
 
-- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
-}
+/* Required ? */
+//- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+//    return YES;
+//}
 
 - (IBAction) dragTableHandle:(UIPanGestureRecognizer *) sender {
     if ([sender state] == UIGestureRecognizerStateBegan) {
@@ -713,6 +714,18 @@
     [box didMoveToParentViewController:self];
     [self restrictBoxView:box.view toBounds:self.imageView.frame];
     
+}
+
+- (void) doubleTapImageHandler: (UITapGestureRecognizer *) gesture {
+    if (self.imageScrollView.zoomScale > self.imageScrollView.minimumZoomScale) {
+        [self.imageScrollView setZoomScale:self.imageScrollView.minimumZoomScale animated:YES];
+    } else {
+        if (selectedBox) {
+            [self.imageScrollView zoomToRect:selectedBox.view.frame animated:YES];
+        } else {
+            [self.imageScrollView setZoomScale:self.imageScrollView.maximumZoomScale animated:YES];
+        }
+    }
 }
 
 - (BOOL) gestureRecognizer:(UIGestureRecognizer *) gestureRecognizer shouldReceiveTouch:(UITouch *) touch {
