@@ -1,9 +1,22 @@
 To do tommorrow:
-1. delete when you add a dotbox without a comment 
-2. double tap zooms out.
-3. what to do with unselected dotboxes
+<!-- 1. delete when you add a dotbox without a comment  -->
+<!-- 2. double tap zooms out.
+ --><!-- 3. what to do with unselected dotboxes
+ -->
 
-Future Adds
+BUGS
+1. remains blue photo button if touch and drag outside
+
+ADD ONS
+1. alert view needs some altering visually
+2. should you be alterted if...
+....a) have shit in post comment field and then click away which would consequently delete the currently selected box
+....b) click x to exit feedback view should alert if there exists at least one dotbox with at least 1 comment
+....c) if you x a dotbox that has a comment then should you be alerted
+
+
+
+FUTURE ADD ONS
 - create bounds around the buttons
 - figure out a better button then the x for exit button feedback mode
 - don't have overlapping dotboxes
@@ -18,7 +31,9 @@ Future Testing
 People don't know you can leave boxes (not dots or something)
 and that you can do this multiple places
 
-Future:
+4. Is is strange that a box is added when you zoom in/out?
+
+FUTURE FUTURE ADD ONS:
 - flash
 - focus
 - filters
