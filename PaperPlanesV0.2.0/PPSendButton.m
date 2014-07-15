@@ -32,7 +32,7 @@
         
         UIView *background = [[UIView alloc] initWithFrame:CGRectInset(CGRectOffset(frame, -6, -1), 1, 1)];
         [background setBackgroundColor:[self.tintColor colorWithAlphaComponent:0.95]];
-        [background.layer setCornerRadius:frame.size.width / 6];
+        [background.layer setCornerRadius:5.0f];
         [background.layer setBorderColor:[[UIColor blackColor] colorWithAlphaComponent:0.5].CGColor];
         [background.layer setBorderWidth:0.5f];
 //        [background addSubview:outlinedPaperPlane];
