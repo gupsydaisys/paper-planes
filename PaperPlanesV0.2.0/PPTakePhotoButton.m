@@ -27,7 +27,7 @@
         cameraButton = [[UIOutlineLabel alloc] initWithFrame:CGRectMake(0, 0, buttonSize, buttonSize)];
         cameraButton.font = [UIFont fontWithName:kFontAwesomeFamilyName size:buttonSize];
         cameraButton.text = [@[@" ", [NSString fontAwesomeIconStringForEnum:FAcircleThin], @" "] componentsJoinedByString:@""];
-        cameraButton.textColor = [UIColor whiteColor];
+        cameraButton.textColor = [UIColor colorWithWhite:1 alpha:0.95];
         cameraButton.layer.contentsScale = [[UIScreen mainScreen] scale];
         cameraButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:cameraButton];
@@ -37,7 +37,7 @@
 
 - (void) setSelected:(BOOL)selected {
     [super setSelected:selected];
-    cameraButton.textColor = selected ? self.tintColor : [UIColor whiteColor];
+    cameraButton.textColor = selected ? [self.tintColor colorWithAlphaComponent:0.95] : [UIColor colorWithWhite:1 alpha:0.95];
 }
 
 @end

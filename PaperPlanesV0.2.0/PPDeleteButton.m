@@ -49,7 +49,7 @@
             outlinedXShape = [[UIOutlineLabel alloc] initWithFrame:outlinedXShapeRect];
             outlinedXShape.font = [UIFont fontWithName:kFontAwesomeFamilyName size:outlinedXShapeRect.size.width];
             outlinedXShape.text = [NSString fontAwesomeIconStringForEnum:FATimes];
-            [outlinedXShape setTextColor:[UIColor whiteColor]];
+            self.selected = false;
             
             [self addSubview:outlinedXShape];
         }
@@ -69,16 +69,16 @@
 
 #pragma mark - Convenience methods
 - (void) setColor: (UIColor*) color {
-    [xShape setTextColor:[UIColor whiteColor]];
+    [xShape setTextColor:[UIColor colorWithWhite:1 alpha:0.95]];
     [circle setTextColor:color];
 }
 
 - (void) setSelected:(BOOL)selected {
     [super setSelected:selected];
     if (selected) {
-        [outlinedXShape setTextColor:self.tintColor];
+        [outlinedXShape setTextColor:[self.tintColor colorWithAlphaComponent:0.95]];
     } else {
-        [outlinedXShape setTextColor:[UIColor whiteColor]];
+        [outlinedXShape setTextColor:[UIColor colorWithWhite:1 alpha:0.95]];
     }
     }
 

@@ -27,11 +27,11 @@
         int adjustmentForOutlinedIcon = -15;
         outlinedPaperPlane.font = [UIFont fontWithName:kFontAwesomeFamilyName size:frame.size.width + adjustmentForOutlinedIcon];
         outlinedPaperPlane.text = [NSString fontAwesomeIconStringForEnum:FApaperPlane];
-        [outlinedPaperPlane setTextColor:[UIColor whiteColor]];
+        [outlinedPaperPlane setTextColor:[UIColor colorWithWhite:1 alpha:0.95]];
         outlinedPaperPlane.outlineColor = [UIColor clearColor];
         
         UIView *background = [[UIView alloc] initWithFrame:CGRectInset(CGRectOffset(frame, -6, -1), 1, 1)];
-        [background setBackgroundColor:self.tintColor];
+        [background setBackgroundColor:[self.tintColor colorWithAlphaComponent:0.95]];
         [background.layer setCornerRadius:frame.size.width / 6];
         [background.layer setBorderColor:[[UIColor blackColor] colorWithAlphaComponent:0.5].CGColor];
         [background.layer setBorderWidth:0.5f];
