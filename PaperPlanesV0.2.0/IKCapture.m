@@ -30,6 +30,7 @@
         self.session = [[AVCaptureSession alloc] init];
         self.session.sessionPreset = AVCaptureSessionPresetHigh;
         
+        /* Added in sessionQueue */
         self.sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
         
         self.captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
@@ -127,6 +128,8 @@
     [self addSubview:overlay];
 }
 
+/* Added in sessionQueue for efficieny*/
+
 -(void)startRunning{
     dispatch_async(self.sessionQueue, ^{
         [self.session startRunning];
@@ -144,11 +147,14 @@
     return (devices.count >=1);
 }
 
+/* Changed for efficieny */
 -(void)takeSnapshotWithCompletionHandler:(void (^)(UIImage *image))completion{
     
     AVCaptureInput* currentCameraInput = [self.session.inputs objectAtIndex:0];
     
     [self.outputStillImage captureStillImageAsynchronouslyFromConnection:	[self.outputStillImage connectionWithMediaType:AVMediaTypeVideo] completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+        
+        /* PP added this line in for efficiency */
         [self.session stopRunning];
         NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
         UIImage *image = [[UIImage alloc] initWithData:imageData];
