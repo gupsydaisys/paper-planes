@@ -164,7 +164,7 @@
 
 
 - (void) deleteButtonTapped {
-    [self removeFromSuperview];
+//    [self removeFromSuperview];
     [delegate boxViewWasDeleted:self];
 }
 

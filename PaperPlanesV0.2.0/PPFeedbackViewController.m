@@ -17,6 +17,7 @@
 #import "PPSendButton.h"
 #import "DateTools.h"
 #import "IKCapture.h"
+#import "OLGhostAlertView.h"
 
 /* Post Comment Constants */
 #define POST_COMMENT_CONTAINTER_WIDTH 480.0f
@@ -30,7 +31,7 @@
 #define X_COMMENT_OFFSET SIDE_MARGIN
 #define Y_COMMENT_OFFSET 3.0f
 #define TEXT_SIZE 18.0f
-#define PLACEHOLDER_TEXT @"Give Feedback here..."
+#define PLACEHOLDER_TEXT @"Ask for feedback here..."
 
 /* Table Comments Constants */
 #define TABLE_HANDLE_HEIGHT 25.0f
@@ -66,6 +67,7 @@
 
     PPTakePhotoButton* takePhotoButton;
     IKCapture* captureView;
+    OLGhostAlertView* tutorialAlert;
 }
 
 @end
@@ -85,6 +87,33 @@
         
         [self initMainView];
         self.mainView.hidden = true;        
+    }
+}
+
+- (void) transitionToMainViewWithImage: (UIImage*) image {
+    captureView.hidden = YES;
+    
+    [tutorialAlert show];
+    self.mainView.hidden = NO;
+    self.imageView.image = image;
+    self.imageScrollView.contentSize = self.imageView.frame.size;
+
+    [captureView startRunning];
+}
+
+- (void) transitionToCameraView {
+    [tutorialAlert hide:false];
+    self.mainView.hidden = YES;
+    takePhotoButton.hidden = NO;
+    captureView.hidden = NO;
+    [self.view endEditing:YES];
+    
+    [self deleteChildBoxes];
+}
+
+- (void) deleteChildBoxes {
+    for (UIViewController* boxViewController in self.childViewControllers) {
+        [self boxWasDeleted:(PPBoxViewController *) boxViewController];
     }
 }
 
@@ -150,16 +179,12 @@
     takePhotoButton.hidden = YES;
     
     [captureView takeSnapshotWithCompletionHandler:^(UIImage *image) {
-        captureView.hidden = YES;
-
-        self.mainView.hidden = NO;
-        self.imageView.image = image;
-        self.imageScrollView.contentSize = self.imageView.frame.size;
-
-        [captureView startRunning];
+        [self transitionToMainViewWithImage:image];
     }];
     
 }
+
+
 
 #pragma mark - Initialization of main view
 
@@ -170,8 +195,8 @@
     [self addGestureRecognizers];
     [self initExitButton];
     [self initSendButton];
+    [self initTutorialAlert];
     self.postButton.enabled = NO;
-
 }
 
 - (void)addObservers {
@@ -188,6 +213,11 @@
     UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImageHandler:)];
     tapRecognizer.delegate = self;
     [self.imageView addGestureRecognizer:tapRecognizer];
+}
+
+- (void) initTutorialAlert {
+    tutorialAlert = [[OLGhostAlertView alloc] initWithTitle:@"Tap where you want feedback" message:nil timeout:CGFLOAT_MAX dismissible:YES];
+    tutorialAlert.position = OLGhostAlertViewPositionCenter;
 }
 
 - (void) initSendButton {
@@ -287,14 +317,7 @@
 
 - (void) touchUpInsideExitButton {
     exitButton.selected = FALSE;
-    self.mainView.hidden = YES;
-    
-//    [captureView startRunning];
-    takePhotoButton.hidden = NO;
-    captureView.hidden = NO;
-    
-
-
+    [self transitionToCameraView];
 }
 
 # pragma mark - Resizing Text View Methods
@@ -673,6 +696,8 @@
 #pragma mark - Gesture recognizer delegate
 
 - (void) tapImageHandler: (UITapGestureRecognizer *) gesture {
+    [tutorialAlert hide:false];
+
     CGPoint touchPoint = [gesture locationInView:gesture.view];
     
     PPBoxViewController* box = [[PPBoxViewController alloc] init];
@@ -687,6 +712,7 @@
     [gesture.view addSubview:box.view];
     [box didMoveToParentViewController:self];
     [self restrictBoxView:box.view toBounds:self.imageView.frame];
+    
 }
 
 - (BOOL) gestureRecognizer:(UIGestureRecognizer *) gestureRecognizer shouldReceiveTouch:(UITouch *) touch {
@@ -749,10 +775,12 @@
     [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 }
 
+#pragma mark -
 - (void) boxWasDeleted:(PPBoxViewController *)box {
-    if (selectedBox == box) {
-        [self boxSelectionChanged:box toState:NO];
-    }
+    [self boxSelectionChanged:box toState:NO];
+    [box willMoveToParentViewController:nil];
+    [box.view removeFromSuperview];
+    [box removeFromParentViewController];
 }
 
 - (void) boxWasPanned:(PPBoxViewController *)box {

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4831DF191964B72700445877 /* photo1 (6).jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4831DF181964B72700445877 /* photo1 (6).jpg */; };
 		483CEE751974691E0030E4B9 /* PPSendButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 483CEE741974691E0030E4B9 /* PPSendButton.m */; };
+		483CEE7819748E8D0030E4B9 /* OLGhostAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 483CEE7719748E8D0030E4B9 /* OLGhostAlertView.m */; };
 		483DD01A197064A3009EE161 /* UIOutlineLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 483DD019197064A3009EE161 /* UIOutlineLabel.m */; };
 		483F32DE195E0EF2009788C0 /* HSCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 483F32DD195E0EF2009788C0 /* HSCommentCell.m */; };
 		483F32E5195E13E2009788C0 /* PPComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 483F32E4195E13E2009788C0 /* PPComment.m */; };
@@ -60,6 +61,8 @@
 		4831DF181964B72700445877 /* photo1 (6).jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "photo1 (6).jpg"; sourceTree = "<group>"; };
 		483CEE731974691E0030E4B9 /* PPSendButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPSendButton.h; sourceTree = "<group>"; };
 		483CEE741974691E0030E4B9 /* PPSendButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPSendButton.m; sourceTree = "<group>"; };
+		483CEE7619748E8D0030E4B9 /* OLGhostAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OLGhostAlertView.h; sourceTree = "<group>"; };
+		483CEE7719748E8D0030E4B9 /* OLGhostAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OLGhostAlertView.m; sourceTree = "<group>"; };
 		483DD018197064A3009EE161 /* UIOutlineLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIOutlineLabel.h; sourceTree = "<group>"; };
 		483DD019197064A3009EE161 /* UIOutlineLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIOutlineLabel.m; sourceTree = "<group>"; };
 		483F32DC195E0EF2009788C0 /* HSCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSCommentCell.h; sourceTree = "<group>"; };
@@ -149,6 +152,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		483CEE7919748E950030E4B9 /* Ghost Alert */ = {
+			isa = PBXGroup;
+			children = (
+				483CEE7619748E8D0030E4B9 /* OLGhostAlertView.h */,
+				483CEE7719748E8D0030E4B9 /* OLGhostAlertView.m */,
+			);
+			name = "Ghost Alert";
+			sourceTree = "<group>";
+		};
 		483F32E2195E135D009788C0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +206,7 @@
 		CA384773195B3AD20083B949 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				483CEE7919748E950030E4B9 /* Ghost Alert */,
 				CA8B5E51196CDD17004BE4F3 /* IKCapture */,
 				484CCCF7196DAF3F00823F64 /* Date Tools */,
 				48987A5C195A3E6E003C6EC6 /* Growing Text View */,
@@ -444,6 +457,7 @@
 				CABC91301959F99600B4AEF5 /* PPFeedbackViewController.m in Sources */,
 				484CCCF3196DAF2900823F64 /* DTTimePeriodChain.m in Sources */,
 				CABC912D1959F99600B4AEF5 /* AppDelegate.m in Sources */,
+				483CEE7819748E8D0030E4B9 /* OLGhostAlertView.m in Sources */,
 				CA9216E2195C86DF001ABA86 /* PPButton.m in Sources */,
 				CA384771195B3AC10083B949 /* NSString+FontAwesome.m in Sources */,
 				CA38476C195A52340083B949 /* PPDeleteButton.m in Sources */,
