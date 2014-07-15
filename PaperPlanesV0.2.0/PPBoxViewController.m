@@ -28,10 +28,16 @@
 }
 
 - (void) makeSelection:(BOOL) select {
-    selectionState = select;
-    [self.view showControls:selectionState];
-    [self.view marchingAnts:selectionState];
-    [delegate boxSelectionChanged:self toState:selectionState];
+    /* Delete unselected box without a comment */
+    if ((self.comments == nil || self.comments.count == 0) && !select) {
+        [delegate boxWasDeleted:self];
+    } else {
+        selectionState = select;
+        [self.view showControls:selectionState];
+        [self.view marchingAnts:selectionState];
+        [delegate boxSelectionChanged:self toState:selectionState];
+    }
+
 }
 
 - (void) didMoveToParentViewController:(UIViewController *)parent {
@@ -42,7 +48,10 @@
 }
 
 - (void) boxTapped: (UITapGestureRecognizer *) gesture {
-    [self toggleSelection];
+    /* Can't unselecte a box without a comment */
+    if (self.comments != nil && self.comments.count > 0) {
+        [self toggleSelection];
+    }
 }
 
 - (void) boxViewWasDeleted:(PPBoxView *)boxView {
