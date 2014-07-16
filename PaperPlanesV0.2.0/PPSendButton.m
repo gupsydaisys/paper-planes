@@ -16,11 +16,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-//        int adjustmentForOutlinedIcon = -5;
-//        UILabel *paperPlane = [self fontAwesomeLabel:FApaperPlane withFrame:CGRectInset(frame, -5, 0)];
         
-//        UILabel* outlinedPaperPlane = [self fontAwesomeLabel:FApaperPlane withFrame:frame];
-//        
+        //TODO: Rewrite this so that the paper plane does *not* use a UIOutlineLabel,
+        // and instead uses a regular UILabel
         UIOutlineLabel* outlinedPaperPlane = [[UIOutlineLabel alloc] initWithFrame:frame];
         
         // We shrink the icon font a bit so that the outline doesn't get cut off

@@ -11,7 +11,7 @@
 #import "UIOutlineLabel.h"
 
 @interface PPTakePhotoButton () {
-    UILabel *cameraButton;
+    UILabel *takePhotoButton;
 }
 
 @end
@@ -24,20 +24,20 @@
     self = [super init];
     if (self) {
         CGFloat buttonSize = 80;
-        cameraButton = [[UIOutlineLabel alloc] initWithFrame:CGRectMake(0, 0, buttonSize, buttonSize)];
-        cameraButton.font = [UIFont fontWithName:kFontAwesomeFamilyName size:buttonSize];
-        cameraButton.text = [@[@" ", [NSString fontAwesomeIconStringForEnum:FAcircleThin], @" "] componentsJoinedByString:@""];
-        cameraButton.textColor = [UIColor colorWithWhite:1 alpha:0.95];
-        cameraButton.layer.contentsScale = [[UIScreen mainScreen] scale];
-        cameraButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:cameraButton];
+        takePhotoButton = [[UIOutlineLabel alloc] initWithFrame:CGRectMake(0, 0, buttonSize, buttonSize)];
+        takePhotoButton.font = [UIFont fontWithName:kFontAwesomeFamilyName size:buttonSize];
+        takePhotoButton.text = [@[@" ", [NSString fontAwesomeIconStringForEnum:FAcircleThin], @" "] componentsJoinedByString:@""];
+        takePhotoButton.textColor = [UIColor colorWithWhite:1 alpha:0.95];
+        takePhotoButton.layer.contentsScale = [[UIScreen mainScreen] scale];
+        takePhotoButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:takePhotoButton];
     }
     return self;
 }
 
 - (void) setSelected:(BOOL)selected {
     [super setSelected:selected];
-    cameraButton.textColor = selected ? [self.tintColor colorWithAlphaComponent:0.95] : [UIColor colorWithWhite:1 alpha:0.95];
+    takePhotoButton.textColor = selected ? [self.tintColor colorWithAlphaComponent:0.95] : [UIColor colorWithWhite:1 alpha:0.95];
 }
 
 @end

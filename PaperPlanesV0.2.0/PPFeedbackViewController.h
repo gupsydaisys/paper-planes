@@ -11,6 +11,7 @@
 #import "PPBoxView.h"
 #import "PPBoxViewController.h"
 #import "PPCenteredScrollView.h"
+#import "PPPageViewController.h"
 
 @interface PPFeedbackViewController : UIViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate, BoxViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -48,6 +49,9 @@
 /* Drag Comments Table Container */
 @property (weak, nonatomic) IBOutlet UIPanGestureRecognizer *dragTableHandleRecognizer;
 - (IBAction)dragTableHandle:(UIPanGestureRecognizer *)sender;
+
+@property (nonatomic, weak) PPPageViewController* pageViewController;
+
 
 enum commentStateTypes
 {

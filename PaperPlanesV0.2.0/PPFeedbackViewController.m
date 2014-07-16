@@ -74,14 +74,16 @@
 
 @implementation PPFeedbackViewController
 
-
 - (void) viewDidLoad {
     [super viewDidLoad];
+    
     UIView* cameraOverlay = [self cameraOverlay];
     
     if ([IKCapture isCameraAvailable]) {
         captureView = [[IKCapture alloc] initWithFrame:self.view.frame];
+        captureView.backgroundColor = [UIColor blackColor];
         [captureView startRunning];
+
         captureView.overlay = cameraOverlay;
         [self.view addSubview:captureView];
         
