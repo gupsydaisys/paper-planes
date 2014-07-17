@@ -10,45 +10,47 @@
 #import "UIOutlineLabel.h"
 #import "NSString+FontAwesome.h"
 
+@interface PPSendButton ()
+
+@property (strong, nonatomic) UILabel* paperPlane;
+
+@end
 @implementation PPSendButton
+
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
-        //TODO: Rewrite this so that the paper plane does *not* use a UIOutlineLabel,
-        // and instead uses a regular UILabel
-        UIOutlineLabel* outlinedPaperPlane = [[UIOutlineLabel alloc] initWithFrame:frame];
+        self.paperPlane = [[UILabel alloc] initWithFrame:CGRectOffset(frame, 6, 1)];
         
         // We shrink the icon font a bit so that the outline doesn't get cut off
-        int adjustmentForOutlinedIcon = -15;
-        outlinedPaperPlane.font = [UIFont fontWithName:kFontAwesomeFamilyName size:frame.size.width + adjustmentForOutlinedIcon];
-        outlinedPaperPlane.text = [NSString fontAwesomeIconStringForEnum:FApaperPlane];
-        [outlinedPaperPlane setTextColor:[UIColor colorWithWhite:1 alpha:0.95]];
-        outlinedPaperPlane.outlineColor = [UIColor clearColor];
+        int adjustmentForOutlinedIcon = -13;
+        self.paperPlane.font = [UIFont fontWithName:kFontAwesomeFamilyName size:frame.size.width + adjustmentForOutlinedIcon];
+        self.paperPlane.text = [NSString fontAwesomeIconStringForEnum:FApaperPlane];
+        [self.paperPlane setTextColor:[UIColor colorWithWhite:1 alpha:0.95]];
         
-        UIView *background = [[UIView alloc] initWithFrame:CGRectInset(CGRectOffset(frame, -6, -1), 1, 1)];
+        UIView *background = [[UIView alloc] initWithFrame:frame];
         [background setBackgroundColor:[self.tintColor colorWithAlphaComponent:0.95]];
         [background.layer setCornerRadius:5.0f];
         [background.layer setBorderColor:[[UIColor blackColor] colorWithAlphaComponent:0.5].CGColor];
         [background.layer setBorderWidth:0.5f];
-//        [background addSubview:outlinedPaperPlane];
 
+        /* Subviews don't cancel the hit from UIControlEvent */
+        [background setUserInteractionEnabled:NO];
+        [self.paperPlane setUserInteractionEnabled:NO];
         
         [self addSubview:background];
-        [self addSubview:outlinedPaperPlane];
+        [self addSubview:self.paperPlane];
+        
+
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+- (void) setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    self.paperPlane.textColor = selected ? [UIColor colorWithRed:190.0f / 255.0f green:190.0f / 255.0f blue:190.0f / 255.0f alpha:1] : [UIColor colorWithWhite:1 alpha:0.95];
 }
-*/
 
 @end
