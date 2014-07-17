@@ -95,10 +95,11 @@
 - (void) transitionToMainViewWithImage: (UIImage*) image {
     captureView.hidden = YES;
     
-    [tutorialAlert show];
+    [tutorialAlert showInView:self.mainView];
     self.mainView.hidden = NO;
     self.imageView.image = image;
     self.imageScrollView.contentSize = self.imageView.frame.size;
+    [self.imageScrollView setZoomScale:self.imageScrollView.minimumZoomScale animated:NO];
 
     [captureView startRunning];
 }
@@ -274,8 +275,9 @@
 }
 
 - (void) touchUpInsideSendButton {
-    [tutorialAlert hide];
-    [self.pageViewController transitionToOrganizerViewController];
+    [self.pageViewController transitionToOrganizerViewController:^{
+        [self transitionToCameraView];
+    }];
 }
 
 - (void) deselectSendButton:(UIButton*)sender {

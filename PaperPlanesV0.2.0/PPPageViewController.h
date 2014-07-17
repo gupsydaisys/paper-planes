@@ -12,5 +12,7 @@
 
 - (void) transitionToFeedbackViewController;
 - (void) transitionToOrganizerViewController;
+- (void) transitionToFeedbackViewController:(void(^)(void)) callback;
+- (void) transitionToOrganizerViewController:(void(^)(void)) callback;
 
 @end

@@ -41,10 +41,6 @@
     [self setViewControllers:[NSArray arrayWithObject:self.feedbackViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 }
 
-- (BOOL) prefersStatusBarHidden {
-    return TRUE;
-}
-
 - (UIViewController *) pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
     if (viewController == self.organizerViewController) {
         return nil;
@@ -62,14 +58,26 @@
 }
 
 - (void) transitionToFeedbackViewController {
-    [self transitionToController:self.feedbackViewController];
+    [self transitionToController:self.feedbackViewController completion:^{}];
 }
 
 - (void) transitionToOrganizerViewController {
-    [self transitionToController:self.organizerViewController];
+    [self transitionToController:self.organizerViewController completion:^{}];
 }
 
-- (void) transitionToController: (UIViewController*) controller {
+- (void) transitionToFeedbackViewController:(void(^)(void)) callback {
+    [self transitionToController:self.feedbackViewController completion:^{
+        callback();
+    }];
+}
+
+- (void) transitionToOrganizerViewController:(void(^)(void)) callback {
+    [self transitionToController:self.organizerViewController completion:^{
+        callback();
+    }];
+}
+
+- (void) transitionToController: (UIViewController*) controller completion:(void(^)(void)) callback {
     
     UIPageViewControllerNavigationDirection direction;
     if ([controller isKindOfClass:[PPOrganizerViewController class]]) {
@@ -85,6 +93,7 @@
             if (finished) {
                 [blocksafeSelf setScrollEnabled:TRUE];
                 blocksafeSelf.transitioning = FALSE;
+                callback();
             }
         }];
     }
@@ -112,5 +121,23 @@
     }
 }
 
+# pragma mark - iPhone Preference UI Methods
+- (NSUInteger) supportedInterfaceOrientations {
+    // Return a bitmask of supported orientations. If you need more,
+    // use bitwise or (see the commented return).
+    return UIInterfaceOrientationMaskPortrait;
+    // return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
+}
+
+- (UIInterfaceOrientation) preferredInterfaceOrientationForPresentation {
+    // Return the orientation you'd prefer - this is what it launches to. The
+    // user can still rotate. You don't have to implement this method, in which
+    // case it launches in the current orientation
+    return UIInterfaceOrientationPortrait;
+}
+
+- (BOOL) prefersStatusBarHidden {
+    return TRUE;
+}
 
 @end
