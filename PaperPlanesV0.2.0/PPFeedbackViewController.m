@@ -229,7 +229,7 @@
 }
 
 - (void) initSendButton {
-    float buttonSize = 39;
+    float buttonSize = 37;
     
     sendButton = [[PPSendButton alloc] initWithFrame:CGRectMake(0, 0, buttonSize, buttonSize)];
     sendButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -253,7 +253,7 @@
                                    constant:buttonSize]];
 
     [self.mainView addConstraints:[NSLayoutConstraint
-                                   constraintsWithVisualFormat:@"H:[sendButton]-0-|"
+                                   constraintsWithVisualFormat:@"H:[sendButton]-5-|"
                                    options:0
                                    metrics:nil
                                    views:NSDictionaryOfVariableBindings(sendButton)]];
@@ -263,8 +263,24 @@
                                    options:0
                                    metrics:nil
                                    views:NSDictionaryOfVariableBindings(sendButton)]];
+    [sendButton addTarget:self action:@selector(touchDownSendButton:) forControlEvents:UIControlEventTouchDown];
+    [sendButton addTarget:self action:@selector(deselectSendButton:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
+        [sendButton addTarget:self action:@selector(touchUpInsideSendButton) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void) touchDownSendButton:(UIButton*)sender {
+    //TODO: make it a disco party
+    [sender setSelected:true];
+}
+
+- (void) touchUpInsideSendButton {
+    [tutorialAlert hide];
+    [self.pageViewController transitionToOrganizerViewController];
+}
+
+- (void) deselectSendButton:(UIButton*)sender {
+    [sender setSelected:false];
+}
 - (void) initExitButton {
     float buttonSize = 57;
     exitButton = [[PPDeleteButton alloc] initWithFrame:CGRectMake(0, 0, buttonSize, buttonSize) circleShown:FALSE];
@@ -304,8 +320,9 @@
                                    metrics:NSDictionaryOfVariableBindings(marginY)
                                    views:NSDictionaryOfVariableBindings(exitButton)]];
     
-    [exitButton addTarget:self action:@selector(touchDownExitButton) forControlEvents:UIControlEventTouchDown];
+    [exitButton addTarget:self action:@selector(touchDownExitButton:) forControlEvents:UIControlEventTouchDown];
     [exitButton addTarget:self action:@selector(touchUpInsideExitButton) forControlEvents:UIControlEventTouchUpInside];
+    [exitButton addTarget:self action:@selector(deselectExitButton:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
 }
 
 - (BOOL) prefersStatusBarHidden {
@@ -313,12 +330,15 @@
 }
 
 #pragma mark - Exit and Send Buttons for Feedback Mode
-- (void) touchDownExitButton {
-    exitButton.selected = TRUE;
+- (void) touchDownExitButton:(UIButton*)sender {
+    sender.selected = TRUE;
+}
+
+- (void) deselectExitButton:(UIButton*)sender {
+    sender.selected = false;
 }
 
 - (void) touchUpInsideExitButton {
-    exitButton.selected = FALSE;
     [self transitionToCameraView];
 }
 

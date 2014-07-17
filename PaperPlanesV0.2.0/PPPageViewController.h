@@ -11,5 +11,6 @@
 @interface PPPageViewController : UIPageViewController
 
 - (void) transitionToFeedbackViewController;
+- (void) transitionToOrganizerViewController;
 
 @end

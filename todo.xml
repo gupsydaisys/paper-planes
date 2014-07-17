@@ -1,14 +1,40 @@
-To do tommorrow:
-<!-- 1. delete when you add a dotbox without a comment  -->
-<!-- 2. double tap zooms out.
- --><!-- 3. what to do with unselected dotboxes
- -->
+1. Easy to distinguish a piece of work: grp associated, picture of it, creator
+2. Easy to see if it's been updated since you last viewed it
+<!-- 3. Easy to see if anyone is currently viewing it right now. -->
+
+
+
+OUR SCHEDULE
+
+Feed finished (end of Wed)
+Fix view for when you click (Thurs)
+On Friday complete Eugene version
+
+login, hook-up to parse, fix bugs
+
+Wed get Charles
+Wed get Casie & Marina
+
+Ongoing:
+	- use it with girl
+- find 2 people in the same class
+
+
+
+
+
+
+
+
 
 BUGS
 1. remains blue photo button if touch and drag outside
+2. double tap
+3. instead of turning blue, graying out or enlarging or wiggling
+4. nsinternalinconsistencyexception failed to determine navigation directino for scroll
 
 ADD ONS
-1. alert view needs some altering visually
+1. alert view needs some altering visually (look at fb photo)
 2. should you be alterted if...
 ....a) have shit in post comment field and then click away which would consequently delete the currently selected box
 ....b) click x to exit feedback view should alert if there exists at least one dotbox with at least 1 comment
@@ -38,7 +64,7 @@ FUTURE FUTURE ADD ONS:
 - focus
 - filters
 - rotation
-
+- mark as complete
 
 
 
@@ -64,11 +90,8 @@ Serena
 Hani
 1. shouldn't be able to put box handles off screen
 
-OUR SCHEDULE
 
-<!-- A. fix fundemntal flaws by thursday afternoon if can't then talk to other person and be done by (Thursday Night) -->
 
-1) snapchat style add conversation (1 day)
 2) individual converastion - fix views so that creator privlages, different colors (1 days)
 3) nice looking feed view + indiviual conversation (2-3 days)
 4) login page make pretty (1 days)

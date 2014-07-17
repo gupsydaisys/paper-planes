@@ -75,12 +75,9 @@
 
 - (void) setSelected:(BOOL)selected {
     [super setSelected:selected];
-    if (selected) {
-        [outlinedXShape setTextColor:[self.tintColor colorWithAlphaComponent:0.95]];
-    } else {
-        [outlinedXShape setTextColor:[UIColor colorWithWhite:1 alpha:0.95]];
-    }
-    }
+    outlinedXShape.textColor = selected ? [UIColor colorWithRed:190.0f / 255.0f green:190.0f / 255.0f blue:190.0f / 255.0f alpha:1] : [UIColor colorWithWhite:1 alpha:0.95];
+}
+
 
 + (float) getDefaultWidth {
     return BUTTON_DEFAULT_WIDTH;
