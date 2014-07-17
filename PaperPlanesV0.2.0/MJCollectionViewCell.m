@@ -49,6 +49,9 @@
     self.MJImageView.backgroundColor = [UIColor redColor];
     self.MJImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.MJImageView.clipsToBounds = NO;
+    
+    /* Make zPosition below for adding labels on top */
+    self.MJImageView.layer.zPosition = -1;
     [self addSubview:self.MJImageView];
 }
 

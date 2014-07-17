@@ -7,7 +7,7 @@
 //
 
 #import "PPOrganizerViewController.h"
-#import "MJCollectionViewCell.h"
+#import "PPFeedbackItemCell.h"
 #import "PPCameraButton.h"
 
 @interface PPOrganizerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
@@ -25,10 +25,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSUInteger index;
+    for (index = 0; index < 7; ++index) {
+        // Setup image name
+        NSString *name = [NSString stringWithFormat:@"img%03ld.jpg", (unsigned long)index];
+        if(!self.images)
+            self.images = [NSMutableArray arrayWithCapacity:0];
+        [self.images addObject:[UIImage imageNamed:name]];
+    }
     
-    if(!self.images)
-        self.images = [NSMutableArray arrayWithCapacity:0];
-    [self.images addObject:[UIImage imageNamed:@"IMG_2602.jpg"]];
     [self.collectionView reloadData];
     
     [self addHeaderButtons];
@@ -99,24 +104,25 @@
 
 #pragma mark - Collection View Data Source Methods
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 5;
+    return self.images.count;
 }
 
 - (UICollectionViewCell*) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    MJCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FeedbackItemCell" forIndexPath:indexPath];
-    
-    cell.image = [self.images lastObject];
+    PPFeedbackItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FeedbackItemCell" forIndexPath:indexPath];
+    cell.image = [self.images objectAtIndex:indexPath.item];
     
     //set offset accordingly
     CGFloat yOffset = ((self.collectionView.contentOffset.y - cell.frame.origin.y) / IMAGE_HEIGHT) * IMAGE_OFFSET_SPEED;
     cell.imageOffset = CGPointMake(0.0f, yOffset);
+    cell.creator.text = @"serenagupta";
+    cell.creator.layer.zPosition = 1.0f;
     
     return cell;
 }
 
 #pragma mark - UIScrollViewdelegate methods
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    for(MJCollectionViewCell *cell in self.collectionView.visibleCells) {
+    for(PPFeedbackItemCell *cell in self.collectionView.visibleCells) {
         CGFloat yOffset = ((self.collectionView.contentOffset.y - cell.frame.origin.y) / IMAGE_HEIGHT) * IMAGE_OFFSET_SPEED;
         cell.imageOffset = CGPointMake(0.0f, yOffset);
     }

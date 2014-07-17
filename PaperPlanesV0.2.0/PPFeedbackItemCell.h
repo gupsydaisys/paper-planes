@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MJCollectionViewCell.h"
 
-@interface PPFeedbackItemCell : UITableViewCell
+@interface PPFeedbackItemCell : MJCollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *image;
+@property (weak, nonatomic) IBOutlet UILabel *creator;
 
 @end
