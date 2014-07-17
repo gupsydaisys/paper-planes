@@ -31,6 +31,8 @@
     self.dataSource = self;
     self.delegate = self;
     
+    
+
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     self.organizerViewController = (PPOrganizerViewController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"PPOrganizerViewController"];
@@ -98,8 +100,6 @@
         }];
     }
 }
-
-
 
 - (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers {
     self.transitioning = TRUE;
