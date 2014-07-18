@@ -94,7 +94,7 @@
 }
 
 - (void) touchUpInsideCameraButton {
-    [self.pageViewController transitionToFeedbackViewController];
+    [self.pageViewController transitionToRequestViewController];
 }
 
 - (void) deselectCameraButton {
@@ -117,7 +117,14 @@
     cell.creator.text = @"serenagupta";
     cell.creator.layer.zPosition = 1.0f;
     
+    UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(transitionToFeedbackViewController:)];
+    [cell addGestureRecognizer:tapGestureRecognizer];
+    
     return cell;
+}
+
+- (void) transitionToFeedbackViewController: (UITapGestureRecognizer *) gesture {
+    [self.pageViewController transitionToFeedbackViewController];
 }
 
 #pragma mark - UIScrollViewdelegate methods

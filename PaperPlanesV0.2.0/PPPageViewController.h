@@ -10,9 +10,13 @@
 
 @interface PPPageViewController : UIPageViewController
 
+- (void) transitionToRequestViewController;
+- (void) transitionToRequestViewController:(void(^)(void)) callback;
+
 - (void) transitionToFeedbackViewController;
-- (void) transitionToOrganizerViewController;
 - (void) transitionToFeedbackViewController:(void(^)(void)) callback;
+
+- (void) transitionToOrganizerViewController;
 - (void) transitionToOrganizerViewController:(void(^)(void)) callback;
 
 @end

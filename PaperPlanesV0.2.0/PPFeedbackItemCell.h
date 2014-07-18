@@ -12,5 +12,6 @@
 @interface PPFeedbackItemCell : MJCollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *creator;
+@property (weak, nonatomic) IBOutlet UIView *header;
 
 @end

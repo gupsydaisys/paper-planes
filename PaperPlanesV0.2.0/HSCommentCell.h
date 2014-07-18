@@ -13,7 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *creator;
 @property (weak, nonatomic) IBOutlet UILabel *timestamp;
 @property (weak, nonatomic) IBOutlet UILabel *thanksCount;
-@property (weak, nonatomic) IBOutlet UILabel *content;
+@property (weak, nonatomic) IBOutlet UITextView *content;
 
 - (IBAction)sayThanks:(id)sender;
 

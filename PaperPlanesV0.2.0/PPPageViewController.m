@@ -14,7 +14,9 @@
 }
 
 @property (nonatomic, strong) PPOrganizerViewController* organizerViewController;
+@property (nonatomic, strong) PPFeedbackViewController* requestViewController;
 @property (nonatomic, strong) PPFeedbackViewController* feedbackViewController;
+@property (nonatomic, strong) NSArray* allViewControllers;
 
 // This may not be necessary but it seems to decrease the chances of
 // getting a NSInternalInconsistencyException upon transitioning while the screen is touched
@@ -37,40 +39,48 @@
     
     self.organizerViewController = (PPOrganizerViewController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"PPOrganizerViewController"];
     self.organizerViewController.pageViewController = self;
+    
+    self.requestViewController = (PPFeedbackViewController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"PPRequestViewController"];
+    self.requestViewController.pageViewController = self;
+    
     self.feedbackViewController = (PPFeedbackViewController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"PPFeedbackViewController"];
     self.feedbackViewController.pageViewController = self;
     
-    [self setViewControllers:[NSArray arrayWithObject:self.feedbackViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    self.allViewControllers = [[NSArray alloc] initWithObjects:self.requestViewController, self.organizerViewController, self.feedbackViewController, nil];
+    
+    [self setViewControllers:[NSArray arrayWithObject:self.requestViewController] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 }
 
 - (UIViewController *) pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
-    if (viewController == self.organizerViewController) {
+    int nextIndex = [self.allViewControllers indexOfObject:viewController] + 1;
+    if (nextIndex >= self.allViewControllers.count) {
         return nil;
     } else {
-        return self.organizerViewController;
+        return [self.allViewControllers objectAtIndex:nextIndex];
     }
 }
 
 - (UIViewController *) pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
-    if (viewController == self.feedbackViewController) {
+    int nextIndex = [self.allViewControllers indexOfObject:viewController] - 1;
+    if (nextIndex < 0) {
         return nil;
     } else {
-        return self.feedbackViewController;
+        return [self.allViewControllers objectAtIndex:nextIndex];
     }
 }
 
-- (void) transitionToFeedbackViewController {
-    [self transitionToController:self.feedbackViewController completion:^{}];
+- (void) transitionToRequestViewController {
+    [self transitionToRequestViewController:^{}];
+}
+
+- (void) transitionToRequestViewController:(void(^)(void)) callback {
+    [self transitionToController:self.requestViewController completion:^{
+        callback();
+    }];
 }
 
 - (void) transitionToOrganizerViewController {
-    [self transitionToController:self.organizerViewController completion:^{}];
-}
-
-- (void) transitionToFeedbackViewController:(void(^)(void)) callback {
-    [self transitionToController:self.feedbackViewController completion:^{
-        callback();
-    }];
+    [self transitionToOrganizerViewController:^{}];
 }
 
 - (void) transitionToOrganizerViewController:(void(^)(void)) callback {
@@ -79,10 +89,27 @@
     }];
 }
 
+- (void) transitionToFeedbackViewController {
+    [self transitionToFeedbackViewController:^{}];
+}
+
+- (void) transitionToFeedbackViewController:(void(^)(void)) callback {
+    [self transitionToController:self.feedbackViewController completion:^{
+        callback();
+    }];
+}
+
+- (UIViewController *) currentlyShownViewController {
+    // We only show 1 view controller at a time
+    return [self.viewControllers objectAtIndex:0];
+}
+
+
 - (void) transitionToController: (UIViewController*) controller completion:(void(^)(void)) callback {
     
     UIPageViewControllerNavigationDirection direction;
-    if ([controller isKindOfClass:[PPOrganizerViewController class]]) {
+    
+    if ([self.allViewControllers indexOfObject:controller] > [self.allViewControllers indexOfObject:[self currentlyShownViewController]]) {
         direction = UIPageViewControllerNavigationDirectionForward;
     } else {
         direction = UIPageViewControllerNavigationDirectionReverse;
