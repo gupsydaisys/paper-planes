@@ -99,6 +99,15 @@
     self.mainView.hidden = NO;
     self.imageView.image = image;
     self.imageScrollView.contentSize = self.imageView.frame.size;
+    
+    /* <hack> */
+    // On longer screens such as iPhone 5s, A white gap mysteriously appears underneath the scrollview,
+    // its height exactly equal to the height of the post comment container. No amount of adjusting autolayout constraints seems to help.
+    // However, zooming into the scrollview mysteriously causes the white gap to disappear, never to show again.
+    // Thus, the following hack:
+    [self.imageScrollView setZoomScale:2.0f animated:NO];
+    /* </hack> */
+    
     [self.imageScrollView setZoomScale:self.imageScrollView.minimumZoomScale animated:NO];
 
     [captureView startRunning];
