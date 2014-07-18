@@ -70,32 +70,30 @@
     OLGhostAlertView* tutorialAlert;
 }
 
+
 @end
 
 @implementation PPFeedbackViewController
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    
-    UIView* cameraOverlay = [self cameraOverlay];
-    
+}
+
+- (void) initCamera {
     if ([IKCapture isCameraAvailable]) {
         captureView = [[IKCapture alloc] initWithFrame:self.view.frame];
         captureView.backgroundColor = [UIColor blackColor];
         [captureView startRunning];
-
-        captureView.overlay = cameraOverlay;
-        [self.view addSubview:captureView];
         
-        [self initMainView];
-        self.mainView.hidden = true;        
+        UIView* cameraOverlay = [self cameraOverlay];
+        captureView.overlay = cameraOverlay;
+        
+        [self.view addSubview:captureView];
     }
 }
 
 - (void) transitionToMainViewWithImage: (UIImage*) image {
-    captureView.hidden = YES;
     
-    [tutorialAlert showInView:self.mainView];
     self.mainView.hidden = NO;
     self.imageView.image = image;
     self.imageScrollView.contentSize = self.imageView.frame.size;
@@ -110,7 +108,6 @@
     
     [self.imageScrollView setZoomScale:self.imageScrollView.minimumZoomScale animated:NO];
 
-    [captureView startRunning];
 }
 
 - (void) transitionToCameraView {
@@ -191,7 +188,10 @@
     takePhotoButton.hidden = YES;
     
     [captureView takeSnapshotWithCompletionHandler:^(UIImage *image) {
+        captureView.hidden = YES;
+        [tutorialAlert showInView:self.mainView];
         [self transitionToMainViewWithImage:image];
+        [captureView startRunning];
     }];
     
 }

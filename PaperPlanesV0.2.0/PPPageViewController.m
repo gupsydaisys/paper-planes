@@ -40,10 +40,10 @@
     self.organizerViewController = (PPOrganizerViewController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"PPOrganizerViewController"];
     self.organizerViewController.pageViewController = self;
     
-    self.requestViewController = (PPFeedbackViewController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"PPRequestViewController"];
+    self.requestViewController = (PPFeedbackViewController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"PPRequestFeedbackViewController"];
     self.requestViewController.pageViewController = self;
     
-    self.feedbackViewController = (PPFeedbackViewController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"PPFeedbackViewController"];
+    self.feedbackViewController = (PPFeedbackViewController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"PPAddFeedbackViewController"];
     self.feedbackViewController.pageViewController = self;
     
     self.allViewControllers = [[NSArray alloc] initWithObjects:self.requestViewController, self.organizerViewController, self.feedbackViewController, nil];

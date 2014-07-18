@@ -42,6 +42,8 @@
 		CA384776195B3BD70083B949 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA384775195B3AFE0083B949 /* FontAwesome.ttf */; };
 		CA3C07F6195DDDE9005C52FC /* PPFeedbackImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3C07F5195DDDE9005C52FC /* PPFeedbackImageView.m */; };
 		CA3C07FD19632AB8005C52FC /* PPBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3C07FC19632AB8005C52FC /* PPBoxViewController.m */; };
+		CA4D630B1979DAC400B54C21 /* PPRequestFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4D630A1979DAC400B54C21 /* PPRequestFeedbackViewController.m */; };
+		CA4D630E1979DCFF00B54C21 /* PPAddFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4D630D1979DCFF00B54C21 /* PPAddFeedbackViewController.m */; };
 		CA8B5E50196CDD11004BE4F3 /* IKCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8B5E4F196CDD11004BE4F3 /* IKCapture.m */; };
 		CA8B5E54196DC072004BE4F3 /* PPCenteredScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8B5E53196DC072004BE4F3 /* PPCenteredScrollView.m */; };
 		CA9216E2195C86DF001ABA86 /* PPButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9216E1195C86DF001ABA86 /* PPButton.m */; };
@@ -130,6 +132,10 @@
 		CA3C07F5195DDDE9005C52FC /* PPFeedbackImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPFeedbackImageView.m; sourceTree = "<group>"; };
 		CA3C07FB19632AB8005C52FC /* PPBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPBoxViewController.h; sourceTree = "<group>"; };
 		CA3C07FC19632AB8005C52FC /* PPBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPBoxViewController.m; sourceTree = "<group>"; };
+		CA4D63091979DAC400B54C21 /* PPRequestFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPRequestFeedbackViewController.h; sourceTree = "<group>"; };
+		CA4D630A1979DAC400B54C21 /* PPRequestFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPRequestFeedbackViewController.m; sourceTree = "<group>"; };
+		CA4D630C1979DCFF00B54C21 /* PPAddFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPAddFeedbackViewController.h; sourceTree = "<group>"; };
+		CA4D630D1979DCFF00B54C21 /* PPAddFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPAddFeedbackViewController.m; sourceTree = "<group>"; };
 		CA8B5E4E196CDD11004BE4F3 /* IKCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKCapture.h; sourceTree = "<group>"; };
 		CA8B5E4F196CDD11004BE4F3 /* IKCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKCapture.m; sourceTree = "<group>"; };
 		CA8B5E52196DC072004BE4F3 /* PPCenteredScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCenteredScrollView.h; sourceTree = "<group>"; };
@@ -301,6 +307,10 @@
 				48AA4DE01976E675002824EF /* PPPageViewController.m */,
 				CABC912E1959F99600B4AEF5 /* PPFeedbackViewController.h */,
 				CABC912F1959F99600B4AEF5 /* PPFeedbackViewController.m */,
+				CA4D63091979DAC400B54C21 /* PPRequestFeedbackViewController.h */,
+				CA4D630A1979DAC400B54C21 /* PPRequestFeedbackViewController.m */,
+				CA4D630C1979DCFF00B54C21 /* PPAddFeedbackViewController.h */,
+				CA4D630D1979DCFF00B54C21 /* PPAddFeedbackViewController.m */,
 				CA8B5E52196DC072004BE4F3 /* PPCenteredScrollView.h */,
 				CA8B5E53196DC072004BE4F3 /* PPCenteredScrollView.m */,
 				CA3C07FB19632AB8005C52FC /* PPBoxViewController.h */,
@@ -526,6 +536,7 @@
 				48AA4DE11976E675002824EF /* PPPageViewController.m in Sources */,
 				CA9216E2195C86DF001ABA86 /* PPButton.m in Sources */,
 				CA384771195B3AC10083B949 /* NSString+FontAwesome.m in Sources */,
+				CA4D630E1979DCFF00B54C21 /* PPAddFeedbackViewController.m in Sources */,
 				CA38476C195A52340083B949 /* PPDeleteButton.m in Sources */,
 				CA384772195B3AC10083B949 /* UIFont+FontAwesome.m in Sources */,
 				CA384769195A39510083B949 /* PPBoxView.m in Sources */,
@@ -546,6 +557,7 @@
 				48AA4DDD1976DA85002824EF /* MJCollectionViewCell.m in Sources */,
 				483DD01A197064A3009EE161 /* UIOutlineLabel.m in Sources */,
 				CA8B5E50196CDD11004BE4F3 /* IKCapture.m in Sources */,
+				CA4D630B1979DAC400B54C21 /* PPRequestFeedbackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

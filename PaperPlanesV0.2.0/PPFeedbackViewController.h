@@ -52,7 +52,6 @@
 
 @property (nonatomic, weak) PPPageViewController* pageViewController;
 
-
 enum commentStateTypes
 {
     CLOSED = 0,
@@ -60,5 +59,9 @@ enum commentStateTypes
     HALF = 2,
     FULL = 3,
 } typedef CommentState;
+
+- (void) initCamera;
+- (void) initMainView;
+- (void) transitionToMainViewWithImage: (UIImage*) image;
 
 @end
