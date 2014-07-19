@@ -57,7 +57,7 @@
     if (nextIndex >= self.allViewControllers.count) {
         return nil;
     } else {
-        return [self.allViewControllers objectAtIndex:nextIndex];
+        return [(PPViewController*)[self.allViewControllers objectAtIndex:nextIndex] controllerForPaging];
     }
 }
 
@@ -66,7 +66,7 @@
     if (nextIndex < 0) {
         return nil;
     } else {
-        return [self.allViewControllers objectAtIndex:nextIndex];
+        return [(PPViewController*)[self.allViewControllers objectAtIndex:nextIndex] controllerForPaging];
     }
 }
 

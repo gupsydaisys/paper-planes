@@ -64,5 +64,11 @@ enum commentStateTypes
 - (void) initCamera;
 - (void) initMainView;
 - (void) transitionToMainView;
+- (void) transitionToCameraView;
+
+- (NSString*) placeholderText;
+
+- (void) touchUpInsideExitButton;
+- (void) touchUpInsideSendButton;
 
 @end

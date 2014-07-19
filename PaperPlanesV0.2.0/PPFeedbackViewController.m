@@ -31,7 +31,6 @@
 #define X_COMMENT_OFFSET SIDE_MARGIN
 #define Y_COMMENT_OFFSET 3.0f
 #define TEXT_SIZE 18.0f
-#define PLACEHOLDER_TEXT @"Ask for feedback here..."
 
 /* Table Comments Constants */
 #define TABLE_HANDLE_HEIGHT 25.0f
@@ -288,9 +287,7 @@
 }
 
 - (void) touchUpInsideSendButton {
-    [self.pageViewController transitionToOrganizerViewController:^{
-        [self transitionToCameraView];
-    }];
+    // Overridden in subclasses
 }
 
 - (void) deselectSendButton:(UIButton*)sender {
@@ -354,7 +351,7 @@
 }
 
 - (void) touchUpInsideExitButton {
-    [self transitionToCameraView];
+    // Overridden in subclass
 }
 
 # pragma mark - Resizing Text View Methods
@@ -367,7 +364,7 @@
     self.textView.font = [UIFont systemFontOfSize:TEXT_SIZE];
     self.textView.delegate = self;
     self.textView.internalTextView.scrollIndicatorInsets = UIEdgeInsetsMake(5, 0, 5, 0);
-    self.textView.placeholder = PLACEHOLDER_TEXT;
+    self.textView.placeholder = [self placeholderText];
     [self.postCommentContainer addSubview:self.textView];
 
     self.textView.internalTextView.layer.borderWidth = .6f;
@@ -375,6 +372,11 @@
     self.textView.internalTextView.layer.backgroundColor = [UIColor whiteColor].CGColor;
     self.textView.internalTextView.clipsToBounds = YES;
     self.textView.internalTextView.layer.cornerRadius = 10.0f;
+}
+
+- (NSString*) placeholderText {
+    // Overridden in subclasses
+    return @"";
 }
 
 - (void) growingTextView:(HPGrowingTextView *) growingTextView willChangeHeight:(float) height {

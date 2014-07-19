@@ -25,4 +25,25 @@
     [self transitionToMainView];
 }
 
+- (NSString*) placeholderText {
+    return @"Add a comment here...";
+}
+
+- (void) touchUpInsideExitButton {
+    [self.pageViewController transitionToOrganizerViewController];
+}
+
+- (void) touchUpInsideSendButton {
+    [self.pageViewController transitionToOrganizerViewController];
+}
+
+- (UIViewController*) controllerForPaging {
+    if (self.image) {
+        return self;
+    } else {
+        return nil;
+    }
+}
+
+
 @end

@@ -22,4 +22,23 @@
     self.mainView.hidden = true;
 }
 
+- (NSString*) placeholderText {
+    return @"Ask for feedback here...";
+}
+
+- (void) touchUpInsideExitButton {
+    // Overridden in subclass
+    [self transitionToCameraView];
+}
+
+- (void) touchUpInsideSendButton {
+    [self.pageViewController transitionToOrganizerViewController:^{
+        [self transitionToCameraView];
+    }];
+}
+
+- (UIViewController*) controllerForPaging {
+    return self;
+}
+
 @end

@@ -103,11 +103,16 @@
     self.cameraButton.selected = false;
 }
 
-#pragma mark - Page View delegate methods
+#pragma mark - Page View delegate/helper methods
 
 - (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers {
     PPAddFeedbackViewController* nextController = (PPAddFeedbackViewController*)[pendingViewControllers objectAtIndex:0];
     nextController.image = self.selectedCell.image;
+}
+
+
+- (UIViewController*) controllerForPaging {
+    return self;
 }
 
 

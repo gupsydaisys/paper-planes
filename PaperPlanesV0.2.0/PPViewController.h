@@ -10,4 +10,6 @@
 
 @interface PPViewController : UIViewController <UIPageViewControllerDelegate>
 
+- (UIViewController*) controllerForPaging;
+
 @end
