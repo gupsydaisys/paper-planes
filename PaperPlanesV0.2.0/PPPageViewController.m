@@ -9,6 +9,7 @@
 #import "PPPageViewController.h"
 #import "PPOrganizerViewController.h"
 #import "PPFeedbackViewController.h"
+#import "PPOrganizerViewController.h"
 
 @interface PPPageViewController () <UIPageViewControllerDelegate, UIPageViewControllerDataSource> {
 }
@@ -99,17 +100,19 @@
     }];
 }
 
-- (UIViewController *) currentlyShownViewController {
+- (PPViewController *) currentlyShownViewController {
     // We only show 1 view controller at a time
-    return [self.viewControllers objectAtIndex:0];
+    return (PPViewController*)[self.viewControllers objectAtIndex:0];
 }
 
 
 - (void) transitionToController: (UIViewController*) controller completion:(void(^)(void)) callback {
     
     UIPageViewControllerNavigationDirection direction;
+    PPViewController* currentController = [self currentlyShownViewController];
+    NSArray* nextController = [NSArray arrayWithObject:controller];
     
-    if ([self.allViewControllers indexOfObject:controller] > [self.allViewControllers indexOfObject:[self currentlyShownViewController]]) {
+    if ([self.allViewControllers indexOfObject:controller] > [self.allViewControllers indexOfObject:currentController]) {
         direction = UIPageViewControllerNavigationDirectionForward;
     } else {
         direction = UIPageViewControllerNavigationDirectionReverse;
@@ -118,7 +121,8 @@
     __block PPPageViewController *blocksafeSelf = self;
     [self setScrollEnabled:FALSE];
     if (!self.transitioning) {
-        [self setViewControllers:[NSArray arrayWithObject:controller] direction:direction animated:YES completion:^(BOOL finished) {
+        [currentController pageViewController:self willTransitionToViewControllers:nextController];
+        [self setViewControllers:nextController direction:direction animated:YES completion:^(BOOL finished) {
             if (finished) {
                 [blocksafeSelf setScrollEnabled:TRUE];
                 blocksafeSelf.transitioning = FALSE;
@@ -129,6 +133,7 @@
 }
 
 - (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers {
+    [[self currentlyShownViewController] pageViewController:pageViewController willTransitionToViewControllers:pendingViewControllers];
     self.transitioning = TRUE;
 }
 

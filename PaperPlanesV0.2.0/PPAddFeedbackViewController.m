@@ -18,7 +18,11 @@
 {
     [super viewDidLoad];
     [self initMainView];
-    [self transitionToMainViewWithImage:[UIImage imageNamed:@"img000.jpg"]];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self transitionToMainView];
 }
 
 @end

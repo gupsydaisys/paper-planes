@@ -7,6 +7,7 @@
 //
 
 #import "PPOrganizerViewController.h"
+#import "PPAddFeedbackViewController.h"
 #import "PPFeedbackItemCell.h"
 #import "PPCameraButton.h"
 
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) NSMutableArray* images;
 
 @property (nonatomic, strong) PPButton* cameraButton;
+@property (nonatomic, strong) PPFeedbackItemCell* selectedCell;
 
 @end
 
@@ -101,6 +103,13 @@
     self.cameraButton.selected = false;
 }
 
+#pragma mark - Page View delegate methods
+
+- (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers {
+    PPAddFeedbackViewController* nextController = (PPAddFeedbackViewController*)[pendingViewControllers objectAtIndex:0];
+    nextController.image = self.selectedCell.image;
+}
+
 
 #pragma mark - Collection View Data Source Methods
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -117,13 +126,14 @@
     cell.creator.text = @"serenagupta";
     cell.creator.layer.zPosition = 1.0f;
     
-    UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(transitionToFeedbackViewController:)];
+    UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellTapped:)];
     [cell addGestureRecognizer:tapGestureRecognizer];
     
     return cell;
 }
 
-- (void) transitionToFeedbackViewController: (UITapGestureRecognizer *) gesture {
+- (void) cellTapped: (UITapGestureRecognizer *) gesture {
+    self.selectedCell = (PPFeedbackItemCell*) gesture.view;
     [self.pageViewController transitionToFeedbackViewController];
 }
 

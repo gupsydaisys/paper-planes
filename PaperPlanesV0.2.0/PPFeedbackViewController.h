@@ -10,10 +10,11 @@
 #import "HPGrowingTextView.h"
 #import "PPBoxView.h"
 #import "PPBoxViewController.h"
+#import "PPViewController.h"
 #import "PPCenteredScrollView.h"
 #import "PPPageViewController.h"
 
-@interface PPFeedbackViewController : UIViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate, BoxViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface PPFeedbackViewController : PPViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate, BoxViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 
 @property (weak, nonatomic) UIImage *image;
@@ -62,6 +63,6 @@ enum commentStateTypes
 
 - (void) initCamera;
 - (void) initMainView;
-- (void) transitionToMainViewWithImage: (UIImage*) image;
+- (void) transitionToMainView;
 
 @end

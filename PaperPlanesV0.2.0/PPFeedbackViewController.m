@@ -92,6 +92,10 @@
     }
 }
 
+- (void) transitionToMainView {
+    [self transitionToMainViewWithImage:self.image];
+}
+
 - (void) transitionToMainViewWithImage: (UIImage*) image {
     
     self.mainView.hidden = NO;

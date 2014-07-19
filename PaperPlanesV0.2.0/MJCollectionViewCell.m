@@ -66,6 +66,11 @@
     [self setImageOffset:self.imageOffset];
 }
 
+/* Add getter for image */
+- (UIImage*) image {
+    return self.MJImageView.image;
+}
+
 - (void)setImageOffset:(CGPoint)imageOffset
 {
     // Store padding value

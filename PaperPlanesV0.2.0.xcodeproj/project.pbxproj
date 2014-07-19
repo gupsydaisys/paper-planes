@@ -44,6 +44,7 @@
 		CA3C07FD19632AB8005C52FC /* PPBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3C07FC19632AB8005C52FC /* PPBoxViewController.m */; };
 		CA4D630B1979DAC400B54C21 /* PPRequestFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4D630A1979DAC400B54C21 /* PPRequestFeedbackViewController.m */; };
 		CA4D630E1979DCFF00B54C21 /* PPAddFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4D630D1979DCFF00B54C21 /* PPAddFeedbackViewController.m */; };
+		CA4D63111979E9CB00B54C21 /* PPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4D63101979E9CB00B54C21 /* PPViewController.m */; };
 		CA8B5E50196CDD11004BE4F3 /* IKCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8B5E4F196CDD11004BE4F3 /* IKCapture.m */; };
 		CA8B5E54196DC072004BE4F3 /* PPCenteredScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8B5E53196DC072004BE4F3 /* PPCenteredScrollView.m */; };
 		CA9216E2195C86DF001ABA86 /* PPButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9216E1195C86DF001ABA86 /* PPButton.m */; };
@@ -136,6 +137,8 @@
 		CA4D630A1979DAC400B54C21 /* PPRequestFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPRequestFeedbackViewController.m; sourceTree = "<group>"; };
 		CA4D630C1979DCFF00B54C21 /* PPAddFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPAddFeedbackViewController.h; sourceTree = "<group>"; };
 		CA4D630D1979DCFF00B54C21 /* PPAddFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPAddFeedbackViewController.m; sourceTree = "<group>"; };
+		CA4D630F1979E9CB00B54C21 /* PPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPViewController.h; sourceTree = "<group>"; };
+		CA4D63101979E9CB00B54C21 /* PPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPViewController.m; sourceTree = "<group>"; };
 		CA8B5E4E196CDD11004BE4F3 /* IKCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKCapture.h; sourceTree = "<group>"; };
 		CA8B5E4F196CDD11004BE4F3 /* IKCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKCapture.m; sourceTree = "<group>"; };
 		CA8B5E52196DC072004BE4F3 /* PPCenteredScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCenteredScrollView.h; sourceTree = "<group>"; };
@@ -305,18 +308,20 @@
 			children = (
 				48AA4DDF1976E675002824EF /* PPPageViewController.h */,
 				48AA4DE01976E675002824EF /* PPPageViewController.m */,
+				CA4D630F1979E9CB00B54C21 /* PPViewController.h */,
+				CA4D63101979E9CB00B54C21 /* PPViewController.m */,
 				CABC912E1959F99600B4AEF5 /* PPFeedbackViewController.h */,
 				CABC912F1959F99600B4AEF5 /* PPFeedbackViewController.m */,
 				CA4D63091979DAC400B54C21 /* PPRequestFeedbackViewController.h */,
 				CA4D630A1979DAC400B54C21 /* PPRequestFeedbackViewController.m */,
 				CA4D630C1979DCFF00B54C21 /* PPAddFeedbackViewController.h */,
 				CA4D630D1979DCFF00B54C21 /* PPAddFeedbackViewController.m */,
+				48AA4DC51975FAB2002824EF /* PPOrganizerViewController.h */,
+				48AA4DC61975FAB2002824EF /* PPOrganizerViewController.m */,
 				CA8B5E52196DC072004BE4F3 /* PPCenteredScrollView.h */,
 				CA8B5E53196DC072004BE4F3 /* PPCenteredScrollView.m */,
 				CA3C07FB19632AB8005C52FC /* PPBoxViewController.h */,
 				CA3C07FC19632AB8005C52FC /* PPBoxViewController.m */,
-				48AA4DC51975FAB2002824EF /* PPOrganizerViewController.h */,
-				48AA4DC61975FAB2002824EF /* PPOrganizerViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -543,6 +548,7 @@
 				483CEE751974691E0030E4B9 /* PPSendButton.m in Sources */,
 				484CCCF5196DAF2900823F64 /* DTTimePeriodGroup.m in Sources */,
 				CABC912A1959F99600B4AEF5 /* main.m in Sources */,
+				CA4D63111979E9CB00B54C21 /* PPViewController.m in Sources */,
 				48ECD4E8196F71FD001A66C5 /* PPPushNoAnimationSegue.m in Sources */,
 				CAE99DE7195B8E240050B584 /* PPResizeButton.m in Sources */,
 				484CCCF1196DAF2900823F64 /* DTError.m in Sources */,
