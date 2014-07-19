@@ -60,9 +60,6 @@
                                         <subviews>
                                             <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="146" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Uze-VR-py1">
                                                 <rect key="frame" x="0.0" y="25" width="480" height="400"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="480" id="bX0-57-QZK" userLabel="tableView width"/>
-                                                </constraints>
                                                 <color key="sectionIndexColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <prototypes>
                                                     <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentCell" rowHeight="146" id="5i3-ta-1QU" customClass="HSCommentCell">
@@ -115,6 +112,9 @@
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="0.0" y="25" width="480" height="0.0"/>
+                                                </variation>
                                                 <connections>
                                                     <outlet property="dataSource" destination="vXZ-lx-hvc" id="xBb-6A-VoU"/>
                                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="5fG-fV-vfG"/>
@@ -126,7 +126,6 @@
                                                 <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="HVb-qO-S9D" userLabel="tableHandle height"/>
-                                                    <constraint firstAttribute="width" constant="480" id="e92-O8-4PD" userLabel="tableHandle width"/>
                                                 </constraints>
                                                 <connections>
                                                     <outletCollection property="gestureRecognizers" destination="xpW-Oy-5w3" appends="YES" id="dW9-6R-JzY"/>
@@ -143,8 +142,10 @@
                                             <constraint firstItem="hdq-26-8O3" firstAttribute="top" secondItem="Zdy-ft-VoQ" secondAttribute="top" id="kXF-Hg-mjw" userLabel="tableHandle to top"/>
                                             <constraint firstAttribute="height" constant="25" id="kg3-eB-f1Y" userLabel="tableContainer height"/>
                                             <constraint firstItem="Uze-VR-py1" firstAttribute="leading" secondItem="Zdy-ft-VoQ" secondAttribute="leading" id="mTv-fJ-L0G" userLabel="tableView leading"/>
-                                            <constraint firstAttribute="width" constant="480" id="w1K-wr-10s" userLabel="tableContainer width"/>
                                         </constraints>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="615" width="480" height="25"/>
+                                        </variation>
                                     </view>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9nT-b2-373" userLabel="Post Comment Container">
                                         <subviews>
@@ -167,12 +168,14 @@
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" id="DbQ-ZV-WV9" userLabel="postComment height"/>
-                                            <constraint firstAttribute="width" constant="480" id="awG-D9-Die" userLabel="postComment width"/>
                                         </constraints>
                                         <variation key="heightClass=regular">
                                             <mask key="subviews">
                                                 <include reference="SpW-XB-g4h"/>
                                             </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="640" width="480" height="0.0"/>
                                         </variation>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="vbP-cQ-Mtw" appends="YES" id="t9O-MG-f3s"/>
@@ -329,6 +332,11 @@ UhBlcXVlc3QgRmVlZGJhY2sgVmlldyBDb250cm9sbGVyA
                                     <constraint firstAttribute="height" constant="50" id="wVx-13-Zpn"/>
                                     <constraint firstAttribute="width" constant="480" id="ySt-eO-W8v"/>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="ySt-eO-W8v"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -487,6 +495,12 @@ UhBlcXVlc3QgRmVlZGJhY2sgVmlldyBDb250cm9sbGVyA
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="0.0" y="25" width="480" height="0.0"/>
+                                                    <mask key="constraints">
+                                                        <exclude reference="MUR-qh-9fd"/>
+                                                    </mask>
+                                                </variation>
                                                 <connections>
                                                     <outlet property="dataSource" destination="4mb-4x-UVh" id="LyN-Ab-8Sa"/>
                                                     <outlet property="delegate" destination="4mb-4x-UVh" id="Sli-2E-eqd"/>
@@ -500,6 +514,11 @@ UhBlcXVlc3QgRmVlZGJhY2sgVmlldyBDb250cm9sbGVyA
                                                     <constraint firstAttribute="height" constant="25" id="Nr0-Es-7rN" userLabel="tableHandle height"/>
                                                     <constraint firstAttribute="width" constant="480" id="hYv-Aa-9iZ" userLabel="tableHandle width"/>
                                                 </constraints>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <mask key="constraints">
+                                                        <exclude reference="hYv-Aa-9iZ"/>
+                                                    </mask>
+                                                </variation>
                                                 <connections>
                                                     <outletCollection property="gestureRecognizers" destination="hXM-yc-AJw" appends="YES" id="2nw-BD-XNa"/>
                                                 </connections>
@@ -517,6 +536,12 @@ UhBlcXVlc3QgRmVlZGJhY2sgVmlldyBDb250cm9sbGVyA
                                             <constraint firstAttribute="height" constant="25" id="wZQ-2L-RYY" userLabel="tableContainer height"/>
                                             <constraint firstAttribute="trailing" secondItem="asZ-2A-S68" secondAttribute="trailing" id="zIo-N0-gZo" userLabel="tableHandle to trailing"/>
                                         </constraints>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="615" width="480" height="25"/>
+                                            <mask key="constraints">
+                                                <exclude reference="9Os-5V-aOB"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Jc-pU-EDe" userLabel="Post Comment Container">
                                         <subviews>
@@ -544,6 +569,12 @@ UhBlcXVlc3QgRmVlZGJhY2sgVmlldyBDb250cm9sbGVyA
                                         <variation key="heightClass=regular">
                                             <mask key="subviews">
                                                 <include reference="AIB-HO-Yse"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="640" width="480" height="0.0"/>
+                                            <mask key="constraints">
+                                                <exclude reference="vhO-KU-L69"/>
                                             </mask>
                                         </variation>
                                         <connections>
