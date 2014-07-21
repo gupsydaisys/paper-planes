@@ -1,22 +1,39 @@
+<!-- Tomorrow
+1. Subclass PPFeedbackViewController for both views
+
+Feedback
+- no tutorial
+- no camera
+- "Add comment here..."
+- x goes to organizer
+- plane goes to organizer -->
+
+- different colors for different users
+- editing for person who created it
+
+2. disabled for right most
+
+
+
+
+
+ORGANIZER
 1. Easy to distinguish a piece of work: grp associated, picture of it, creator
 2. Easy to see if it's been updated since you last viewed it
-<!-- 3. Easy to see if anyone is currently viewing it right now. -->
-
-
 
 OUR SCHEDULE
+- On Friday complete Eugene version
+- login, hook-up to parse, fix bugs
+- logo + font
 
-Feed finished (end of Wed)
-Fix view for when you click (Thurs)
-On Friday complete Eugene version
 
-login, hook-up to parse, fix bugs
+
 
 Wed get Charles
 Wed get Casie & Marina
 
 Ongoing:
-	- use it with girl
+- use it with girl
 - find 2 people in the same class
 
 
@@ -28,19 +45,29 @@ Ongoing:
 
 
 BUGS
-1. remains blue photo button if touch and drag outside
-2. double tap
-3. instead of turning blue, graying out or enlarging or wiggling
-4. nsinternalinconsistencyexception failed to determine navigation directino for scroll
+1. double tap
+
+HARD BUGS
+1. Doesn't seem like it's caused by the tranistion method in PageViewController since when you try to catch it, nothing is logged.
+- tried limiting clicks
+- tried having a boolean
+- tried dispatching it asychronously to the main queue
+
+2014-07-17 09:24:29.508 PaperPlanesV0.2.0[7788:60b] *** Assertion failure in -[_UIQueuingScrollView _didScrollWithAnimation:force:], /SourceCache/UIKit/UIKit-2935.137/_UIQueuingScrollView.m:799
+2014-07-17 09:24:29.511 PaperPlanesV0.2.0[7788:60b] *** Terminating app due to uncaught exception 'NSInternalInconsistencyException', reason: 'Failed to determine navigation direction for scroll'
+*** First throw call stack:
+(0x2e347fd3 0x38bc0ccf 0x2e347ead 0x2ecf4d5b 0x310c7bfd 0x310c7851 0x310c4309 0x30d07483 0x30d06e6d 0x30d06d4d 0x3082fdf3 0x3082fb9d 0x335fc75d 0x2f032451 0x2e307ef9 0x2e312ab7 0x2e312a53 0x2e311227 0x2e27bf0f 0x2e27bcf3 0x331d4663 0x30bc716d 0x4e625 0x390cdab7)
+libc++abi.dylib: terminating with uncaught exception of type NSException
+
 
 ADD ONS
+0. CREATE GOOD animation/whatever for plane button in organizer.
 1. alert view needs some altering visually (look at fb photo)
 2. should you be alterted if...
 ....a) have shit in post comment field and then click away which would consequently delete the currently selected box
 ....b) click x to exit feedback view should alert if there exists at least one dotbox with at least 1 comment
 ....c) if you x a dotbox that has a comment then should you be alerted
-
-
+3. buttons colors. remains blue photo button if touch and drag outside, instead of turning blue, graying out or enlarging or wiggling
 
 FUTURE ADD ONS
 - create bounds around the buttons
@@ -58,6 +85,7 @@ People don't know you can leave boxes (not dots or something)
 and that you can do this multiple places
 
 4. Is is strange that a box is added when you zoom in/out?
+5. Is it strange that when you click on feeditem in organizer that that view doesn't have tutorialalert?
 
 FUTURE FUTURE ADD ONS:
 - flash

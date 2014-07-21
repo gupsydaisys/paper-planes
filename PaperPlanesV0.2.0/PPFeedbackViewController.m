@@ -69,7 +69,6 @@
     OLGhostAlertView* tutorialAlert;
 }
 
-
 @end
 
 @implementation PPFeedbackViewController
@@ -606,11 +605,9 @@
 
 - (float) getTableCellHeight:(NSString *) comment {
     // NEXT STEP remove hard coded size and figure out how to correctly get height
-    
-    float verticalPadding = 30.0f + TABLE_CELL_LABEL_TO_CONTENT + TABLE_CELL_LABEL_MARGIN + 50.0f;
+    float verticalPadding = 50.0f + 10.0f;
+//    float verticalPadding = 30.0f + TABLE_CELL_LABEL_TO_CONTENT + TABLE_CELL_LABEL_MARGIN + 50.0f;
     float maxWidth = 454.0f - (TABLE_CELL_LABEL_MARGIN * 2);
-//    float height = [comment sizeWithFont:[UIFont systemFontOfSize:TABLE_CELL_CONTENT_FONT_SIZE] constrainedToSize:CGSizeMake(maxWidth, 999999.0f) lineBreakMode:NSLineBreakByWordWrapping].height + verticalPadding;
-//    return height;
     
     UIFont *font = [UIFont systemFontOfSize:TABLE_CELL_CONTENT_FONT_SIZE];
     // Make a copy of the default paragraph style
@@ -711,7 +708,6 @@
 - (UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *) indexPath {
     HSCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
     NSString *comment = selectedBox.comments[indexPath.row];
-
     
     // NEXT TIME change this so that when you access cell it goes into the cell
     
@@ -721,10 +717,15 @@
     cell.creator.text = @"dempsey";
     cell.timestamp.text = @"2 days ago";
     cell.content.text = comment;
+    
+    // TODO: interface builder does not recognize setting this atrributes on the textview (?)
+    cell.content.backgroundColor = [UIColor clearColor];
+    cell.content.editable = FALSE;
+    cell.content.scrollEnabled = false;
+    cell.content.contentInset = UIEdgeInsetsMake(0, -3, 0, 0);
 
     [cell setNeedsUpdateConstraints];
     [cell updateConstraintsIfNeeded];
-
 
     return cell;
 }
