@@ -374,11 +374,6 @@
     self.textView.internalTextView.layer.cornerRadius = 10.0f;
 }
 
-- (NSString*) placeholderText {
-    // Overridden in subclasses
-    return @"";
-}
-
 - (void) growingTextView:(HPGrowingTextView *) growingTextView willChangeHeight:(float) height {
     float diff = (growingTextView.frame.size.height - height);
     

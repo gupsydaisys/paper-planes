@@ -68,7 +68,4 @@ enum commentStateTypes
 
 - (NSString*) placeholderText;
 
-- (void) touchUpInsideExitButton;
-- (void) touchUpInsideSendButton;
-
 @end
