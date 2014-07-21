@@ -12,11 +12,11 @@
 
 - (void) marchingAnts: (BOOL) turnOn;
 - (void) showControls: (BOOL) show;
+- (void) setColor:(UIColor*) color;
 
 @property (nonatomic, strong) UIPanGestureRecognizer* moveButtonPanGestureRecognizer;
 @property (nonatomic, strong) UIPanGestureRecognizer* resizeButtonPanGestureRecognizer;
 @property (nonatomic, strong) NSMutableArray* controls;
-
 @property (nonatomic, assign) id delegate;
 
 @end
