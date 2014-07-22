@@ -1,30 +1,37 @@
-<!-- Tomorrow
-1. Subclass PPFeedbackViewController for both views
-
-Feedback
-- no tutorial
-- no camera
-- "Add comment here..."
-- x goes to organizer
-- plane goes to organizer -->
-
-- different colors for different users
-- editing for person who created it
-
-2. disabled for right most
+A. hook up to back end
+- color is different based on new box or old box
+B. logo + design
+C. network + groups (Friday Morning)
+D. landscape mode should work
+D. having multiple images and figuring out what that means
+E. create filters: created by me, all, by group, by recency, by trending (these should be determined based on testing)
+F. navagation of boxes
 
 
 
 
+
+
+
+
+OPEN QUESTIONS
+1. Organizer
+- documents one after each other in organizer will look too similar and be hard to distinguish if they are the same
+2. What is the best way to mark homework?
+- handles getting clumsy for dotboxes
+- kind of wihs she coudl drag over the region
+- wanted to highlight soemthing within region
+- highlight and draw
 
 ORGANIZER
 1. Easy to distinguish a piece of work: grp associated, picture of it, creator
 2. Easy to see if it's been updated since you last viewed it
 
-OUR SCHEDULE
-- On Friday complete Eugene version
-- login, hook-up to parse, fix bugs
-- logo + font
+
+
+
+
+
 
 
 
@@ -36,6 +43,16 @@ Ongoing:
 - use it with girl
 - find 2 people in the same class
 
+QUESTION TO ASK DURING TESTING
+0. Do we need more of a way to look at the overview of everything you have done?
+1. "tap where you want feedback" how does this feel? >>>>
+-> coding excersise didn't make sense with this message
+
+(Pieter and co)
+People don't know you can leave boxes (not dots or something)
+and that you can do this multiple places
+
+2. Should it be more explicit to dimiss keyboard?
 
 
 
@@ -43,9 +60,69 @@ Ongoing:
 
 
 
+
+SERENA
+0. mess around with styling for post comment container
+1. table handle top should be changing arrow
+
+1. animate post field
+2. change to instagram like view on feed
+3. change so you can also bring keyboard up using swipe gesture
+4. after a user as put feedback in once, change message to "add more feedback here..."
+5. show all comments after posting a new comment
+...
+20. change both request and add feedback to look the same
+(get Hani input on animation + colors)
+
+HANI FUTURE
+1. shouldn't be able to put box handles off screen
+2. don't allow the dotbox to resize and have the icons switch around
+3. no overlapping dotboxes
+4. create bounds around icons on feedpack page so you can't put dotbox there
+
+
+MOST IMPORTANT CHANGES
+1. need to make send button more button looking
+>> box buttons bigger than send button (EVERYONE)
+>> add a drop shadow
+>> animate object
+2. change swipe gesture recognizer on organizer to swipe to correct view and swipe on navigation should swipe to last selected view or not do anything
+3. should you be alterted if...
+....a) have shit in post comment field and then click away which would consequently delete the currently selected box
+....b) click x to exit feedback view should alert if there exists at least one dotbox with at least 1 comment
+....c) if you x a dotbox that has a comment then should you be alerted
+....e) if you spend time resizing and moving dotbox the should be alerted if you delete it
+4. you should add a dotbox when you dimiss tutorial alert
+
+
+VISUAL CHANGES
+0. whenever you add a new sheet by clicking plane button, have organizer very obviously add it or show changes.
+1. alert view needs some altering visually (look at fb photo)
+2. buttons colors. remains blue photo button if touch and drag outside, instead of turning blue, graying out or enlarging or wiggling
+3. figure out a better button then the x for exit button feedback mode
 
 BUGS
-1. double tap
+0. have to many times tap twice on the camera
+1. double tap should not leave dotbox
+2. touch down on white x and then move finger away (but dont' lift up), it one time froze the swipe to other pages features and in general doesn't unselect.
+
+FUTURE ADD-ONS
+- flash
+- focus
+- filters for hw
+- rotation
+- mark different items in organizer as complete
+
+
+
+
+
+
+
+
+
+
+
 
 HARD BUGS
 1. Doesn't seem like it's caused by the tranistion method in PageViewController since when you try to catch it, nothing is logged.
@@ -58,73 +135,3 @@ HARD BUGS
 *** First throw call stack:
 (0x2e347fd3 0x38bc0ccf 0x2e347ead 0x2ecf4d5b 0x310c7bfd 0x310c7851 0x310c4309 0x30d07483 0x30d06e6d 0x30d06d4d 0x3082fdf3 0x3082fb9d 0x335fc75d 0x2f032451 0x2e307ef9 0x2e312ab7 0x2e312a53 0x2e311227 0x2e27bf0f 0x2e27bcf3 0x331d4663 0x30bc716d 0x4e625 0x390cdab7)
 libc++abi.dylib: terminating with uncaught exception of type NSException
-
-
-ADD ONS
-0. CREATE GOOD animation/whatever for plane button in organizer.
-1. alert view needs some altering visually (look at fb photo)
-2. should you be alterted if...
-....a) have shit in post comment field and then click away which would consequently delete the currently selected box
-....b) click x to exit feedback view should alert if there exists at least one dotbox with at least 1 comment
-....c) if you x a dotbox that has a comment then should you be alerted
-3. buttons colors. remains blue photo button if touch and drag outside, instead of turning blue, graying out or enlarging or wiggling
-
-FUTURE ADD ONS
-- create bounds around the buttons
-- figure out a better button then the x for exit button feedback mode
-- don't have overlapping dotboxes
-
-Future Testing
-0. Do we need more of a way to look at the overview of everything you have done?
-1. Should you add a box when you dismiss tutorial alert?
-2. Should you create bounds around the buttons?
-3. "tap where you want feedback" how does this feel? >>>>
-
-(Pieter and co)
-People don't know you can leave boxes (not dots or something)
-and that you can do this multiple places
-
-4. Is is strange that a box is added when you zoom in/out?
-5. Is it strange that when you click on feeditem in organizer that that view doesn't have tutorialalert?
-
-FUTURE FUTURE ADD ONS:
-- flash
-- focus
-- filters
-- rotation
-- mark as complete
-
-
-
-
-
-Serena
-
-<!-- 1. fix height resizing -->
-<!-- 2. make into constants
- --><!-- 1. you have to be able to create deeper comments with elipsis
- --><!-- 2. should go into full from full in comment mode -->
-<!-- 3. remove flash -- 0 comments to first ??? what should animation be? -->
-1. Make into UITextView instead of UILabel which should fix height shit on table cell.
-2. be able to highlight text in table view
-4. animate the textfield
-5. fix labels in post comment
-6. be able to highlight text in tableview
-7. cutting off lines in post comment
-8. add ellipsis
-9. deleting shouldn't be so easy
-10. fix so that resizing is more proper and less jankalicious
-
-Hani
-1. shouldn't be able to put box handles off screen
-
-
-
-2) individual converastion - fix views so that creator privlages, different colors (1 days)
-3) nice looking feed view + indiviual conversation (2-3 days)
-4) login page make pretty (1 days)
-5) extra time to make speed + aethetically pleasing + fix bugs (2-3 days)
-
-B. network + groups (Friday Morning)
-C. adding images to comment thread & making them into scroll views
-D. navagation of boxes
