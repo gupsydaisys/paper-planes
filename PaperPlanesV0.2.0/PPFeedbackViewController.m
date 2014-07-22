@@ -18,6 +18,7 @@
 #import "DateTools.h"
 #import "IKCapture.h"
 #import "OLGhostAlertView.h"
+#import <Parse/Parse.h>
 
 /* Post Comment Constants */
 //#define POST_COMMENT_CONTAINTER_WIDTH 480.0f
@@ -190,6 +191,18 @@
     takePhotoButton.hidden = YES;
     
     [captureView takeSnapshotWithCompletionHandler:^(UIImage *image) {
+        NSLog(@"Image was taken");
+        NSData *imageData = UIImageJPEGRepresentation(image, 0.9f);
+        PFObject* imageObject = [PFObject objectWithClassName:@"ImageObject"];
+        imageObject[@"image"] = [PFFile fileWithName:@"image.jpg" data:imageData contentType:@"image"];
+        [imageObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (!error) {
+                NSLog(@"Saved image");
+            } else {
+                NSLog(@"There was an error saving the image");
+            }
+        }];
+
         captureView.hidden = YES;
         [tutorialAlert showInView:self.mainView];
         [self transitionToMainViewWithImage:image];
@@ -379,11 +392,6 @@
     self.textView.internalTextView.layer.backgroundColor = [UIColor clearColor].CGColor;
 //    self.textView.internalTextView.layer.cornerRadius = 5.0f;
 
-}
-
-- (NSString*) placeholderText {
-    // Overridden in subclasses
-    return @"";
 }
 
 - (void) growingTextView:(HPGrowingTextView *) growingTextView willChangeHeight:(float) height {
