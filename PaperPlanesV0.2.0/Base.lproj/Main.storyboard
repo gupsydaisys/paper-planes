@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="D8W-Rv-Ynu">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
     </dependencies>
     <scenes>
@@ -63,7 +62,7 @@
                                                 <rect key="frame" x="0.0" y="25" width="480" height="400"/>
                                                 <color key="sectionIndexColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <prototypes>
-                                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentCell" rowHeight="146" id="5i3-ta-1QU" customClass="HSCommentCell">
+                                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentCell" rowHeight="146" id="5i3-ta-1QU" customClass="HSCommentCell">
                                                         <rect key="frame" x="0.0" y="22" width="320" height="146"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5i3-ta-1QU" id="Agf-kM-aFt">
@@ -85,9 +84,9 @@
                                                                         <rect key="frame" x="235" y="10" width="42" height="22"/>
                                                                     </variation>
                                                                 </label>
-                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y4M-dh-J8Q">
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y4M-dh-J8Q">
                                                                     <rect key="frame" x="10" y="36" width="434" height="100"/>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -153,7 +152,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SpW-XB-g4h">
                                                 <rect key="frame" x="448" y="12" width="45" height="25"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                <state key="normal" title="Post">
+                                                <state key="normal" title="Add">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <variation key="heightClass=regular" fixedFrame="YES">
@@ -440,7 +439,7 @@ UhBlcXVlc3QgRmVlZGJhY2sgVmlldyBDb250cm9sbGVyA
                                                 </constraints>
                                                 <color key="sectionIndexColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <prototypes>
-                                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentCell" rowHeight="146" id="ccl-dy-H85" customClass="HSCommentCell">
+                                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommentCell" rowHeight="146" id="ccl-dy-H85" customClass="HSCommentCell">
                                                         <rect key="frame" x="0.0" y="22" width="320" height="146"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ccl-dy-H85" id="A0A-PJ-khF">
@@ -468,7 +467,7 @@ UhBlcXVlc3QgRmVlZGJhY2sgVmlldyBDb250cm9sbGVyA
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWC-lm-vew">
                                                                     <rect key="frame" x="10" y="36" width="434" height="100"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                                    <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -482,7 +481,7 @@ UhBlcXVlc3QgRmVlZGJhY2sgVmlldyBDb250cm9sbGVyA
                                                                 <constraint firstAttribute="bottom" secondItem="JWC-lm-vew" secondAttribute="bottom" constant="10" id="GCt-Rw-C9U"/>
                                                                 <constraint firstItem="eEv-RC-3Js" firstAttribute="top" secondItem="A0A-PJ-khF" secondAttribute="top" constant="4" id="Hwc-MH-ZmR"/>
                                                                 <constraint firstAttribute="trailing" secondItem="JWC-lm-vew" secondAttribute="trailing" constant="10" id="I20-JC-LFt"/>
-                                                                <constraint firstItem="eEv-RC-3Js" firstAttribute="leading" secondItem="A0A-PJ-khF" secondAttribute="leading" constant="15" id="IW6-1P-UwC"/>
+                                                                <constraint firstItem="eEv-RC-3Js" firstAttribute="leading" secondItem="A0A-PJ-khF" secondAttribute="leading" constant="10" id="IW6-1P-UwC"/>
                                                                 <constraint firstItem="JWC-lm-vew" firstAttribute="top" secondItem="eEv-RC-3Js" secondAttribute="bottom" id="TpX-HS-w4u"/>
                                                                 <constraint firstItem="JWC-lm-vew" firstAttribute="top" secondItem="lUW-cx-qDf" secondAttribute="bottom" id="aMI-fx-gDu"/>
                                                                 <constraint firstItem="JWC-lm-vew" firstAttribute="leading" secondItem="A0A-PJ-khF" secondAttribute="leading" constant="10" id="oo8-Uc-pao"/>
@@ -549,7 +548,7 @@ UhBlcXVlc3QgRmVlZGJhY2sgVmlldyBDb250cm9sbGVyA
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AIB-HO-Yse">
                                                 <rect key="frame" x="448" y="12" width="45" height="25"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                <state key="normal" title="Post">
+                                                <state key="normal" title="Add">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <variation key="heightClass=regular" fixedFrame="YES">

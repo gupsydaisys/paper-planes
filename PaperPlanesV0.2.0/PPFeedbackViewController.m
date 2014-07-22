@@ -708,20 +708,11 @@
 - (UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *) indexPath {
     HSCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
     NSString *comment = selectedBox.comments[indexPath.row];
-    
-    // NEXT TIME change this so that when you access cell it goes into the cell
-    
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 
     cell.creator.text = @"dempsey";
     cell.timestamp.text = @"2 days ago";
     cell.content.text = comment;
-    
-    // TODO: interface builder does not recognize setting this atrributes on the textview (?)
-    cell.content.backgroundColor = [UIColor clearColor];
-    cell.content.editable = FALSE;
-    cell.content.scrollEnabled = false;
+
     cell.content.contentInset = UIEdgeInsetsMake(0, -3, 0, 0);
 
     [cell setNeedsUpdateConstraints];
