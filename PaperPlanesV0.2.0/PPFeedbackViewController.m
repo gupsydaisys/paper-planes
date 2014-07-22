@@ -613,7 +613,7 @@
 
 - (float) getTableCellHeight:(NSString *) comment {
     // NEXT STEP remove hard coded size and figure out how to correctly get height
-    float verticalPadding = 50.0f;
+    float verticalPadding = 45.0f;
 //    float verticalPadding = 30.0f + TABLE_CELL_LABEL_TO_CONTENT + TABLE_CELL_LABEL_MARGIN + 50.0f;
     float maxWidth = 454.0f - (TABLE_CELL_LABEL_MARGIN * 2);
     
