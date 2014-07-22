@@ -45,6 +45,21 @@
 		CA4D630B1979DAC400B54C21 /* PPRequestFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4D630A1979DAC400B54C21 /* PPRequestFeedbackViewController.m */; };
 		CA4D630E1979DCFF00B54C21 /* PPAddFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4D630D1979DCFF00B54C21 /* PPAddFeedbackViewController.m */; };
 		CA4D63111979E9CB00B54C21 /* PPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4D63101979E9CB00B54C21 /* PPViewController.m */; };
+		CA50FD36197ED7F100E36EA3 /* PPSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA50FD35197ED7F100E36EA3 /* PPSignUpViewController.m */; };
+		CA50FD41197EDAF400E36EA3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA50FD37197EDAF400E36EA3 /* AudioToolbox.framework */; };
+		CA50FD42197EDAF400E36EA3 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA50FD38197EDAF400E36EA3 /* CFNetwork.framework */; };
+		CA50FD43197EDAF400E36EA3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA50FD39197EDAF400E36EA3 /* CoreGraphics.framework */; };
+		CA50FD44197EDAF400E36EA3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA50FD3A197EDAF400E36EA3 /* CoreLocation.framework */; };
+		CA50FD45197EDAF400E36EA3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CA50FD3B197EDAF400E36EA3 /* libz.dylib */; };
+		CA50FD46197EDAF400E36EA3 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA50FD3C197EDAF400E36EA3 /* MobileCoreServices.framework */; };
+		CA50FD47197EDAF400E36EA3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA50FD3D197EDAF400E36EA3 /* QuartzCore.framework */; };
+		CA50FD48197EDAF400E36EA3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA50FD3E197EDAF400E36EA3 /* Security.framework */; };
+		CA50FD49197EDAF400E36EA3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA50FD3F197EDAF400E36EA3 /* StoreKit.framework */; };
+		CA50FD4A197EDAF400E36EA3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA50FD40197EDAF400E36EA3 /* SystemConfiguration.framework */; };
+		CA50FD4D197EDB1200E36EA3 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA50FD4C197EDB1200E36EA3 /* Parse.framework */; };
+		CA50FD4F197EDBB400E36EA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA50FD4E197EDBB400E36EA3 /* Foundation.framework */; };
+		CA50FD52197EDF6100E36EA3 /* PPUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = CA50FD51197EDF6100E36EA3 /* PPUtilities.m */; };
+		CA50FD54197EE19700E36EA3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA50FD53197EE19700E36EA3 /* UIKit.framework */; };
 		CA8B5E50196CDD11004BE4F3 /* IKCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8B5E4F196CDD11004BE4F3 /* IKCapture.m */; };
 		CA8B5E54196DC072004BE4F3 /* PPCenteredScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8B5E53196DC072004BE4F3 /* PPCenteredScrollView.m */; };
 		CA9216E2195C86DF001ABA86 /* PPButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9216E1195C86DF001ABA86 /* PPButton.m */; };
@@ -139,6 +154,23 @@
 		CA4D630D1979DCFF00B54C21 /* PPAddFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPAddFeedbackViewController.m; sourceTree = "<group>"; };
 		CA4D630F1979E9CB00B54C21 /* PPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPViewController.h; sourceTree = "<group>"; };
 		CA4D63101979E9CB00B54C21 /* PPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPViewController.m; sourceTree = "<group>"; };
+		CA50FD34197ED7F100E36EA3 /* PPSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPSignUpViewController.h; sourceTree = "<group>"; };
+		CA50FD35197ED7F100E36EA3 /* PPSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPSignUpViewController.m; sourceTree = "<group>"; };
+		CA50FD37197EDAF400E36EA3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		CA50FD38197EDAF400E36EA3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		CA50FD39197EDAF400E36EA3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CA50FD3A197EDAF400E36EA3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CA50FD3B197EDAF400E36EA3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		CA50FD3C197EDAF400E36EA3 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		CA50FD3D197EDAF400E36EA3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CA50FD3E197EDAF400E36EA3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		CA50FD3F197EDAF400E36EA3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		CA50FD40197EDAF400E36EA3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CA50FD4C197EDB1200E36EA3 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		CA50FD4E197EDBB400E36EA3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CA50FD50197EDF6100E36EA3 /* PPUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPUtilities.h; sourceTree = "<group>"; };
+		CA50FD51197EDF6100E36EA3 /* PPUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPUtilities.m; sourceTree = "<group>"; };
+		CA50FD53197EE19700E36EA3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CA8B5E4E196CDD11004BE4F3 /* IKCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKCapture.h; sourceTree = "<group>"; };
 		CA8B5E4F196CDD11004BE4F3 /* IKCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKCapture.m; sourceTree = "<group>"; };
 		CA8B5E52196DC072004BE4F3 /* PPCenteredScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPCenteredScrollView.h; sourceTree = "<group>"; };
@@ -170,6 +202,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA50FD54197EE19700E36EA3 /* UIKit.framework in Frameworks */,
+				CA50FD4F197EDBB400E36EA3 /* Foundation.framework in Frameworks */,
+				CA50FD41197EDAF400E36EA3 /* AudioToolbox.framework in Frameworks */,
+				CA50FD43197EDAF400E36EA3 /* CoreGraphics.framework in Frameworks */,
+				CA50FD44197EDAF400E36EA3 /* CoreLocation.framework in Frameworks */,
+				CA50FD45197EDAF400E36EA3 /* libz.dylib in Frameworks */,
+				CA50FD46197EDAF400E36EA3 /* MobileCoreServices.framework in Frameworks */,
+				CA50FD4D197EDB1200E36EA3 /* Parse.framework in Frameworks */,
+				CA50FD47197EDAF400E36EA3 /* QuartzCore.framework in Frameworks */,
+				CA50FD48197EDAF400E36EA3 /* Security.framework in Frameworks */,
+				CA50FD49197EDAF400E36EA3 /* StoreKit.framework in Frameworks */,
+				CA50FD4A197EDAF400E36EA3 /* SystemConfiguration.framework in Frameworks */,
+				CA50FD42197EDAF400E36EA3 /* CFNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +351,8 @@
 		CA3C07FE19632ABF005C52FC /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CA50FD34197ED7F100E36EA3 /* PPSignUpViewController.h */,
+				CA50FD35197ED7F100E36EA3 /* PPSignUpViewController.m */,
 				48AA4DDF1976E675002824EF /* PPPageViewController.h */,
 				48AA4DE01976E675002824EF /* PPPageViewController.m */,
 				CA4D630F1979E9CB00B54C21 /* PPViewController.h */,
@@ -326,6 +373,26 @@
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
+		CA50FD4B197EDB0300E36EA3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CA50FD53197EE19700E36EA3 /* UIKit.framework */,
+				CA50FD4E197EDBB400E36EA3 /* Foundation.framework */,
+				CA50FD4C197EDB1200E36EA3 /* Parse.framework */,
+				CA50FD37197EDAF400E36EA3 /* AudioToolbox.framework */,
+				CA50FD38197EDAF400E36EA3 /* CFNetwork.framework */,
+				CA50FD39197EDAF400E36EA3 /* CoreGraphics.framework */,
+				CA50FD3A197EDAF400E36EA3 /* CoreLocation.framework */,
+				CA50FD3B197EDAF400E36EA3 /* libz.dylib */,
+				CA50FD3C197EDAF400E36EA3 /* MobileCoreServices.framework */,
+				CA50FD3D197EDAF400E36EA3 /* QuartzCore.framework */,
+				CA50FD3E197EDAF400E36EA3 /* Security.framework */,
+				CA50FD3F197EDAF400E36EA3 /* StoreKit.framework */,
+				CA50FD40197EDAF400E36EA3 /* SystemConfiguration.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CA8B5E51196CDD17004BE4F3 /* IKCapture */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,6 +405,7 @@
 		CABC911B1959F99600B4AEF5 = {
 			isa = PBXGroup;
 			children = (
+				CA50FD4B197EDB0300E36EA3 /* Frameworks */,
 				CABC91261959F99600B4AEF5 /* PaperPlanesV0.2.0 */,
 				CABC913D1959F99600B4AEF5 /* PaperPlanesV0.2.0Tests */,
 				CABC91251959F99600B4AEF5 /* Products */,
@@ -362,6 +430,8 @@
 				CABC912C1959F99600B4AEF5 /* AppDelegate.m */,
 				48ECD4E6196F71FD001A66C5 /* PPPushNoAnimationSegue.h */,
 				48ECD4E7196F71FD001A66C5 /* PPPushNoAnimationSegue.m */,
+				CA50FD50197EDF6100E36EA3 /* PPUtilities.h */,
+				CA50FD51197EDF6100E36EA3 /* PPUtilities.m */,
 				CA3C07FE19632ABF005C52FC /* View Controllers */,
 				483F32E2195E135D009788C0 /* Models */,
 				CAE99DEB195BA3610050B584 /* Views */,
@@ -542,6 +612,7 @@
 				CA9216E2195C86DF001ABA86 /* PPButton.m in Sources */,
 				CA384771195B3AC10083B949 /* NSString+FontAwesome.m in Sources */,
 				CA4D630E1979DCFF00B54C21 /* PPAddFeedbackViewController.m in Sources */,
+				CA50FD36197ED7F100E36EA3 /* PPSignUpViewController.m in Sources */,
 				CA38476C195A52340083B949 /* PPDeleteButton.m in Sources */,
 				CA384772195B3AC10083B949 /* UIFont+FontAwesome.m in Sources */,
 				CA384769195A39510083B949 /* PPBoxView.m in Sources */,
@@ -561,6 +632,7 @@
 				484CCCF6196DAF2900823F64 /* NSDate+DateTools.m in Sources */,
 				48987A5B195A3E64003C6EC6 /* HPTextViewInternal.m in Sources */,
 				48AA4DDD1976DA85002824EF /* MJCollectionViewCell.m in Sources */,
+				CA50FD52197EDF6100E36EA3 /* PPUtilities.m in Sources */,
 				483DD01A197064A3009EE161 /* UIOutlineLabel.m in Sources */,
 				CA8B5E50196CDD11004BE4F3 /* IKCapture.m in Sources */,
 				CA4D630B1979DAC400B54C21 /* PPRequestFeedbackViewController.m in Sources */,
@@ -678,6 +750,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PaperPlanesV0.2.0/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -689,6 +765,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PaperPlanesV0.2.0/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
