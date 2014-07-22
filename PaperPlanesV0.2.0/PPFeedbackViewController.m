@@ -20,17 +20,17 @@
 #import "OLGhostAlertView.h"
 
 /* Post Comment Constants */
-#define POST_COMMENT_CONTAINTER_WIDTH 480.0f
-#define POST_COMMENT_CONTAINTER_HEIGHT 45.0f
+//#define POST_COMMENT_CONTAINTER_WIDTH 480.0f
+//#define POST_COMMENT_CONTAINTER_HEIGHT 45.0f
 #define POST_BUTTON_WIDTH 40.0f
 #define SIDE_MARGIN 10.0f
 
 /* Post Comment Text View Constants */
 #define COMMENT_INIT_HEIGHT 37.0f
-#define COMMENT_WIDTH 250.0f
-#define X_COMMENT_OFFSET SIDE_MARGIN
-#define Y_COMMENT_OFFSET 3.0f
-#define TEXT_SIZE 18.0f
+#define COMMENT_WIDTH 280.0f
+#define X_COMMENT_OFFSET 6.0f
+#define Y_COMMENT_OFFSET 6.0f
+#define TEXT_SIZE 16.0f
 
 /* Table Comments Constants */
 #define TABLE_HANDLE_HEIGHT 25.0f
@@ -356,8 +356,11 @@
 # pragma mark - Resizing Text View Methods
 - (void) initTextView {
     self.textView = [[HPGrowingTextView alloc] initWithFrame:CGRectMake(X_COMMENT_OFFSET, Y_COMMENT_OFFSET, COMMENT_WIDTH, 0.0f)];
+//    self.textView.contentInset = UIEdgeInsetsMake(0, -2, 0, 0);
+    
+    
     self.textView.isScrollable = NO;
-    self.textView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
+//    self.textView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
     self.textView.minNumberOfLines = 1;
     self.textView.maxNumberOfLines = 4;
     self.textView.font = [UIFont systemFontOfSize:TEXT_SIZE];
@@ -366,11 +369,14 @@
     self.textView.placeholder = [self placeholderText];
     [self.postCommentContainer addSubview:self.textView];
 
-    self.textView.internalTextView.layer.borderWidth = .6f;
-    self.textView.internalTextView.layer.borderColor = [[UIColor grayColor] CGColor];
-    self.textView.internalTextView.layer.backgroundColor = [UIColor whiteColor].CGColor;
-    self.textView.internalTextView.clipsToBounds = YES;
-    self.textView.internalTextView.layer.cornerRadius = 10.0f;
+    // ???
+//    self.textView.internalTextView.clipsToBounds = YES;
+    
+//    self.textView.internalTextView.layer.borderWidth = 0.5f;
+//    self.textView.internalTextView.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.25].CGColor;
+    self.textView.internalTextView.layer.backgroundColor = [UIColor clearColor].CGColor;
+    self.textView.internalTextView.layer.cornerRadius = 5.0f;
+
 }
 
 - (NSString*) placeholderText {
@@ -770,7 +776,7 @@
 //    [UIView animateWithDuration:.5 animations:^{
         if (shouldShow) {
             self.textView.text = @"";
-            self.postCommentHeight.constant = 45;
+            self.postCommentHeight.constant = 50;
             [self.view setNeedsUpdateConstraints];
             self.postCommentContainer.hidden = NO;
             
