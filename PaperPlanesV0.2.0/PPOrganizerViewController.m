@@ -10,6 +10,7 @@
 #import "PPAddFeedbackViewController.h"
 #import "PPFeedbackItemCell.h"
 #import "PPCameraButton.h"
+#import <Parse/Parse.h>
 
 @interface PPOrganizerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 
@@ -24,21 +25,61 @@
 
 @implementation PPOrganizerViewController
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self populateImages];
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSUInteger index;
-    for (index = 0; index < 7; ++index) {
-        // Setup image name
-        NSString *name = [NSString stringWithFormat:@"img%03ld.jpg", (unsigned long)index];
-        if(!self.images)
-            self.images = [NSMutableArray arrayWithCapacity:0];
-        [self.images addObject:[UIImage imageNamed:name]];
-    }
-    
-    [self.collectionView reloadData];
+
+/* Mock data */
+//    NSUInteger index;
+//    for (index = 0; index < 7; ++index) {
+//        // Setup image name
+//        NSString *name = [NSString stringWithFormat:@"img%03ld.jpg", (unsigned long)index];
+//        if(!self.images)
+//            self.images = [NSMutableArray arrayWithCapacity:0];
+//        [self.images addObject:[UIImage imageNamed:name]];
+//    }
+/* End Mock Data */
     
     [self addHeaderButtons];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+}
+
+- (void) populateImages {
+    PFQuery *query = [PFQuery queryWithClassName:@"ImageObject"];
+    [query orderByDescending:@"updatedAt"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        self.images = [NSMutableArray arrayWithCapacity:0];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            for (PFObject* object in objects) {
+                PFFile* imageFile = object[@"image"];
+                NSURL *imageFileUrl = [[NSURL alloc] initWithString:imageFile.url];
+                NSData *imageData = [NSData dataWithContentsOfURL:imageFileUrl];
+                UIImage* image = [UIImage imageWithData:imageData];
+                if (image) {
+                    // If a nil image somehow got uploaded to parse, it can cause an error here, so we check
+                    [self.images addObject:image];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.collectionView reloadData];
+                    });
+
+                }
+            }
+            
+        });
+    }];
+
 }
 
 - (void) addHeaderButtons {
@@ -106,8 +147,11 @@
 #pragma mark - Page View delegate/helper methods
 
 - (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers {
-    PPAddFeedbackViewController* nextController = (PPAddFeedbackViewController*)[pendingViewControllers objectAtIndex:0];
-    nextController.image = self.selectedCell.image;
+    UIViewController* nextController = [pendingViewControllers objectAtIndex:0];
+    if ([nextController isKindOfClass:[PPAddFeedbackViewController class]]) {
+        PPAddFeedbackViewController* addFeedbackViewController = (PPAddFeedbackViewController*)nextController;
+        addFeedbackViewController.image = self.selectedCell.image;
+    }
 }
 
 
