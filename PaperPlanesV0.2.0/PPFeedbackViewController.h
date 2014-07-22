@@ -36,6 +36,7 @@
 @property (strong, nonatomic) HPGrowingTextView *textView;
 @property (weak, nonatomic) IBOutlet UIView *postCommentContainer;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *postCommentHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *postCommentDividerHeight;
 
 /* Post & Associated */
 @property (weak, nonatomic) IBOutlet UIButton *postButton;

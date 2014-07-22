@@ -211,6 +211,8 @@
     [self initSendButton];
     [self initTutorialAlert];
     self.postButton.enabled = NO;
+    self.postCommentDividerHeight.constant = 0.25f;
+    [self updateViewConstraints];
 }
 
 - (void)addObservers {
@@ -375,7 +377,7 @@
 //    self.textView.internalTextView.layer.borderWidth = 0.5f;
 //    self.textView.internalTextView.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.25].CGColor;
     self.textView.internalTextView.layer.backgroundColor = [UIColor clearColor].CGColor;
-    self.textView.internalTextView.layer.cornerRadius = 5.0f;
+//    self.textView.internalTextView.layer.cornerRadius = 5.0f;
 
 }
 
@@ -611,7 +613,7 @@
 
 - (float) getTableCellHeight:(NSString *) comment {
     // NEXT STEP remove hard coded size and figure out how to correctly get height
-    float verticalPadding = 50.0f + 10.0f;
+    float verticalPadding = 50.0f;
 //    float verticalPadding = 30.0f + TABLE_CELL_LABEL_TO_CONTENT + TABLE_CELL_LABEL_MARGIN + 50.0f;
     float maxWidth = 454.0f - (TABLE_CELL_LABEL_MARGIN * 2);
     
@@ -776,7 +778,7 @@
 //    [UIView animateWithDuration:.5 animations:^{
         if (shouldShow) {
             self.textView.text = @"";
-            self.postCommentHeight.constant = 50;
+            self.postCommentHeight.constant = 46;
             [self.view setNeedsUpdateConstraints];
             self.postCommentContainer.hidden = NO;
             
