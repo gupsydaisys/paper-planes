@@ -19,7 +19,6 @@
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-    [PFUser logOut];
     if ([PFUser currentUser]) {
         [self performSegueWithIdentifier:@"LogInToRequestFeedbackSegue" sender:self];
     } else {
