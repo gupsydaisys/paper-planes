@@ -1,15 +1,24 @@
+BIG "T" to do List
 A. hook up to back end
 - color is different based on new box or old box
-B. logo + design
-C. network + groups (Friday Morning)
-D. landscape mode should work
-D. having multiple images and figuring out what that means
-E. create filters: created by me, all, by group, by recency, by trending (these should be determined based on testing)
-F. navagation of boxes
 
-Morning
-1. Ask hani about aethetics of log in page (~20 mins)
-2. Hani shows serena what he did (~30 min)
+B. logo + design
+
+C. notification list
+
+D. network + groups (Friday Morning)
+
+E. landscape mode should work
+
+F. having multiple images and figuring out what that means
+
+G. create filters: created by me, all, by group, by recency, by trending (these should be determined based on testing)
+
+H. navagation of boxes
+
+
+
+
 
 
 
@@ -27,22 +36,6 @@ ORGANIZER
 1. Easy to distinguish a piece of work: grp associated, picture of it, creator
 2. Easy to see if it's been updated since you last viewed it
 
-
-
-
-
-
-
-
-
-
-Wed get Charles
-Wed get Casie & Marina
-
-Ongoing:
-- use it with girl
-- find 2 people in the same class
-
 QUESTION TO ASK DURING TESTING
 0. Do we need more of a way to look at the overview of everything you have done?
 1. "tap where you want feedback" how does this feel? >>>>
@@ -52,7 +45,7 @@ QUESTION TO ASK DURING TESTING
 People don't know you can leave boxes (not dots or something)
 and that you can do this multiple places
 
-2. Should it be more explicit to dimiss keyboard?
+2. Should it be more explicit to dimiss keyboard?  Should you have reverse swip gesture on keyboard?
 
 
 
@@ -61,18 +54,9 @@ and that you can do this multiple places
 
 
 
-SERENA
-0. mess around with styling for post comment container
-1. table handle top should be changing arrow
 
-1. animate post field
-2. change to instagram like view on feed
-3. change so you can also bring keyboard up using swipe gesture
-4. after a user as put feedback in once, change message to "add more feedback here..."
-5. show all comments after posting a new comment
-...
-20. change both request and add feedback to look the same
-(get Hani input on animation + colors)
+
+
 
 HANI FUTURE
 1. shouldn't be able to put box handles off screen
@@ -98,16 +82,22 @@ VISUAL CHANGES
 1. alert view needs some altering visually (look at fb photo)
 2. buttons colors. remains blue photo button if touch and drag outside, instead of turning blue, graying out or enlarging or wiggling
 3. figure out a better button then the x for exit button feedback mode
+4. the sign up screen
+- once you navigate to a log in or sign up screen, have the button only appear when you are there
+- problem is log in looks relaly plain as a button
+- underline sign up button
+5. post comment container and table comments
+- mess around with styling for post comment container
+- table handle top should be changing arrow
+- animate post field
+- change to instagram like view on feed
+
+
 
 BUGS
-0. got to many times tap twice on the camera
+0. got to tap too many times on the take photo button to take photo on camera
 1. double tap should not leave dotbox
 2. touch down on white x and then move finger away (but dont' lift up), it one time froze the swipe to other pages features and in general doesn't unselect.
-
-EASY ADD-ONS
-1. sign up page
-- have next go to the next field ie go from email id to password
-- if you click "log in" or sign up" and no text is in email field or email field is wrong, put cursor there, else if no text is in password field, put cursor there
 
 FUTURE ADD-ONS
 - flash
@@ -115,7 +105,7 @@ FUTURE ADD-ONS
 - filters for hw
 - rotation
 - mark different items in organizer as complete 
-
+- tilt feature on newsfeed
 
 
 
