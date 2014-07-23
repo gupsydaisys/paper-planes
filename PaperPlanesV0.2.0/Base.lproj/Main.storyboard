@@ -84,8 +84,11 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ab-B3-Rpk" userLabel="Switch Entry">
-                                <rect key="frame" x="209" y="367" width="59" height="60"/>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ab-B3-Rpk" userLabel="Switch Entry">
+                                <rect key="frame" x="203" y="350" width="74" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="74" id="rRP-6y-EOm"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                 <state key="normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

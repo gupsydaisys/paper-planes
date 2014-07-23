@@ -59,11 +59,11 @@ enum entryPages
 //    [_switchEntryPageButton setAttributedTitle:commentString forState:UIControlStateNormal];
 
     
-//    if ([PFUser currentUser]) {
-//        [self performSegueWithIdentifier:@"LogInToRequestFeedbackSegue" sender:self];
-//    } else {
+    if ([PFUser currentUser]) {
+        [self performSegueWithIdentifier:@"LogInToRequestFeedbackSegue" sender:self];
+    } else {
         _user = [PFUser user];
-//    }
+    }
 }
 
 - (IBAction) logIn {
@@ -71,7 +71,11 @@ enum entryPages
         if (_currentPage == LANDING_PAGE) {
             [self performTransitionTo:LOG_IN];
         } else {
-            if ([self populateUserProperties]) {
+            if (_emailField.text.length <= 0) {
+                [_emailField becomeFirstResponder];
+            } else if (_passwordField.text.length <= 0) {
+                [_passwordField becomeFirstResponder];
+            } else if ([self populateUserProperties]) {
                 [PFUser logInWithUsernameInBackground:_user.username
                                              password:_user.password
                                                target:self
@@ -81,13 +85,17 @@ enum entryPages
     }
 }
 
-// TODO: fix bug that when you sign up with already valid info...it's okay with it
+// You can log in on the sign up page if you want to (bug...who knowzzz)
 - (IBAction) signUp {
     if (!_inAnimation) {
         if (_currentPage == LANDING_PAGE) {
             [self performTransitionTo:SIGN_UP];
         } else {
-            if ([self populateUserProperties]) {
+            if (_emailField.text.length <= 0) {
+                [_emailField becomeFirstResponder];
+            } else if (_passwordField.text.length <= 0) {
+                [_passwordField becomeFirstResponder];
+            } else if ([self populateUserProperties]) {
                 [_user signUpInBackgroundWithTarget:self
                                            selector:@selector(handleSignUp:error:)];
             }
@@ -99,25 +107,22 @@ enum entryPages
     _currentPage == SIGN_UP ? [self performTransitionTo:LOG_IN] : [self performTransitionTo:SIGN_UP];
 }
 
-// TODO: fix animation aestheics
 - (void) performTransitionTo:(EntryPage) entryPage {
     _inAnimation = true;
+
+    // you will also have to add back in in the finished statement, having the switchentry page button appear
 //    if (_currentPage == SIGN_UP) {
 //        NSMutableAttributedString *commentString = [[NSMutableAttributedString alloc] initWithAttributedString:_switchEntryPageButton.titleLabel.attributedText];
-//        
 //        [commentString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [commentString length])];
-//        
 //        [commentString replaceCharactersInRange:(NSMakeRange(0, [commentString length])) withString:@"Log in"];
 //        [_switchEntryPageButton setAttributedTitle:commentString forState:UIControlStateNormal];
-//        
 //    } else {
 //        NSMutableAttributedString *commentString = [[NSMutableAttributedString alloc] initWithAttributedString:_switchEntryPageButton.titleLabel.attributedText];
-//        
 //        [commentString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [commentString length])];
-//        
 //        [commentString replaceCharactersInRange:(NSMakeRange(0, [commentString length])) withString:@"Sign Up"];
 //        [_switchEntryPageButton setAttributedTitle:commentString forState:UIControlStateNormal];
 //    }
+    
     [UIView animateWithDuration:.7f animations:^{
         _logoTopConstraint.constant = 25;
         _emailField.text = @"";
@@ -178,6 +183,7 @@ enum entryPages
     if (error) {
         _user = [PFUser user]; // Reset user so they can try again
         [PPUtilities showError:error];
+        [_emailField becomeFirstResponder];
     } else {
         [self performSegueWithIdentifier:@"LogInToRequestFeedbackSegue" sender:self];
     }
