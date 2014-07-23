@@ -52,7 +52,6 @@
 @property (weak, nonatomic) IBOutlet UIPanGestureRecognizer *dragTableHandleRecognizer;
 - (IBAction)dragTableHandle:(UIPanGestureRecognizer *)sender;
 
-@property (nonatomic, weak) PPPageViewController* pageViewController;
 
 enum commentStateTypes
 {

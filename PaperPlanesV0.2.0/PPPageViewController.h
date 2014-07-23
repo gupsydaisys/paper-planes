@@ -7,16 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+//#import "PPOrganizerViewController.h"
+//#import "PPFeedbackViewController.h"
+//#import "PPOrganizerViewController.h"
+
 
 @interface PPPageViewController : UIPageViewController
 
 - (void) transitionToRequestViewController;
 - (void) transitionToRequestViewController:(void(^)(void)) callback;
+- (UIViewController*) getRequestViewController;
 
 - (void) transitionToFeedbackViewController;
 - (void) transitionToFeedbackViewController:(void(^)(void)) callback;
+- (UIViewController*) getFeedbackViewController;
 
 - (void) transitionToOrganizerViewController;
 - (void) transitionToOrganizerViewController:(void(^)(void)) callback;
+- (UIViewController*) getOrganizerViewController;
 
 @end

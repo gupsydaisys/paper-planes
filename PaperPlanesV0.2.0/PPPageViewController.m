@@ -7,17 +7,15 @@
 //
 
 #import "PPPageViewController.h"
-#import "PPOrganizerViewController.h"
-#import "PPFeedbackViewController.h"
-#import "PPOrganizerViewController.h"
+#import "PPViewController.h"
 
 @interface PPPageViewController () <UIPageViewControllerDelegate, UIPageViewControllerDataSource> {
 }
 
-@property (nonatomic, strong) PPOrganizerViewController* organizerViewController;
-@property (nonatomic, strong) PPFeedbackViewController* requestViewController;
-@property (nonatomic, strong) PPFeedbackViewController* feedbackViewController;
 @property (nonatomic, strong) NSArray* allViewControllers;
+@property (nonatomic, strong) PPViewController* organizerViewController;
+@property (nonatomic, strong) PPViewController* requestViewController;
+@property (nonatomic, strong) PPViewController* feedbackViewController;
 
 // This may not be necessary but it seems to decrease the chances of
 // getting a NSInternalInconsistencyException upon transitioning while the screen is touched
@@ -33,18 +31,16 @@
     [super viewDidLoad];
     self.dataSource = self;
     self.delegate = self;
-    
-    
 
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-    self.organizerViewController = (PPOrganizerViewController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"PPOrganizerViewController"];
+    self.organizerViewController = (PPViewController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"PPOrganizerViewController"];
     self.organizerViewController.pageViewController = self;
     
-    self.requestViewController = (PPFeedbackViewController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"PPRequestFeedbackViewController"];
+    self.requestViewController = (PPViewController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"PPRequestFeedbackViewController"];
     self.requestViewController.pageViewController = self;
     
-    self.feedbackViewController = (PPFeedbackViewController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"PPAddFeedbackViewController"];
+    self.feedbackViewController = (PPViewController*)[mainStoryboard instantiateViewControllerWithIdentifier:@"PPAddFeedbackViewController"];
     self.feedbackViewController.pageViewController = self;
     
     self.allViewControllers = [[NSArray alloc] initWithObjects:self.requestViewController, self.organizerViewController, self.feedbackViewController, nil];
@@ -80,6 +76,10 @@
     }];
 }
 
+- (UIViewController*) getRequestViewController {
+    return self.requestViewController;
+}
+
 - (void) transitionToOrganizerViewController {
     [self transitionToOrganizerViewController:^{}];
 }
@@ -90,6 +90,10 @@
     }];
 }
 
+- (UIViewController*) getOrganizerViewController {
+    return self.organizerViewController;
+}
+
 - (void) transitionToFeedbackViewController {
     [self transitionToFeedbackViewController:^{}];
 }
@@ -98,6 +102,10 @@
     [self transitionToController:self.feedbackViewController completion:^{
         callback();
     }];
+}
+
+- (UIViewController*) getFeedbackViewController {
+    return self.feedbackViewController;
 }
 
 - (PPViewController *) currentlyShownViewController {
