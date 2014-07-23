@@ -191,13 +191,17 @@
     takePhotoButton.hidden = YES;
     
     [captureView takeSnapshotWithCompletionHandler:^(UIImage *image) {
-        NSLog(@"Image was taken");
         NSData *imageData = UIImageJPEGRepresentation(image, 0.9f);
         PFObject* imageObject = [PFObject objectWithClassName:@"ImageObject"];
         imageObject[@"image"] = [PFFile fileWithName:@"image.jpg" data:imageData contentType:@"image"];
+        
         [imageObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error) {
-                NSLog(@"Saved image");
+                PFPush *push = [[PFPush alloc] init];
+                NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:imageObject.objectId, @"objectId", nil];
+                [push setChannel:@"ImageObject"];
+                [push setData:data];
+                [push sendPushInBackground];
             } else {
                 NSLog(@"There was an error saving the image");
             }

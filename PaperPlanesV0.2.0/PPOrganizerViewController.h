@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PPPageViewController.h"
+#import <Parse/Parse.h>
+#import "PPViewController.h"
 
-@interface PPOrganizerViewController : UIViewController
+@interface PPOrganizerViewController : PPViewController
 
-@property (nonatomic, weak) PPPageViewController* pageViewController;
+- (void) addImageObject:(PFObject*)imageObject;
 
 @end

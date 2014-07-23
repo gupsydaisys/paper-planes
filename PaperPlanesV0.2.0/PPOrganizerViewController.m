@@ -10,7 +10,6 @@
 #import "PPAddFeedbackViewController.h"
 #import "PPFeedbackItemCell.h"
 #import "PPCameraButton.h"
-#import <Parse/Parse.h>
 
 @interface PPOrganizerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 
@@ -63,23 +62,36 @@
         self.images = [NSMutableArray arrayWithCapacity:0];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
             for (PFObject* object in objects) {
-                PFFile* imageFile = object[@"image"];
-                NSURL *imageFileUrl = [[NSURL alloc] initWithString:imageFile.url];
-                NSData *imageData = [NSData dataWithContentsOfURL:imageFileUrl];
-                UIImage* image = [UIImage imageWithData:imageData];
+                UIImage* image = [self getImageFromObject:object];
                 if (image) {
-                    // If a nil image somehow got uploaded to parse, it can cause an error here, so we check
                     [self.images addObject:image];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.collectionView reloadData];
                     });
-
                 }
             }
             
         });
     }];
 
+}
+
+- (UIImage*) getImageFromObject:(PFObject*) imageObject {
+    PFFile* imageFile = imageObject[@"image"];
+    NSURL *imageFileUrl = [[NSURL alloc] initWithString:imageFile.url];
+    NSData *imageData = [NSData dataWithContentsOfURL:imageFileUrl];
+    UIImage* image = [UIImage imageWithData:imageData];
+    return image;
+}
+
+- (void) addImageObject:(PFObject *)imageObject {
+    UIImage* image = [self getImageFromObject:imageObject];
+    if (image) {
+        [self.images insertObject:image atIndex:0];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+        });
+    }
 }
 
 - (void) addHeaderButtons {

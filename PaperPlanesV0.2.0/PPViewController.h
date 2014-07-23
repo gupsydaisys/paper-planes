@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PPPageViewController.h"
 
 @interface PPViewController : UIViewController <UIPageViewControllerDelegate>
 
 - (UIViewController*) controllerForPaging;
+@property (nonatomic, weak) PPPageViewController* pageViewController;
 
 @end
