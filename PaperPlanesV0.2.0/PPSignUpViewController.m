@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 #import "PPUtilities.h"
 
-@interface PPSignUpViewController ()
+@interface PPSignUpViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
@@ -50,12 +50,12 @@ enum entryPages
     
     [self addObservers];
     _currentPage = LANDING_PAGE;
-    
-    // Make the button underlined
+    self.emailField.delegate = self;
+    self.passwordField.delegate = self;
+
+// Make the button underlined
 //    NSMutableAttributedString *commentString = [[NSMutableAttributedString alloc] initWithAttributedString:_switchEntryPageButton.titleLabel.attributedText];
-//    
 //    [commentString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [commentString length])];
-//    
 //    [_switchEntryPageButton setAttributedTitle:commentString forState:UIControlStateNormal];
 
     
@@ -81,6 +81,7 @@ enum entryPages
     }
 }
 
+// TODO: fix bug that when you sign up with already valid info...it's okay with it
 - (IBAction) signUp {
     if (!_inAnimation) {
         if (_currentPage == LANDING_PAGE) {
@@ -119,6 +120,8 @@ enum entryPages
 //    }
     [UIView animateWithDuration:.7f animations:^{
         _logoTopConstraint.constant = 25;
+        _emailField.text = @"";
+        _passwordField.text = @"";
         _emailField.hidden = false;
         _passwordField.hidden = false;
         _switchEntryPageButton.hidden = false;
@@ -218,7 +221,6 @@ enum entryPages
 }
 
 #pragma mark - Keyboard Shit
-
 - (void)addObservers {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -270,18 +272,30 @@ enum entryPages
     [self.view setNeedsUpdateConstraints];
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == _emailField) {
+        [self.view endEditing:true];
+        [_passwordField becomeFirstResponder];
+        NSLog(@"email field");
+    } else {
+        [self.view endEditing:true];
+        _currentPage == SIGN_UP ? [self signUp] : [self logIn];
+        NSLog(@"password field");
+    }
+    return false;
+}
+
+- (void) textFieldDidEndEditing:(UITextField *)textField {
+    [textField resignFirstResponder];
+}
+
 # pragma mark - iPhone Preference UI Methods
 - (NSUInteger) supportedInterfaceOrientations {
-    // Return a bitmask of supported orientations. If you need more,
-    // use bitwise or (see the commented return).
     return UIInterfaceOrientationMaskPortrait;
     // return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
 }
 
 - (UIInterfaceOrientation) preferredInterfaceOrientationForPresentation {
-    // Return the orientation you'd prefer - this is what it launches to. The
-    // user can still rotate. You don't have to implement this method, in which
-    // case it launches in the current orientation
     return UIInterfaceOrientationPortrait;
 }
 
