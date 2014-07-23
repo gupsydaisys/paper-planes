@@ -7,9 +7,9 @@ D. having multiple images and figuring out what that means
 E. create filters: created by me, all, by group, by recency, by trending (these should be determined based on testing)
 F. navagation of boxes
 
-
-
-
+Morning
+1. Ask hani about aethetics of log in page (~20 mins)
+2. Hani shows serena what he did (~30 min)
 
 
 
@@ -79,7 +79,7 @@ HANI FUTURE
 2. don't allow the dotbox to resize and have the icons switch around
 3. no overlapping dotboxes
 4. create bounds around icons on feedpack page so you can't put dotbox there
-
+5. you should add a dotbox when you dimiss tutorial alert
 
 MOST IMPORTANT CHANGES
 1. need to make send button more button looking
@@ -92,8 +92,6 @@ MOST IMPORTANT CHANGES
 ....b) click x to exit feedback view should alert if there exists at least one dotbox with at least 1 comment
 ....c) if you x a dotbox that has a comment then should you be alerted
 ....e) if you spend time resizing and moving dotbox the should be alerted if you delete it
-4. you should add a dotbox when you dimiss tutorial alert
-
 
 VISUAL CHANGES
 0. whenever you add a new sheet by clicking plane button, have organizer very obviously add it or show changes.
@@ -102,20 +100,21 @@ VISUAL CHANGES
 3. figure out a better button then the x for exit button feedback mode
 
 BUGS
-0. have to many times tap twice on the camera
+0. got to many times tap twice on the camera
 1. double tap should not leave dotbox
 2. touch down on white x and then move finger away (but dont' lift up), it one time froze the swipe to other pages features and in general doesn't unselect.
+
+EASY ADD-ONS
+1. sign up page
+- have next go to the next field ie go from email id to password
+- if you click "log in" or sign up" and no text is in email field or email field is wrong, put cursor there, else if no text is in password field, put cursor there
 
 FUTURE ADD-ONS
 - flash
 - focus
 - filters for hw
 - rotation
-- mark different items in organizer as complete
-
-
-
-
+- mark different items in organizer as complete 
 
 
 
