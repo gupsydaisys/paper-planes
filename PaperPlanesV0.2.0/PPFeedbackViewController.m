@@ -260,7 +260,7 @@
 }
 
 - (void) initSendButton {
-    float buttonSize = 37;
+    float buttonSize = 41;
     
     sendButton = [[PPSendButton alloc] initWithFrame:CGRectMake(0, 0, buttonSize, buttonSize)];
     sendButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -828,11 +828,7 @@
 
 - (void) didPostComment {
     [self.tableView reloadData];
-    if (selectedBox.comments.count == 1) {
-        [self showComments:TRUE state:ONE];
-    } else {
-        [self showComments:TRUE state:tableHandleState];
-    }
+    [self showComments:TRUE state:FULL];
     
     [self.view endEditing:YES];
     NSIndexPath *index = [NSIndexPath indexPathForItem:(selectedBox.comments.count - 1) inSection:0];

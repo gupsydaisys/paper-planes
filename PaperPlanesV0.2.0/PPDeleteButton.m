@@ -16,7 +16,7 @@
 @interface PPDeleteButton () {
     UILabel* circle;
     UILabel* xShape;
-    UIOutlineLabel* outlinedXShape;
+    UILabel* outlinedXShape;
 }
 
 @end
@@ -50,6 +50,11 @@
             outlinedXShape.font = [UIFont fontWithName:kFontAwesomeFamilyName size:outlinedXShapeRect.size.width];
             outlinedXShape.text = [NSString fontAwesomeIconStringForEnum:FATimes];
             self.selected = false;
+            
+//            outlinedXShape.layer.shadowColor = [UIColor blackColor].CGColor;
+//            outlinedXShape.layer.shadowOpacity = 0.7f;
+//            outlinedXShape.layer.shadowRadius = 1.0f;
+//            outlinedXShape.layer.shadowOffset = CGSizeMake(0, 0);
             
             [self addSubview:outlinedXShape];
         }

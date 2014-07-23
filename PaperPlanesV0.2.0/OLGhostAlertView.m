@@ -43,8 +43,8 @@
         self.backgroundColor = [UIColor colorWithWhite:0 alpha:.45];
         
         /* Add border to match white exit button */
-        self.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.7].CGColor;
-        self.layer.borderWidth = 0.5f;
+//        self.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.7].CGColor;
+//        self.layer.borderWidth = 0.5f;
         
         self.alpha = 0;
         
