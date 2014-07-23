@@ -23,7 +23,7 @@
 }
 
 - (NSString*) placeholderText {
-    return @"Ask for feedback here...";
+    return @"Add a comment on selected area...";
 }
 
 - (void) touchUpInsideExitButton {

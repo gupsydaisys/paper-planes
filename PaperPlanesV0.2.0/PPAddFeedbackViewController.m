@@ -26,7 +26,7 @@
 }
 
 - (NSString*) placeholderText {
-    return @"Add a comment here...";
+    return @"Add a comment on selected area...";
 }
 
 - (void) touchUpInsideExitButton {

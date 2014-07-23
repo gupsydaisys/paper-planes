@@ -251,7 +251,7 @@
 }
 
 - (void) initTutorialAlert {
-    tutorialAlert = [[OLGhostAlertView alloc] initWithTitle:@"Tap where you want feedback" message:nil timeout:CGFLOAT_MAX dismissible:YES];
+    tutorialAlert = [[OLGhostAlertView alloc] initWithTitle:@"Tap to box a region where you would like to get feedback" message:nil timeout:CGFLOAT_MAX dismissible:YES];
     tutorialAlert.position = OLGhostAlertViewPositionCenter;
 }
 
