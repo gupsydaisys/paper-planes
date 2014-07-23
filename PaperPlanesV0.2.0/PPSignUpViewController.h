@@ -10,9 +10,4 @@
 
 @interface PPSignUpViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UITextField *emailField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordField;
-
-- (IBAction)logIn:(id)sender;
-- (IBAction)signUp:(id)sender;
 @end
