@@ -11,7 +11,7 @@
 #import "PPFeedbackItemCell.h"
 #import "PPCameraButton.h"
 
-@interface PPOrganizerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
+@interface PPOrganizerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIView *header;
@@ -190,12 +190,24 @@
     UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellTapped:)];
     [cell addGestureRecognizer:tapGestureRecognizer];
     
+    UIPanGestureRecognizer * swipeGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(cellSwiped:)];
+    [cell addGestureRecognizer:swipeGestureRecognizer];
+    
     return cell;
 }
 
 - (void) cellTapped: (UITapGestureRecognizer *) gesture {
     self.selectedCell = (PPFeedbackItemCell*) gesture.view;
     [self.pageViewController transitionToFeedbackViewController];
+}
+
+- (void) cellSwiped: (UIPanGestureRecognizer *) gesture {
+    if (((gesture.state == UIGestureRecognizerStateChanged) ||
+         (gesture.state == UIGestureRecognizerStateEnded)) &&
+        [gesture velocityInView:self.view].x < 0) {
+        self.selectedCell = (PPFeedbackItemCell*) gesture.view;
+        [self.pageViewController transitionToFeedbackViewController];
+    }
 }
 
 #pragma mark - UIScrollViewdelegate methods
@@ -205,5 +217,6 @@
         cell.imageOffset = CGPointMake(0.0f, yOffset);
     }
 }
+
 
 @end

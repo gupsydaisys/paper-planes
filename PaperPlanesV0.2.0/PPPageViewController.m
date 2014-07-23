@@ -50,7 +50,7 @@
 
 - (UIViewController *) pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
     int nextIndex = [self.allViewControllers indexOfObject:viewController] + 1;
-    if (nextIndex >= self.allViewControllers.count) {
+    if (nextIndex >= self.allViewControllers.count || nextIndex == 2) {
         return nil;
     } else {
         return [(PPViewController*)[self.allViewControllers objectAtIndex:nextIndex] controllerForPaging];
@@ -59,7 +59,7 @@
 
 - (UIViewController *) pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
     int nextIndex = [self.allViewControllers indexOfObject:viewController] - 1;
-    if (nextIndex < 0) {
+    if (nextIndex < 0 || nextIndex == 2) {
         return nil;
     } else {
         return [(PPViewController*)[self.allViewControllers objectAtIndex:nextIndex] controllerForPaging];
@@ -140,7 +140,7 @@
     }
 }
 
-- (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers {
+- (void) pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers {
     [[self currentlyShownViewController] pageViewController:pageViewController willTransitionToViewControllers:pendingViewControllers];
     self.transitioning = TRUE;
 }
