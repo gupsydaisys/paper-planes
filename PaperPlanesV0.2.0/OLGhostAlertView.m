@@ -228,7 +228,7 @@
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         if (UIDeviceOrientationIsPortrait(self.interfaceOrientation))
-            maxWidth = 280 - (HORIZONTAL_PADDING * 2);
+            maxWidth = 250 - (HORIZONTAL_PADDING * 2);
         else
             maxWidth = 420 - (HORIZONTAL_PADDING * 2);
     } else {
