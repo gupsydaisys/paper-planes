@@ -11,7 +11,7 @@
 		483CEE7819748E8D0030E4B9 /* OLGhostAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 483CEE7719748E8D0030E4B9 /* OLGhostAlertView.m */; };
 		483DD01A197064A3009EE161 /* UIOutlineLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 483DD019197064A3009EE161 /* UIOutlineLabel.m */; };
 		483F32DE195E0EF2009788C0 /* HSCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 483F32DD195E0EF2009788C0 /* HSCommentCell.m */; };
-		483F32E5195E13E2009788C0 /* PPComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 483F32E4195E13E2009788C0 /* PPComment.m */; };
+		483F32E5195E13E2009788C0 /* PPBoxComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 483F32E4195E13E2009788C0 /* PPBoxComment.m */; };
 		484CCCF0196DAF2900823F64 /* DateTools.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 484CCCE1196DAF2900823F64 /* DateTools.bundle */; };
 		484CCCF1196DAF2900823F64 /* DTError.m in Sources */ = {isa = PBXBuildFile; fileRef = 484CCCE5196DAF2900823F64 /* DTError.m */; };
 		484CCCF2196DAF2900823F64 /* DTTimePeriod.m in Sources */ = {isa = PBXBuildFile; fileRef = 484CCCE7196DAF2900823F64 /* DTTimePeriod.m */; };
@@ -96,8 +96,8 @@
 		483DD019197064A3009EE161 /* UIOutlineLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIOutlineLabel.m; sourceTree = "<group>"; };
 		483F32DC195E0EF2009788C0 /* HSCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSCommentCell.h; sourceTree = "<group>"; };
 		483F32DD195E0EF2009788C0 /* HSCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSCommentCell.m; sourceTree = "<group>"; };
-		483F32E3195E13E2009788C0 /* PPComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPComment.h; sourceTree = "<group>"; };
-		483F32E4195E13E2009788C0 /* PPComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPComment.m; sourceTree = "<group>"; };
+		483F32E3195E13E2009788C0 /* PPBoxComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPBoxComment.h; sourceTree = "<group>"; };
+		483F32E4195E13E2009788C0 /* PPBoxComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPBoxComment.m; sourceTree = "<group>"; };
 		484CCCE1196DAF2900823F64 /* DateTools.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DateTools.bundle; sourceTree = "<group>"; };
 		484CCCE2196DAF2900823F64 /* DateTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTools.h; sourceTree = "<group>"; };
 		484CCCE3196DAF2900823F64 /* DTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTConstants.h; sourceTree = "<group>"; };
@@ -249,8 +249,8 @@
 		483F32E2195E135D009788C0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				483F32E3195E13E2009788C0 /* PPComment.h */,
-				483F32E4195E13E2009788C0 /* PPComment.m */,
+				483F32E3195E13E2009788C0 /* PPBoxComment.h */,
+				483F32E4195E13E2009788C0 /* PPBoxComment.m */,
 				CAF8A2EE1980547400D41941 /* PPFeedbackItem.h */,
 				CAF8A2EF1980547400D41941 /* PPFeedbackItem.m */,
 				CAB3B44F198092D600061C97 /* PPBox.h */,
@@ -620,7 +620,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				483F32DE195E0EF2009788C0 /* HSCommentCell.m in Sources */,
-				483F32E5195E13E2009788C0 /* PPComment.m in Sources */,
+				483F32E5195E13E2009788C0 /* PPBoxComment.m in Sources */,
 				CA3C07FD19632AB8005C52FC /* PPBoxViewController.m in Sources */,
 				48AA4DCA1975FB3D002824EF /* PPFeedbackItemCell.m in Sources */,
 				CAE99DEE195BA4FF0050B584 /* PPMoveButton.m in Sources */,

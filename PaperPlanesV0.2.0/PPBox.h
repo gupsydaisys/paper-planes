@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Learning Public. All rights reserved.
 //
 
+#import "PPBoxComment.h"
 #import <Parse/Parse.h>
 
 @interface PPBox : PFObject<PFSubclassing>
@@ -19,6 +20,6 @@
 @property float height;
 @property (retain, nonatomic) NSMutableArray* comments;
 
-- (void) addComment:(NSString*) text;
+- (void) addComment:(PPBoxComment*) text;
 
 @end

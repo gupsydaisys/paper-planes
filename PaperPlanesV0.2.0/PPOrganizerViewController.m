@@ -61,6 +61,8 @@
     [query orderByDescending:@"updatedAt"];
     [query includeKey:@"imageObject"];
     [query includeKey:@"boxes"];
+    [query includeKey:@"boxes.comments"];
+    [query includeKey:@"boxes.comments.creator"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         self.feedbackItems = [NSMutableArray arrayWithCapacity:0];
         for (PPFeedbackItem* feedbackItem in objects) {

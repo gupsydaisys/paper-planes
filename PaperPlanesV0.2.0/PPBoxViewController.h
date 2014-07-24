@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "PPBox.h"
 #import "PPBoxView.h"
+#import "PPBoxComment.h"
 
 @interface PPBoxViewController : UIViewController <UIGestureRecognizerDelegate, BoxViewDelegate>
 
 - (void) makeSelection: (BOOL) select;
-- (void) addComment: (NSString*) text;
+- (void) addComment: (PPBoxComment*) comment;
 - (NSArray*) comments;
 - (void) savePosition;
 - (id) initWithModel:(PPBox*) model;

@@ -82,8 +82,8 @@
     [delegate boxWasPanned:self];
 }
 
-- (void) addComment:(NSString *)text {
-    [self.model addComment:text];
+- (void) addComment:(PPBoxComment *)comment {
+    [self.model addComment:comment];
 }
 
 - (NSArray*) comments {

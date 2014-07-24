@@ -22,8 +22,8 @@
     return @"Box";
 }
 
-- (void) addComment:(NSString *)text {
-    [self addObject:text forKey:@"comments"];
+- (void) addComment:(PPBoxComment *)comment {
+    [self addObject:comment forKey:@"comments"];
 }
 
 @end

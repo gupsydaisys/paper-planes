@@ -11,6 +11,7 @@
 #import "PPOrganizerViewController.h"
 #import "PPFeedbackItem.h"
 #import "PPBox.h"
+#import "PPBoxComment.h"
 #import <Parse/Parse.h>
 
 @interface AppDelegate ()
@@ -25,6 +26,7 @@
     
     [PPFeedbackItem registerSubclass];
     [PPBox registerSubclass];
+    [PPBoxComment registerSubclass];
     
     [Parse setApplicationId:@"GWcbVtJelPpTL3yJB4ajgHcsxJFdlFDCnBnopNoe"
                   clientKey:@"SnU5aen5AC3SfTyPViOvKIeU8s2xBJ3aVHMCDH9w"];
@@ -49,6 +51,8 @@
     PFQuery *query = [PFQuery queryWithClassName:@"FeedbackItem"];
     [query includeKey:@"imageObject"];
     [query includeKey:@"boxes"];
+    [query includeKey:@"boxes.comments"];
+    [query includeKey:@"boxes.comments.creator"];
     [query whereKey:@"objectId" equalTo:feedbackItemObjectId];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
