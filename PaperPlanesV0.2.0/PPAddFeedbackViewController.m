@@ -7,6 +7,8 @@
 //
 
 #import "PPAddFeedbackViewController.h"
+#import "PPUtilities.h"
+#import "UIBAlertView.h"
 
 @interface PPAddFeedbackViewController ()
 
@@ -30,11 +32,27 @@
 }
 
 - (void) touchUpInsideExitButton {
-    [self.pageViewController transitionToOrganizerViewController];
+    [self transitionToOrganizerViewController];
 }
 
 - (void) touchUpInsideSendButton {
-    [self.pageViewController transitionToOrganizerViewController];
+    [self transitionToOrganizerViewController];
+}
+
+- (void) transitionToOrganizerViewController {
+    /* Alert iff selected dotbox has unsaved text in comment field */
+    if (self.selectedBox != nil && ![self.textView.text isEqualToString:@""]) {
+        UIBAlertView *alert = [PPUtilities getAlertUnsavedComment];
+        [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+            if (didCancel) {
+                return;
+            } else {
+                [self.pageViewController transitionToOrganizerViewController];
+            }
+        }];
+    } else {
+        [self.pageViewController transitionToOrganizerViewController];
+    }
 }
 
 - (UIViewController*) controllerForPaging {

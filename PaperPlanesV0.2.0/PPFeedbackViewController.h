@@ -52,6 +52,7 @@
 @property (weak, nonatomic) IBOutlet UIPanGestureRecognizer *dragTableHandleRecognizer;
 - (IBAction)dragTableHandle:(UIPanGestureRecognizer *)sender;
 
+@property (strong, nonatomic) PPBoxViewController* selectedBox;
 
 enum commentStateTypes
 {

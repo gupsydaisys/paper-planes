@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "UIBAlertView.h"
+
 
 @interface PPUtilities : NSObject
 
@@ -15,5 +17,6 @@
 + (NSString*) getEmailUsername: (NSString*) text;
 + (NSError*) newError: (NSString*) message;
 + (void) showError:(NSError *) error;
++ (UIBAlertView*) getAlertUnsavedComment;
 
 @end

@@ -53,8 +53,6 @@
 #define ANIMATION_DURATION 0.2f
 
 @interface PPFeedbackViewController () {
-    PPBoxViewController* selectedBox;
-
     CommentState tableHandleState;
     CGPoint startPos;
     CGPoint minPos;
@@ -540,10 +538,10 @@
 #pragma mark - Table Resize/Update Methods
 - (void) updateTableContainerFrame:(CommentState) curr {
     float fullHeight = self.mainView.frame.size.height - self.postCommentHeight.constant - self.keyboardHeight.constant - HEADING_HEIGHT;
-    float singleHeight = [self getTableCellHeight:[selectedBox.comments lastObject]];
+    float singleHeight = [self getTableCellHeight:[self.selectedBox.comments lastObject]];
     float cumulativeCommentHeight = TABLE_HANDLE_HEIGHT;
     
-    for (NSString *comment in selectedBox.comments) {
+    for (NSString *comment in self.selectedBox.comments) {
         cumulativeCommentHeight += [self getTableCellHeight:comment];
     }
     
@@ -675,8 +673,8 @@
 }
 
 - (void) keyboardDidShow {
-    if (selectedBox) {
-        [self.imageScrollView zoomToRect:selectedBox.view.frame animated:YES];
+    if (self.selectedBox) {
+        [self.imageScrollView zoomToRect:self.selectedBox.view.frame animated:YES];
     }
 }
 
@@ -724,12 +722,12 @@
 }
 
 - (NSInteger) tableView:(UITableView *) tableView numberOfRowsInSection:(NSInteger) section {
-    return selectedBox.comments.count;
+    return self.selectedBox.comments.count;
 }
 
 - (UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *) indexPath {
     HSCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
-    NSString *comment = selectedBox.comments[indexPath.row];
+    NSString *comment = self.selectedBox.comments[indexPath.row];
 
     cell.creator.text = @"dempsey";
     cell.timestamp.text = @"2 days ago";
@@ -744,7 +742,7 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *) indexPath {
-    return [self getTableCellHeight:selectedBox.comments[indexPath.row]];
+    return [self getTableCellHeight:self.selectedBox.comments[indexPath.row]];
 }
 
 #pragma mark - Gesture recognizer delegate
@@ -753,11 +751,8 @@
     CGPoint touchPoint = [gesture locationInView:gesture.view];
     
     /* Alert iff selected dotbox has unsaved text in comment field */
-    if (selectedBox != nil && ![self.textView.text isEqualToString:@""]) {
-        NSString *errorMessage = @"If you abondon the current box, your comment will be discarded.";
-        NSString *errorTitle = @"Discard Comment?";
-        
-        UIBAlertView *alert = [[UIBAlertView alloc] initWithTitle:errorTitle message:errorMessage cancelButtonTitle:@"Hold on" otherButtonTitles:@"Discard", nil];
+    if (self.selectedBox != nil && ![self.textView.text isEqualToString:@""]) {
+        UIBAlertView *alert = [PPUtilities getAlertUnsavedComment];
         [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
             if (didCancel) {
                 return;
@@ -792,8 +787,8 @@
     if (self.imageScrollView.zoomScale > self.imageScrollView.minimumZoomScale) {
         [self.imageScrollView setZoomScale:self.imageScrollView.minimumZoomScale animated:YES];
     } else {
-        if (selectedBox) {
-            [self.imageScrollView zoomToRect:selectedBox.view.frame animated:YES];
+        if (self.selectedBox) {
+            [self.imageScrollView zoomToRect:self.selectedBox.view.frame animated:YES];
         } else {
             [self.imageScrollView setZoomScale:self.imageScrollView.maximumZoomScale animated:YES];
         }
@@ -815,7 +810,7 @@
             [self.view setNeedsUpdateConstraints];
             self.postCommentContainer.hidden = NO;
             
-            if (selectedBox.comments.count != 0) {
+            if (self.selectedBox.comments.count != 0) {
                 self.tableContainer.hidden = NO;
                 [self setOpenedState:curr animated:NO];
             } else {
@@ -843,7 +838,7 @@
 
 #pragma mark - Post Comment Methods
 - (IBAction) tapPostComment:(id) sender {
-    [selectedBox.comments addObject:self.textView.text];
+    [self.selectedBox.comments addObject:self.textView.text];
     [self didPostComment];
 }
 
@@ -852,7 +847,7 @@
     [self showComments:TRUE state:FULL];
     
     [self.view endEditing:YES];
-    NSIndexPath *index = [NSIndexPath indexPathForItem:(selectedBox.comments.count - 1) inSection:0];
+    NSIndexPath *index = [NSIndexPath indexPathForItem:(self.selectedBox.comments.count - 1) inSection:0];
     [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 }
 
@@ -865,23 +860,23 @@
 }
 
 - (void) boxWasPanned:(PPBoxViewController *)box {
-    if (selectedBox == box) {
+    if (self.selectedBox == box) {
         [self restrictBoxView:box.view toBounds:self.imageView.frame];
     }
 }
 
 - (void) boxSelectionChanged:(PPBoxViewController *)box toState:(BOOL)selectionState {
     if (selectionState) {
-        [selectedBox makeSelection:false];
-        selectedBox = box;
+        [self.selectedBox makeSelection:false];
+        self.selectedBox = box;
         [self.tableView reloadData];
         if (tableHandleState) {
             [self showComments:YES state:tableHandleState];
         } else {
             [self showComments:YES state:CLOSED];
         }
-    } else if (selectionState == false && selectedBox == box) {
-        selectedBox = nil;
+    } else if (selectionState == false && self.selectedBox == box) {
+        self.selectedBox = nil;
         [self showComments:NO state:-1];
         if (isKeyboardUp) {
             [self.view endEditing:YES];
@@ -914,22 +909,6 @@
 
     if (CGRectGetMaxY(frame) > CGRectGetMaxY(bounds)) {
         view.center = CGPointMake(view.center.x, CGRectGetMaxY(bounds) - frame.size.height / 2);
-    }
-}
-
-# pragma mark - Alert methods
-- (void) alertDeletionWithError:(NSError *) error title:(NSString *) title {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                        message:[error.userInfo objectForKey:@"error"]
-                                                       delegate:self
-                                              cancelButtonTitle:@"Hold on"
-                                              otherButtonTitles:@"Discard", nil];
-    [alertView show];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == [alertView firstOtherButtonIndex]) {
-        NSLog(@"discard");
     }
 }
 
