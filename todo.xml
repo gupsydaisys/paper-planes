@@ -15,7 +15,7 @@ F. having multiple images and figuring out what that means
 
 G. create filters: created by me, all, by group, by recency, by trending (these should be determined based on testing)
 
-H. navagation of boxes use < > arrow
+H. navagation of boxes using < > arrow that come up on 
 
 
 
@@ -60,19 +60,11 @@ and that you can do this multiple places
 
 
 HANI FUTURE
-1. shouldn't be able to put box handles off screen
-2. don't allow the dotbox to resize and have the icons switch around
+2. don't allow x button and double arrow to go away upon circling
 3. no overlapping dotboxes
 4. create bounds around icons on feedpack page so you can't put dotbox there
 5. you should add a dotbox when you dimiss tutorial alert
 
-MOST IMPORTANT CHANGES
-2. change swipe gesture recognizer on organizer to swipe to correct view and swipe on navigation should swipe to last selected view or not do anything
-3. should you be alterted if...
-....a) have shit in post comment field and then click away which would consequently delete the currently selected box
-....b) click x to exit feedback view should alert if there exists at least one dotbox with at least 1 comment
-....c) if you x a dotbox that has a comment then should you be alerted
-....e) if you spend time resizing and moving dotbox the should be alerted if you delete it
 
 VISUAL CHANGES
 0. whenever you add a new sheet by clicking plane button, have organizer very obviously add it or show changes.
@@ -90,10 +82,23 @@ VISUAL CHANGES
 - change to instagram like view on feed
 6. add consistent shadows across and create file of uibutton stuff
 
+
+
+
+
+
+
+
+
+
+
 BUGS
 0. got to tap too many times on the take photo button to take photo on camera
 1. double tap should not leave dotbox
 2. touch down on white x and then move finger away (but dont' lift up), it one time froze the swipe to other pages features and in general doesn't unselect.
+
+WOULD BE NICE...
+- unsaved text was remembered on dotboxes that already had comments
 
 FUTURE ADD-ONS
 1. change camera take photo button to be similar to pintrist in aethetics and functionality
@@ -104,6 +109,13 @@ FUTURE ADD-ONS
 5. flash, focus, and rotation for camera
 6. filters for hw
 7. ability to reverse camera
+
+FUTURE FUTURE ADD-ONS
+1. should be able to add people onto conversation you didn't start
+
+NEXT VERSION (wed or thurs next week...)
+- implement mole skin changes (ie split of feedback view controller)
+- homogenize icons
 
 
 
