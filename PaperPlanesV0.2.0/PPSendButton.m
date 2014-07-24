@@ -33,8 +33,17 @@
         UIView *background = [[UIView alloc] initWithFrame:frame];
         [background setBackgroundColor:[self.tintColor colorWithAlphaComponent:0.95]];
         [background.layer setCornerRadius:5.0f];
-        [background.layer setBorderColor:[[UIColor blackColor] colorWithAlphaComponent:0.5].CGColor];
-        [background.layer setBorderWidth:0.5f];
+//        [background.layer setBorderColor:[[UIColor blackColor] colorWithAlphaComponent:0.5].CGColor];
+//        [background.layer setBorderWidth:0.5f];
+        background.layer.shadowColor = [UIColor blackColor].CGColor;
+        background.layer.shadowOpacity = 0.7f;
+        background.layer.shadowRadius = 1.0f;
+        background.layer.shadowOffset = CGSizeMake(0, 0);
+//    } else {
+//        self.layer.shadowColor = [UIColor colorWithWhite:0 alpha:0.1].CGColor;
+//        self.layer.shadowOffset = CGSizeMake(0, 0);
+//        self.layer.shadowOpacity = 1.0;
+//        self.layer.shadowRadius = 30.0;
 
         /* Subviews don't cancel the hit from UIControlEvent */
         [background setUserInteractionEnabled:NO];

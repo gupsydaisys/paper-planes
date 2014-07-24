@@ -49,4 +49,14 @@
     return push;
 }
 
++ (UIBAlertView*) getAlertUnsavedComment {
+    
+    NSString *errorMessage = @"If you abondon this %@, your comment will be discarded.";
+    NSString *errorTitle = @"Discard Comment?";
+    
+    UIBAlertView *alert = [[UIBAlertView alloc] initWithTitle:errorTitle message:errorMessage cancelButtonTitle:@"Hold on" otherButtonTitles:@"Discard", nil];
+    return alert;
+}
+    
+
 @end

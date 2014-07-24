@@ -9,8 +9,9 @@
 #import "PPRequestFeedbackViewController.h"
 #import "PPOrganizerViewController.h"
 #import "PPFeedbackItem.h"
-#import "PPUtilities.h"
 #import <Parse/Parse.h>
+#import "PPUtilities.h"
+#import "UIBAlertView.h"
 
 @interface PPRequestFeedbackViewController ()
 
@@ -27,12 +28,23 @@
 }
 
 - (NSString*) placeholderText {
-    return @"Ask for feedback here...";
+    return @"Add a comment on selected area...";
 }
 
 - (void) touchUpInsideExitButton {
-    // Overridden in subclass
-    [self transitionToCameraView];
+    /* Alert iff selected dotbox has unsaved text in comment field */
+    if (self.selectedBox != nil && ![self.textView.text isEqualToString:@""]) {
+        UIBAlertView *alert = [PPUtilities getAlertUnsavedComment];
+        [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+            if (didCancel) {
+                return;
+            } else {
+                [self transitionToCameraView];
+            }
+        }];
+    } else {
+        [self transitionToCameraView];
+    }
 }
 
 - (void) touchUpInsideSendButton {
@@ -52,9 +64,23 @@
         }
     }];
     
-    [self.pageViewController transitionToOrganizerViewController:^{
-        [self transitionToCameraView];
-    }];
+    /* Alert iff selected dotbox has unsaved text in comment field */
+    if (self.selectedBox != nil && ![self.textView.text isEqualToString:@""]) {
+        UIBAlertView *alert = [PPUtilities getAlertUnsavedComment];
+        [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+            if (didCancel) {
+                return;
+            } else {
+                [self.pageViewController transitionToOrganizerViewController:^{
+                    [self transitionToCameraView];
+                }];
+            }
+        }];
+    } else {
+        [self.pageViewController transitionToOrganizerViewController:^{
+            [self transitionToCameraView];
+        }];
+    }
 }
 
 - (UIViewController*) controllerForPaging {

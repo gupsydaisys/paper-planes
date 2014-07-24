@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 #import "PPUtilities.h"
 
-@interface PPSignUpViewController ()
+@interface PPSignUpViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
@@ -50,12 +50,12 @@ enum entryPages
     
     [self addObservers];
     _currentPage = LANDING_PAGE;
-    
-    // Make the button underlined
+    self.emailField.delegate = self;
+    self.passwordField.delegate = self;
+
+// Make the button underlined
 //    NSMutableAttributedString *commentString = [[NSMutableAttributedString alloc] initWithAttributedString:_switchEntryPageButton.titleLabel.attributedText];
-//    
 //    [commentString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [commentString length])];
-//    
 //    [_switchEntryPageButton setAttributedTitle:commentString forState:UIControlStateNormal];
 
     
@@ -71,7 +71,11 @@ enum entryPages
         if (_currentPage == LANDING_PAGE) {
             [self performTransitionTo:LOG_IN];
         } else {
-            if ([self populateUserProperties]) {
+            if (_emailField.text.length <= 0) {
+                [_emailField becomeFirstResponder];
+            } else if (_passwordField.text.length <= 0) {
+                [_passwordField becomeFirstResponder];
+            } else if ([self populateUserProperties]) {
                 [PFUser logInWithUsernameInBackground:_user.username
                                              password:_user.password
                                                target:self
@@ -81,12 +85,17 @@ enum entryPages
     }
 }
 
+// You can log in on the sign up page if you want to (bug...who knowzzz)
 - (IBAction) signUp {
     if (!_inAnimation) {
         if (_currentPage == LANDING_PAGE) {
             [self performTransitionTo:SIGN_UP];
         } else {
-            if ([self populateUserProperties]) {
+            if (_emailField.text.length <= 0) {
+                [_emailField becomeFirstResponder];
+            } else if (_passwordField.text.length <= 0) {
+                [_passwordField becomeFirstResponder];
+            } else if ([self populateUserProperties]) {
                 [_user signUpInBackgroundWithTarget:self
                                            selector:@selector(handleSignUp:error:)];
             }
@@ -95,30 +104,16 @@ enum entryPages
 }
 
 - (IBAction) switchEntryPage {
-    _currentPage == SIGN_UP ? [self performTransitionTo:LOG_IN] : [self performTransitionTo:SIGN_UP];
+    _currentPage == SIGN_UP ? [self performTransitionTo:SIGN_UP] : [self performTransitionTo:LOG_IN];
 }
 
-// TODO: fix animation aestheics
 - (void) performTransitionTo:(EntryPage) entryPage {
     _inAnimation = true;
-//    if (_currentPage == SIGN_UP) {
-//        NSMutableAttributedString *commentString = [[NSMutableAttributedString alloc] initWithAttributedString:_switchEntryPageButton.titleLabel.attributedText];
-//        
-//        [commentString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [commentString length])];
-//        
-//        [commentString replaceCharactersInRange:(NSMakeRange(0, [commentString length])) withString:@"Log in"];
-//        [_switchEntryPageButton setAttributedTitle:commentString forState:UIControlStateNormal];
-//        
-//    } else {
-//        NSMutableAttributedString *commentString = [[NSMutableAttributedString alloc] initWithAttributedString:_switchEntryPageButton.titleLabel.attributedText];
-//        
-//        [commentString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [commentString length])];
-//        
-//        [commentString replaceCharactersInRange:(NSMakeRange(0, [commentString length])) withString:@"Sign Up"];
-//        [_switchEntryPageButton setAttributedTitle:commentString forState:UIControlStateNormal];
-//    }
+    
     [UIView animateWithDuration:.7f animations:^{
         _logoTopConstraint.constant = 25;
+        _emailField.text = @"";
+        _passwordField.text = @"";
         _emailField.hidden = false;
         _passwordField.hidden = false;
         _switchEntryPageButton.hidden = false;
@@ -175,6 +170,7 @@ enum entryPages
     if (error) {
         _user = [PFUser user]; // Reset user so they can try again
         [PPUtilities showError:error];
+        [_emailField becomeFirstResponder];
     } else {
         [self performSegueWithIdentifier:@"LogInToRequestFeedbackSegue" sender:self];
     }
@@ -218,7 +214,6 @@ enum entryPages
 }
 
 #pragma mark - Keyboard Shit
-
 - (void)addObservers {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -270,19 +265,21 @@ enum entryPages
     [self.view setNeedsUpdateConstraints];
 }
 
-# pragma mark - iPhone Preference UI Methods
-- (NSUInteger) supportedInterfaceOrientations {
-    // Return a bitmask of supported orientations. If you need more,
-    // use bitwise or (see the commented return).
-    return UIInterfaceOrientationMaskPortrait;
-    // return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == _emailField) {
+        [self.view endEditing:true];
+        [_passwordField becomeFirstResponder];
+        NSLog(@"email field");
+    } else {
+        [self.view endEditing:true];
+        _currentPage == SIGN_UP ? [self signUp] : [self logIn];
+        NSLog(@"password field");
+    }
+    return false;
 }
 
-- (UIInterfaceOrientation) preferredInterfaceOrientationForPresentation {
-    // Return the orientation you'd prefer - this is what it launches to. The
-    // user can still rotate. You don't have to implement this method, in which
-    // case it launches in the current orientation
-    return UIInterfaceOrientationPortrait;
+- (void) textFieldDidEndEditing:(UITextField *)textField {
+    [textField resignFirstResponder];
 }
 
 @end

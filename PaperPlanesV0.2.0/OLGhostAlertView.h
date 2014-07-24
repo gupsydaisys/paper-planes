@@ -28,7 +28,7 @@ typedef NS_ENUM(NSUInteger, OLGhostAlertViewStyle) {
 - (void)showInView:(UIView *)view;
 - (void)hide;
 /* Added this method in to prevent long animation when you just want to hide */
-- (void)hide:(BOOL) animate;
+- (void)hideWithAnimation:(BOOL) shouldAnimate;
 
 @property (nonatomic) OLGhostAlertViewPosition position;
 @property (nonatomic) OLGhostAlertViewStyle style;

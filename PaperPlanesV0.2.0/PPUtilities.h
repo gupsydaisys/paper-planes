@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "PPFeedbackItem.h"
+#import "UIBAlertView.h"
 
 @interface PPUtilities : NSObject
 
@@ -19,5 +20,6 @@
 + (void) showError:(NSError *) error;
 + (UIImage*) getImageFromObject:(PFObject*) imageObject;
 + (PFPush*) pushWithFeedbackItem:(PPFeedbackItem*) feedbackItem;
++ (UIBAlertView*) getAlertUnsavedComment;
 
 @end

@@ -15,7 +15,7 @@
 #import "PPPageViewController.h"
 #import "PPFeedbackItem.h"
 
-@interface PPFeedbackViewController : PPViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate, BoxViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface PPFeedbackViewController : PPViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate, BoxViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 
 
 @property (strong, nonatomic) PPFeedbackItem* feedbackItem;
@@ -54,6 +54,7 @@
 @property (weak, nonatomic) IBOutlet UIPanGestureRecognizer *dragTableHandleRecognizer;
 - (IBAction)dragTableHandle:(UIPanGestureRecognizer *)sender;
 
+@property (strong, nonatomic) PPBoxViewController* selectedBox;
 
 enum commentStateTypes
 {

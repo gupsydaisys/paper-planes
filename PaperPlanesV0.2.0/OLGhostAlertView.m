@@ -43,8 +43,8 @@
         self.backgroundColor = [UIColor colorWithWhite:0 alpha:.45];
         
         /* Add border to match white exit button */
-        self.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.7].CGColor;
-        self.layer.borderWidth = 0.5f;
+//        self.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.7].CGColor;
+//        self.layer.borderWidth = 0.5f;
         
         self.alpha = 0;
         
@@ -192,13 +192,13 @@
 
 /* Changed to have a no animation possiblity with hide. */
 - (void) hide {
-    [self hide:true];
+    [self hideWithAnimation:true];
 }
 
-- (void) hide:(BOOL) animate {
+- (void) hideWithAnimation:(BOOL) shouldAnimate {
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     
-    if (animate) {
+    if (shouldAnimate) {
         [UIView animateWithDuration:0.5 animations:^{
             self.alpha = 0;
         } completion:^(BOOL finished){
@@ -228,7 +228,7 @@
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         if (UIDeviceOrientationIsPortrait(self.interfaceOrientation))
-            maxWidth = 280 - (HORIZONTAL_PADDING * 2);
+            maxWidth = 250 - (HORIZONTAL_PADDING * 2);
         else
             maxWidth = 420 - (HORIZONTAL_PADDING * 2);
     } else {

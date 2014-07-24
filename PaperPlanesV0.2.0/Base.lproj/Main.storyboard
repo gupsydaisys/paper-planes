@@ -27,7 +27,7 @@
                                 </state>
                                 <variation key="heightClass=regular-widthClass=compact"/>
                                 <connections>
-                                    <action selector="logIn" destination="Kdi-zA-Wl8" eventType="touchUpInside" id="Lgt-L3-4p5"/>
+                                    <action selector="signUp" destination="Kdi-zA-Wl8" eventType="touchUpInside" id="fP7-xD-Rw6"/>
                                 </connections>
                             </button>
                             <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Rh-Oi-sXo" userLabel="Log in">
@@ -61,7 +61,7 @@
                                     <constraint firstAttribute="height" constant="40" id="jSc-dc-SXu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="jSc-dc-SXu"/>
@@ -82,8 +82,11 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ab-B3-Rpk" userLabel="Switch Entry">
-                                <rect key="frame" x="209" y="367" width="59" height="60"/>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ab-B3-Rpk" userLabel="Switch Entry">
+                                <rect key="frame" x="203" y="350" width="74" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="74" id="rRP-6y-EOm"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                 <state key="normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

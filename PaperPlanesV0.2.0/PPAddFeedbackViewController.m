@@ -7,6 +7,8 @@
 //
 
 #import "PPAddFeedbackViewController.h"
+#import "PPUtilities.h"
+#import "UIBAlertView.h"
 
 @interface PPAddFeedbackViewController ()
 
@@ -26,16 +28,32 @@
 }
 
 - (NSString*) placeholderText {
-    return @"Add a comment here...";
+    return @"Add a comment on selected area...";
 }
 
 - (void) touchUpInsideExitButton {
     [self cleanUpBeforeTransition];
-    [self.pageViewController transitionToOrganizerViewController];
+    [self transitionToOrganizerViewController];
 }
 
 - (void) touchUpInsideSendButton {
-    [self.pageViewController transitionToOrganizerViewController];
+    [self transitionToOrganizerViewController];
+}
+
+- (void) transitionToOrganizerViewController {
+    /* Alert iff selected dotbox has unsaved text in comment field */
+    if (self.selectedBox != nil && ![self.textView.text isEqualToString:@""]) {
+        UIBAlertView *alert = [PPUtilities getAlertUnsavedComment];
+        [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+            if (didCancel) {
+                return;
+            } else {
+                [self.pageViewController transitionToOrganizerViewController];
+            }
+        }];
+    } else {
+        [self.pageViewController transitionToOrganizerViewController];
+    }
 }
 
 - (UIViewController*) controllerForPaging {

@@ -24,7 +24,7 @@
     self = [super init];
     if (self) {
         CGFloat buttonSize = 80;
-        takePhotoButton = [[UIOutlineLabel alloc] initWithFrame:CGRectMake(0, 0, buttonSize, buttonSize)];
+        takePhotoButton = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, buttonSize, buttonSize)];
         takePhotoButton.font = [UIFont fontWithName:kFontAwesomeFamilyName size:buttonSize];
         takePhotoButton.text = [@[@" ", [NSString fontAwesomeIconStringForEnum:FAcircleThin], @" "] componentsJoinedByString:@""];
         takePhotoButton.textColor = [UIColor colorWithWhite:1 alpha:0.95];
