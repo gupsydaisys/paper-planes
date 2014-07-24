@@ -769,11 +769,12 @@
 - (void) tapImageHandler: (UITapGestureRecognizer *) gesture {
     CGPoint touchPoint = [gesture locationInView:gesture.view];
     
+    BOOL hasComments = self.selectedBox.comments.count > 0;
     BOOL hasUnsavedComment = self.selectedBox != nil && ![self.textView.text isEqualToString:@""];
     BOOL hasChangedForm = [self.selectedBox boxHasChangedForm];
 
     /* Alert iff selected dotbox has unsaved text in comment field */
-    if (hasUnsavedComment || hasChangedForm) {
+    if (!hasComments && (hasUnsavedComment || hasChangedForm)) {
         UIBAlertView *alert = [PPUtilities getAlertUnsavedCommentAbandon:@"box"];
         [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
             if (didCancel) {

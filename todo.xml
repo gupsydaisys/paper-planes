@@ -66,21 +66,6 @@ HANI FUTURE
 5. you should add a dotbox when you dimiss tutorial alert
 
 
-VISUAL CHANGES
-0. whenever you add a new sheet by clicking plane button, have organizer very obviously add it or show changes.
-1. alert view needs some altering visually (look at fb photo)
-2. buttons colors. remains blue photo button if touch and drag outside, instead of turning blue, graying out or enlarging or wiggling
-3. figure out a better button then the x for exit button feedback mode
-4. the sign up screen
-- once you navigate to a log in or sign up screen, have the button only appear when you are there
-- problem is log in looks relaly plain as a button
-- underline sign up button
-5. post comment container and table comments
-- mess around with styling for post comment container
-- table handle top should be changing arrow
-- animate post field
-- change to instagram like view on feed
-6. add consistent shadows across and create file of uibutton stuff
 
 
 
@@ -97,10 +82,8 @@ BUGS
 1. double tap should not leave dotbox
 2. touch down on white x and then move finger away (but dont' lift up), it one time froze the swipe to other pages features and in general doesn't unselect.
 
-WOULD BE NICE...
-- unsaved text was remembered on dotboxes that already had comments
-
 FUTURE ADD-ONS
+0. unsaved text was remembered on dotboxes that already had comments
 1. change camera take photo button to be similar to pintrist in aethetics and functionality
 2. add tilt feature on newsfeed
 2.5 add tilt feature to x and paper planes icon on feedback view controller
@@ -116,6 +99,26 @@ FUTURE FUTURE ADD-ONS
 NEXT VERSION (wed or thurs next week...)
 - implement mole skin changes (ie split of feedback view controller)
 - homogenize icons
+
+VISUAL CHANGES
+0. whenever you add a new sheet by clicking plane button, have organizer very obviously add it or show changes.
+1. tutorial view needs some altering visually (look at fb photo)
+2. buttons colors. remains blue photo button if touch and drag outside, instead of turning blue, graying out or enlarging or wiggling
+3. figure out a better button then the x for exit button feedback mode
+4. the sign up screen
+- once you navigate to a log in or sign up screen, have the button only appear when you are there
+- problem is log in looks relaly plain as a button
+- underline sign up button
+5. post comment container and table comments
+- mess around with styling for post comment container
+- table handle top should be changing arrow
+- animate post field
+- change to instagram like view on feed
+6. add consistent shadows across and create file of uibutton stuff
+
+
+
+
 
 
 

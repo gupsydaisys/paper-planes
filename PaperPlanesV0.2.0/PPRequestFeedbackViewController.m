@@ -32,8 +32,12 @@
 }
 
 - (void) touchUpInsideExitButton {
+    BOOL hasComments = self.selectedBox.comments.count > 0;
+    BOOL hasUnsavedComment = self.selectedBox != nil && ![self.textView.text isEqualToString:@""];
+    BOOL hasChangedForm = [self.selectedBox boxHasChangedForm];
+    
     /* Alert iff selected dotbox has unsaved text in comment field */
-    if (self.selectedBox != nil && ![self.textView.text isEqualToString:@""]) {
+    if (!hasComments && (hasUnsavedComment || hasChangedForm)) {
         UIBAlertView *alert = [PPUtilities getAlertUnsavedCommentAbandon:@"screen"];
         [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
             if (didCancel) {
@@ -48,6 +52,26 @@
 }
 
 - (void) touchUpInsideSendButton {
+    BOOL hasComments = self.selectedBox.comments.count > 0;
+    BOOL hasUnsavedComment = self.selectedBox != nil && ![self.textView.text isEqualToString:@""];
+    BOOL hasChangedForm = [self.selectedBox boxHasChangedForm];
+    
+    /* Alert iff selected dotbox has unsaved text in comment field */
+    if (!hasComments && (hasUnsavedComment || hasChangedForm)) {
+        UIBAlertView *alert = [PPUtilities getAlertUnsavedCommentAbandon:@"screen"];
+        [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+            if (didCancel) {
+                return;
+            } else {
+                [self transitionToOrganizerViewController];
+            }
+        }];
+    } else {
+        [self transitionToOrganizerViewController];
+    }
+}
+
+- (void) transitionToOrganizerViewController {
     for (PPBoxViewController* box in self.childViewControllers) {
         [self.feedbackItem addObject:[box getModel] forKey:@"boxes"];
     }
@@ -64,23 +88,9 @@
         }
     }];
     
-    /* Alert iff selected dotbox has unsaved text in comment field */
-    if (self.selectedBox != nil && ![self.textView.text isEqualToString:@""]) {
-        UIBAlertView *alert = [PPUtilities getAlertUnsavedCommentAbandon:@"screen"];
-        [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
-            if (didCancel) {
-                return;
-            } else {
-                [self.pageViewController transitionToOrganizerViewController:^{
-                    [self transitionToCameraView];
-                }];
-            }
-        }];
-    } else {
-        [self.pageViewController transitionToOrganizerViewController:^{
-            [self transitionToCameraView];
-        }];
-    }
+    [self.pageViewController transitionToOrganizerViewController:^{
+        [self transitionToCameraView];
+    }];
 }
 
 - (UIViewController*) controllerForPaging {

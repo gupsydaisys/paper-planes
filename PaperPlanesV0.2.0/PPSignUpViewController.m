@@ -59,11 +59,11 @@ enum entryPages
 //    [_switchEntryPageButton setAttributedTitle:commentString forState:UIControlStateNormal];
 
     
-//    if ([PFUser currentUser]) {
-//        [self performSegueWithIdentifier:@"LogInToRequestFeedbackSegue" sender:self];
-//    } else {
+    if ([PFUser currentUser]) {
+        [self performSegueWithIdentifier:@"LogInToRequestFeedbackSegue" sender:self];
+    } else {
         _user = [PFUser user];
-//    }
+    }
 }
 
 - (IBAction) logIn {
