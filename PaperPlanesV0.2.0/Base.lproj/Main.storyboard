@@ -28,7 +28,7 @@
                                     <rect key="frame" x="160" y="379" width="160" height="45"/>
                                 </variation>
                                 <connections>
-                                    <action selector="logIn" destination="Kdi-zA-Wl8" eventType="touchUpInside" id="Lgt-L3-4p5"/>
+                                    <action selector="signUp" destination="Kdi-zA-Wl8" eventType="touchUpInside" id="fP7-xD-Rw6"/>
                                 </connections>
                             </button>
                             <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Rh-Oi-sXo" userLabel="Log in">

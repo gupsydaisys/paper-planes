@@ -59,11 +59,11 @@ enum entryPages
 //    [_switchEntryPageButton setAttributedTitle:commentString forState:UIControlStateNormal];
 
     
-    if ([PFUser currentUser]) {
-        [self performSegueWithIdentifier:@"LogInToRequestFeedbackSegue" sender:self];
-    } else {
+//    if ([PFUser currentUser]) {
+//        [self performSegueWithIdentifier:@"LogInToRequestFeedbackSegue" sender:self];
+//    } else {
         _user = [PFUser user];
-    }
+//    }
 }
 
 - (IBAction) logIn {
@@ -104,24 +104,11 @@ enum entryPages
 }
 
 - (IBAction) switchEntryPage {
-    _currentPage == SIGN_UP ? [self performTransitionTo:LOG_IN] : [self performTransitionTo:SIGN_UP];
+    _currentPage == SIGN_UP ? [self performTransitionTo:SIGN_UP] : [self performTransitionTo:LOG_IN];
 }
 
 - (void) performTransitionTo:(EntryPage) entryPage {
     _inAnimation = true;
-
-    // you will also have to add back in in the finished statement, having the switchentry page button appear
-//    if (_currentPage == SIGN_UP) {
-//        NSMutableAttributedString *commentString = [[NSMutableAttributedString alloc] initWithAttributedString:_switchEntryPageButton.titleLabel.attributedText];
-//        [commentString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [commentString length])];
-//        [commentString replaceCharactersInRange:(NSMakeRange(0, [commentString length])) withString:@"Log in"];
-//        [_switchEntryPageButton setAttributedTitle:commentString forState:UIControlStateNormal];
-//    } else {
-//        NSMutableAttributedString *commentString = [[NSMutableAttributedString alloc] initWithAttributedString:_switchEntryPageButton.titleLabel.attributedText];
-//        [commentString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [commentString length])];
-//        [commentString replaceCharactersInRange:(NSMakeRange(0, [commentString length])) withString:@"Sign Up"];
-//        [_switchEntryPageButton setAttributedTitle:commentString forState:UIControlStateNormal];
-//    }
     
     [UIView animateWithDuration:.7f animations:^{
         _logoTopConstraint.constant = 25;
