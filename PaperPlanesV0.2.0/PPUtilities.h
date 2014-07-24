@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
+#import "PPFeedbackItem.h"
 
 @interface PPUtilities : NSObject
 
@@ -15,5 +17,7 @@
 + (NSString*) getEmailUsername: (NSString*) text;
 + (NSError*) newError: (NSString*) message;
 + (void) showError:(NSError *) error;
++ (UIImage*) getImageFromObject:(PFObject*) imageObject;
++ (PFPush*) pushWithFeedbackItem:(PPFeedbackItem*) feedbackItem;
 
 @end

@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "PPViewController.h"
+#import "PPFeedbackItem.h"
 
 @interface PPOrganizerViewController : PPViewController
 
 - (void) addImageObject:(PFObject*)imageObject;
+- (void) addFeedbackItem:(PPFeedbackItem *) feedbackItem;
 
 @end

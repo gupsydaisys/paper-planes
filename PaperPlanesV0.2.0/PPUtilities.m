@@ -35,4 +35,18 @@
     [alertView show];
 }
 
++ (UIImage*) getImageFromObject:(PFObject*) imageObject {
+    PFFile* imageFile = imageObject[@"image"];
+    UIImage* image = [UIImage imageWithData:[imageFile getData]];
+    return image;
+}
+
++ (PFPush*) pushWithFeedbackItem:(PPFeedbackItem*) feedbackItem {
+    PFPush* push = [[PFPush alloc] init];
+    NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:feedbackItem.objectId, @"objectId", nil];
+    [push setChannel:@"FeedbackItem"];
+    [push setData:data];
+    return push;
+}
+
 @end

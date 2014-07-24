@@ -13,10 +13,12 @@
 #import "PPViewController.h"
 #import "PPCenteredScrollView.h"
 #import "PPPageViewController.h"
+#import "PPFeedbackItem.h"
 
 @interface PPFeedbackViewController : PPViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate, BoxViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 
+@property (strong, nonatomic) PPFeedbackItem* feedbackItem;
 @property (weak, nonatomic) UIImage *image;
 
 /* Main View */
@@ -65,6 +67,7 @@ enum commentStateTypes
 - (void) initMainView;
 - (void) transitionToMainView;
 - (void) transitionToCameraView;
+- (void) cleanUpBeforeTransition;
 
 - (NSString*) placeholderText;
 
