@@ -19,6 +19,8 @@
 #import "IKCapture.h"
 #import "OLGhostAlertView.h"
 #import <Parse/Parse.h>
+#import "PPUtilities.h"
+#import "UIBAlertView.h"
 
 /* Post Comment Constants */
 //#define POST_COMMENT_CONTAINTER_WIDTH 480.0f
@@ -114,7 +116,7 @@
 }
 
 - (void) transitionToCameraView {
-    [tutorialAlert hide:false];
+    [tutorialAlert hideWithAnimation:false];
     self.mainView.hidden = YES;
     takePhotoButton.hidden = NO;
     captureView.hidden = NO;
@@ -748,9 +750,28 @@
 #pragma mark - Gesture recognizer delegate
 
 - (void) tapImageHandler: (UITapGestureRecognizer *) gesture {
-    [tutorialAlert hide:false];
-
     CGPoint touchPoint = [gesture locationInView:gesture.view];
+    
+    /* Alert iff selected dotbox has unsaved text in comment field */
+    if (selectedBox != nil && ![self.textView.text isEqualToString:@""]) {
+        NSString *errorMessage = @"If you abondon the current box, your comment will be discarded.";
+        NSString *errorTitle = @"Discard Comment?";
+        
+        UIBAlertView *alert = [[UIBAlertView alloc] initWithTitle:errorTitle message:errorMessage cancelButtonTitle:@"Hold on" otherButtonTitles:@"Discard", nil];
+        [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+            if (didCancel) {
+                return;
+            } else {
+                [self addBoxWithTouchPoint:touchPoint];
+            }
+        }];
+    } else {
+        [self addBoxWithTouchPoint:touchPoint];
+    }
+}
+
+- (void) addBoxWithTouchPoint: (CGPoint) touchPoint {
+    [tutorialAlert hideWithAnimation:false];
     
     PPBoxViewController* box = [[PPBoxViewController alloc] init];
     [self addChildViewController:box];
@@ -761,7 +782,7 @@
     [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:box.view.resizeButtonPanGestureRecognizer];
     box.delegate = self;
     [box makeSelection:true];
-    [gesture.view addSubview:box.view];
+    [self.imageView addSubview:box.view];
     [box didMoveToParentViewController:self];
     [self restrictBoxView:box.view toBounds:self.imageView.frame];
     
@@ -896,5 +917,20 @@
     }
 }
 
+# pragma mark - Alert methods
+- (void) alertDeletionWithError:(NSError *) error title:(NSString *) title {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                        message:[error.userInfo objectForKey:@"error"]
+                                                       delegate:self
+                                              cancelButtonTitle:@"Hold on"
+                                              otherButtonTitles:@"Discard", nil];
+    [alertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == [alertView firstOtherButtonIndex]) {
+        NSLog(@"discard");
+    }
+}
 
 @end

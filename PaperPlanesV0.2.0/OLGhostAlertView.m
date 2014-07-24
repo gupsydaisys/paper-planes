@@ -192,13 +192,13 @@
 
 /* Changed to have a no animation possiblity with hide. */
 - (void) hide {
-    [self hide:true];
+    [self hideWithAnimation:true];
 }
 
-- (void) hide:(BOOL) animate {
+- (void) hideWithAnimation:(BOOL) shouldAnimate {
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     
-    if (animate) {
+    if (shouldAnimate) {
         [UIView animateWithDuration:0.5 animations:^{
             self.alpha = 0;
         } completion:^(BOOL finished){

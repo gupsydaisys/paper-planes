@@ -14,7 +14,7 @@
 #import "PPCenteredScrollView.h"
 #import "PPPageViewController.h"
 
-@interface PPFeedbackViewController : PPViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate, BoxViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface PPFeedbackViewController : PPViewController <UIScrollViewDelegate, HPGrowingTextViewDelegate, UIGestureRecognizerDelegate, BoxViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 
 
 @property (weak, nonatomic) UIImage *image;
