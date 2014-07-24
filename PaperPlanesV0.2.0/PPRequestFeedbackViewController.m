@@ -7,6 +7,10 @@
 //
 
 #import "PPRequestFeedbackViewController.h"
+#import "PPOrganizerViewController.h"
+#import "PPFeedbackItem.h"
+#import "PPUtilities.h"
+#import <Parse/Parse.h>
 
 @interface PPRequestFeedbackViewController ()
 
@@ -32,6 +36,22 @@
 }
 
 - (void) touchUpInsideSendButton {
+    for (PPBoxViewController* box in self.childViewControllers) {
+        [self.feedbackItem addObject:[box getModel] forKey:@"boxes"];
+    }
+    
+    // Because self.feedbackItem could be changing, we keep a pointer to it
+    // so that we push the correct feedbackItem after the save completes.
+    PPFeedbackItem* feedbackItem = self.feedbackItem;
+    [feedbackItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            PFPush *newFeedbackItemPush = [PPUtilities pushWithFeedbackItem:feedbackItem];
+            [newFeedbackItemPush sendPushInBackground];
+        } else {
+            NSLog(@"There was an error saving the feedback item");
+        }
+    }];
+    
     [self.pageViewController transitionToOrganizerViewController:^{
         [self transitionToCameraView];
     }];

@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PPFeedbackItem.h"
 #import "MJCollectionViewCell.h"
 
 @interface PPFeedbackItemCell : MJCollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *creator;
 @property (weak, nonatomic) IBOutlet UIView *header;
+@property (strong, nonatomic) PPFeedbackItem* feedbackItem;
 
 @end
