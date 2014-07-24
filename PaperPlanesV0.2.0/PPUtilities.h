@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
+#import "PPFeedbackItem.h"
 #import "UIBAlertView.h"
-
 
 @interface PPUtilities : NSObject
 
@@ -20,5 +21,7 @@
 
 + (UIBAlertView*) getAlertUnsavedCommentAbandon:(NSString*) nameOfAbandonedObject;
 + (UIBAlertView*) getAlertUnsavedEdits;
++ (UIImage*) getImageFromObject:(PFObject*) imageObject;
++ (PFPush*) pushWithFeedbackItem:(PPFeedbackItem*) feedbackItem;
 
 @end

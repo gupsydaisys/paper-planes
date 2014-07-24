@@ -55,11 +55,9 @@
 
 - (void) drawRect:(CGRect)rect {
     [self resizeBoundsToFitSubviews];
-    CGRect boxRect = [self boxRect];
-    // boxRect is drawn based on positions of top left button and bottom right button
-    // So we must 'manually' set the moveButton on the top right corner
-    moveButton.center = CGPointMake(CGRectGetMaxX(boxRect), CGRectGetMinY(boxRect));
-    UIBezierPath *rectPath = [UIBezierPath bezierPathWithRect:boxRect];
+    CGRect boxBounds = [self boxBounds];
+    moveButton.center = CGPointMake(boxBounds.size.width, 0);
+    UIBezierPath *rectPath = [UIBezierPath bezierPathWithRect:boxBounds];
     boxLayer.path = rectPath.CGPath;
 }
 
@@ -74,13 +72,13 @@
 
 - (void) resizeBoundsToFitSubviews {
     CGRect bounds = CGRectZero;
-    bounds = CGRectUnion(bounds, [self boxRect]);
+    bounds = CGRectUnion(bounds, [self boxBounds]);
     float deleteButtonInset = deleteButton.frame.size.width / 2;
     float resizeButtonInset = resizeButton.frame.size.width / 2;
     float moveButtonInset = moveButton.frame.size.width / 2;
     
-    bounds = CGRectMake(bounds.origin.x - deleteButtonInset,
-                        bounds.origin.y - deleteButtonInset,
+    bounds = CGRectMake(-deleteButtonInset,
+                        -deleteButtonInset,
                         bounds.size.width + MAX(resizeButtonInset, moveButtonInset) + deleteButtonInset,
                         bounds.size.height + MAX(resizeButtonInset, moveButtonInset) + deleteButtonInset);
     
@@ -135,10 +133,15 @@
     return boxLayer;
 }
 
-- (CGRect) boxRect {
-    float width = resizeButton.center.x - deleteButton.center.x;
-    float height = resizeButton.center.y - deleteButton.center.y;
-    return CGRectMake(deleteButton.center.x, deleteButton.center.y, width, height);
+- (CGRect) boxBounds {
+    float width = resizeButton.center.x;
+    float height = resizeButton.center.y;
+    return CGRectMake(0, 0, width, height);
+}
+
+- (CGRect) boxFrame {
+    float deleteButtonInset = deleteButton.frame.size.width / 2;
+    return CGRectOffset([self boxBounds], self.frame.origin.x + deleteButtonInset, self.frame.origin.y + deleteButtonInset);
 }
 
 - (UIView*) deleteButton {

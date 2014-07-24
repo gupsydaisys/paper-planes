@@ -14,6 +14,7 @@
 - (void) showControls: (BOOL) show;
 - (void) setColor:(UIColor*) color;
 - (BOOL) hasChangedForm;
+- (CGRect) boxFrame;
 
 @property (nonatomic, strong) UIPanGestureRecognizer* moveButtonPanGestureRecognizer;
 @property (nonatomic, strong) UIPanGestureRecognizer* resizeButtonPanGestureRecognizer;

@@ -10,12 +10,13 @@
 #import "PPAddFeedbackViewController.h"
 #import "PPFeedbackItemCell.h"
 #import "PPCameraButton.h"
+#import "PPUtilities.h"
 
 @interface PPOrganizerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIView *header;
-@property (nonatomic, strong) NSMutableArray* images;
+@property (nonatomic, strong) NSMutableArray* feedbackItems;
 
 @property (nonatomic, strong) PPButton* cameraButton;
 @property (nonatomic, strong) PPFeedbackItemCell* selectedCell;
@@ -27,7 +28,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self populateImages];
+        [self populateFeedbackItems];
     }
     return self;
 }
@@ -55,43 +56,25 @@
 
 }
 
-- (void) populateImages {
-    PFQuery *query = [PFQuery queryWithClassName:@"ImageObject"];
+- (void) populateFeedbackItems {
+    PFQuery *query = [PFQuery queryWithClassName:@"FeedbackItem"];
     [query orderByDescending:@"updatedAt"];
+    [query includeKey:@"imageObject"];
+    [query includeKey:@"boxes"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        self.images = [NSMutableArray arrayWithCapacity:0];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            for (PFObject* object in objects) {
-                UIImage* image = [self getImageFromObject:object];
-                if (image) {
-                    [self.images addObject:image];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.collectionView reloadData];
-                    });
-                }
-            }
-            
-        });
+        self.feedbackItems = [NSMutableArray arrayWithCapacity:0];
+        for (PPFeedbackItem* feedbackItem in objects) {
+            [self.feedbackItems addObject:feedbackItem];
+            [self.collectionView reloadData];
+        }
+        
     }];
 
 }
 
-- (UIImage*) getImageFromObject:(PFObject*) imageObject {
-    PFFile* imageFile = imageObject[@"image"];
-    NSURL *imageFileUrl = [[NSURL alloc] initWithString:imageFile.url];
-    NSData *imageData = [NSData dataWithContentsOfURL:imageFileUrl];
-    UIImage* image = [UIImage imageWithData:imageData];
-    return image;
-}
-
-- (void) addImageObject:(PFObject *)imageObject {
-    UIImage* image = [self getImageFromObject:imageObject];
-    if (image) {
-        [self.images insertObject:image atIndex:0];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView reloadData];
-        });
-    }
+- (void) addFeedbackItem:(PPFeedbackItem *) feedbackItem {
+    [self.feedbackItems insertObject:feedbackItem atIndex:0];
+    [self.collectionView reloadData];
 }
 
 - (void) addHeaderButtons {
@@ -162,7 +145,7 @@
     UIViewController* nextController = [pendingViewControllers objectAtIndex:0];
     if ([nextController isKindOfClass:[PPAddFeedbackViewController class]]) {
         PPAddFeedbackViewController* addFeedbackViewController = (PPAddFeedbackViewController*)nextController;
-        addFeedbackViewController.image = self.selectedCell.image;
+        addFeedbackViewController.feedbackItem = self.selectedCell.feedbackItem;
     }
 }
 
@@ -174,12 +157,22 @@
 
 #pragma mark - Collection View Data Source Methods
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.images.count;
+    return self.feedbackItems.count;
 }
 
 - (UICollectionViewCell*) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PPFeedbackItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FeedbackItemCell" forIndexPath:indexPath];
-    cell.image = [self.images objectAtIndex:indexPath.item];
+
+    PPFeedbackItem* feedbackItem = [self.feedbackItems objectAtIndex:indexPath.item];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        UIImage* image = [PPUtilities getImageFromObject:feedbackItem.imageObject];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            cell.image = image;
+        });
+    });
+    
+    cell.feedbackItem = feedbackItem;
     
     //set offset accordingly
     CGFloat yOffset = ((self.collectionView.contentOffset.y - cell.frame.origin.y) / IMAGE_HEIGHT) * IMAGE_OFFSET_SPEED;

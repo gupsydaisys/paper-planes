@@ -32,6 +32,7 @@
 }
 
 - (void) touchUpInsideExitButton {
+    [self cleanUpBeforeTransition];
     [self transitionToOrganizerViewController];
 }
 
@@ -56,7 +57,7 @@
 }
 
 - (UIViewController*) controllerForPaging {
-    if (self.image) {
+    if (self.feedbackItem) {
         return self;
     } else {
         return nil;

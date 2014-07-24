@@ -13,6 +13,7 @@
     BOOL selectionState;
     UITapGestureRecognizer* boxTapGestureRecognizer;
 }
+@property (nonatomic, strong) PPBox *model;
 
 
 @end
@@ -21,6 +22,26 @@
 
 @dynamic view;
 @synthesize delegate;
+
+- (id) initWithModel:(PPBox*) model {
+    self = [self init];
+    if (self) {
+        self.model = model;
+        CGRect boxFrame = CGRectMake(model.originX, model.originY, model.width, model.height);
+        PPBoxView* boxView = [[PPBoxView alloc] initWithFrame:boxFrame];
+        self.view = boxView;
+    }
+    return self;
+}
+
+- (id) init {
+    self = [super init];
+    if (self) {
+        self.model = [PPBox object];
+        self.comments = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
 
 - (void) toggleSelection {
     selectionState = !selectionState;
@@ -44,11 +65,10 @@
     boxTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(boxTapped:)];
     [self.view addGestureRecognizer:boxTapGestureRecognizer];
     self.view.delegate = self;
-    self.comments = [[NSMutableArray alloc] init];
 }
 
 - (void) boxTapped: (UITapGestureRecognizer *) gesture {
-    /* Can't unselecte a box without a comment */
+    /* This condition is to prevent deselection of a new box without any comments on it */
     if (self.comments != nil && self.comments.count > 0) {
         [self toggleSelection];
     }
@@ -65,5 +85,32 @@
 - (BOOL) boxHasChangedForm {
     return [self.view hasChangedForm];
 }
+
+- (void) addComment:(NSString *)text {
+    [self.model addComment:text];
+}
+
+- (NSArray*) comments {
+    return self.model.comments;
+}
+
+- (void) setComments: (NSMutableArray*) comments {
+    self.model.comments = comments;
+}
+
+- (PPBox*) getModel {
+    [self savePosition];
+    return self.model;
+}
+
+
+- (void) savePosition {
+    CGRect boxFrame = [self.view boxFrame];
+    self.model.originX = boxFrame.origin.x;
+    self.model.originY = boxFrame.origin.y;
+    self.model.width  = boxFrame.size.width;
+    self.model.height  = boxFrame.size.height;
+}
+
 
 @end

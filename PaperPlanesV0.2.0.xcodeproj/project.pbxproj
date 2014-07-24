@@ -64,6 +64,7 @@
 		CA8B5E50196CDD11004BE4F3 /* IKCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8B5E4F196CDD11004BE4F3 /* IKCapture.m */; };
 		CA8B5E54196DC072004BE4F3 /* PPCenteredScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8B5E53196DC072004BE4F3 /* PPCenteredScrollView.m */; };
 		CA9216E2195C86DF001ABA86 /* PPButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9216E1195C86DF001ABA86 /* PPButton.m */; };
+		CAB3B451198092D600061C97 /* PPBox.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB3B450198092D600061C97 /* PPBox.m */; };
 		CABC912A1959F99600B4AEF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC91291959F99600B4AEF5 /* main.m */; };
 		CABC912D1959F99600B4AEF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC912C1959F99600B4AEF5 /* AppDelegate.m */; };
 		CABC91301959F99600B4AEF5 /* PPFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CABC912F1959F99600B4AEF5 /* PPFeedbackViewController.m */; };
@@ -73,6 +74,7 @@
 		CAE99DE7195B8E240050B584 /* PPResizeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE99DE6195B8E240050B584 /* PPResizeButton.m */; };
 		CAE99DEA195BA0970050B584 /* UIView+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE99DE9195BA0970050B584 /* UIView+Util.m */; };
 		CAE99DEE195BA4FF0050B584 /* PPMoveButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE99DED195BA4FF0050B584 /* PPMoveButton.m */; };
+		CAF8A2F01980547400D41941 /* PPFeedbackItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF8A2EF1980547400D41941 /* PPFeedbackItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +182,8 @@
 		CA8B5E53196DC072004BE4F3 /* PPCenteredScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPCenteredScrollView.m; sourceTree = "<group>"; };
 		CA9216E0195C86DF001ABA86 /* PPButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPButton.h; sourceTree = "<group>"; };
 		CA9216E1195C86DF001ABA86 /* PPButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPButton.m; sourceTree = "<group>"; };
+		CAB3B44F198092D600061C97 /* PPBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPBox.h; sourceTree = "<group>"; };
+		CAB3B450198092D600061C97 /* PPBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPBox.m; sourceTree = "<group>"; };
 		CABC91241959F99600B4AEF5 /* PaperPlanesV0.2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaperPlanesV0.2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CABC91281959F99600B4AEF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CABC91291959F99600B4AEF5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -198,6 +202,8 @@
 		CAE99DE9195BA0970050B584 /* UIView+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Util.m"; sourceTree = "<group>"; };
 		CAE99DEC195BA4FF0050B584 /* PPMoveButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPMoveButton.h; sourceTree = "<group>"; };
 		CAE99DED195BA4FF0050B584 /* PPMoveButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPMoveButton.m; sourceTree = "<group>"; };
+		CAF8A2EE1980547400D41941 /* PPFeedbackItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPFeedbackItem.h; sourceTree = "<group>"; };
+		CAF8A2EF1980547400D41941 /* PPFeedbackItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPFeedbackItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +251,10 @@
 			children = (
 				483F32E3195E13E2009788C0 /* PPComment.h */,
 				483F32E4195E13E2009788C0 /* PPComment.m */,
+				CAF8A2EE1980547400D41941 /* PPFeedbackItem.h */,
+				CAF8A2EF1980547400D41941 /* PPFeedbackItem.m */,
+				CAB3B44F198092D600061C97 /* PPBox.h */,
+				CAB3B450198092D600061C97 /* PPBox.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -624,6 +634,7 @@
 				48AA4DE11976E675002824EF /* PPPageViewController.m in Sources */,
 				CA9216E2195C86DF001ABA86 /* PPButton.m in Sources */,
 				CA384771195B3AC10083B949 /* NSString+FontAwesome.m in Sources */,
+				CAB3B451198092D600061C97 /* PPBox.m in Sources */,
 				CA4D630E1979DCFF00B54C21 /* PPAddFeedbackViewController.m in Sources */,
 				CA50FD36197ED7F100E36EA3 /* PPSignUpViewController.m in Sources */,
 				CA38476C195A52340083B949 /* PPDeleteButton.m in Sources */,
@@ -641,6 +652,7 @@
 				484CCCF2196DAF2900823F64 /* DTTimePeriod.m in Sources */,
 				48AA4DC71975FAB2002824EF /* PPOrganizerViewController.m in Sources */,
 				CAE99DEA195BA0970050B584 /* UIView+Util.m in Sources */,
+				CAF8A2F01980547400D41941 /* PPFeedbackItem.m in Sources */,
 				484CCCF4196DAF2900823F64 /* DTTimePeriodCollection.m in Sources */,
 				48987A5A195A3E64003C6EC6 /* HPGrowingTextView.m in Sources */,
 				484CCCF6196DAF2900823F64 /* NSDate+DateTools.m in Sources */,

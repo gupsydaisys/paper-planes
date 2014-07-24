@@ -18,6 +18,7 @@
 #import "DateTools.h"
 #import "IKCapture.h"
 #import "OLGhostAlertView.h"
+#import "PPUtilities.h"
 #import <Parse/Parse.h>
 #import "PPUtilities.h"
 #import "UIBAlertView.h"
@@ -92,8 +93,21 @@
 }
 
 - (void) transitionToMainView {
-    [self transitionToMainViewWithImage:self.image];
+    [self transitionToMainViewWithFeedbackItem:self.feedbackItem];
 }
+
+- (void) transitionToMainViewWithFeedbackItem:(PPFeedbackItem*) feedbackItem {
+    for (PPBox* boxModel in feedbackItem.boxes) {
+        PPBoxViewController *box = [[PPBoxViewController alloc] initWithModel:boxModel];
+        [self addBoxController:box toView:self.imageView];
+        [box makeSelection:false];
+    }
+    
+    UIImage *image = [PPUtilities getImageFromObject:feedbackItem.imageObject];
+
+    [self transitionToMainViewWithImage:image];
+}
+
 
 - (void) transitionToMainViewWithImage: (UIImage*) image {
     
@@ -118,9 +132,13 @@
     self.mainView.hidden = YES;
     takePhotoButton.hidden = NO;
     captureView.hidden = NO;
+    [self cleanUpBeforeTransition];
+}
+
+- (void) cleanUpBeforeTransition {
     [self.view endEditing:YES];
-    
     [self deleteChildBoxes];
+    
 }
 
 - (void) deleteChildBoxes {
@@ -191,25 +209,26 @@
     takePhotoButton.hidden = YES;
     
     [captureView takeSnapshotWithCompletionHandler:^(UIImage *image) {
+        self.feedbackItem = [PPFeedbackItem object];
+        
         NSData *imageData = UIImageJPEGRepresentation(image, 0.9f);
         PFObject* imageObject = [PFObject objectWithClassName:@"ImageObject"];
-        imageObject[@"image"] = [PFFile fileWithName:@"image.jpg" data:imageData contentType:@"image"];
+        PFFile* imageFile = [PFFile fileWithName:@"image.jpg" data:imageData contentType:@"image"];
+        imageObject[@"image"] = imageFile;
         
+        self.feedbackItem.imageObject = imageObject;
+        
+        // Start saving the image as soon as the picture is taken,
+        // feedback item gets saved later
         [imageObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (!error) {
-                PFPush *push = [[PFPush alloc] init];
-                NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:imageObject.objectId, @"objectId", nil];
-                [push setChannel:@"ImageObject"];
-                [push setData:data];
-                [push sendPushInBackground];
-            } else {
-                NSLog(@"There was an error saving the image");
+            if (error) {
+                NSLog(@"There was an error saving the image object: %@", error);
             }
         }];
 
         captureView.hidden = YES;
         [tutorialAlert showInView:self.mainView];
-        [self transitionToMainViewWithImage:image];
+        [self transitionToMainViewWithFeedbackItem:self.feedbackItem];
         [captureView startRunning];
     }];
     
@@ -772,18 +791,21 @@
     [tutorialAlert hideWithAnimation:false];
     
     PPBoxViewController* box = [[PPBoxViewController alloc] init];
-    [self addChildViewController:box];
-    
     box.view = [PPBoxView centeredAtPoint:touchPoint];
+    [self addBoxController:box toView:self.imageView];
+    // Note: Due to delegation, it's important to not call
+    // makeSelection until *after* addBox has been called.
+    [box makeSelection:true];
+}
 
+- (void) addBoxController: (PPBoxViewController*) box toView:(UIView*) view {
+    [self addChildViewController:box];
     [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:box.view.moveButtonPanGestureRecognizer];
     [self.imageScrollView.panGestureRecognizer requireGestureRecognizerToFail:box.view.resizeButtonPanGestureRecognizer];
     box.delegate = self;
-    [box makeSelection:true];
-    [self.imageView addSubview:box.view];
+    [view addSubview:box.view];
     [box didMoveToParentViewController:self];
-    [self restrictBoxView:box.view toBounds:self.imageView.frame];
-    
+    [self restrictBoxView:box.view toBounds:view.frame];
 }
 
 - (void) doubleTapImageHandler: (UITapGestureRecognizer *) gesture {
@@ -841,7 +863,7 @@
 
 #pragma mark - Post Comment Methods
 - (IBAction) tapPostComment:(id) sender {
-    [self.selectedBox.comments addObject:self.textView.text];
+    [self.selectedBox addComment:self.textView.text];
     [self didPostComment];
 }
 

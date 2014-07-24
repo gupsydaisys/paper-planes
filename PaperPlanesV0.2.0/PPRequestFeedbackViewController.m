@@ -7,6 +7,9 @@
 //
 
 #import "PPRequestFeedbackViewController.h"
+#import "PPOrganizerViewController.h"
+#import "PPFeedbackItem.h"
+#import <Parse/Parse.h>
 #import "PPUtilities.h"
 #import "UIBAlertView.h"
 
@@ -45,6 +48,22 @@
 }
 
 - (void) touchUpInsideSendButton {
+    for (PPBoxViewController* box in self.childViewControllers) {
+        [self.feedbackItem addObject:[box getModel] forKey:@"boxes"];
+    }
+    
+    // Because self.feedbackItem could be changing, we keep a pointer to it
+    // so that we push the correct feedbackItem after the save completes.
+    PPFeedbackItem* feedbackItem = self.feedbackItem;
+    [feedbackItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            PFPush *newFeedbackItemPush = [PPUtilities pushWithFeedbackItem:feedbackItem];
+            [newFeedbackItemPush sendPushInBackground];
+        } else {
+            NSLog(@"There was an error saving the feedback item");
+        }
+    }];
+    
     /* Alert iff selected dotbox has unsaved text in comment field */
     if (self.selectedBox != nil && ![self.textView.text isEqualToString:@""]) {
         UIBAlertView *alert = [PPUtilities getAlertUnsavedCommentAbandon:@"screen"];

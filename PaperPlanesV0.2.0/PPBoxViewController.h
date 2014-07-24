@@ -7,16 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PPBox.h"
 #import "PPBoxView.h"
 
 @interface PPBoxViewController : UIViewController <UIGestureRecognizerDelegate, BoxViewDelegate>
 
 - (void) makeSelection: (BOOL) select;
 - (BOOL) boxHasChangedForm;
+- (void) addComment: (NSString*) text;
+- (NSArray*) comments;
+- (void) savePosition;
+- (id) initWithModel:(PPBox*) model;
+- (PPBox*) getModel;
 
 @property (strong, nonatomic) PPBoxView *view;
 @property (nonatomic, assign) id delegate;
-@property (nonatomic, strong) NSMutableArray* comments;
 
 @end
 
