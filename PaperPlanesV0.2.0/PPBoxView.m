@@ -17,6 +17,8 @@
     PPDeleteButton* deleteButton;
     PPResizeButton* resizeButton;
     PPMoveButton* moveButton;
+    BOOL hasResized;
+    BOOL hasMoved;
 }
 
 @property (nonatomic, strong) UITapGestureRecognizer* boxLayerTapGestureRecognizer;
@@ -43,6 +45,8 @@
         [self resizeBoundsToFitSubviews];
         self.userInteractionEnabled = YES;
         self.opaque = NO;
+        hasResized = FALSE;
+        hasMoved = FALSE;
     }
     return self;
 }
@@ -169,6 +173,7 @@
 }
 
 - (void) resizeButtonPanned: (UIPanGestureRecognizer *) gesture {
+    hasResized = true;
     CGPoint translation = [gesture translationInView:gesture.view.superview];
     resizeButton.frame = CGRectOffset(resizeButton.frame, translation.x, translation.y);
     self.frame = CGRectOffset(self.frame, translation.x / 2, translation.y / 2);
@@ -177,6 +182,7 @@
 }
 
 - (void) moveButtonPanned: (UIPanGestureRecognizer* ) gesture {
+    hasMoved = true;
     CGPoint translation = [gesture translationInView:gesture.view.superview];
     self.frame = CGRectOffset(self.frame, translation.x, translation.y);
     [delegate boxViewWasPanned:self];
@@ -185,6 +191,9 @@
 }
 
 #pragma mark - Convenience methods
+- (BOOL) hasChangedForm {
+    return hasResized;
+}
 
 - (void) setColor:(UIColor*) color {
     [boxLayer setStrokeColor:color.CGColor];

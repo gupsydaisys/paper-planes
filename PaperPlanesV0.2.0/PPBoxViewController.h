@@ -12,6 +12,7 @@
 @interface PPBoxViewController : UIViewController <UIGestureRecognizerDelegate, BoxViewDelegate>
 
 - (void) makeSelection: (BOOL) select;
+- (BOOL) boxHasChangedForm;
 
 @property (strong, nonatomic) PPBoxView *view;
 @property (nonatomic, assign) id delegate;

@@ -17,6 +17,8 @@
 + (NSString*) getEmailUsername: (NSString*) text;
 + (NSError*) newError: (NSString*) message;
 + (void) showError:(NSError *) error;
-+ (UIBAlertView*) getAlertUnsavedComment;
+
++ (UIBAlertView*) getAlertUnsavedCommentAbandon:(NSString*) nameOfAbandonedObject;
++ (UIBAlertView*) getAlertUnsavedEdits;
 
 @end

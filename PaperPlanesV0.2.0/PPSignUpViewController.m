@@ -104,7 +104,8 @@ enum entryPages
 }
 
 - (IBAction) switchEntryPage {
-    _currentPage == SIGN_UP ? [self performTransitionTo:SIGN_UP] : [self performTransitionTo:LOG_IN];
+    /* from sign up go to log in and vice versa */
+    _currentPage == SIGN_UP ? [self performTransitionTo:LOG_IN] : [self performTransitionTo:SIGN_UP];
 }
 
 - (void) performTransitionTo:(EntryPage) entryPage {

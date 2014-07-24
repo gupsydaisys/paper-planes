@@ -42,7 +42,7 @@
 - (void) transitionToOrganizerViewController {
     /* Alert iff selected dotbox has unsaved text in comment field */
     if (self.selectedBox != nil && ![self.textView.text isEqualToString:@""]) {
-        UIBAlertView *alert = [PPUtilities getAlertUnsavedComment];
+        UIBAlertView *alert = [PPUtilities getAlertUnsavedCommentAbandon:@"screen"];
         [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
             if (didCancel) {
                 return;

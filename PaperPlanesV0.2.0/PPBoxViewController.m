@@ -62,4 +62,8 @@
     [delegate boxWasPanned:self];
 }
 
+- (BOOL) boxHasChangedForm {
+    return [self.view hasChangedForm];
+}
+
 @end

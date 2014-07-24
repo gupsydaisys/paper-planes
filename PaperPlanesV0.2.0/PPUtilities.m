@@ -35,11 +35,16 @@
     [alertView show];
 }
 
-+ (UIBAlertView*) getAlertUnsavedComment {
-    
-    NSString *errorMessage = @"If you abondon this %@, your comment will be discarded.";
++ (UIBAlertView*) getAlertUnsavedCommentAbandon:(NSString*) nameOfAbandonedObject {
+    NSString *errorMessage = [NSString stringWithFormat:@"If you abandon this %@, your comment will be discarded.", nameOfAbandonedObject];
     NSString *errorTitle = @"Discard Comment?";
-    
+    UIBAlertView *alert = [[UIBAlertView alloc] initWithTitle:errorTitle message:errorMessage cancelButtonTitle:@"Hold on" otherButtonTitles:@"Discard", nil];
+    return alert;
+}
+
++ (UIBAlertView*) getAlertUnsavedEdits {
+    NSString *errorMessage = @"If you abandon this box, your edits will be discarded.";
+    NSString *errorTitle = @"Discard Edits?";
     UIBAlertView *alert = [[UIBAlertView alloc] initWithTitle:errorTitle message:errorMessage cancelButtonTitle:@"Hold on" otherButtonTitles:@"Discard", nil];
     return alert;
 }

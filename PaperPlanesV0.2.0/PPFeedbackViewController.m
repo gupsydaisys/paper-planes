@@ -750,9 +750,12 @@
 - (void) tapImageHandler: (UITapGestureRecognizer *) gesture {
     CGPoint touchPoint = [gesture locationInView:gesture.view];
     
+    BOOL hasUnsavedComment = self.selectedBox != nil && ![self.textView.text isEqualToString:@""];
+    BOOL hasChangedForm = [self.selectedBox boxHasChangedForm];
+
     /* Alert iff selected dotbox has unsaved text in comment field */
-    if (self.selectedBox != nil && ![self.textView.text isEqualToString:@""]) {
-        UIBAlertView *alert = [PPUtilities getAlertUnsavedComment];
+    if (hasUnsavedComment || hasChangedForm) {
+        UIBAlertView *alert = [PPUtilities getAlertUnsavedCommentAbandon:@"box"];
         [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
             if (didCancel) {
                 return;
@@ -851,12 +854,30 @@
     [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 }
 
-#pragma mark -
+#pragma mark - Box methods
 - (void) boxWasDeleted:(PPBoxViewController *)box {
-    [self boxSelectionChanged:box toState:NO];
-    [box willMoveToParentViewController:nil];
-    [box.view removeFromSuperview];
-    [box removeFromParentViewController];
+    BOOL hasComments = self.selectedBox != nil && (self.selectedBox.comments.count > 0);
+    /* Alert iff significant changes were being made to box */
+    if (hasComments) {
+        UIBAlertView *alert = [PPUtilities getAlertUnsavedEdits];
+        [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+            if (didCancel) {
+                return;
+            } else {
+                [self boxSelectionChanged:box toState:NO];
+                [box willMoveToParentViewController:nil];
+                [box.view removeFromSuperview];
+                [box removeFromParentViewController];
+            }
+        }];
+    } else {
+        [self boxSelectionChanged:box toState:NO];
+        [box willMoveToParentViewController:nil];
+        [box.view removeFromSuperview];
+        [box removeFromParentViewController];
+    }
+    
+    
 }
 
 - (void) boxWasPanned:(PPBoxViewController *)box {
