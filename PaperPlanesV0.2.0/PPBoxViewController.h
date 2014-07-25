@@ -19,6 +19,8 @@
 - (void) savePosition;
 - (id) initWithModel:(PPBox*) model;
 - (PPBox*) getModel;
+- (void) disableEditing;
+- (void) enableEditing;
 
 @property (strong, nonatomic) PPBoxView *view;
 @property (nonatomic, assign) id delegate;

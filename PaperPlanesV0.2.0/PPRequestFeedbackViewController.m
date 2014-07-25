@@ -48,9 +48,7 @@
 }
 
 - (void) touchUpInsideSendButton {
-    for (PPBoxViewController* box in self.childViewControllers) {
-        [self.feedbackItem addObject:[box getModel] forKey:@"boxes"];
-    }
+    [super touchUpInsideSendButton];
     
     // Because self.feedbackItem could be changing, we keep a pointer to it
     // so that we push the correct feedbackItem after the save completes.

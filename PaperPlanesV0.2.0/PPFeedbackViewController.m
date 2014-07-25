@@ -93,23 +93,6 @@
     }
 }
 
-- (void) transitionToMainView {
-    [self transitionToMainViewWithFeedbackItem:self.feedbackItem];
-}
-
-- (void) transitionToMainViewWithFeedbackItem:(PPFeedbackItem*) feedbackItem {
-    for (PPBox* boxModel in feedbackItem.boxes) {
-        PPBoxViewController *box = [[PPBoxViewController alloc] initWithModel:boxModel];
-        [self addBoxController:box toView:self.imageView];
-        [box makeSelection:false];
-    }
-    
-    UIImage *image = [PPUtilities getImageFromObject:feedbackItem.imageObject];
-
-    [self transitionToMainViewWithImage:image];
-}
-
-
 - (void) transitionToMainViewWithImage: (UIImage*) image {
     
     self.mainView.hidden = NO;
@@ -229,7 +212,7 @@
 
         captureView.hidden = YES;
         [tutorialAlert showInView:self.mainView];
-        [self transitionToMainViewWithFeedbackItem:self.feedbackItem];
+        [self transitionToMainViewWithImage:image];
         [captureView startRunning];
     }];
     
@@ -326,6 +309,9 @@
 
 - (void) touchUpInsideSendButton {
     // Overridden in subclasses
+    for (PPBoxViewController* box in self.childViewControllers) {
+        [self.feedbackItem addUniqueObject:[box getModel] forKey:@"boxes"];
+    }
 }
 
 - (void) deselectSendButton:(UIButton*)sender {
