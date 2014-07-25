@@ -24,8 +24,26 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self transitionToMainView];
+    [self transitionToMainViewWithFeedbackItem:self.feedbackItem];
 }
+
+- (void) transitionToMainViewWithFeedbackItem:(PPFeedbackItem*) feedbackItem {
+    // clear old boxes first
+    [self deleteChildBoxes];
+    
+    for (PPBox* boxModel in feedbackItem.boxes) {
+        PPBoxViewController *box = [[PPBoxViewController alloc] initWithModel:boxModel];
+        [self addBoxController:box toView:self.imageView];
+        [box disableEditing];
+        [box makeSelection:false];
+    }
+    
+    [self showComments:YES state:FULL];
+    
+    UIImage *image = [PPUtilities getImageFromObject:feedbackItem.imageObject];
+    [self transitionToMainViewWithImage:image];
+}
+
 
 - (NSString*) placeholderText {
     return @"Add a comment on selected area...";
@@ -36,6 +54,8 @@
 }
 
 - (void) touchUpInsideSendButton {
+    [self saveChildBoxes];
+    [self.feedbackItem saveInBackground];
     [self transitionToOrganizerViewController];
 }
 
@@ -51,14 +71,16 @@
             if (didCancel) {
                 return;
             } else {
-                [self cleanUpBeforeTransition];
-                [self.pageViewController transitionToOrganizerViewController];
+                [self performTransitionToOrganizerViewController];
             }
         }];
     } else {
-        [self cleanUpBeforeTransition];
-        [self.pageViewController transitionToOrganizerViewController];
+        [self performTransitionToOrganizerViewController];
     }
+}
+
+- (void) performTransitionToOrganizerViewController {
+    [self.pageViewController transitionToOrganizerViewController];
 }
 
 - (UIViewController*) controllerForPaging { 

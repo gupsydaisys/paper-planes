@@ -56,8 +56,10 @@
     BOOL hasUnsavedComment = self.selectedBox != nil && ![self.textView.text isEqualToString:@""];
     BOOL hasChangedForm = [self.selectedBox boxHasChangedForm];
     
+    NSLog(@"hasComments: %i, hasUnsavedComment:%i, hasChangedForm: %i", hasComments, hasUnsavedComment, hasChangedForm);
     /* Alert iff selected dotbox has unsaved text in comment field */
     if (!hasComments && (hasUnsavedComment || hasChangedForm)) {
+        NSLog(@"FOOOZ");
         UIBAlertView *alert = [PPUtilities getAlertUnsavedCommentAbandon:@"screen"];
         [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
             if (didCancel) {
@@ -72,10 +74,9 @@
 }
 
 - (void) transitionToOrganizerViewController {
-    for (PPBoxViewController* box in self.childViewControllers) {
-        [self.feedbackItem addObject:[box getModel] forKey:@"boxes"];
-    }
     
+    [self saveChildBoxes];
+
     // Because self.feedbackItem could be changing, we keep a pointer to it
     // so that we push the correct feedbackItem after the save completes.
     PPFeedbackItem* feedbackItem = self.feedbackItem;

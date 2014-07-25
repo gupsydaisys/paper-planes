@@ -8,6 +8,7 @@
 
 #import "PPFeedbackViewController.h"
 #import "HSCommentCell.h"
+#import "PPBoxComment.h"
 #import "PPBoxView.h"
 #import "UIView+Util.h"
 #import "NSString+FontAwesome.h"
@@ -92,23 +93,6 @@
     }
 }
 
-- (void) transitionToMainView {
-    [self transitionToMainViewWithFeedbackItem:self.feedbackItem];
-}
-
-- (void) transitionToMainViewWithFeedbackItem:(PPFeedbackItem*) feedbackItem {
-    for (PPBox* boxModel in feedbackItem.boxes) {
-        PPBoxViewController *box = [[PPBoxViewController alloc] initWithModel:boxModel];
-        [self addBoxController:box toView:self.imageView];
-        [box makeSelection:false];
-    }
-    
-    UIImage *image = [PPUtilities getImageFromObject:feedbackItem.imageObject];
-
-    [self transitionToMainViewWithImage:image];
-}
-
-
 - (void) transitionToMainViewWithImage: (UIImage*) image {
     
     self.mainView.hidden = NO;
@@ -132,18 +116,19 @@
     self.mainView.hidden = YES;
     takePhotoButton.hidden = NO;
     captureView.hidden = NO;
-    [self cleanUpBeforeTransition];
-}
-
-- (void) cleanUpBeforeTransition {
     [self.view endEditing:YES];
     [self deleteChildBoxes];
-    
 }
 
 - (void) deleteChildBoxes {
     for (UIViewController* boxViewController in self.childViewControllers) {
-        [self boxWasDeleted:(PPBoxViewController *) boxViewController];
+        [self deleteBox:(PPBoxViewController *) boxViewController];
+    }
+}
+
+- (void) saveChildBoxes {
+    for (PPBoxViewController* box in self.childViewControllers) {
+        [self.feedbackItem addUniqueObject:[box getModel] forKey:@"boxes"];
     }
 }
 
@@ -209,14 +194,15 @@
     takePhotoButton.hidden = YES;
     
     [captureView takeSnapshotWithCompletionHandler:^(UIImage *image) {
-        self.feedbackItem = [PPFeedbackItem object];
         
         NSData *imageData = UIImageJPEGRepresentation(image, 0.9f);
         PFObject* imageObject = [PFObject objectWithClassName:@"ImageObject"];
         PFFile* imageFile = [PFFile fileWithName:@"image.jpg" data:imageData contentType:@"image"];
         imageObject[@"image"] = imageFile;
-        
+
+        self.feedbackItem = [PPFeedbackItem object];
         self.feedbackItem.imageObject = imageObject;
+        self.feedbackItem.creator = [PFUser currentUser];
         
         // Start saving the image as soon as the picture is taken,
         // feedback item gets saved later
@@ -228,7 +214,7 @@
 
         captureView.hidden = YES;
         [tutorialAlert showInView:self.mainView];
-        [self transitionToMainViewWithFeedbackItem:self.feedbackItem];
+        [self transitionToMainViewWithImage:image];
         [captureView startRunning];
     }];
     
@@ -560,7 +546,7 @@
     float singleHeight = [self getTableCellHeight:[self.selectedBox.comments lastObject]];
     float cumulativeCommentHeight = TABLE_HANDLE_HEIGHT;
     
-    for (NSString *comment in self.selectedBox.comments) {
+    for (PPBoxComment *comment in self.selectedBox.comments) {
         cumulativeCommentHeight += [self getTableCellHeight:comment];
     }
     
@@ -642,7 +628,8 @@
     }
 }
 
-- (float) getTableCellHeight:(NSString *) comment {
+- (float) getTableCellHeight:(PPBoxComment *) boxComment {
+    NSString* comment = boxComment.text;
     // NEXT STEP remove hard coded size and figure out how to correctly get height
     float verticalPadding = 45.0f;
 //    float verticalPadding = 30.0f + TABLE_CELL_LABEL_TO_CONTENT + TABLE_CELL_LABEL_MARGIN + 50.0f;
@@ -746,11 +733,11 @@
 
 - (UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *) indexPath {
     HSCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
-    NSString *comment = self.selectedBox.comments[indexPath.row];
+    PPBoxComment *comment = self.selectedBox.comments[indexPath.row];
 
-    cell.creator.text = @"dempsey";
-    cell.timestamp.text = @"2 days ago";
-    cell.content.text = comment;
+    cell.creator.text = comment.creator.username;
+    cell.timestamp.text = comment.createdAt ? comment.createdAt.timeAgoSinceNow : @"Pending";
+    cell.content.text = comment.text;
 
     cell.content.contentInset = UIEdgeInsetsMake(0, -3, 0, 0);
 
@@ -864,7 +851,7 @@
 
 #pragma mark - Post Comment Methods
 - (IBAction) tapPostComment:(id) sender {
-    [self.selectedBox addComment:self.textView.text];
+    [self.selectedBox addComment:[PPBoxComment commentWithText:self.textView.text]];
     [self didPostComment];
 }
 
@@ -887,20 +874,21 @@
             if (didCancel) {
                 return;
             } else {
-                [self boxSelectionChanged:box toState:NO];
-                [box willMoveToParentViewController:nil];
-                [box.view removeFromSuperview];
-                [box removeFromParentViewController];
+                [self deleteBox:box];
             }
         }];
     } else {
-        [self boxSelectionChanged:box toState:NO];
-        [box willMoveToParentViewController:nil];
-        [box.view removeFromSuperview];
-        [box removeFromParentViewController];
+        [self deleteBox:box];
     }
     
     
+}
+
+- (void) deleteBox:(PPBoxViewController *) box {
+    [self boxSelectionChanged:box toState:NO];
+    [box willMoveToParentViewController:nil];
+    [box.view removeFromSuperview];
+    [box removeFromParentViewController];
 }
 
 - (void) boxWasPanned:(PPBoxViewController *)box {

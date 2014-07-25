@@ -13,6 +13,7 @@
 
 @dynamic displayName;
 @dynamic imageObject;
+@dynamic creator;
 @dynamic boxes;
 
 + (NSString *) parseClassName {

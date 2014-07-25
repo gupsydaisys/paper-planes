@@ -11,6 +11,7 @@
 
 @interface PPBoxViewController () {
     BOOL selectionState;
+    BOOL disableEditing;
     UITapGestureRecognizer* boxTapGestureRecognizer;
 }
 @property (nonatomic, strong) PPBox *model;
@@ -54,7 +55,11 @@
         [delegate boxWasDeleted:self];
     } else {
         selectionState = select;
-        [self.view showControls:selectionState];
+        if (disableEditing) {
+            [self.view showControls:FALSE];
+        } else {
+            [self.view showControls:selectionState];
+        }
         [self.view marchingAnts:selectionState];
         [delegate boxSelectionChanged:self toState:selectionState];
     }
@@ -82,12 +87,12 @@
     [delegate boxWasPanned:self];
 }
 
-- (BOOL) boxHasChangedForm {
-    return [self.view hasChangedForm];
+- (void) addComment:(PPBoxComment *)comment {
+    [self.model addComment:comment];
 }
 
-- (void) addComment:(NSString *)text {
-    [self.model addComment:text];
+- (BOOL) boxHasChangedForm {
+    return [self.view hasChangedForm];
 }
 
 - (NSArray*) comments {
@@ -103,6 +108,13 @@
     return self.model;
 }
 
+- (void) disableEditing {
+    disableEditing = TRUE;
+}
+
+- (void) enableEditing {
+    disableEditing = FALSE;
+}
 
 - (void) savePosition {
     CGRect boxFrame = [self.view boxFrame];

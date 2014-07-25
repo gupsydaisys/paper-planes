@@ -66,9 +66,13 @@ enum commentStateTypes
 
 - (void) initCamera;
 - (void) initMainView;
-- (void) transitionToMainView;
+- (void) transitionToMainViewWithImage: (UIImage*) image;
 - (void) transitionToCameraView;
-- (void) cleanUpBeforeTransition;
+- (void) deleteChildBoxes;
+- (void) saveChildBoxes;
+- (void) addBoxController: (PPBoxViewController*) box toView:(UIView*) view;
+- (void) showComments:(BOOL) shouldShow state:(CommentState) curr;
+- (void) touchUpInsideSendButton;
 
 - (NSString*) placeholderText;
 
