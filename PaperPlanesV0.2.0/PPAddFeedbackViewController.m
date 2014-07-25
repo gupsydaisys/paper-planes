@@ -54,7 +54,7 @@
 }
 
 - (void) touchUpInsideSendButton {
-    [super touchUpInsideSendButton];
+    [self saveChildBoxes];
     [self.feedbackItem saveInBackground];
     [self transitionToOrganizerViewController];
 }

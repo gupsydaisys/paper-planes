@@ -116,18 +116,19 @@
     self.mainView.hidden = YES;
     takePhotoButton.hidden = NO;
     captureView.hidden = NO;
-    [self cleanUpBeforeTransition];
-}
-
-- (void) cleanUpBeforeTransition {
     [self.view endEditing:YES];
     [self deleteChildBoxes];
-    
 }
 
 - (void) deleteChildBoxes {
     for (UIViewController* boxViewController in self.childViewControllers) {
-        [self boxWasDeleted:(PPBoxViewController *) boxViewController];
+        [self deleteBox:(PPBoxViewController *) boxViewController];
+    }
+}
+
+- (void) saveChildBoxes {
+    for (PPBoxViewController* box in self.childViewControllers) {
+        [self.feedbackItem addUniqueObject:[box getModel] forKey:@"boxes"];
     }
 }
 
@@ -310,9 +311,6 @@
 
 - (void) touchUpInsideSendButton {
     // Overridden in subclasses
-    for (PPBoxViewController* box in self.childViewControllers) {
-        [self.feedbackItem addUniqueObject:[box getModel] forKey:@"boxes"];
-    }
 }
 
 - (void) deselectSendButton:(UIButton*)sender {
@@ -738,7 +736,7 @@
     PPBoxComment *comment = self.selectedBox.comments[indexPath.row];
 
     cell.creator.text = comment.creator.username;
-    cell.timestamp.text = comment.createdAt.timeAgoSinceNow;
+    cell.timestamp.text = comment.createdAt ? comment.createdAt.timeAgoSinceNow : @"Pending";
     cell.content.text = comment.text;
 
     cell.content.contentInset = UIEdgeInsetsMake(0, -3, 0, 0);
@@ -876,20 +874,21 @@
             if (didCancel) {
                 return;
             } else {
-                [self boxSelectionChanged:box toState:NO];
-                [box willMoveToParentViewController:nil];
-                [box.view removeFromSuperview];
-                [box removeFromParentViewController];
+                [self deleteBox:box];
             }
         }];
     } else {
-        [self boxSelectionChanged:box toState:NO];
-        [box willMoveToParentViewController:nil];
-        [box.view removeFromSuperview];
-        [box removeFromParentViewController];
+        [self deleteBox:box];
     }
     
     
+}
+
+- (void) deleteBox:(PPBoxViewController *) box {
+    [self boxSelectionChanged:box toState:NO];
+    [box willMoveToParentViewController:nil];
+    [box.view removeFromSuperview];
+    [box removeFromParentViewController];
 }
 
 - (void) boxWasPanned:(PPBoxViewController *)box {
