@@ -193,14 +193,15 @@
     takePhotoButton.hidden = YES;
     
     [captureView takeSnapshotWithCompletionHandler:^(UIImage *image) {
-        self.feedbackItem = [PPFeedbackItem object];
         
         NSData *imageData = UIImageJPEGRepresentation(image, 0.9f);
         PFObject* imageObject = [PFObject objectWithClassName:@"ImageObject"];
         PFFile* imageFile = [PFFile fileWithName:@"image.jpg" data:imageData contentType:@"image"];
         imageObject[@"image"] = imageFile;
-        
+
+        self.feedbackItem = [PPFeedbackItem object];
         self.feedbackItem.imageObject = imageObject;
+        self.feedbackItem.creator = [PFUser currentUser];
         
         // Start saving the image as soon as the picture is taken,
         // feedback item gets saved later

@@ -15,5 +15,6 @@
 @property (retain) NSString *displayName;
 @property (retain) PFObject *imageObject;
 @property (retain, nonatomic) NSArray* boxes;
+@property (retain) PFUser* creator;
 
 @end

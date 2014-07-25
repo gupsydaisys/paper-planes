@@ -61,6 +61,7 @@
     [query orderByDescending:@"updatedAt"];
     [query includeKey:@"imageObject"];
     [query includeKey:@"boxes"];
+    [query includeKey:@"creator"];
     [query includeKey:@"boxes.comments"];
     [query includeKey:@"boxes.comments.creator"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -179,7 +180,7 @@
     //set offset accordingly
     CGFloat yOffset = ((self.collectionView.contentOffset.y - cell.frame.origin.y) / IMAGE_HEIGHT) * IMAGE_OFFSET_SPEED;
     cell.imageOffset = CGPointMake(0.0f, yOffset);
-    cell.creator.text = @"serenagupta";
+    cell.creator.text = feedbackItem.creator.username;
     cell.creator.layer.zPosition = 1.0f;
     
     UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellTapped:)];

@@ -51,6 +51,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"FeedbackItem"];
     [query includeKey:@"imageObject"];
     [query includeKey:@"boxes"];
+    [query includeKey:@"creator"];
     [query includeKey:@"boxes.comments"];
     [query includeKey:@"boxes.comments.creator"];
     [query whereKey:@"objectId" equalTo:feedbackItemObjectId];
