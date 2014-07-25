@@ -191,6 +191,13 @@
     [self.pageViewController transitionToFeedbackViewController];
 }
 
+#pragma mark - Notificaiton Configuration Methods
+- (UILabel*) getNotificationType {
+    // Comment is new iff I just created it || I have never viewed it
+    // new = updatedAt creator = me
+    return nil;
+}
+
 #pragma mark - UIScrollViewdelegate methods
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     for(PPFeedbackItemCell *cell in self.collectionView.visibleCells) {

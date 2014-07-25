@@ -437,9 +437,15 @@ UhBlcXVlc3QgRmVlZGJhY2sgVmlldyBDb250cm9sbGVyA
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Dempsey" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qej-4f-xhQ">
-                                                            <rect key="frame" x="20" y="20" width="73" height="20"/>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Dempsey" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qej-4f-xhQ" userLabel="Creator">
+                                                            <rect key="frame" x="10" y="10" width="73" height="20"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXf-Tg-fy5" userLabel="Notification Icon">
+                                                            <rect key="frame" x="268" y="10" width="42" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -453,11 +459,14 @@ UhBlcXVlc3QgRmVlZGJhY2sgVmlldyBDb250cm9sbGVyA
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="Qej-4f-xhQ" firstAttribute="top" secondItem="cRq-OG-2hD" secondAttribute="top" constant="10" id="ZM5-Ic-BZI"/>
+                                                    <constraint firstItem="EXf-Tg-fy5" firstAttribute="top" secondItem="cRq-OG-2hD" secondAttribute="top" constant="10" id="mS8-TE-xfF"/>
                                                     <constraint firstItem="Qej-4f-xhQ" firstAttribute="leading" secondItem="cRq-OG-2hD" secondAttribute="leading" constant="10" id="mV9-XE-c5e"/>
+                                                    <constraint firstAttribute="trailing" secondItem="EXf-Tg-fy5" secondAttribute="trailing" constant="10" id="tqs-dc-zk7"/>
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="creator" destination="Qej-4f-xhQ" id="IYR-l7-zKw"/>
                                                     <outlet property="header" destination="fnl-rv-Ctu" id="Te6-iq-bFj"/>
+                                                    <outlet property="notification" destination="EXf-Tg-fy5" id="aGO-eA-BBK"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
@@ -484,13 +493,13 @@ UhBlcXVlc3QgRmVlZGJhY2sgVmlldyBDb250cm9sbGVyA
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="0.0" y="50" width="480" height="590"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <mask key="constraints">
                                         <include reference="0bP-hR-Vo3"/>
                                         <include reference="3O6-mI-nXm"/>
                                     </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="50" width="480" height="590"/>
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Dc-kj-Jxn" userLabel="Header">
