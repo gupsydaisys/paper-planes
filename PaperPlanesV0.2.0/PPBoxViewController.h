@@ -15,6 +15,7 @@
 
 - (void) makeSelection: (BOOL) select;
 - (void) addComment: (PPBoxComment*) comment;
+- (BOOL) boxHasChangedForm;
 - (NSArray*) comments;
 - (void) savePosition;
 - (id) initWithModel:(PPBox*) model;

@@ -91,6 +91,10 @@
     [self.model addComment:comment];
 }
 
+- (BOOL) boxHasChangedForm {
+    return [self.view hasChangedForm];
+}
+
 - (NSArray*) comments {
     return self.model.comments;
 }

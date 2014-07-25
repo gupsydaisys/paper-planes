@@ -18,8 +18,10 @@
 + (NSString*) getEmailUsername: (NSString*) text;
 + (NSError*) newError: (NSString*) message;
 + (void) showError:(NSError *) error;
+
++ (UIBAlertView*) getAlertUnsavedCommentAbandon:(NSString*) nameOfAbandonedObject;
++ (UIBAlertView*) getAlertUnsavedEdits;
 + (UIImage*) getImageFromObject:(PFObject*) imageObject;
 + (PFPush*) pushWithFeedbackItem:(PPFeedbackItem*) feedbackItem;
-+ (UIBAlertView*) getAlertUnsavedComment;
 
 @end

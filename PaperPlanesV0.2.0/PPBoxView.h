@@ -13,6 +13,7 @@
 - (void) marchingAnts: (BOOL) turnOn;
 - (void) showControls: (BOOL) show;
 - (void) setColor:(UIColor*) color;
+- (BOOL) hasChangedForm;
 - (CGRect) boxFrame;
 
 @property (nonatomic, strong) UIPanGestureRecognizer* moveButtonPanGestureRecognizer;
@@ -26,6 +27,7 @@
 
 - (void) boxViewWasDeleted:(PPBoxView*) boxView;
 - (void) boxViewWasPanned:(PPBoxView*) boxView;
+
 
 @end
 

@@ -35,6 +35,13 @@
     [alertView show];
 }
 
++ (UIBAlertView*) getAlertUnsavedCommentAbandon:(NSString*) nameOfAbandonedObject {
+    NSString *errorMessage = [NSString stringWithFormat:@"If you abandon this %@, your comment will be discarded.", nameOfAbandonedObject];
+    NSString *errorTitle = @"Discard Comment?";
+    UIBAlertView *alert = [[UIBAlertView alloc] initWithTitle:errorTitle message:errorMessage cancelButtonTitle:@"Hold on" otherButtonTitles:@"Discard", nil];
+    return alert;
+}
+
 + (UIImage*) getImageFromObject:(PFObject*) imageObject {
     PFFile* imageFile = imageObject[@"image"];
     UIImage* image = [UIImage imageWithData:[imageFile getData]];
@@ -49,11 +56,9 @@
     return push;
 }
 
-+ (UIBAlertView*) getAlertUnsavedComment {
-    
-    NSString *errorMessage = @"If you abondon this %@, your comment will be discarded.";
-    NSString *errorTitle = @"Discard Comment?";
-    
++ (UIBAlertView*) getAlertUnsavedEdits {
+    NSString *errorMessage = @"If you abandon this box, your edits will be discarded.";
+    NSString *errorTitle = @"Discard Edits?";
     UIBAlertView *alert = [[UIBAlertView alloc] initWithTitle:errorTitle message:errorMessage cancelButtonTitle:@"Hold on" otherButtonTitles:@"Discard", nil];
     return alert;
 }

@@ -225,7 +225,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "278"
             endingLineNumber = "278"
-            landmarkName = "-initSendButton"
+            landmarkName = "-initTutorialAlert"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
