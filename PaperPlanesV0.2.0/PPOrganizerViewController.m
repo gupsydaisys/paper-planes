@@ -112,7 +112,7 @@
                                    constant:buttonSize]];
     
     NSNumber *marginX = [NSNumber numberWithInt:5];
-    NSNumber *marginY = [NSNumber numberWithInt:7];
+    NSNumber *marginY = [NSNumber numberWithInt:11];
     
     [self.header addConstraints:[NSLayoutConstraint
                                    constraintsWithVisualFormat:@"H:[_cameraButton]-marginX-|"
