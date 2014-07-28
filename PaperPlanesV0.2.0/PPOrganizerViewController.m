@@ -53,6 +53,7 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.collectionView reloadData];
 
 }
 
@@ -165,11 +166,13 @@
 
 - (UICollectionViewCell*) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PPFeedbackItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FeedbackItemCell" forIndexPath:indexPath];
+    
+    cell.image = nil;
 
     PPFeedbackItem* feedbackItem = [self.feedbackItems objectAtIndex:indexPath.item];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        UIImage* image = [PPUtilities getImageFromObject:feedbackItem.imageObject];
+        UIImage* image = [ PPUtilities getImageFromObject:feedbackItem.imageObject];
         dispatch_async(dispatch_get_main_queue(), ^{
             cell.image = image;
         });
@@ -182,6 +185,24 @@
     cell.imageOffset = CGPointMake(0.0f, yOffset);
     cell.creator.text = feedbackItem.creator.username;
     cell.creator.layer.zPosition = 1.0f;
+    
+    if (![feedbackItem.haveViewed containsObject:[PFUser currentUser].objectId]) {
+            NSLog(@"unread");
+        cell.notification.hidden = false;
+        cell.notification.font = [UIFont fontWithName:kFontAwesomeFamilyName size:22];
+        cell.notification.text = [NSString fontAwesomeIconStringForEnum:FACircle];
+        cell.notification.textColor = [UIColor colorWithRed:0.0f / 255.0f green:128.0f / 255.0f blue:255.0f / 255.0f alpha:1];
+        cell.notification.layer.shadowColor = [UIColor blackColor].CGColor;
+        cell.notification.layer.shadowOpacity = 0.7f;
+        cell.notification.layer.shadowRadius = 1.0f;
+        cell.notification.layer.shadowOffset = CGSizeMake(0, 1);
+        cell.notification.layer.zPosition = 1.0f;
+    } else {
+        NSLog(@"read");
+        cell.notification.hidden = true;
+    }
+    
+    //haveViewedv
     
     UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellTapped:)];
     [cell addGestureRecognizer:tapGestureRecognizer];

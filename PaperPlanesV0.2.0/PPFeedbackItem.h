@@ -16,5 +16,6 @@
 @property (retain) PFObject *imageObject;
 @property (retain, nonatomic) NSArray* boxes;
 @property (retain) PFUser* creator;
+@property (retain, nonatomic) NSArray* haveViewed;
 
 @end

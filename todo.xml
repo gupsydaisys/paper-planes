@@ -23,6 +23,9 @@ HANI-BUGS-ATHON
 
 SERENA-BUGS-ATHON
 1. first time you click discard on alert view it does weird jitter
+2. fix scrolling on table cell
+3. fix jumping when you paste into 
+4. multi line still does weird ass sheet
 
 BUGS-ATHON
 0. got to tap too many times on the take photo button to take photo on camera

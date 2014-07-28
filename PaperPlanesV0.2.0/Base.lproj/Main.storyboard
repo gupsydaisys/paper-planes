@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="14A238x" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Jwh-vd-uHW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Jwh-vd-uHW">
     <dependencies>
         <deployment defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
     </dependencies>
     <scenes>
         <!--Sign Up View Controller-->
@@ -211,7 +211,7 @@
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zdy-ft-VoQ" userLabel="Table Container">
                                         <rect key="frame" x="20" y="220" width="480" height="425"/>
                                         <subviews>
-                                            <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="146" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Uze-VR-py1">
+                                            <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="146" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Uze-VR-py1">
                                                 <rect key="frame" x="0.0" y="25" width="480" height="400"/>
                                                 <color key="sectionIndexColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <prototypes>
@@ -237,7 +237,7 @@
                                                                         <rect key="frame" x="235" y="10" width="42" height="22"/>
                                                                     </variation>
                                                                 </label>
-                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y4M-dh-J8Q" userLabel="content">
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y4M-dh-J8Q" userLabel="content">
                                                                     <rect key="frame" x="10" y="36" width="434" height="100"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -439,13 +439,20 @@ UhBlcXVlc3QgRmVlZGJhY2sgVmlldyBDb250cm9sbGVyA
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Dempsey" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qej-4f-xhQ" userLabel="Creator">
-                                                            <rect key="frame" x="10" y="10" width="73" height="20"/>
+                                                            <rect key="frame" x="40" y="10" width="73" height="20"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXf-Tg-fy5" userLabel="Notification Icon">
-                                                            <rect key="frame" x="268" y="10" width="42" height="21"/>
+                                                            <rect key="frame" x="10" y="10" width="42" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yb5-AU-tMv" userLabel="New Comments">
+                                                            <rect key="frame" x="276" y="10" width="37" height="21"/>
+                                                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -459,12 +466,15 @@ UhBlcXVlc3QgRmVlZGJhY2sgVmlldyBDb250cm9sbGVyA
                                                 </view>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
+                                                    <constraint firstItem="Qej-4f-xhQ" firstAttribute="leading" secondItem="EXf-Tg-fy5" secondAttribute="trailing" constant="10" id="CMf-9b-wC7"/>
+                                                    <constraint firstItem="EXf-Tg-fy5" firstAttribute="leading" secondItem="cRq-OG-2hD" secondAttribute="leading" constant="10" id="Vk4-SI-51e"/>
                                                     <constraint firstItem="Qej-4f-xhQ" firstAttribute="top" secondItem="cRq-OG-2hD" secondAttribute="top" constant="10" id="ZM5-Ic-BZI"/>
-                                                    <constraint firstItem="EXf-Tg-fy5" firstAttribute="top" secondItem="cRq-OG-2hD" secondAttribute="top" constant="10" id="mS8-TE-xfF"/>
-                                                    <constraint firstItem="Qej-4f-xhQ" firstAttribute="leading" secondItem="cRq-OG-2hD" secondAttribute="leading" constant="10" id="mV9-XE-c5e"/>
-                                                    <constraint firstAttribute="trailing" secondItem="EXf-Tg-fy5" secondAttribute="trailing" constant="10" id="tqs-dc-zk7"/>
+                                                    <constraint firstAttribute="trailing" secondItem="yb5-AU-tMv" secondAttribute="trailing" constant="10" id="Za3-ys-jCw"/>
+                                                    <constraint firstItem="yb5-AU-tMv" firstAttribute="top" secondItem="cRq-OG-2hD" secondAttribute="top" constant="10" id="f0B-sm-14m"/>
+                                                    <constraint firstItem="EXf-Tg-fy5" firstAttribute="top" secondItem="cRq-OG-2hD" secondAttribute="top" constant="8" id="rnR-HB-Kot"/>
                                                 </constraints>
                                                 <connections>
+                                                    <outlet property="comments" destination="fnl-rv-Ctu" id="Wob-CR-JCG"/>
                                                     <outlet property="creator" destination="Qej-4f-xhQ" id="IYR-l7-zKw"/>
                                                     <outlet property="header" destination="fnl-rv-Ctu" id="Te6-iq-bFj"/>
                                                     <outlet property="notification" destination="EXf-Tg-fy5" id="aGO-eA-BBK"/>
@@ -494,9 +504,6 @@ UhBlcXVlc3QgRmVlZGJhY2sgVmlldyBDb250cm9sbGVyA
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
-                                    <rect key="frame" x="0.0" y="50" width="480" height="590"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <mask key="constraints">
                                         <include reference="0bP-hR-Vo3"/>
                                         <include reference="3O6-mI-nXm"/>
@@ -613,7 +620,7 @@ UhBlcXVlc3QgRmVlZGJhY2sgVmlldyBDb250cm9sbGVyA
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ml8-fR-rcS" userLabel="Table Container">
                                         <rect key="frame" x="20" y="220" width="480" height="425"/>
                                         <subviews>
-                                            <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="146" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="PKz-8J-gJc">
+                                            <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="146" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="PKz-8J-gJc">
                                                 <rect key="frame" x="0.0" y="25" width="480" height="400"/>
                                                 <color key="sectionIndexColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <prototypes>
@@ -640,7 +647,7 @@ UhBlcXVlc3QgRmVlZGJhY2sgVmlldyBDb250cm9sbGVyA
                                                                     </variation>
                                                                     <variation key="heightClass=regular-widthClass=compact"/>
                                                                 </label>
-                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2w-aT-oxW" userLabel="content">
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2w-aT-oxW" userLabel="content">
                                                                     <rect key="frame" x="10" y="36" width="434" height="100"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>

@@ -203,7 +203,8 @@
         self.feedbackItem = [PPFeedbackItem object];
         self.feedbackItem.imageObject = imageObject;
         self.feedbackItem.creator = [PFUser currentUser];
-        
+        [self.feedbackItem addObject:[PFUser currentUser].objectId forKey:@"haveViewed"];
+
         // Start saving the image as soon as the picture is taken,
         // feedback item gets saved later
         [imageObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

@@ -31,6 +31,7 @@
     [Parse setApplicationId:@"GWcbVtJelPpTL3yJB4ajgHcsxJFdlFDCnBnopNoe"
                   clientKey:@"SnU5aen5AC3SfTyPViOvKIeU8s2xBJ3aVHMCDH9w"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
     [application registerForRemoteNotificationTypes:
                      UIRemoteNotificationTypeBadge |
                      UIRemoteNotificationTypeAlert |

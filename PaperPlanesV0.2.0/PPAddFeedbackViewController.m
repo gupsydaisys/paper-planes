@@ -27,6 +27,13 @@
     [self transitionToMainViewWithFeedbackItem:self.feedbackItem];
 }
 
+- (void) viewWillDisappear:(BOOL) animated {
+    /* must save whether or not user has read it */
+    [super viewWillDisappear:animated];
+    [self.feedbackItem addUniqueObject:[PFUser currentUser].objectId forKey:@"haveViewed"];
+    [self.feedbackItem saveInBackground];
+}
+
 - (void) transitionToMainViewWithFeedbackItem:(PPFeedbackItem*) feedbackItem {
     // clear old boxes first
     [self deleteChildBoxes];
