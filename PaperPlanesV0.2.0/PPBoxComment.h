@@ -15,6 +15,7 @@
 
 @property (retain) NSString *text;
 @property (retain) PFUser *creator;
+@property (retain, nonatomic) NSArray* haveViewed;
 
 + (PPBoxComment*) commentWithText:(NSString*) text;
 

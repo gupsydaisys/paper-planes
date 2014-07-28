@@ -11,6 +11,7 @@
 #import "PPFeedbackItemCell.h"
 #import "PPCameraButton.h"
 #import "PPUtilities.h"
+#import "UIOutlineLabel.h"
 
 @interface PPOrganizerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
@@ -186,23 +187,25 @@
     cell.creator.text = feedbackItem.creator.username;
     cell.creator.layer.zPosition = 1.0f;
     
+    /* Setting the whether or not feedback item is viewed */
     if (![feedbackItem.haveViewed containsObject:[PFUser currentUser].objectId]) {
-            NSLog(@"unread");
-        cell.notification.hidden = false;
-        cell.notification.font = [UIFont fontWithName:kFontAwesomeFamilyName size:22];
-        cell.notification.text = [NSString fontAwesomeIconStringForEnum:FACircle];
-        cell.notification.textColor = [UIColor colorWithRed:0.0f / 255.0f green:128.0f / 255.0f blue:255.0f / 255.0f alpha:1];
-        cell.notification.layer.shadowColor = [UIColor blackColor].CGColor;
-        cell.notification.layer.shadowOpacity = 0.7f;
-        cell.notification.layer.shadowRadius = 1.0f;
-        cell.notification.layer.shadowOffset = CGSizeMake(0, 1);
-        cell.notification.layer.zPosition = 1.0f;
+        cell.readItem.hidden = false;
+        [self addItemReadTo:cell];
+        cell.readItem.layer.zPosition = 1.0f;
     } else {
-        NSLog(@"read");
-        cell.notification.hidden = true;
+        cell.readItem.hidden = true;
     }
     
-    //haveViewedv
+    /* Setting the number of new comments for feedback item */
+    int newCommentCount = [self getCommentCountForCell:cell fromFeedbackItem:feedbackItem];
+    if (newCommentCount > 0) {
+        cell.readComment.hidden = false;
+        [self addCommentReadTo:cell withNumber:newCommentCount];
+        cell.readComment.layer.zPosition = 1.0f;
+    } else {
+        cell.readComment.hidden = true;
+    }
+    
     
     UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellTapped:)];
     [cell addGestureRecognizer:tapGestureRecognizer];
@@ -215,11 +218,27 @@
     [self.pageViewController transitionToFeedbackViewController];
 }
 
-#pragma mark - Notificaiton Configuration Methods
-- (UILabel*) getNotificationType {
-    // Comment is new iff I just created it || I have never viewed it
-    // new = updatedAt creator = me
-    return nil;
+#pragma mark - Notificaiton Configuration Method
+- (void) addItemReadTo: (PPFeedbackItemCell*) cell {
+    // TODO: make circle more obvious
+    cell.readItem.font = [UIFont fontWithName:kFontAwesomeFamilyName size:17];
+    cell.readItem.text = [NSString fontAwesomeIconStringForEnum:FACircle];
+    cell.readItem.textColor = [UIColor colorWithRed:0.0f / 255.0f green:128.0f / 255.0f blue:255.0f / 255.0f alpha:1];
+}
+
+- (int) getCommentCountForCell: (PPFeedbackItemCell*) cell fromFeedbackItem:(PPFeedbackItem*) feedbackItem {
+    int count = 0;
+    for (PPBox* box in feedbackItem.boxes) {
+        for (PPBoxComment *comment in box.comments) {
+            if (![comment.haveViewed containsObject:[PFUser currentUser].objectId])
+                count++;
+        }
+    }
+    return count;
+}
+- (void) addCommentReadTo: (PPFeedbackItemCell*) cell withNumber:(int) count {
+    // TODO: make it nicer
+    cell.readComment.text = [NSString stringWithFormat:@"%d", count];
 }
 
 #pragma mark - UIScrollViewdelegate methods

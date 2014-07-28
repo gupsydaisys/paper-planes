@@ -853,6 +853,7 @@
 #pragma mark - Post Comment Methods
 - (IBAction) tapPostComment:(id) sender {
     [self.selectedBox addComment:[PPBoxComment commentWithText:self.textView.text]];
+
     [self didPostComment];
 }
 

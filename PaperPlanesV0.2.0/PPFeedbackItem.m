@@ -15,6 +15,7 @@
 @dynamic imageObject;
 @dynamic creator;
 @dynamic boxes;
+@dynamic haveViewed;
 
 + (NSString *) parseClassName {
     return @"FeedbackItem";

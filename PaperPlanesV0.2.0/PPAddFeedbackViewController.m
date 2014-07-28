@@ -24,6 +24,13 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    /* Adds the current user to the ones who haveViewed the comment */
+    for (PPBox* box in self.feedbackItem.boxes) {
+        for (PPBoxComment *comment in box.comments) {
+            [comment addUniqueObject:[PFUser currentUser].objectId forKey:@"haveViewed"];
+        }
+    }
     [self transitionToMainViewWithFeedbackItem:self.feedbackItem];
 }
 

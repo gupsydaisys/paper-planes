@@ -12,9 +12,9 @@
 @implementation PPBoxComment
 
 @dynamic displayName;
-
 @dynamic text;
 @dynamic creator;
+@dynamic haveViewed;
 
 + (NSString *) parseClassName {
     return @"BoxComment";
@@ -24,6 +24,7 @@
     PPBoxComment* comment = [self object];
     comment.text = text;
     comment.creator = [PFUser currentUser];
+    comment.haveViewed = [[NSArray alloc] initWithObjects:[PFUser currentUser].objectId, nil];
     return comment;
 }
 
