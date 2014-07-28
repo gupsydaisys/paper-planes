@@ -48,13 +48,12 @@
                                     <action selector="logIn" destination="Kdi-zA-Wl8" eventType="touchUpInside" id="H6l-fa-zwg"/>
                                 </connections>
                             </button>
-                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="logo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJj-NJ-3fV" userLabel="Logo">
-                                <rect key="frame" x="219" y="45" width="42" height="21"/>
+                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="logo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJj-NJ-3fV" userLabel="Logo">
+                                <rect key="frame" x="219" y="45" width="30" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField hidden="YES" appearanceType="aqua" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RVS-Iz-21e" userLabel="Password">
+                            <textField hidden="YES" appearanceType="aqua" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RVS-Iz-21e" userLabel="Password">
                                 <rect key="frame" x="20" y="321" width="440" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="jSc-dc-SXu"/>
@@ -67,7 +66,7 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <textField hidden="YES" appearanceType="aqua" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Kqv-J3-ddg" userLabel="Email">
+                            <textField hidden="YES" appearanceType="aqua" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Kqv-J3-ddg" userLabel="Email">
                                 <rect key="frame" x="20" y="271" width="440" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -97,7 +96,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196078431372548" blue="1" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
-                            <constraint firstItem="Kqv-J3-ddg" firstAttribute="top" secondItem="yJj-NJ-3fV" secondAttribute="bottom" constant="30" id="0TK-kf-AeG"/>
+                            <constraint firstItem="Kqv-J3-ddg" firstAttribute="top" secondItem="yJj-NJ-3fV" secondAttribute="bottom" constant="10" id="0TK-kf-AeG"/>
                             <constraint firstItem="z6T-Hb-Dpu" firstAttribute="top" secondItem="3Rh-Oi-sXo" secondAttribute="bottom" id="8eX-20-OcL"/>
                             <constraint firstItem="RVS-Iz-21e" firstAttribute="leading" secondItem="dfs-CM-tHH" secondAttribute="leading" constant="20" id="8vN-we-Dum"/>
                             <constraint firstAttribute="trailing" secondItem="Kqv-J3-ddg" secondAttribute="trailing" constant="20" id="AdJ-s2-wD6"/>
@@ -143,6 +142,7 @@
                         <outlet property="logInButton" destination="3Rh-Oi-sXo" id="POb-gX-YTC"/>
                         <outlet property="logInLeadingSpaceConstraint" destination="CzL-5L-m5a" id="9zE-Cm-jqu"/>
                         <outlet property="logInSignUpEqualWidthConstraint" destination="zqf-PD-4BD" id="A82-N3-IFD"/>
+                        <outlet property="logo" destination="yJj-NJ-3fV" id="1PM-mk-iX9"/>
                         <outlet property="logoTopConstraint" destination="Sj0-kF-EJd" id="8DP-Fq-U8T"/>
                         <outlet property="passwordField" destination="RVS-Iz-21e" id="GVD-FU-u6A"/>
                         <outlet property="signUpBottomConstraint" destination="VAt-XG-fF6" id="KKo-cd-SwE"/>

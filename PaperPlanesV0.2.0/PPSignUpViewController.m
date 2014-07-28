@@ -9,9 +9,11 @@
 #import "PPSignUpViewController.h"
 #import <Parse/Parse.h>
 #import "PPUtilities.h"
+#import "NSString+FontAwesome.h"
 
 @interface PPSignUpViewController () <UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *logo;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet UIButton *signUpButton;
@@ -52,18 +54,12 @@ enum entryPages
     _currentPage = LANDING_PAGE;
     self.emailField.delegate = self;
     self.passwordField.delegate = self;
-
-// Make the button underlined
-//    NSMutableAttributedString *commentString = [[NSMutableAttributedString alloc] initWithAttributedString:_switchEntryPageButton.titleLabel.attributedText];
-//    [commentString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [commentString length])];
-//    [_switchEntryPageButton setAttributedTitle:commentString forState:UIControlStateNormal];
-
     
-    if ([PFUser currentUser]) {
-        [self performSegueWithIdentifier:@"LogInToRequestFeedbackSegue" sender:self];
-    } else {
+    self.logo.font = [UIFont fontWithName:kFontAwesomeFamilyName size:50];
+    self.logo.text = [NSString fontAwesomeIconStringForEnum:FApaperPlaneO];
+    self.logo.textColor = [UIColor whiteColor];
+
         _user = [PFUser user];
-    }
 }
 
 - (IBAction) logIn {
@@ -112,7 +108,7 @@ enum entryPages
     _inAnimation = true;
     
     [UIView animateWithDuration:.7f animations:^{
-        _logoTopConstraint.constant = 25;
+        _logoTopConstraint.constant = 10;
         _emailField.text = @"";
         _passwordField.text = @"";
         _emailField.hidden = false;
