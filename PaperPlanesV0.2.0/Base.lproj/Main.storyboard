@@ -715,7 +715,7 @@ UhBlcXVlc3QgRmVlZGJhY2sgVmlldyBDb250cm9sbGVyA
                                             <constraint firstAttribute="trailing" secondItem="cfq-yi-Ib4" secondAttribute="trailing" id="mBM-U6-NgT" userLabel="tableHandle to trailing"/>
                                         </constraints>
                                     </view>
-                                    <view alpha="0.94999998807907104" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wpM-b9-PBD" userLabel="Post Comment Container">
+                                    <view hidden="YES" alpha="0.94999998807907104" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wpM-b9-PBD" userLabel="Post Comment Container">
                                         <rect key="frame" x="0.0" y="0.0" width="480" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYg-WZ-cGY">

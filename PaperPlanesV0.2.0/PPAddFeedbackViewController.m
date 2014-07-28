@@ -51,9 +51,7 @@
         [box disableEditing];
         [box makeSelection:false];
     }
-    
-    [self showComments:YES state:FULL];
-    
+
     UIImage *image = [PPUtilities getImageFromObject:feedbackItem.imageObject];
     [self transitionToMainViewWithImage:image];
 }
