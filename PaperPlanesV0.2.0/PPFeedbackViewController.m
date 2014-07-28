@@ -907,7 +907,7 @@
         if (tableHandleState) {
             [self showComments:YES state:tableHandleState];
         } else {
-            [self showComments:YES state:CLOSED];
+            [self showComments:YES state:FULL];
         }
     } else if (selectionState == false && self.selectedBox == box) {
         self.selectedBox = nil;
