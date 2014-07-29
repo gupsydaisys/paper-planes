@@ -3,17 +3,19 @@ BIG "T" to do List FRIDAY
 @Hani
 1. hook up the back end
 - hook up details like creator etc for diff components
-- creator privlages on boxes
+- creator privlages o n boxes
 - different color boxes
 
 @Hani Done w/ Serena
 2. infinite scrolling + swiping
 
 @Serena
-1. notifications 
 2. animate next one coming in
 3. landscape mode
-4. request feedback should look different
+4. add in loading wheel
+5. change color for background loading
+6. request feedback should look different
+
 
 HANI-BUGS-ATHON
 2. don't allow x button and double arrow to go away upon circling
@@ -43,11 +45,30 @@ ADD-ONS
 5. flash, focus, and rotation for camera
 6. filters for hw
 7. ability to reverse camera
+8. tapping should have a cool zoom orientation
+9. animate logo coming in
+10. fix x button
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+Page by page issues
+"Sign up/Log in"
+- turn off capitialization
+- change field for log in to read username or email & hook up
+- make logo have a more interesting way to come in
+- fix buttons so when pressed look cool
 
 
 
