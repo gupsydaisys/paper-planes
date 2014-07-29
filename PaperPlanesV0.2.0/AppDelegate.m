@@ -49,6 +49,9 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     NSString *feedbackItemObjectId = [userInfo objectForKey:@"objectId"];
+    PFQuery *userFilter = [PFUser query];
+    [userFilter whereKey:@"role" notEqualTo:@"admin"];
+    
     PFQuery *query = [PFQuery queryWithClassName:@"FeedbackItem"];
     [query includeKey:@"imageObject"];
     [query includeKey:@"boxes"];
@@ -56,7 +59,7 @@
     [query includeKey:@"boxes.comments"];
     [query includeKey:@"boxes.comments.creator"];
     [query whereKey:@"objectId" equalTo:feedbackItemObjectId];
-    
+    [query whereKey:@"creator" matchesQuery:userFilter];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error) {
             NSLog(@"Error fetching new feedback item: %@", error);

@@ -60,6 +60,9 @@
 }
 
 - (void) populateFeedbackItems {
+    PFQuery *userFilter = [PFUser query];
+    [userFilter whereKey:@"role" notEqualTo:@"admin"];
+
     PFQuery *query = [PFQuery queryWithClassName:@"FeedbackItem"];
     [query orderByDescending:@"lastCommentAt"];
     [query includeKey:@"imageObject"];
@@ -67,6 +70,7 @@
     [query includeKey:@"creator"];
     [query includeKey:@"boxes.comments"];
     [query includeKey:@"boxes.comments.creator"];
+    [query whereKey:@"creator" matchesQuery:userFilter];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         NSInteger length = [objects count];
         self.feedbackItems = [NSMutableArray new];
@@ -101,7 +105,6 @@
             [self.collectionView reloadData];
         });
     });
-    
 }
 
 - (void) addHeaderButtons {
