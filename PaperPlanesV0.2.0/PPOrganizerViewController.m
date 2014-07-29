@@ -187,15 +187,6 @@
     cell.creator.text = feedbackItem.creator.username;
     cell.creator.layer.zPosition = 1.0f;
     
-    /* Setting the whether or not feedback item is viewed */
-    if (![feedbackItem.haveViewed containsObject:[PFUser currentUser].objectId]) {
-        cell.readItem.hidden = false;
-        [self addItemReadTo:cell];
-        cell.readItem.layer.zPosition = 1.0f;
-    } else {
-        cell.readItem.hidden = true;
-    }
-    
     /* Setting the number of new comments for feedback item */
     int newCommentCount = [self getCommentCountForCell:cell fromFeedbackItem:feedbackItem];
     if (newCommentCount > 0) {
@@ -204,6 +195,20 @@
         cell.readComment.layer.zPosition = 1.0f;
     } else {
         cell.readComment.hidden = true;
+    }
+    
+    /* Setting the whether or not feedback item has new information */
+    if (![feedbackItem.haveViewed containsObject:[PFUser currentUser].objectId] || newCommentCount > 0) {
+        cell.readItem.hidden = false;
+        [self addItemReadTo:cell];
+        cell.readItem.layer.zPosition = 1.0f;
+//        cell.header.backgroundColor = cell.header.tintColor;
+//        cell.header.alpha = 0.45f;
+        
+    } else {
+        cell.readItem.hidden = true;
+//        cell.header.backgroundColor = [UIColor blackColor];
+//        cell.header.alpha = 0.35f;
     }
     
     
@@ -220,10 +225,27 @@
 
 #pragma mark - Notificaiton Configuration Method
 - (void) addItemReadTo: (PPFeedbackItemCell*) cell {
-    // TODO: make circle more obvious
-    cell.readItem.font = [UIFont fontWithName:kFontAwesomeFamilyName size:17];
-    cell.readItem.text = [NSString fontAwesomeIconStringForEnum:FACircle];
-    cell.readItem.textColor = [UIColor colorWithRed:0.0f / 255.0f green:128.0f / 255.0f blue:255.0f / 255.0f alpha:1];
+    CGRect r = CGRectMake(0, 0, cell.readItem.frame.size.width, cell.readItem.frame.size.height);
+    UILabel *whiteCircle = [[UILabel alloc] initWithFrame:r];
+    whiteCircle.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
+    whiteCircle.text = [NSString fontAwesomeIconStringForEnum:FACircle];
+    whiteCircle.textColor = [UIColor whiteColor];
+    whiteCircle.textAlignment = NSTextAlignmentCenter;
+
+    r = CGRectOffset(r, -.15, .5);
+    UILabel *blueCircle = [[UILabel alloc] initWithFrame:r];
+    blueCircle.font = [UIFont fontWithName:kFontAwesomeFamilyName size:17];
+    blueCircle.text = [NSString fontAwesomeIconStringForEnum:FACircle];
+    blueCircle.textColor = cell.readItem.tintColor;
+    blueCircle.textAlignment = NSTextAlignmentCenter;
+
+    [cell.readItem addSubview:whiteCircle];
+    [cell.readItem addSubview:blueCircle];
+
+// TODO: make circle more obvious
+//    cell.readItem.font = [UIFont fontWithName:kFontAwesomeFamilyName size:17];
+//    cell.readItem.text = [NSString fontAwesomeIconStringForEnum:FACircle];
+//    cell.readItem.textColor = [UIColor colorWithRed:0.0f / 255.0f green:128.0f / 255.0f blue:255.0f / 255.0f alpha:1];
 }
 
 - (int) getCommentCountForCell: (PPFeedbackItemCell*) cell fromFeedbackItem:(PPFeedbackItem*) feedbackItem {
@@ -238,7 +260,10 @@
 }
 - (void) addCommentReadTo: (PPFeedbackItemCell*) cell withNumber:(int) count {
     // TODO: make it nicer
-    cell.readComment.text = [NSString stringWithFormat:@"%d", count];
+    cell.readComment.text = [NSString stringWithFormat:@" %d ", count];
+    cell.readComment.textAlignment = NSTextAlignmentCenter;
+    cell.readComment.layer.borderWidth = 1.0f;
+    cell.readComment.layer.borderColor = [UIColor whiteColor].CGColor;
 }
 
 #pragma mark - UIScrollViewdelegate methods
