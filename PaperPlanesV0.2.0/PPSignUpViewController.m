@@ -59,11 +59,11 @@ enum entryPages
     self.logo.text = [NSString fontAwesomeIconStringForEnum:FApaperPlaneO];
     self.logo.textColor = [UIColor whiteColor];
 
-    if ([PFUser currentUser]) {
-        [self performSegueWithIdentifier:@"LogInToRequestFeedbackSegue" sender:self];
-    } else {
+//    if ([PFUser currentUser]) {
+//        [self performSegueWithIdentifier:@"LogInToRequestFeedbackSegue" sender:self];
+//    } else {
         _user = [PFUser user];
-    }
+//    }
 
 }
 - (IBAction) logIn {
