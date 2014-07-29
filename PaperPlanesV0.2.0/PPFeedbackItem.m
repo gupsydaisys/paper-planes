@@ -16,6 +16,7 @@
 @dynamic creator;
 @dynamic boxes;
 @dynamic haveViewed;
+@dynamic lastCommentAt;
 
 + (NSString *) parseClassName {
     return @"FeedbackItem";

@@ -854,13 +854,13 @@
 - (IBAction) tapPostComment:(id) sender {
     [self.selectedBox addComment:[PPBoxComment commentWithText:self.textView.text]];
 
+    self.feedbackItem.lastCommentAt = [NSDate date];
     [self didPostComment];
 }
 
 - (void) didPostComment {
     [self.tableView reloadData];
     [self showComments:TRUE state:FULL];
-    
     [self.view endEditing:YES];
     NSIndexPath *index = [NSIndexPath indexPathForItem:(self.selectedBox.comments.count - 1) inSection:0];
     [self.tableView scrollToRowAtIndexPath:index atScrollPosition:UITableViewScrollPositionBottom animated:NO];

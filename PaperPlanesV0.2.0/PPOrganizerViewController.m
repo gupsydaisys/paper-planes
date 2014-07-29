@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIView *header;
 @property (nonatomic, strong) NSMutableArray* feedbackItems;
+@property (nonatomic, strong) NSMutableArray* images;
 
 @property (nonatomic, strong) PPButton* cameraButton;
 @property (nonatomic, strong) PPFeedbackItemCell* selectedCell;
@@ -60,17 +61,32 @@
 
 - (void) populateFeedbackItems {
     PFQuery *query = [PFQuery queryWithClassName:@"FeedbackItem"];
-    [query orderByDescending:@"updatedAt"];
+    [query orderByDescending:@"lastCommentAt"];
     [query includeKey:@"imageObject"];
     [query includeKey:@"boxes"];
     [query includeKey:@"creator"];
     [query includeKey:@"boxes.comments"];
     [query includeKey:@"boxes.comments.creator"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        self.feedbackItems = [NSMutableArray arrayWithCapacity:0];
+        NSInteger length = [objects count];
+        self.feedbackItems = [NSMutableArray new];
+        self.images = [NSMutableArray new];
+        for (int i = 0 ; i != length ; [self.feedbackItems addObject:[NSNull null]], i++);
+        for (int i = 0 ; i != length ; [self.images addObject:[NSNull null]], i++);
+
+        NSInteger count = 0;
         for (PPFeedbackItem* feedbackItem in objects) {
-            [self.feedbackItems addObject:feedbackItem];
-            [self.collectionView reloadData];
+            [self.feedbackItems replaceObjectAtIndex:count withObject:feedbackItem];
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                [self.images replaceObjectAtIndex:count withObject:[PPUtilities getImageFromObject:feedbackItem.imageObject]];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.collectionView reloadData];
+                });
+            });
+            
+            count++;
         }
         
     }];
@@ -79,7 +95,13 @@
 
 - (void) addFeedbackItem:(PPFeedbackItem *) feedbackItem {
     [self.feedbackItems insertObject:feedbackItem atIndex:0];
-    [self.collectionView reloadData];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self.images insertObject:[PPUtilities getImageFromObject:feedbackItem.imageObject] atIndex:0];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+        });
+    });
+    
 }
 
 - (void) addHeaderButtons {
@@ -168,16 +190,13 @@
 - (UICollectionViewCell*) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PPFeedbackItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FeedbackItemCell" forIndexPath:indexPath];
     
-    cell.image = nil;
-
     PPFeedbackItem* feedbackItem = [self.feedbackItems objectAtIndex:indexPath.item];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        UIImage* image = [ PPUtilities getImageFromObject:feedbackItem.imageObject];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            cell.image = image;
-        });
-    });
+    if ([[self.images objectAtIndex:indexPath.item] isKindOfClass:[NSNull class]]) {
+        cell.image = nil;
+    } else {
+        cell.image = [self.images objectAtIndex:indexPath.item];
+    }
     
     cell.feedbackItem = feedbackItem;
     

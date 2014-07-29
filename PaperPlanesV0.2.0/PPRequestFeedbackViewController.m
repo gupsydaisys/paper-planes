@@ -78,6 +78,7 @@
     // Because self.feedbackItem could be changing, we keep a pointer to it
     // so that we push the correct feedbackItem after the save completes.
     PPFeedbackItem* feedbackItem = self.feedbackItem;
+    self.feedbackItem.lastCommentAt = [NSDate date];
     [feedbackItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             PFPush *newFeedbackItemPush = [PPUtilities pushWithFeedbackItem:feedbackItem];

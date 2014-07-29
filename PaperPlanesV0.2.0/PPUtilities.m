@@ -45,7 +45,11 @@
 + (UIImage*) getImageFromObject:(PFObject*) imageObject {
     PFFile* imageFile = imageObject[@"image"];
     UIImage* image = [UIImage imageWithData:[imageFile getData]];
-    return image;
+    
+    // Rotate the image
+    return [[UIImage alloc] initWithCGImage: image.CGImage
+                                      scale: 1.0
+                                orientation: UIImageOrientationRight];
 }
 
 + (PFPush*) pushWithFeedbackItem:(PPFeedbackItem*) feedbackItem {

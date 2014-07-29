@@ -17,5 +17,6 @@
 @property (retain, nonatomic) NSArray* boxes;
 @property (retain) PFUser* creator;
 @property (retain, nonatomic) NSArray* haveViewed;
+@property (retain) NSDate *lastCommentAt;
 
 @end
