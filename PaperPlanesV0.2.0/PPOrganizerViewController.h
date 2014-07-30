@@ -13,7 +13,6 @@
 
 @interface PPOrganizerViewController : PPViewController
 
-- (void) addImageObject:(PFObject*)imageObject;
 - (void) addFeedbackItem:(PPFeedbackItem *) feedbackItem;
 
 @end

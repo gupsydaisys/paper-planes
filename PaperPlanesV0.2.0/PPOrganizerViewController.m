@@ -38,19 +38,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-/* Mock data */
-//    NSUInteger index;
-//    for (index = 0; index < 7; ++index) {
-//        // Setup image name
-//        NSString *name = [NSString stringWithFormat:@"img%03ld.jpg", (unsigned long)index];
-//        if(!self.images)
-//            self.images = [NSMutableArray arrayWithCapacity:0];
-//        [self.images addObject:[UIImage imageNamed:name]];
-//    }
-/* End Mock Data */
-    
     [self addHeaderButtons];
+    
 }
 
 - (void) viewWillAppear:(BOOL)animated {

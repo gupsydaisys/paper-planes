@@ -270,11 +270,9 @@ enum entryPages
     if (textField == _emailField) {
         [self.view endEditing:true];
         [_passwordField becomeFirstResponder];
-        NSLog(@"email field");
     } else {
         [self.view endEditing:true];
         _currentPage == SIGN_UP ? [self signUp] : [self logIn];
-        NSLog(@"password field");
     }
     return false;
 }
