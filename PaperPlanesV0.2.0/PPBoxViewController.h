@@ -25,6 +25,7 @@
 
 @property (strong, nonatomic) PPBoxView *view;
 @property (nonatomic, assign) id delegate;
+@property (strong, nonatomic) NSString *currentComment;
 
 @end
 

@@ -51,7 +51,9 @@
 
 - (void) makeSelection:(BOOL) select {
     /* Delete unselected box without a comment */
-    if ((self.comments == nil || self.comments.count == 0) && !select) {
+    BOOL hasNoComments = self.comments == nil || self.comments.count == 0;
+    BOOL hasNoPendingComment = self.currentComment == nil || [self.currentComment isEqualToString:@""];
+    if (hasNoComments && !select && hasNoPendingComment) {
         [delegate boxWasDeleted:self];
     } else {
         selectionState = select;
@@ -73,8 +75,10 @@
 }
 
 - (void) boxTapped: (UITapGestureRecognizer *) gesture {
+    BOOL hasComments = self.comments != nil && self.comments.count > 0;
+    BOOL hasPendingComment = self.currentComment != nil  && ![self.currentComment isEqualToString:@""];
     /* This condition is to prevent deselection of a new box without any comments on it */
-    if (self.comments != nil && self.comments.count > 0) {
+    if (hasComments || hasPendingComment) {
         [self toggleSelection];
     }
 }

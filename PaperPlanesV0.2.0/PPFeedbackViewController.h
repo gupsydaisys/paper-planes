@@ -73,7 +73,7 @@ enum commentStateTypes
 - (void) addBoxController: (PPBoxViewController*) box toView:(UIView*) view;
 - (void) showComments:(BOOL) shouldShow state:(CommentState) curr;
 - (void) touchUpInsideSendButton;
-
+- (void) boxSelectionChanged:(PPBoxViewController *)box toState:(BOOL)selectionState;
 - (NSString*) placeholderText;
 
 @end

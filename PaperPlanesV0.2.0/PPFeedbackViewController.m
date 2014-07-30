@@ -7,6 +7,7 @@
 //
 
 #import "PPFeedbackViewController.h"
+#import "PPRequestFeedbackViewController.h"
 #import "HSCommentCell.h"
 #import "PPBoxComment.h"
 #import "PPBoxView.h"
@@ -381,11 +382,7 @@
 # pragma mark - Resizing Text View Methods
 - (void) initTextView {
     self.textView = [[HPGrowingTextView alloc] initWithFrame:CGRectMake(X_COMMENT_OFFSET, Y_COMMENT_OFFSET, COMMENT_WIDTH, 0.0f)];
-//    self.textView.contentInset = UIEdgeInsetsMake(0, -2, 0, 0);
-    
-    
     self.textView.isScrollable = NO;
-//    self.textView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
     self.textView.minNumberOfLines = 1;
     self.textView.maxNumberOfLines = 4;
     self.textView.font = [UIFont systemFontOfSize:TEXT_SIZE];
@@ -393,16 +390,9 @@
     self.textView.internalTextView.scrollIndicatorInsets = UIEdgeInsetsMake(5, 0, 5, 0);
     self.textView.placeholder = [self placeholderText];
     [self.postCommentContainer addSubview:self.textView];
-
-    // ???
-//    self.textView.internalTextView.clipsToBounds = YES;
-    
-//    self.textView.internalTextView.layer.borderWidth = 0.5f;
-//    self.textView.internalTextView.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:0.25].CGColor;
     self.textView.internalTextView.layer.backgroundColor = [UIColor clearColor].CGColor;
-//    self.textView.internalTextView.layer.cornerRadius = 5.0f;
-
 }
+
 
 - (void) growingTextView:(HPGrowingTextView *) growingTextView willChangeHeight:(float) height {
     float diff = (growingTextView.frame.size.height - height);
@@ -434,6 +424,16 @@
         self.postButton.enabled = NO;
     } else {
         self.postButton.enabled = YES;
+    }
+    _selectedBox.currentComment = growingTextView.text;
+}
+
+- (BOOL)growingTextViewShouldReturn:(HPGrowingTextView *)growingTextView {
+    if([self isKindOfClass:[PPRequestFeedbackViewController class]])
+    {
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -641,7 +641,9 @@
     paragraphStyle.alignment = NSTextAlignmentRight;
     NSDictionary *attributes = @{ NSFontAttributeName: font,
                                   NSParagraphStyleAttributeName: paragraphStyle };
-    NSAttributedString *text = [[NSAttributedString alloc] initWithString:boxComment.text attributes:attributes];
+    
+    NSString *str = boxComment.text != nil ? boxComment.text : @"";
+    NSAttributedString *text = [[NSAttributedString alloc] initWithString:str attributes:attributes];
     
     UITextView *calculationView = [[UITextView alloc] init];
     calculationView.contentInset = UIEdgeInsetsMake(0, -3, 0, 0);
@@ -754,23 +756,27 @@
 #pragma mark - Gesture recognizer delegate
 
 - (void) tapImageHandler: (UITapGestureRecognizer *) gesture {
+    NSLog(@"tap");
     CGPoint touchPoint = [gesture locationInView:gesture.view];
     
     BOOL hasComments = self.selectedBox.comments.count > 0;
     BOOL hasUnsavedComment = self.selectedBox != nil && ![self.textView.text isEqualToString:@""];
     BOOL hasChangedForm = [self.selectedBox boxHasChangedForm];
+    BOOL isRequest = [self isKindOfClass:[PPRequestFeedbackViewController class]];
 
     /* Alert iff selected dotbox has unsaved text in comment field */
-    if (!hasComments && (hasUnsavedComment || hasChangedForm)) {
+    if (!isRequest && !hasComments && (hasUnsavedComment || hasChangedForm)) {
         UIBAlertView *alert = [PPUtilities getAlertUnsavedCommentAbandon:@"box"];
         [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
             if (didCancel) {
                 return;
             } else {
+                NSLog(@"if");
                 [self addBoxWithTouchPoint:touchPoint];
             }
         }];
     } else {
+        NSLog(@"else");
         [self addBoxWithTouchPoint:touchPoint];
     }
 }
@@ -779,6 +785,7 @@
     [tutorialAlert hideWithAnimation:false];
     
     PPBoxViewController* box = [[PPBoxViewController alloc] init];
+//    box.isRequest = [self isKindOfClass:[PPRequestFeedbackViewController class]] ? true : false;
     box.view = [PPBoxView centeredAtPoint:touchPoint];
     [self addBoxController:box toView:self.imageView];
     // Note: Due to delegation, it's important to not call
@@ -900,6 +907,7 @@
 
 - (void) boxSelectionChanged:(PPBoxViewController *)box toState:(BOOL)selectionState {
     if (selectionState) {
+        NSString *comment = box.currentComment;
         [self.selectedBox makeSelection:false];
         self.selectedBox = box;
         [self.tableView reloadData];
@@ -908,13 +916,17 @@
         } else {
             [self showComments:YES state:FULL];
         }
+        BOOL hasComment = comment != nil && ![comment isEqualToString:@""];
+        self.textView.text = hasComment ? comment : @"";
     } else if (selectionState == false && self.selectedBox == box) {
+        self.selectedBox.currentComment = self.textView.text;
         self.selectedBox = nil;
         [self showComments:NO state:-1];
         if (isKeyboardUp) {
             [self.view endEditing:YES];
         }
     }
+    
 }
 
 #pragma mark - Helper methods
@@ -944,5 +956,4 @@
         view.center = CGPointMake(view.center.x, CGRectGetMaxY(bounds) - frame.size.height / 2);
     }
 }
-
 @end

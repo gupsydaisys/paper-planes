@@ -25,6 +25,7 @@
     [self initCamera];
     [self initMainView];
     self.mainView.hidden = true;
+    self.textView.returnKeyType = UIReturnKeyDone;
 }
 
 - (NSString*) placeholderText {
@@ -32,49 +33,53 @@
 }
 
 - (void) touchUpInsideExitButton {
-    BOOL hasComments = self.selectedBox.comments.count > 0;
-    BOOL hasUnsavedComment = self.selectedBox != nil && ![self.textView.text isEqualToString:@""];
-    BOOL hasChangedForm = [self.selectedBox boxHasChangedForm];
-    
-    /* Alert iff selected dotbox has unsaved text in comment field */
-    if (!hasComments && (hasUnsavedComment || hasChangedForm)) {
-        UIBAlertView *alert = [PPUtilities getAlertUnsavedCommentAbandon:@"screen"];
-        [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
-            if (didCancel) {
-                return;
-            } else {
-                [self transitionToCameraView];
-            }
-        }];
-    } else {
+//    BOOL hasComments = self.selectedBox.comments.count > 0;
+//    BOOL hasUnsavedComment = self.selectedBox != nil && ![self.textView.text isEqualToString:@""];
+//    BOOL hasChangedForm = [self.selectedBox boxHasChangedForm];
+//    
+//    /* Alert iff selected dotbox has unsaved text in comment field */
+//    if (!hasComments && (hasUnsavedComment || hasChangedForm)) {
+//        UIBAlertView *alert = [PPUtilities getAlertUnsavedCommentAbandon:@"screen"];
+//        [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+//            if (didCancel) {
+//                return;
+//            } else {
+//                [self transitionToCameraView];
+//            }
+//        }];
+//    } else {
         [self transitionToCameraView];
-    }
+//    }
 }
 
 - (void) touchUpInsideSendButton {
-    BOOL hasComments = self.selectedBox.comments.count > 0;
-    BOOL hasUnsavedComment = self.selectedBox != nil && ![self.textView.text isEqualToString:@""];
-    BOOL hasChangedForm = [self.selectedBox boxHasChangedForm];
-    
-    /* Alert iff selected dotbox has unsaved text in comment field */
-    if (!hasComments && (hasUnsavedComment || hasChangedForm)) {
-        UIBAlertView *alert = [PPUtilities getAlertUnsavedCommentAbandon:@"screen"];
-        [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
-            if (didCancel) {
-                return;
-            } else {
-                [self transitionToOrganizerViewController];
-            }
-        }];
-    } else {
+//    BOOL hasComments = self.selectedBox.comments.count > 0;
+//    BOOL hasUnsavedComment = self.selectedBox != nil && ![self.textView.text isEqualToString:@""];
+//    BOOL hasChangedForm = [self.selectedBox boxHasChangedForm];
+//    
+//    /* Alert iff selected dotbox has unsaved text in comment field */
+//    if (!hasComments && (hasUnsavedComment || hasChangedForm)) {
+//        UIBAlertView *alert = [PPUtilities getAlertUnsavedCommentAbandon:@"screen"];
+//        [alert showWithDismissHandler:^(NSInteger selectedIndex, NSString *selectedTitle, BOOL didCancel) {
+//            if (didCancel) {
+//                return;
+//            } else {
+//                [self transitionToOrganizerViewController];
+//            }
+//        }];
+//    } else {
         [self transitionToOrganizerViewController];
-    }
+//    }
 }
 
 - (void) transitionToOrganizerViewController {
+    NSLog(@"all comments");
+    for (PPBoxViewController* box in self.childViewControllers) {
+        NSLog(@"box curr comment %@", box.currentComment);
+        [box addComment:[PPBoxComment commentWithText:box.currentComment]];
+        [self.feedbackItem addUniqueObject:[box getModel] forKey:@"boxes"];
+    }
     
-    [self saveChildBoxes];
-
     // Because self.feedbackItem could be changing, we keep a pointer to it
     // so that we push the correct feedbackItem after the save completes.
     PPFeedbackItem* feedbackItem = self.feedbackItem;
