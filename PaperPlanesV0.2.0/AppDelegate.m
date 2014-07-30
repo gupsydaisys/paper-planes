@@ -62,14 +62,14 @@
     [query whereKey:@"creator" matchesQuery:userFilter];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error) {
-            NSLog(@"Error fetching new feedback item: %@", error);
+            NSLog(@"Error fetching feedback item: %@", error);
         } else {
             if ([objects count] > 0) {
                 PPFeedbackItem* feedbackItem = [objects lastObject];
                 UINavigationController* navigationController = (UINavigationController*)self.window.rootViewController;
                 PPPageViewController* pageViewController = (PPPageViewController*)[navigationController.viewControllers lastObject];
                 PPOrganizerViewController* organizerViewController = (PPOrganizerViewController*)[pageViewController getOrganizerViewController];
-                [organizerViewController addFeedbackItem:feedbackItem];
+                [organizerViewController handleFeedbackItemPush:feedbackItem];
             } else {
                 NSLog(@"non-existent feedback item? -> %@", feedbackItemObjectId);
             }

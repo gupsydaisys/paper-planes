@@ -63,18 +63,25 @@
             if (didCancel) {
                 return;
             } else {
+                [self saveFeedbackItem];
                 [self transitionToOrganizerViewController];
             }
         }];
     } else {
+        [self saveFeedbackItem];
         [self transitionToOrganizerViewController];
     }
 }
 
 - (void) transitionToOrganizerViewController {
-    
-    [self saveChildBoxes];
+    [self.pageViewController transitionToOrganizerViewController:^{
+        [self transitionToCameraView];
+    }];
+}
 
+- (void) saveFeedbackItem {
+    [self saveChildBoxes];
+    
     // Because self.feedbackItem could be changing, we keep a pointer to it
     // so that we push the correct feedbackItem after the save completes.
     PPFeedbackItem* feedbackItem = self.feedbackItem;
@@ -86,10 +93,6 @@
         } else {
             NSLog(@"There was an error saving the feedback item");
         }
-    }];
-    
-    [self.pageViewController transitionToOrganizerViewController:^{
-        [self transitionToCameraView];
     }];
 }
 
