@@ -66,9 +66,20 @@
 }
 
 - (void) touchUpInsideSendButton {
-    [self saveChildBoxes];
-    [self.feedbackItem saveInBackground];
+    [self saveFeedbackItem];
     [self transitionToOrganizerViewController];
+}
+
+- (void) saveFeedbackItem {
+    [self saveChildBoxes];
+    [self.feedbackItem saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            PFPush* feedbackItemPush = [PPUtilities pushWithFeedbackItem:self.feedbackItem];
+            [feedbackItemPush sendPushInBackground];
+        } else {
+            NSLog(@"There was an error saving feedback item %@", self.feedbackItem);
+        }
+    }];
 }
 
 - (void) transitionToOrganizerViewController {

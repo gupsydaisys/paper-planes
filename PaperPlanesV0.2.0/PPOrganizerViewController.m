@@ -86,8 +86,32 @@
 
 }
 
-- (void) addFeedbackItem:(PPFeedbackItem *) feedbackItem {
+- (void) handleFeedbackItemPush:(PPFeedbackItem *) feedbackItem {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId==%@",feedbackItem.objectId];
+    PPFeedbackItem *matchingFeedbackItem = [[self.feedbackItems filteredArrayUsingPredicate:predicate] lastObject];
+    
+    if (!matchingFeedbackItem) {
+        [self addFeedbackItemToTop:feedbackItem];
+    } else {
+        NSInteger oldCommentCount = [self getCommentCountForFeedbackItem:matchingFeedbackItem];
+        NSInteger newCommentCount = [self getCommentCountForFeedbackItem:feedbackItem];
+        if (oldCommentCount < newCommentCount) {
+            [self removeFeedbackItem:matchingFeedbackItem];
+            [self addFeedbackItemToTop:feedbackItem];
+        }
+    }
+    
+}
+
+- (void) removeFeedbackItem:(PPFeedbackItem *) feedbackItem {
+    NSInteger index = [self.feedbackItems indexOfObject:feedbackItem];
+    [self.feedbackItems removeObjectAtIndex:index];
+    [self.images removeObjectAtIndex:index];
+}
+
+- (void) addFeedbackItemToTop:(PPFeedbackItem *) feedbackItem {
     [self.feedbackItems insertObject:feedbackItem atIndex:0];
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [self.images insertObject:[PPUtilities getImageFromObject:feedbackItem.imageObject] atIndex:0];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -199,7 +223,7 @@
     cell.creator.layer.zPosition = 1.0f;
     
     /* Setting the number of new comments for feedback item */
-    int newCommentCount = [self getCommentCountForCell:cell fromFeedbackItem:feedbackItem];
+    int newCommentCount = [self getCommentCountForFeedbackItem:feedbackItem];
     if (newCommentCount > 0) {
         cell.readComment.hidden = false;
         [self addCommentReadTo:cell withNumber:newCommentCount];
@@ -259,7 +283,7 @@
 //    cell.readItem.textColor = [UIColor colorWithRed:0.0f / 255.0f green:128.0f / 255.0f blue:255.0f / 255.0f alpha:1];
 }
 
-- (int) getCommentCountForCell: (PPFeedbackItemCell*) cell fromFeedbackItem:(PPFeedbackItem*) feedbackItem {
+- (int) getCommentCountForFeedbackItem:(PPFeedbackItem*) feedbackItem {
     int count = 0;
     for (PPBox* box in feedbackItem.boxes) {
         for (PPBoxComment *comment in box.comments) {

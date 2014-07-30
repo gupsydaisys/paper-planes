@@ -68,14 +68,19 @@
 //            }
 //        }];
 //    } else {
+        [self saveFeedbackItem];
         [self transitionToOrganizerViewController];
 //    }
 }
 
 - (void) transitionToOrganizerViewController {
-    NSLog(@"all comments");
+    [self.pageViewController transitionToOrganizerViewController:^{
+        [self transitionToCameraView];
+    }];
+}
+
+- (void) saveFeedbackItem {
     for (PPBoxViewController* box in self.childViewControllers) {
-        NSLog(@"box curr comment %@", box.currentComment);
         [box addComment:[PPBoxComment commentWithText:box.currentComment]];
         [self.feedbackItem addUniqueObject:[box getModel] forKey:@"boxes"];
     }
@@ -91,10 +96,6 @@
         } else {
             NSLog(@"There was an error saving the feedback item");
         }
-    }];
-    
-    [self.pageViewController transitionToOrganizerViewController:^{
-        [self transitionToCameraView];
     }];
 }
 

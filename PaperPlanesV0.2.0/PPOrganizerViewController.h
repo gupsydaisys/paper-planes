@@ -13,6 +13,6 @@
 
 @interface PPOrganizerViewController : PPViewController
 
-- (void) addFeedbackItem:(PPFeedbackItem *) feedbackItem;
+- (void) handleFeedbackItemPush:(PPFeedbackItem *) feedbackItem;
 
 @end
