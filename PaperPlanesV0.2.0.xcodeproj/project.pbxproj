@@ -78,6 +78,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		48752F561989683500A04503 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CABC911C1959F99600B4AEF5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CABC91231959F99600B4AEF5;
+			remoteInfo = PaperPlanesV0.2.0;
+		};
 		CABC913B1959F99600B4AEF5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CABC911C1959F99600B4AEF5 /* Project object */;
@@ -543,6 +550,7 @@
 			);
 			dependencies = (
 				CABC913C1959F99600B4AEF5 /* PBXTargetDependency */,
+				48752F571989683500A04503 /* PBXTargetDependency */,
 			);
 			name = PaperPlanesV0.2.0Tests;
 			productName = PaperPlanesV0.2.0Tests;
@@ -560,6 +568,7 @@
 				TargetAttributes = {
 					CABC91231959F99600B4AEF5 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = M97XGQY5VN;
 					};
 					CABC91391959F99600B4AEF5 = {
 						CreatedOnToolsVersion = 6.0;
@@ -676,6 +685,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		48752F571989683500A04503 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CABC91231959F99600B4AEF5 /* PaperPlanesV0.2.0 */;
+			targetProxy = 48752F561989683500A04503 /* PBXContainerItemProxy */;
+		};
 		CABC913C1959F99600B4AEF5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CABC91231959F99600B4AEF5 /* PaperPlanesV0.2.0 */;
@@ -781,6 +795,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = PaperPlanesV0.2.0/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -796,6 +811,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = PaperPlanesV0.2.0/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

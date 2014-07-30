@@ -273,7 +273,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "165"
             endingLineNumber = "165"
-            landmarkName = "-collectionView:numberOfItemsInSection:"
+            landmarkName = "-touchUpInsideCameraButton"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

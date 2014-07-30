@@ -629,26 +629,26 @@
     }
 }
 
+
 - (float) getTableCellHeight:(PPBoxComment *) boxComment {
-    NSString* comment = boxComment.text;
-    // NEXT STEP remove hard coded size and figure out how to correctly get height
-    float verticalPadding = 45.0f;
-//    float verticalPadding = 30.0f + TABLE_CELL_LABEL_TO_CONTENT + TABLE_CELL_LABEL_MARGIN + 50.0f;
-    float maxWidth = 454.0f - (TABLE_CELL_LABEL_MARGIN * 2);
+    /* Whenever you change the textview for cell you MUST change this mehod */
+    float verticalPadding = 40.0f;
+    float width = self.mainView.frame.size.width - (10 * 2);
     
-    UIFont *font = [UIFont systemFontOfSize:TABLE_CELL_CONTENT_FONT_SIZE];
-    // Make a copy of the default paragraph style
+    UIFont *font = [UIFont systemFontOfSize:14.0f];
     NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-    // Set line break mode
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
-    // Set text alignment
     paragraphStyle.alignment = NSTextAlignmentRight;
-    
     NSDictionary *attributes = @{ NSFontAttributeName: font,
                                   NSParagraphStyleAttributeName: paragraphStyle };
+    NSAttributedString *text = [[NSAttributedString alloc] initWithString:boxComment.text attributes:attributes];
     
-    CGRect rect = [comment boundingRectWithSize:CGSizeMake(maxWidth, 999999.0f) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:Nil];
-    return rect.size.height + verticalPadding;
+    UITextView *calculationView = [[UITextView alloc] init];
+    calculationView.contentInset = UIEdgeInsetsMake(0, -3, 0, 0);
+    [calculationView setAttributedText:text];
+
+    CGSize size = [calculationView sizeThatFits:CGSizeMake(width, FLT_MAX)];
+    return size.height + verticalPadding;
 }
 
 #pragma mark - Keyboard Hiding and Showing
@@ -739,7 +739,6 @@
     cell.creator.text = comment.creator.username;
     cell.timestamp.text = comment.createdAt ? comment.createdAt.timeAgoSinceNow : @"Pending";
     cell.content.text = comment.text;
-
     cell.content.contentInset = UIEdgeInsetsMake(0, -3, 0, 0);
 
     [cell setNeedsUpdateConstraints];
